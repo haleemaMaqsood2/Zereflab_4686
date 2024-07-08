@@ -1,43 +1,45 @@
 package com.imagepicker;
 
-import android.support.annotation.StyleRes;
+import androidx.annotation.Nullable;
 
-import com.facebook.react.ReactPackage;
-import com.facebook.react.bridge.JavaScriptModule;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.uimanager.ViewManager;
+import com.facebook.react.module.model.ReactModuleInfo;
+import com.facebook.react.module.model.ReactModuleInfoProvider;
+import com.facebook.react.TurboReactPackage;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-public class ImagePickerPackage implements ReactPackage {
-  public static final int DEFAULT_EXPLAINING_PERMISSION_DIALIOG_THEME = R.style.DefaultExplainingPermissionsTheme;
-  private @StyleRes final int dialogThemeId;
+public class ImagePickerPackage extends TurboReactPackage {
 
-  public ImagePickerPackage()
-  {
-    this.dialogThemeId = DEFAULT_EXPLAINING_PERMISSION_DIALIOG_THEME;
-  }
+    @Nullable
+    @Override
+    public NativeModule getModule(String name, ReactApplicationContext reactContext) {
+        if (name.equals(ImagePickerModuleImpl.NAME)) {
+            return new ImagePickerModule(reactContext);
+        } else {
+            return null;
+        }
+    }
 
-  public ImagePickerPackage(@StyleRes final int dialogThemeId)
-  {
-    this.dialogThemeId = dialogThemeId;
-  }
-
-  @Override
-  public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-    return Arrays.<NativeModule>asList(new ImagePickerModule(reactContext, dialogThemeId));
-  }
-
-  // Deprecated RN 0.47
-  public List<Class<? extends JavaScriptModule>> createJSModules() {
-    return Collections.emptyList();
-  }
-
-  @Override
-  public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-    return Collections.emptyList();
-  }
+    @Override
+    public ReactModuleInfoProvider getReactModuleInfoProvider() {
+        return () -> {
+            final Map<String, ReactModuleInfo> moduleInfos = new HashMap<>();
+            boolean isTurboModule = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
+            moduleInfos.put(
+                    ImagePickerModuleImpl.NAME,
+                    new ReactModuleInfo(
+                            ImagePickerModuleImpl.NAME,
+                            ImagePickerModuleImpl.NAME,
+                            false, // canOverrideExistingModule
+                            false, // needsEagerInit
+                            true, // hasConstants
+                            false, // isCxxModule
+                            isTurboModule // isTurboModule
+                    ));
+            return moduleInfos;
+        };
+    }
 }

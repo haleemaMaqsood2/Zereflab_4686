@@ -40,7 +40,7 @@
                     }
                 },
                 {
-                    "source": "/Users/zereflab/Desktop/ReactNative/secondProject 2/node_modules/react-native-date-picker/android/build/intermediates/packaged_res/debug/values-nb/values-nb.xml",
+                    "source": "/Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-date-picker/android/build/intermediates/packaged_res/debug/values-nb/values-nb.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4",

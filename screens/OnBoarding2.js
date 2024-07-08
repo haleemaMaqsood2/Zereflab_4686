@@ -10,94 +10,147 @@ import {
     TextInput,
     TouchableOpacity,
     Image,
+    Platform,
+    PermissionsAndroid,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 const OnBoarding2 = () => {
     const navigation = useNavigation();
     const [username, setUserName] = useState('');
     const [bio, setBio] = useState('');
-
+    const [filePath, setFilePath] = useState(null);
 
     function moveNext() {
-        navigation.navigate('SuggestedGroups')
+        navigation.navigate('SuggestedGroups');
     }
 
+    const requestCameraPermission = async () => {
+        if (Platform.OS === 'android') {
+            try {
+                const granted = await PermissionsAndroid.request(
+                    PermissionsAndroid.PERMISSIONS.CAMERA,
+                    {
+                        title: 'Camera Permission',
+                        message: 'App needs camera permission',
+                    }
+                );
+                return granted === PermissionsAndroid.RESULTS.GRANTED;
+            } catch (err) {
+                console.warn(err);
+                return false;
+            }
+        } else return true;
+    };
 
-    {
-        return (
-            //    <SafeAreaView style={styles.container}>
-            <LinearGradient
-                colors={['#2b2043', '#000000']}
-                style={styles.background}
-                locations={[0, 0.3]}  // 90% of the gradient is black
-                start={{ x: 0.5, y: 0 }}
-                end={{ x: 0.5, y: 1 }}
-            >
-                <View style={styles.imageContainer}>
-                    <View style={{ alignSelf: 'center' }}>
-                        <Image
-                            style={styles.mainImage}
-                            source={require('../src/assets/profile.png')}
-                        />
-                        <TouchableOpacity>
-                            <Text style={styles.uploadText}>Upload photo</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{ marginTop: '5%' }}>
-                        <Text style={styles.titleText}>Username</Text>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="@username"
-                            placeholderTextColor="#5E6368"
+    const requestExternalWritePermission = async () => {
+        if (Platform.OS === 'android') {
+            try {
+                const granted = await PermissionsAndroid.request(
+                    PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+                    {
+                        title: 'External Storage Write Permission',
+                        message: 'App needs write permission',
+                    }
+                );
+                return granted === PermissionsAndroid.RESULTS.GRANTED;
+            } catch (err) {
+                console.warn(err);
+                alert('Write permission err', err);
+            }
+            return false;
+        } else return true;
+    };
 
-                            onChangeText={value => setUserName(value)}
-                            value={username}
-                        />
-                        <Text style={styles.titleText}>Add bio</Text>
-                        <TextInput
-                            style={styles.input2}
-                            placeholder=""
-                            placeholderTextColor="#5E6368"
+    const chooseFile = async (type) => {
+        let options = {
+            mediaType: type,
+            maxWidth: 300,
+            maxHeight: 550,
+            quality: 1,
+        };
 
-                            onChangeText={value => setBio(value)}
-                            value={bio}
-                            multiline={true}
-                            numberOfLines={4} // Adjust the number of lines as needed
-                        />
-                    </View>
-                    <LinearGradient
-                        colors={['#CB3DC8', '#8A4BD3']}//CB3DC8
+        const isStoragePermitted = await requestExternalWritePermission();
+        if (isStoragePermitted) {
+            launchImageLibrary(options, (response) => {
+                if (response.didCancel) {
+                    alert('User cancelled image picker');
+                    return;
+                } else if (response.errorCode) {
+                    alert(response.errorMessage);
+                    return;
+                }
 
-                        style={styles.linearGradient}
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 1, y: 1 }}
-                    >
-                        <TouchableOpacity onPress={moveNext}>
-                            <Text style={styles.buttonStyle}>Done</Text>
-                        </TouchableOpacity>
-                    </LinearGradient>
+                setFilePath(response.assets[0]);
+            });
+        }
+    };
 
-
-
-
+    return (
+        <LinearGradient
+            colors={['#2b2043', '#000000']}
+            style={styles.background}
+            locations={[0, 0.3]}
+            start={{ x: 0.5, y: 0 }}
+            end={{ x: 0.5, y: 1 }}
+        >
+            <View style={styles.imageContainer}>
+                <View style={{ alignSelf: 'center' }}>
+                    <Image
+                        style={styles.mainImage}
+                        source={
+                            filePath ? { uri: filePath.uri } : require('../src/assets/profile.png')
+                        }
+                    />
+                    <TouchableOpacity onPress={() => chooseFile('photo')}>
+                        <Text style={styles.uploadText}>Upload photo</Text>
+                    </TouchableOpacity>
                 </View>
-            </LinearGradient>
+                <View style={{ marginTop: '5%' }}>
+                    <Text style={styles.titleText}>Username</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="@username"
+                        placeholderTextColor="#5E6368"
+                        onChangeText={value => setUserName(value)}
+                        value={username}
+                    />
+                    <Text style={styles.titleText}>Add bio</Text>
+                    <TextInput
+                        style={styles.input2}
+                        placeholder=""
+                        placeholderTextColor="#5E6368"
+                        onChangeText={value => setBio(value)}
+                        value={bio}
+                        multiline={true}
+                        numberOfLines={4}
+                    />
+                </View>
+                <LinearGradient
+                    colors={['#CB3DC8', '#8A4BD3']}
+                    style={styles.linearGradient}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                >
+                    <TouchableOpacity onPress={moveNext}>
+                        <Text style={styles.buttonStyle}>Done</Text>
+                    </TouchableOpacity>
+                </LinearGradient>
+            </View>
+        </LinearGradient>
+    );
+};
 
-        );
-    }
-
-}
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
         backgroundColor: "#1a1429",
     },
     imageContainer: {
         width: '95%',
         alignSelf: 'center',
-        marginTop: '27%'
+        marginTop: '27%',
     },
     background: {
         flex: 1,
@@ -108,50 +161,18 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 18,
         fontWeight: '500',
-        // backgroundColor:'#8a4bd3',
         width: "70%",
     },
     uploadText: {
         color: 'white',
         textAlign: 'center',
         paddingTop: '10%',
-        // fontsize:14,
         textDecorationLine: 'underline',
     },
     titleText: {
         color: 'white',
         fontSize: 16,
         fontWeight: '300',
-        // font:'urbanist'
-    },
-
-    textInput: {
-        width: '80%',
-        height: "40%",
-        // backgroundColor: 'red', // Light grey background color
-        // borderRadius: 5,
-        // paddingHorizontal: 10,
-        // color: 'black', // Text color inside the input field
-    },
-    resendText: {
-        color: '#FF44F8',
-        // fontsize:14,
-        textDecorationLine: 'underline', // Underline text
-
-    },
-    whatsappText: {
-        color: 'white',
-        // fontsize:14,
-        textDecorationLine: 'underline', // Underline text
-
-    },
-    inputContainer: {
-        width: '100%',
-        marginTop: '10%',
-        flexDirection: 'row',
-        justifyContent: 'space-around'
-        // backgroundColor:'red',
-
     },
     input: {
         backgroundColor: '#1a1925',
@@ -165,7 +186,6 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
     },
     input2: {
-      
         backgroundColor: '#1a1925',
         borderRadius: 10,
         borderColor: '#828CA9',
@@ -176,7 +196,6 @@ const styles = StyleSheet.create({
         paddingLeft: 15,
         paddingVertical: 10,
         height: '30%',
-
     },
     linearGradient: {
         paddingVertical: 13,
@@ -184,8 +203,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '80%',
         alignSelf: 'center',
-        marginTop:'20%'
+        marginTop: '20%',
     },
-
 });
+
 export default OnBoarding2;
