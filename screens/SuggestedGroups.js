@@ -33,13 +33,13 @@ const SuggestedGroups = () => {
             id: 1,
             name: 'Marc T',
             username: '@username',
-            image: require('../src/assets/profile.png'),
+            image: require('../src/assets/images/profile.png'),
         },
         {
             id: 2,
             name: 'Marc T',
             username: '@username',
-            image: require('../src/assets/profile.png'),
+            image: require('../src/assets/images/profile.png'),
 
             // imagePath:
         },
@@ -47,25 +47,25 @@ const SuggestedGroups = () => {
             id: 3,
             name: 'Marc T',
             username: '@username',
-            image: require('../src/assets/profile.png'),
+            image: require('../src/assets/images/profile.png'),
         },
         {
             id: 4,
             name: 'Marc T',
             username: '@username',
-            image: require('../src/assets/profile.png'),
+            image: require('../src/assets/images/profile.png'),
         },
         {
             id: 5,
             name: 'Marc T',
             username: '@username',
-            image: require('../src/assets/profile.png'),
+            image: require('../src/assets/images/profile.png'),
         },
         {
             id: 6,
             name: 'Marc T',
             username: '@username',
-            image: require('../src/assets/profile.png'),
+            image: require('../src/assets/images/profile.png'),
         }
     ]
 
@@ -87,7 +87,7 @@ const SuggestedGroups = () => {
             <View style={styles.groupCard}>
                 <Image
                     style={styles.profileImage}
-                    source={require('../src/assets/user.png')}
+                    source={require('../src/assets/images/user.png')}
                 />
 
                 <Text style={styles.nameText}>{item.name}</Text>
@@ -135,7 +135,7 @@ const SuggestedGroups = () => {
                     <TouchableOpacity style={styles.searchContainer}>
                         <Image
                             style={styles.searchImage}
-                            source={require('../src/assets/searchIcon.png')}
+                            source={require('../src/assets/images/searchIcon.png')}
                         />
                         <TextInput
                             style={{ paddingLeft: 10 }}

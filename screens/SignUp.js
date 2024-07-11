@@ -105,7 +105,7 @@ const SignUp = () => {
                     <TouchableOpacity style={styles.DateInput} onPress={() => setOpen(true)}>
                         <Text style={{ color: "#5E6368" }}>DD-MM-YY</Text>
                         <Image
-                            source={require('../src/assets/downArrow.png')}
+                            source={require('../src/assets/images/downArrow.png')}
                             style={{ marginTop: '2%' }}
                         />
                     </TouchableOpacity>

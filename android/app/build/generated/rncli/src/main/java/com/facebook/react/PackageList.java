@@ -13,8 +13,12 @@ import java.util.ArrayList;
 
 // @react-native-community/blur
 import com.reactnativecommunity.blurview.BlurViewPackage;
+// @react-native-community/datetimepicker
+import com.reactcommunity.rndatetimepicker.RNDateTimePickerPackage;
 // react-native-date-picker
 import com.henninghall.date_picker.DatePickerPackage;
+// react-native-image-picker
+import com.imagepicker.ImagePickerPackage;
 // react-native-linear-gradient
 import com.BV.LinearGradient.LinearGradientPackage;
 // react-native-safe-area-context
@@ -69,7 +73,9 @@ public class PackageList {
     return new ArrayList<>(Arrays.<ReactPackage>asList(
       new MainReactPackage(mConfig),
       new BlurViewPackage(),
+      new RNDateTimePickerPackage(),
       new DatePickerPackage(),
+      new ImagePickerPackage(),
       new LinearGradientPackage(),
       new SafeAreaContextPackage(),
       new RNScreensPackage(),

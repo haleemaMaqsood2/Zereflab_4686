@@ -36,8 +36,10 @@ com.secondproject.app-merged_res-34 /Users/zereflab/Desktop/ReactNative/Zereflab
 com.secondproject.app-debug-35 /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/debug/res
 com.secondproject.app-main-36 /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/res
 com.secondproject.app-packaged_res-37 /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/@react-native-community/blur/android/build/intermediates/packaged_res/debug
-com.secondproject.app-packaged_res-38 /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-date-picker/android/build/intermediates/packaged_res/debug
-com.secondproject.app-packaged_res-39 /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-linear-gradient/android/build/intermediates/packaged_res/debug
-com.secondproject.app-packaged_res-40 /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-safe-area-context/android/build/intermediates/packaged_res/debug
-com.secondproject.app-packaged_res-41 /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-screens/android/build/intermediates/packaged_res/debug
-com.secondproject.app-packaged_res-42 /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-svg/android/build/intermediates/packaged_res/debug
+com.secondproject.app-packaged_res-38 /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/@react-native-community/datetimepicker/android/build/intermediates/packaged_res/debug
+com.secondproject.app-packaged_res-39 /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-date-picker/android/build/intermediates/packaged_res/debug
+com.secondproject.app-packaged_res-40 /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-image-picker/android/build/intermediates/packaged_res/debug
+com.secondproject.app-packaged_res-41 /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-linear-gradient/android/build/intermediates/packaged_res/debug
+com.secondproject.app-packaged_res-42 /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-safe-area-context/android/build/intermediates/packaged_res/debug
+com.secondproject.app-packaged_res-43 /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-screens/android/build/intermediates/packaged_res/debug
+com.secondproject.app-packaged_res-44 /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-svg/android/build/intermediates/packaged_res/debug

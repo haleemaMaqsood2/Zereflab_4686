@@ -1,0 +1,185 @@
+import React, { useState, useRef,useEffect} from 'react';
+import {
+    SafeAreaView,
+    ScrollView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    useColorScheme,
+    View,
+    TextInput,
+    TouchableOpacity,
+    Image,
+    KeyboardAvoidingView,
+} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import { useNavigation,useFocusEffect } from '@react-navigation/native';
+import { color } from '../../src/styles/color';
+import Header from '../Components/Header';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+
+
+const NameInputScreen = ({navigation}) => {
+    //   const navigation = useNavigation();
+const [name,setName]=useState('')
+const nameRef = useRef(null);
+const handleChange = (value) => {
+    setName(value);
+        nameRef.current.focus();
+    
+   
+};
+    
+    function moveNext() {
+        navigation.navigate('DateOfBirth')
+    }
+    useEffect(() => {
+        const focusTimeout = setTimeout(() => {
+            nameRef.current.focus();
+        }, 500);
+
+        return () => clearTimeout(focusTimeout);
+    }, []);
+    //To make keyboard remain open if user navigate back case
+    useFocusEffect(
+        React.useCallback(() => {
+          const focusTimeout = setTimeout(() => {
+            nameRef.current.focus();
+          }, 100);
+          return () => clearTimeout(focusTimeout);
+        }, [])
+      );
+
+
+    {
+        return (
+            <SafeAreaView style={styles.safeArea}>
+                <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+                <Header/>
+
+                <View style={styles.titleContainer}>
+                    <Text style={styles.titleText}>What's your name?</Text>
+                    <View style={styles.inputContainer}>
+                    <TextInput
+                            style={styles.input}
+                            // onChangeText={value => setV1(value)}
+                            onChangeText={value => handleChange(value)}
+                            placeholder='Full name'
+                            placeholderTextColor={color.placeholderColor}
+
+                            keyboardAppearance="dark"
+                            value={name}
+                            ref={nameRef}
+                        />
+
+                    </View>
+
+                    
+                    
+                    <View style={styles.ButtonContainer}>
+                        <TouchableOpacity onPress={moveNext}>
+                            <Text style={styles.conTinueText}>Continue</Text>
+                        </TouchableOpacity>
+                    </View>
+                  
+                </View>
+                </KeyboardAvoidingView>
+
+            </SafeAreaView>
+
+        );
+    }
+
+
+
+}
+const styles = StyleSheet.create({
+
+    safeArea: {
+        flex: 1,
+        backgroundColor: color.backgroundColor,
+
+    },
+    container: {
+        // flex: 1,
+    },
+    background: {
+        flex: 1,
+    },
+    titleContainer: {
+        width: wp('95%'),
+        alignSelf: 'center',
+        marginTop: hp('1%'),
+        justifyContent:'center',
+        alignItems:'center',
+        // backgroundColor:'red'
+    },
+    titleText: {
+        color: '#FFFFFF',
+        fontSize: 28,
+        fontWeight: '700',
+        width:wp('70%'),
+        textAlign:'center',
+       fontFamily:'inter'
+        // font:'urbanist'
+    },
+    
+    textInput: {
+        width: wp('70%'),
+        height:hp("60%"),
+       
+    },
+    
+    inputContainer: {
+        width: '100%',
+        height:55,
+        marginTop: '10%',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        // backgroundColor:'red',
+
+    },
+    input: {
+        backgroundColor: color.inputFieldColor,
+        // width: '96%',
+        width:wp('92%'),
+
+        borderRadius: 15,
+        borderColor: '#414142',
+        borderWidth: 0.5,
+        color: color.placeholderColor,
+        fontSize: 16,
+        fontWeight:'500',
+        paddingLeft:wp(5),
+        fontFamily:'inter'
+        
+       
+    },
+    ButtonContainer:{
+        backgroundColor:color.buttonColor,
+        // height:hp('7%'),
+        height:50,
+        // width:363,
+
+         width:wp('92%'),
+         marginTop:hp(25),
+         textAlign: 'center',
+         borderRadius:10,
+         alignItems:'center',
+         justifyContent:'center'
+
+
+
+    },
+    conTinueText:{
+        alignItems:'center',
+        color:'#FFFFFF',
+        fontSize:16,
+        fontWeight:'700',
+        fontFamily:'inter'
+
+    }
+
+});
+export default NameInputScreen;

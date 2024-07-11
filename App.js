@@ -15,30 +15,32 @@ import {
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import OnBoarding from './screens/OnBoarding';
 
-import GetStarted from './screens/GetStarted';
-import SignUp from './screens/SignUp';
-import OnBoarding2 from './screens/OnBoarding2';
-import SuggestedGroups from './screens/SuggestedGroups';
-import JoinGroup from './screens/JoinGroup';
-import ContactLoading from './screens/ContactLoading';
-// import SyncLater from './screens/SyncLater';
-import Location from './screens/Location';
+import Splash from './screens/OnBoarding/Splash';
+import VerifyCode from './screens/OnBoarding/VerifyCode';
+import NameInputScreen from './screens/OnBoarding/NameInputScreen';
+import Carousel from './screens/OnBoarding/Carousel';
+import SignIn from './screens/OnBoarding/SignIn';
+import DateOfBirth from './screens/OnBoarding/DateOfBirth';
+import UserNameScreen from './screens/OnBoarding/UserNameScreen';
+import ImageUpload from './screens/OnBoarding/ImageUpload';
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="GetStarted" component={GetStarted} />
-        <Stack.Screen name="OnBoarding" component={OnBoarding} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="OnBoarding2" component={OnBoarding2} /> 
-        <Stack.Screen name="SuggestedGroups" component={SuggestedGroups} />
-        <Stack.Screen name="JoinGroup" component={JoinGroup} />
-        <Stack.Screen name="ContactLoading" component={ContactLoading} />
-        <Stack.Screen name="Location" component={Location} />
+        <Stack.Screen name="Splash" component={Splash} />
+        <Stack.Screen name="Carousel" component={Carousel} />
+
+        <Stack.Screen name="VerifyCode" component={VerifyCode} />
+        <Stack.Screen name="NameInputScreen" component={NameInputScreen} />
+        <Stack.Screen name="SignIn" component={SignIn} />
+        <Stack.Screen name="DateOfBirth" component={DateOfBirth} />
+
+        <Stack.Screen name="UserNameScreen" component={UserNameScreen} />
+        <Stack.Screen name="ImageUpload" component={ImageUpload} />
+
 
 
 

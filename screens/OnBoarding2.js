@@ -101,7 +101,7 @@ const OnBoarding2 = () => {
                     <Image
                         style={styles.mainImage}
                         source={
-                            filePath ? { uri: filePath.uri } : require('../src/assets/profile.png')
+                            filePath ? { uri: filePath.uri } : require('../src/assets/images/profile.png')
                         }
                     />
                     <TouchableOpacity onPress={() => chooseFile('photo')}>

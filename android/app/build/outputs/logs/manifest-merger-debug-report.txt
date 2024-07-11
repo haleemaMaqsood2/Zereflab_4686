@@ -1,12 +1,14 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:1:1-25:12
-MERGED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:1:1-25:12
+ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:1:1-29:12
+MERGED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:1:1-29:12
 INJECTED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/debug/AndroidManifest.xml:2:1-9:12
 INJECTED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/debug/AndroidManifest.xml:2:1-9:12
 INJECTED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-community_blur] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/@react-native-community/blur/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:react-native-community_datetimepicker] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/@react-native-community/datetimepicker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-date-picker] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-date-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:react-native-image-picker] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-19:12
 MERGED from [:react-native-linear-gradient] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-linear-gradient/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-safe-area-context] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-safe-area-context/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-screens] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-screens/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
@@ -48,6 +50,7 @@ MERGED from [androidx.lifecycle:lifecycle-process:2.4.1] /Users/zereflab/.gradle
 MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/zereflab/.gradle/caches/transforms-4/fe3cbdcfd13d5dd976989fc5501c6fc3/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
 MERGED from [androidx.tracing:tracing:1.1.0] /Users/zereflab/.gradle/caches/transforms-4/8931e4b41f433e31d93c9e923d149ad1/transformed/jetified-tracing-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [com.github.Dimezis:BlurView:version-2.0.3] /Users/zereflab/.gradle/caches/transforms-4/713d5a256990d2e84932c35a406cfbf4/transformed/jetified-BlurView-version-2.0.3/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.3] /Users/zereflab/.gradle/caches/transforms-4/fc56ba60cb6c7e45c0c1bc52dc58e64f/transformed/exifinterface-1.3.3/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.2.0] /Users/zereflab/.gradle/caches/transforms-4/122d2db9bdcd08a9c2b764011f718319/transformed/coordinatorlayout-1.2.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.autofill:autofill:1.1.0] /Users/zereflab/.gradle/caches/transforms-4/f9a974fa1110ede972b7541bb0caa8eb/transformed/jetified-autofill-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/zereflab/.gradle/caches/transforms-4/03a8fd772aa80a245e45a97aa9a1afde/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
@@ -88,11 +91,29 @@ uses-permission#android.permission.INTERNET
 ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:3:5-67
 	android:name
 		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:3:22-64
+uses-permission#android.permission.CAMERA
+ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:4:5-64
+	android:name
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:4:22-62
+uses-permission#android.permission.SYSTEM_ALERT_WINDOW
+ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:5:5-77
+MERGED from [com.facebook.react:react-android:0.74.3] /Users/zereflab/.gradle/caches/transforms-4/e66d8d99b1d5312de9d2d1b90139c764/transformed/jetified-react-android-0.74.3-debug/AndroidManifest.xml:16:5-78
+MERGED from [com.facebook.react:react-android:0.74.3] /Users/zereflab/.gradle/caches/transforms-4/e66d8d99b1d5312de9d2d1b90139c764/transformed/jetified-react-android-0.74.3-debug/AndroidManifest.xml:16:5-78
+	android:name
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:5:22-75
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:7:5-80
+	android:name
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:7:22-78
 application
-ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:5:5-24:19
-MERGED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:5:5-24:19
-MERGED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:5:5-24:19
+ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:9:5-28:19
+MERGED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:9:5-28:19
+MERGED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:9:5-28:19
 INJECTED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/debug/AndroidManifest.xml:5:5-8:50
+MERGED from [:react-native-community_datetimepicker] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/@react-native-community/datetimepicker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-20
+MERGED from [:react-native-community_datetimepicker] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/@react-native-community/datetimepicker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-20
+MERGED from [:react-native-image-picker] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-17:19
+MERGED from [:react-native-image-picker] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-17:19
 MERGED from [com.facebook.react:react-android:0.74.3] /Users/zereflab/.gradle/caches/transforms-4/e66d8d99b1d5312de9d2d1b90139c764/transformed/jetified-react-android-0.74.3-debug/AndroidManifest.xml:18:5-22:19
 MERGED from [com.facebook.react:react-android:0.74.3] /Users/zereflab/.gradle/caches/transforms-4/e66d8d99b1d5312de9d2d1b90139c764/transformed/jetified-react-android-0.74.3-debug/AndroidManifest.xml:18:5-22:19
 MERGED from [com.google.android.material:material:1.6.1] /Users/zereflab/.gradle/caches/transforms-4/452ffdcf9637ac22e3426671d55dd6fb/transformed/material-1.6.1/AndroidManifest.xml:24:5-20
@@ -120,61 +141,65 @@ MERGED from [net.time4j:time4j-android:4.8-2021a] /Users/zereflab/.gradle/caches
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.9.0] /Users/zereflab/.gradle/caches/transforms-4/6621c239d1e00abea0752787fff99403/transformed/core-1.9.0/AndroidManifest.xml:28:18-86
 	android:label
-		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:7:7-39
-		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:7:7-39
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:11:7-39
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:11:7-39
 	tools:ignore
 		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/debug/AndroidManifest.xml:8:9-48
 	android:roundIcon
-		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:9:7-52
-		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:9:7-52
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:13:7-52
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:13:7-52
 	tools:targetApi
 		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/debug/AndroidManifest.xml:7:9-29
 	android:icon
-		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:8:7-41
-		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:8:7-41
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:12:7-41
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:12:7-41
 	android:allowBackup
-		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:10:7-34
-		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:10:7-34
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:14:7-34
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:14:7-34
 	android:theme
-		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:11:7-38
-		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:11:7-38
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:15:7-38
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:15:7-38
 	android:usesCleartextTraffic
 		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/debug/AndroidManifest.xml:6:9-44
 	android:name
-		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:6:7-38
-		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:6:7-38
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:10:7-38
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:10:7-38
 activity#com.secondproject.MainActivity
-ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:12:7-23:18
+ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:16:7-27:18
 	android:label
-		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:14:9-41
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:18:9-41
 	android:launchMode
-		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:16:9-40
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:20:9-40
 	android:windowSoftInputMode
-		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:17:9-51
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:21:9-51
 	android:exported
-		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:18:9-32
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:22:9-32
 	android:configChanges
-		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:15:9-118
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:19:9-118
 	android:name
-		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:13:9-37
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:17:9-37
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:19:9-22:25
+ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:23:9-26:25
 action#android.intent.action.MAIN
-ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:20:13-65
+ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:24:13-65
 	android:name
-		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:20:21-62
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:24:21-62
 category#android.intent.category.LAUNCHER
-ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:21:13-73
+ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:25:13-73
 	android:name
-		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:21:23-70
+		ADDED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/main/AndroidManifest.xml:25:23-70
 uses-sdk
 INJECTED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/debug/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/debug/AndroidManifest.xml
 INJECTED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/debug/AndroidManifest.xml
 MERGED from [:react-native-community_blur] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/@react-native-community/blur/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:react-native-community_blur] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/@react-native-community/blur/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:react-native-community_datetimepicker] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/@react-native-community/datetimepicker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:react-native-community_datetimepicker] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/@react-native-community/datetimepicker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:react-native-date-picker] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-date-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:react-native-date-picker] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-date-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:react-native-image-picker] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:react-native-image-picker] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:react-native-linear-gradient] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-linear-gradient/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:react-native-linear-gradient] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-linear-gradient/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:react-native-safe-area-context] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-safe-area-context/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
@@ -257,6 +282,8 @@ MERGED from [androidx.tracing:tracing:1.1.0] /Users/zereflab/.gradle/caches/tran
 MERGED from [androidx.tracing:tracing:1.1.0] /Users/zereflab/.gradle/caches/transforms-4/8931e4b41f433e31d93c9e923d149ad1/transformed/jetified-tracing-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [com.github.Dimezis:BlurView:version-2.0.3] /Users/zereflab/.gradle/caches/transforms-4/713d5a256990d2e84932c35a406cfbf4/transformed/jetified-BlurView-version-2.0.3/AndroidManifest.xml:5:5-7:41
 MERGED from [com.github.Dimezis:BlurView:version-2.0.3] /Users/zereflab/.gradle/caches/transforms-4/713d5a256990d2e84932c35a406cfbf4/transformed/jetified-BlurView-version-2.0.3/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.3] /Users/zereflab/.gradle/caches/transforms-4/fc56ba60cb6c7e45c0c1bc52dc58e64f/transformed/exifinterface-1.3.3/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.3] /Users/zereflab/.gradle/caches/transforms-4/fc56ba60cb6c7e45c0c1bc52dc58e64f/transformed/exifinterface-1.3.3/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.2.0] /Users/zereflab/.gradle/caches/transforms-4/122d2db9bdcd08a9c2b764011f718319/transformed/coordinatorlayout-1.2.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.2.0] /Users/zereflab/.gradle/caches/transforms-4/122d2db9bdcd08a9c2b764011f718319/transformed/coordinatorlayout-1.2.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.autofill:autofill:1.1.0] /Users/zereflab/.gradle/caches/transforms-4/f9a974fa1110ede972b7541bb0caa8eb/transformed/jetified-autofill-1.1.0/AndroidManifest.xml:20:5-22:41
@@ -313,10 +340,22 @@ MERGED from [net.time4j:time4j-android:4.8-2021a] /Users/zereflab/.gradle/caches
 		INJECTED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/debug/AndroidManifest.xml
 	android:minSdkVersion
 		INJECTED from /Users/zereflab/Desktop/ReactNative/Zereflab_4686/android/app/src/debug/AndroidManifest.xml
-uses-permission#android.permission.SYSTEM_ALERT_WINDOW
-ADDED from [com.facebook.react:react-android:0.74.3] /Users/zereflab/.gradle/caches/transforms-4/e66d8d99b1d5312de9d2d1b90139c764/transformed/jetified-react-android-0.74.3-debug/AndroidManifest.xml:16:5-78
+provider#com.imagepicker.ImagePickerProvider
+ADDED from [:react-native-image-picker] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:8:9-16:20
+	android:grantUriPermissions
+		ADDED from [:react-native-image-picker] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-47
+	android:authorities
+		ADDED from [:react-native-image-picker] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:10:13-71
+	android:exported
+		ADDED from [:react-native-image-picker] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-37
 	android:name
-		ADDED from [com.facebook.react:react-android:0.74.3] /Users/zereflab/.gradle/caches/transforms-4/e66d8d99b1d5312de9d2d1b90139c764/transformed/jetified-react-android-0.74.3-debug/AndroidManifest.xml:16:22-75
+		ADDED from [:react-native-image-picker] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:13-63
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [:react-native-image-picker] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-15:70
+	android:resource
+		ADDED from [:react-native-image-picker] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:15:17-67
+	android:name
+		ADDED from [:react-native-image-picker] /Users/zereflab/Desktop/ReactNative/Zereflab_4686/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:14:17-67
 activity#com.facebook.react.devsupport.DevSettingsActivity
 ADDED from [com.facebook.react:react-android:0.74.3] /Users/zereflab/.gradle/caches/transforms-4/e66d8d99b1d5312de9d2d1b90139c764/transformed/jetified-react-android-0.74.3-debug/AndroidManifest.xml:19:9-21:40
 	android:exported

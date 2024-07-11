@@ -59,7 +59,7 @@ const Location = () => {
                 <TouchableOpacity style={styles.searchContainer}>
                         <Image
                             style={styles.searchImage}
-                            source={require('../src/assets/location.png')}
+                            source={require('../src/assets/images/location.png')}
                         />
                         <TextInput
                             style={styles.searchInput}

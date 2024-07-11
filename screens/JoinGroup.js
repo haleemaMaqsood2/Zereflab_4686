@@ -27,7 +27,7 @@ const JoinGroup = () => {
             type: 'Public ',
             members: '1.1k',
             friend: 2,
-            image: require('../src/assets/groupImage.png'),
+            image: require('../src/assets/images/groupImage.png'),
         },
         {
             id: 2,
@@ -35,7 +35,7 @@ const JoinGroup = () => {
             type: 'Public ',
             members: '1.1k',
             friend: 2,
-            image: require('../src/assets/groupImage.png'),
+            image: require('../src/assets/images/groupImage.png'),
         },
         {
             id: 3,
@@ -43,7 +43,7 @@ const JoinGroup = () => {
             type: 'Public ',
             members: '1.1k',
             friend: 2,
-            image: require('../src/assets/groupImage.png'),
+            image: require('../src/assets/images/groupImage.png'),
         },
         {
             id: 4,
@@ -51,7 +51,7 @@ const JoinGroup = () => {
             type: 'Public ',
             members: '1.1k',
             friend: 2,
-            image: require('../src/assets/groupImage.png'),
+            image: require('../src/assets/images/groupImage.png'),
         },
         {
             id: 5,
@@ -59,7 +59,7 @@ const JoinGroup = () => {
             type: 'Public ',
             members: '1.1k',
             friend: 2,
-            image: require('../src/assets/groupImage.png'),
+            image: require('../src/assets/images/groupImage.png'),
         },
         {
             id: 6,
@@ -67,7 +67,7 @@ const JoinGroup = () => {
             type: 'Public',
             members: '1.1k',
             friend: 2,
-            image: require('../src/assets/groupImage.png'),
+            image: require('../src/assets/images/groupImage.png'),
         }
     ];
     function moveNext() {
@@ -84,7 +84,7 @@ const JoinGroup = () => {
                     <Image
                         style={styles.closeIconImage}
 
-                            source={require('../src/assets/closeIcon.png')}
+                            source={require('../src/assets/images/closeIcon.png')}
                         />
                 </View>    
 
@@ -92,7 +92,7 @@ const JoinGroup = () => {
                 <Text style={styles.usernameText}>{item.type} group - {item.members} members</Text>
                 <View style={{ flexDirection: 'row', paddingLeft: '4%', paddingTop: '5%' }}>
                     <Image
-                        source={require('../src/assets/friendsImage.png')}
+                        source={require('../src/assets/images/friendsImage.png')}
                     />
                     <Text style={styles.usernameText}>{item.friend} friends are member</Text>
                 </View>
@@ -128,7 +128,7 @@ const JoinGroup = () => {
                     <TouchableOpacity style={styles.searchContainer}>
                         <Image
                             style={styles.searchImage}
-                            source={require('../src/assets/searchIcon.png')}
+                            source={require('../src/assets/images/searchIcon.png')}
                         />
                         <TextInput
                             style={styles.searchInput}
@@ -139,7 +139,7 @@ const JoinGroup = () => {
                         />
                         <Image
                             style={styles.searchImage}
-                            source={require('../src/assets/filterIcon.png')}
+                            source={require('../src/assets/images/filterIcon.png')}
                         />
                     </TouchableOpacity>
 

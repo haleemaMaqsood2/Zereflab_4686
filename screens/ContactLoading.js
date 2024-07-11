@@ -32,7 +32,7 @@ const CenteredTextScreen = () => {
         <View style={styles.centeredContainer}>
           <View style={styles.textContainer}>
           <Image
-                        source={require('../src/assets/loadingIcon.png')}
+                        source={require('../src/assets//images/loadingIcon.png')}
                     />
             <Text style={styles.addingText}>Adding your Contacts</Text>
             <Text style={styles.waitingText}>This may will take a minute</Text>

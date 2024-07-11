@@ -30,7 +30,7 @@ const GetStarted = () => {
           <View style={styles.firstSection}>
             <Image
               style={styles.mainImage}
-              source={require('../src/assets/Main.png')}
+              source={require('../src/assets/images/images/Main.png')}
             />
           </View>
 
