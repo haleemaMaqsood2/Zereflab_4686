@@ -6,5 +6,7 @@ export const color ={
     onBoardingButton:'#0082FB',
     whiteFontColor:'#FFFFFF',
     privacyPolicyColor:'#54B2E7',
-    whiteColor:'#FFFFFF'
+    whiteColor:'#FFFFFF',
+    balckFontColor:'#050507',
+    modalDescriptionText:'#D9D9D9',
 };

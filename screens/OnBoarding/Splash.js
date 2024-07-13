@@ -23,7 +23,7 @@ const Splash = () => {
       // navigation.navigate('VerifyCode');
       navigation.navigate('Carousel');
 
-    }, 3000);
+    }, 5000);
 
     // Cleanup the timer if the component is unmounted
     return () => clearTimeout(timer);

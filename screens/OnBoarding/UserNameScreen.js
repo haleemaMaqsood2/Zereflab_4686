@@ -23,6 +23,7 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 const UserNameScreen = ({navigation}) => {
     //   const navigation = useNavigation();
 const [userName,setUserName]=useState('')
+
 const userNameRef = useRef(null);
 const handleChange = (value) => {
     setUserName(value);

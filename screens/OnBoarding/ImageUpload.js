@@ -32,7 +32,7 @@ const ImageUpload = ({ navigation }) => {
     };
 
     function moveNext() {
-        navigation.navigate('DateOfBirth')
+        navigation.navigate('DiscoverFriends')
     }
 
 
@@ -98,7 +98,16 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     titleContainer: {
-        width: wp('95%'),
+        width: wp('90%'),
+        alignSelf: 'center',
+        marginTop: hp('1%'),
+        justifyContent: 'center',
+        alignItems: 'center',
+        // backgroundColor:'red',
+        height: hp('10%')
+    },
+    titleContainer: {
+        width: wp('90%'),
         alignSelf: 'center',
         marginTop: hp('1%'),
         justifyContent: 'center',
