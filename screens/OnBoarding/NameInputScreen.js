@@ -11,6 +11,7 @@ import {
     TouchableOpacity,
     Image,
     KeyboardAvoidingView,
+    Keyboard,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation,useFocusEffect } from '@react-navigation/native';
@@ -21,6 +22,9 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 
 const NameInputScreen = ({navigation}) => {
+    const [keyboardVisible, setKeyboardVisible] = useState(false);
+
+
     //   const navigation = useNavigation();
 const [name,setName]=useState('')
 const nameRef = useRef(null);
@@ -50,6 +54,21 @@ const handleChange = (value) => {
           return () => clearTimeout(focusTimeout);
         }, [])
       );
+      ///useEffect to manage keyboard state
+      useEffect(() => {
+        const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+            setKeyboardVisible(true);
+        });
+        const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+            setKeyboardVisible(false);
+        });
+
+        return () => {
+            showSubscription.remove();
+            hideSubscription.remove();
+        };
+    }, []);
+   
 
 
     {
@@ -77,7 +96,10 @@ const handleChange = (value) => {
 
                     
                     
-                    <View style={styles.ButtonContainer}>
+                    <View style={[
+                            styles.ButtonContainer,
+                            { marginTop: keyboardVisible ? hp(24) : hp(54) }, // Dynamic margin
+                        ]}>
                         <TouchableOpacity onPress={moveNext}>
                             <Text style={styles.conTinueText}>Continue</Text>
                         </TouchableOpacity>
@@ -121,7 +143,8 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         width:wp('70%'),
         textAlign:'center',
-       fontFamily:'inter'
+       fontFamily:'Inter',
+       lineHeight:36,
         // font:'urbanist'
     },
     
@@ -134,7 +157,8 @@ const styles = StyleSheet.create({
     inputContainer: {
         width: '100%',
         height:55,
-        marginTop: '10%',
+        marginTop: hp('5%'),
+        // marginTop:40,
         flexDirection: 'row',
         justifyContent: 'space-around',
         // backgroundColor:'red',

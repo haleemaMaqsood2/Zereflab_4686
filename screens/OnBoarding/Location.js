@@ -15,9 +15,14 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { color } from '../../src/styles/color';
 import Header from '../Components/Header';
 import { font } from '../../src/styles/font';
-
+import { useDispatch,useSelector } from 'react-redux';
+import { setOnBoardingComplete } from '../../src/store/slices/onBoardingSlice/onBoardingSlice';
 const Location = ({ navigation }) => {
     const [location, setLocation] = useState('');
+    const dispatch = useDispatch();
+    const onBoardingComplete = useSelector(
+        (state) => state.onBoardingSlice.onBoardingComplete
+      );
 
     const searchResult = [
         { id: 1, locationName: 'Phi Gamma Delta House' },
@@ -32,7 +37,11 @@ const Location = ({ navigation }) => {
     };
 
     const moveNext = () => {
-        // navigation.navigate('DateOfBirth')
+        dispatch(setOnBoardingComplete(true));
+        // console.log("continue press",onBoardingComplete)
+        
+        navigation.navigate('HomePage')
+        // navigation.navigate('MainStack', { screen: 'HomePage' });
     };
 
     const renderItem = ({ item }) => (
@@ -138,9 +147,11 @@ const styles = StyleSheet.create({
     },
     input: {
         backgroundColor: color.inputFieldColor,
-        width: wp('78%'),
+        width: wp('75%'),
         borderWidth: 0.5,
         color: color.placeholderColor,
+        // backgroundColor: 'red',
+
         fontSize: 16,
         fontWeight: '500',
         paddingLeft: wp(5),

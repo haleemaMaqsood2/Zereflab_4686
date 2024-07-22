@@ -62,7 +62,7 @@ const SignInTab = () => {
               // onChangeText={value => setV1(value)}
               onChangeText={value => handleChange(value)}
               placeholder='Email'
-              placeholderTextColor={color.placeholderColor}
+              placeholderTextColor={color.buttonColor}
 
               keyboardAppearance="dark"
               value={email}
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // paddingHorizontal: '5%',
     // paddingVertical: '4%',
-    width: wp('90%'),
+    width: wp('87%'),
     height: hp('4%'),
     borderBottomColor: '#ccc',
     // width:'95%',
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
   },
   activeTab: {
     backgroundColor: 'white',
-    width: '50%',
+    width: '55%',
     height: '100%',
     alignItems: 'center',
     // borderRadius:40
@@ -347,7 +347,7 @@ const styles = StyleSheet.create({
 
     borderRadius: 10,
     borderColor: '#414142',
-    borderWidth: 0.5,
+    borderWidth: 1,
     color: color.placeholderColor,
     fontSize: 16,
     fontWeight: '500',

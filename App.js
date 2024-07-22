@@ -15,57 +15,26 @@ import {
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor, store } from './src/store/Store';
+import Router from './src/routes/Router';
 
 
-import Router from './routes/Router';
-Router
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    // <NavigationContainer>
-    //   <Stack.Navigator screenOptions={{ headerShown: false }}>
-    //     <Stack.Screen name="Splash" component={Splash} />
-    //     <Stack.Screen name="Carousel" component={Carousel} />
-
-    //     <Stack.Screen name="VerifyCode" component={VerifyCode} />
-    //     <Stack.Screen name="NameInputScreen" component={NameInputScreen} />
-    //     <Stack.Screen name="SignIn" component={SignIn} />
-    //     <Stack.Screen name="DateOfBirth" component={DateOfBirth} />
-
-    //     <Stack.Screen name="UserNameScreen" component={UserNameScreen} />
-    //     <Stack.Screen name="ImageUpload" component={ImageUpload} />
-    //     <Stack.Screen name="DiscoverFriends" component={DiscoverFriends} />
-
-
-
-
-        
-
-
-
-    //   </Stack.Navigator>
-    // </NavigationContainer>
-    <Router/>
+   
+    <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+            <Router />
+    </PersistGate>
+  </Provider>
   );
 }
 
 const styles = StyleSheet.create({
-  image: {
-    alignSelf: 'center',
-    // height:'50%'
-  },
-  Logo: {
-    textAlign: 'center',
-    color: 'white'
-  },
-  title: {
-    textAlign: 'center',
-    color: 'white'
-  },
-  subTitle: {
-    textAlign: 'center',
-    color: 'white'
-  },
+ 
 });
 export default App;

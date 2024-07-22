@@ -126,9 +126,12 @@ const styles = StyleSheet.create({
     padding: 5,
     borderColor: '#414142',
     borderWidth: 0.4,
-    width: '12.5%',
-    // height: 49,
-    height:RFPercentage(5.7),
+    // width: '12.5%',
+    width: wp('9.5%'),
+
+    // height:RFPercentage(5.7),
+    height:RFPercentage(4.7),
+
     borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',

@@ -11,6 +11,7 @@ import {
     TouchableOpacity,
     Image,
     KeyboardAvoidingView,
+    Keyboard
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation,useFocusEffect } from '@react-navigation/native';
@@ -23,6 +24,7 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 const VerifyCode = () => {
     //   const navigation = useNavigation();
 
+    const [keyboardVisible, setKeyboardVisible] = useState(false);
 
     const navigation = useNavigation();
     const [v1, setV1] = useState('');
@@ -45,6 +47,21 @@ const VerifyCode = () => {
             navigation.navigate('NameInputScreen');
         }
     };
+    
+    useEffect(() => {
+        const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+            setKeyboardVisible(true);
+        });
+        const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+            setKeyboardVisible(false);
+        });
+
+        return () => {
+            showSubscription.remove();
+            hideSubscription.remove();
+        };
+    }, []);
+
     useEffect(() => {
         const focusTimeout = setTimeout(() => {
             v1Ref.current.focus();
@@ -52,29 +69,28 @@ const VerifyCode = () => {
 
         return () => clearTimeout(focusTimeout);
     }, []);
-    //for timer on buttonuseEffect(() => {
-        
-        useEffect(() => {
-            if (timer > 0) {
-                const interval = setInterval(() => {
-                    setTimer(timer - 1);
-                }, 1000);
-                return () => clearInterval(interval);
-            }
-        }, [timer]);
-    ///Discourage user to close keyboard
+
+    useEffect(() => {
+        if (timer > 0) {
+            const interval = setInterval(() => {
+                setTimer(timer - 1);
+            }, 1000);
+            return () => clearInterval(interval);
+        }
+    }, [timer]);
+
     useFocusEffect(
         React.useCallback(() => {
-          const focusTimeout = setTimeout(() => {
-            v1Ref.current.focus();
-          }, 100);
-    
-          return () => clearTimeout(focusTimeout);
+            const focusTimeout = setTimeout(() => {
+                v1Ref.current.focus();
+            }, 100);
+
+            return () => clearTimeout(focusTimeout);
         }, [])
-      );
+    );
 
     function moveNext() {
-        navigation.navigate('SignUp')
+        navigation.navigate('NameInputScreen');
     }
 
 
@@ -138,11 +154,16 @@ const VerifyCode = () => {
                         />
                     </View>
                     
-                    <View style={styles.ButtonContainer}>
+                    <View
+                        style={[
+                            styles.ButtonContainer,
+                            { marginTop: keyboardVisible ? hp(26) : hp(54) }, // Dynamic margin
+                        ]}
+                    >
                         <TouchableOpacity onPress={moveNext}>
                             <Text style={styles.resendText}>Resend code in {timer}s</Text>
                         </TouchableOpacity>
-                    </View>
+                    </View>                       
                   
                 </View>
                 </KeyboardAvoidingView>

@@ -14,6 +14,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import { color } from '../../src/styles/color';
+import { useSelector } from 'react-redux';
 const Splash = () => {
   const navigation = useNavigation();
 
@@ -23,7 +24,7 @@ const Splash = () => {
       // navigation.navigate('VerifyCode');
       navigation.navigate('Carousel');
 
-    }, 5000);
+    }, 3000);
 
     // Cleanup the timer if the component is unmounted
     return () => clearTimeout(timer);

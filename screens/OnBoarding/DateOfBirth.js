@@ -33,10 +33,25 @@ const DateOfBirth = () => {
 
 
     };
+    const calculateAge = (birthDate) => {
+        const today = new Date();
+        const age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+          return age - 1;
+        }
+        return age;
+      };
 
     function moveNext() {
-        console.log(">>>>>>>>dfdfde")
-        navigation.navigate('UserNameScreen')
+        console.log(">>>>>>>>dfdfde",date)
+        const age = calculateAge(date);
+    if (age >= 17) {
+      navigation.navigate('UserNameScreen'); // Navigate if age is 17 or older
+    } else {
+      alert("You must be at least 17 years old to continue.");
+    }
+        // navigation.navigate('UserNameScreen')
     }
  
 
@@ -58,6 +73,7 @@ const DateOfBirth = () => {
                             placeholderTextColor={color.placeholderColor}
 
                             keyboardAppearance="dark"
+                            textColor="white" // Text color
                             // value={name}
                             // ref={nameRef}
                         />
@@ -88,13 +104,16 @@ const DateOfBirth = () => {
                             date={date}
                             onDateChange={setDate}
                             mode="date"
-                          textColor={'blue'}
+                                    textColor="white" // Set text color to white
                             androidVariant="nativeAndroid"
                             onConfirm={(date) => {
                                 setOpen(false);
                                 setDate(date);
                             }}
                             onCancel={() => setOpen(false)}
+                            color={'red'}
+                            theme={'dark'}
+
                         />
                         {/* <TouchableOpacity style={styles.confirmButton} onPress={() => setOpen(false)}>
                             <Text style={styles.confirmButtonText}>Confirm</Text>
@@ -213,11 +232,13 @@ const styles = StyleSheet.create({
         
     },
     datePickerContainer: {
-        // backgroundColor: '#232121',
-        backgroundColor:'white',
+        backgroundColor: '#090A12',
+        // backgroundColor:'white',
         padding: 20,
         color:'white',
         paddingBottom:RFPercentage(10),
+        width:'94%',
+        alignItems:'center'
         // paddingtop:RFPercentage(20)
        
     },

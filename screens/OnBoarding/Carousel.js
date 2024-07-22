@@ -146,8 +146,8 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         width: wp('70%'),
         textAlign: 'center',
-        fontFamily: 'Inter'
-        // font:'urbanist'
+        // fontFamily: 'Inter'
+        font:'Urbanist'
     },
     buttonContainer: {
         backgroundColor: color.onBoardingButton,
@@ -210,12 +210,15 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255,255,255,.3)',
         width: 8,
         height: 8,
+        // marginTop:RFPercentage(2),
         // marginBottom:'50%'
     },
     activeDot: {
         backgroundColor: '#fff',
         width: 8,
         height: 8,
+        // marginTop:RFPercentage(2),
+
         // marginBottom:'50%'
 
     },

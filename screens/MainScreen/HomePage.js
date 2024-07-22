@@ -10,22 +10,50 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  Modal
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import { color } from '../../src/styles/color';
 import Header from './Components/Header';
+import { BottomTabBar } from '@react-navigation/bottom-tabs';
+import HomeTab from './Components/HomeTab';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import { useDispatch } from 'react-redux';
+import { setOnBoardingComplete } from '../../src/store/slices/onBoardingSlice/onBoardingSlice';
 
 const HomePage = () => {
-  const navigation = useNavigation();
+  const [modalVisible, setModalVisible] = useState(true); // Start with the modal visible
+  const dispatch = useDispatch();
 
-  
+  const navigation = useNavigation();
+  const TabData=[
+    {
+      id:1,
+      name:'Popular',
+    },
+    {
+      id:2,
+      name:'Upcoming',
+    },
+    {
+      id:3,
+      name:'Friends',
+    },
+  ]
+
+//  useEffect(()=>{
+//   dispatch(setOnBoardingComplete(false));
+
+//  })
 
   {
     return (
       <SafeAreaView style={styles.safeArea}>
         <SafeAreaView style={styles.safeArea}>
         <Header/>
+        <HomeTab data={TabData}/>
 
 
 
@@ -39,6 +67,7 @@ const HomePage = () => {
           </View>
 
         </SafeAreaView>
+        
       </SafeAreaView>
     );
   }

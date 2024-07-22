@@ -11,6 +11,8 @@ import {
     TouchableOpacity,
     Image,
     KeyboardAvoidingView,
+    Keyboard
+
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation,useFocusEffect } from '@react-navigation/native';
@@ -22,6 +24,8 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 const UserNameScreen = ({navigation}) => {
     //   const navigation = useNavigation();
+    const [keyboardVisible, setKeyboardVisible] = useState(false);
+
 const [userName,setUserName]=useState('')
 
 const userNameRef = useRef(null);
@@ -55,6 +59,19 @@ const handleChange = (value) => {
     //         return () => clearTimeout(focusTimeout);
     //     }, [])
     // );
+    useEffect(() => {
+        const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+            setKeyboardVisible(true);
+        });
+        const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+            setKeyboardVisible(false);
+        });
+
+        return () => {
+            showSubscription.remove();
+            hideSubscription.remove();
+        };
+    }, []);
 
 
     {
@@ -89,7 +106,10 @@ const handleChange = (value) => {
 
                     
                     
-                    <View style={styles.ButtonContainer}>
+                    <View style={[
+                            styles.ButtonContainer,
+                            { marginTop: keyboardVisible ? hp(20) : hp(54) }, // Dynamic margin
+                        ]}>
                         <TouchableOpacity onPress={moveNext}>
                             <Text style={styles.conTinueText}>Sign Up</Text>
                         </TouchableOpacity>
@@ -177,7 +197,7 @@ const styles = StyleSheet.create({
     ButtonContainer:{
         backgroundColor:color.buttonColor,
         // height:hp('7%'),
-        height:hp('7%'),
+        height:hp('6%'),
         // width:363,
 
          width:wp('92%'),

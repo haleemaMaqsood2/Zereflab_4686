@@ -68,9 +68,19 @@ const DiscoverFriends = ({ navigation }) => {
                             <Text style={styles.descriptionText}>Allow Where2 access to your contacts to help you find friends.</Text>
                         </View>
                     </View>
+                    <View style={styles.contineContainer}>
+                            <TouchableOpacity style={styles.uploadContainer} onPress={moveNext}>
+                                <Text style={styles.uploadText}>Continue</Text>
 
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.SkipContainer} onPress={moveNext}>
+                                <Text style={styles.skipText}>Skip</Text>
 
-                    {(!continuePress) ?
+                            </TouchableOpacity>
+                        </View>
+{/* ///hIDE this modal because of Figma Change */}
+
+                    {/* {(!continuePress) ?
                         <View style={styles.contineContainer}>
                             <TouchableOpacity style={styles.uploadContainer} onPress={onPressContinue}>
                                 <Text style={styles.uploadText}>Continue</Text>
@@ -95,7 +105,7 @@ const DiscoverFriends = ({ navigation }) => {
                                 </View>
                             </View>
                         </View>
-                    }
+                    } */}
 
                 </KeyboardAvoidingView>
 
