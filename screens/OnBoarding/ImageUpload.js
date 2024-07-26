@@ -63,7 +63,8 @@ const ImageUpload = ({ navigation }) => {
                             resizeMode="cover"
                         />
                     </View>
-                    <View style={{marginTop:RFPercentage(23),alignItems:'center'}}>
+                    {/* //android=23 Platform.OS === 'ios' ? RFPercentage(13) : RFPercentage(23),*/}
+                    <View style={{marginTop:Platform.OS === 'ios' ? RFPercentage(13) : RFPercentage(23),alignItems:'center'}}>
                     <TouchableOpacity style={styles.uploadContainer} onPress={moveNext}>
                         <Text style={styles.uploadText}>Upload</Text>
 
@@ -106,20 +107,12 @@ const styles = StyleSheet.create({
         // backgroundColor:'red',
         height: hp('10%')
     },
-    titleContainer: {
-        width: wp('90%'),
-        alignSelf: 'center',
-        marginTop: hp('1%'),
-        justifyContent: 'center',
-        alignItems: 'center',
-        // backgroundColor:'red',
-        height: hp('10%')
-    },
+  
     titleText: {
         color: '#FFFFFF',
         fontSize: 28,
         fontWeight: '700',
-        width: wp('70%'),
+        width: wp('80%'),
         textAlign: 'center',
         fontFamily: 'inter'
         // font:'urbanist'
@@ -212,13 +205,13 @@ SkipContainer:{
     borderRadius: 10,
     width:wp('85%'),
     borderWidth:1,
-    borderColor:color.placeholderColor,
+    borderColor:'#ffffff80',
 },
 skipText:  {
     fontSize: 16,
     fontFamily: 'Inter',
     fontweight: '700',
-    color: color.placeholderColor,
+    color: '#ffffff80',
 },
 });
 export default ImageUpload;

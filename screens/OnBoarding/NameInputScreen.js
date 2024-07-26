@@ -98,9 +98,9 @@ const handleChange = (value) => {
                     
                     <View style={[
                             styles.ButtonContainer,
-                            { marginTop: keyboardVisible ? hp(24) : hp(54) }, // Dynamic margin
+                            { marginTop: keyboardVisible ? hp(20) : hp(54) }, // Dynamic margin
                         ]}>
-                        <TouchableOpacity onPress={moveNext}>
+                        <TouchableOpacity onPress={moveNext} style={styles.touchableArea}>
                             <Text style={styles.conTinueText}>Continue</Text>
                         </TouchableOpacity>
                     </View>
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 28,
         fontWeight: '700',
-        width:wp('70%'),
+        width:wp('80%'),
         textAlign:'center',
        fontFamily:'Inter',
        lineHeight:36,
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
 
         borderRadius: 15,
         borderColor: '#414142',
-        borderWidth: 0.5,
+        borderWidth: 1,
         color: color.placeholderColor,
         fontSize: 16,
         fontWeight:'500',
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
        
     },
     ButtonContainer:{
-        backgroundColor:color.buttonColor,
+        backgroundColor: '#ffffff33',
         // height:hp('7%'),
         height:50,
         // width:363,
@@ -203,7 +203,13 @@ const styles = StyleSheet.create({
         fontWeight:'700',
         fontFamily:'inter'
 
-    }
+    },
+    touchableArea: {
+        width: '100%', // Make it the full width of the container
+        height: '100%', // Make it the full height of the container
+        alignItems: 'center', // Center the text
+        justifyContent: 'center', // Center the text
+      },
 
 });
 export default NameInputScreen;

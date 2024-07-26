@@ -9,4 +9,7 @@ export const color ={
     whiteColor:'#FFFFFF',
     balckFontColor:'#050507',
     modalDescriptionText:'#D9D9D9',
+    whiteWithfiftypercentOpacity:'#ffffff80',
+    WhiteWithThirtypercentOpacity:'#ffffff33',
+    shareButtonColor:'#232121'
 };

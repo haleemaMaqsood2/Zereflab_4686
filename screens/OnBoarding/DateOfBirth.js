@@ -45,8 +45,11 @@ const DateOfBirth = () => {
 
     function moveNext() {
         console.log(">>>>>>>>dfdfde",date)
+
         const age = calculateAge(date);
     if (age >= 17) {
+          setOpen(false)
+
       navigation.navigate('UserNameScreen'); // Navigate if age is 17 or older
     } else {
       alert("You must be at least 17 years old to continue.");
@@ -95,7 +98,7 @@ const DateOfBirth = () => {
             >
                 <View style={styles.modalContainer}>
                 <View style={styles.ButtonContainer}>
-                            <TouchableOpacity onPress={moveNext}>
+                            <TouchableOpacity onPress={moveNext} style={styles.touchableArea}>
                                 <Text style={styles.conTinueText}>Continue</Text>
                             </TouchableOpacity>
                         </View>
@@ -159,7 +162,7 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 28,
         fontWeight: '700',
-        width: wp('70%'),
+        width: wp('80%'),
         textAlign: 'center',
         fontFamily: 'Inter'
         // font:'urbanist'
@@ -187,8 +190,8 @@ const styles = StyleSheet.create({
 
         borderRadius: 15,
         borderColor: '#414142',
-        borderWidth: 0.5,
-        color: color.placeholderColor,
+        borderWidth: 1,
+        color: '#ffffff33',
         fontSize: 16,
         fontWeight: '500',
         paddingLeft: wp(5),
@@ -196,8 +199,14 @@ const styles = StyleSheet.create({
 
 
     },
+    touchableArea: {
+        width: '100%', // Make it the full width of the container
+        height: '100%', // Make it the full height of the container
+        alignItems: 'center', // Center the text
+        justifyContent: 'center', // Center the text
+      },
     ButtonContainer: {
-        backgroundColor: color.buttonColor,
+        backgroundColor: '#ffffff33',
         // height:hp('7%'),
         height: RFPercentage(7),
         // width:363,

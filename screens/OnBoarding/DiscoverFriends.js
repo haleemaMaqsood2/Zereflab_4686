@@ -65,7 +65,7 @@ const DiscoverFriends = ({ navigation }) => {
                             resizeMode="cover"
                         />
                         <View style={styles.descriptionContainer}>
-                            <Text style={styles.descriptionText}>Allow Where2 access to your contacts to help you find friends.</Text>
+                            <Text style={styles.descriptionText}>Allow Where2 access to your contacts so we can help you find your friends. Your contacts will not be shared with anyone.</Text>
                         </View>
                     </View>
                     <View style={styles.contineContainer}>
@@ -133,11 +133,10 @@ const styles = StyleSheet.create({
     titleContainer: {
         width: wp('90%'),
         alignSelf: 'center',
-        marginTop: hp('1%'),
         justifyContent: 'center',
         alignItems: 'center',
         // backgroundColor:'yellow',
-        height: hp('10%')
+        height: hp('5%')
     },
     titleContainer2: {
         width: wp('80%'),
@@ -221,8 +220,9 @@ const styles = StyleSheet.create({
     },
     ImageContainer: {
         alignSelf: "center",
-        height: RFPercentage(40)
-        ,
+        alignItems:'center',
+        height: RFPercentage(40),
+        marginTop:hp('5')
     },
     uploadContainer: {
         backgroundColor: color.onBoardingButton,
@@ -247,27 +247,27 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         width: wp('85%'),
         borderWidth: 1,
-        borderColor: color.placeholderColor,
+        borderColor: color.whiteWithfiftypercentOpacity,
     },
     skipText: {
         fontSize: 16,
         fontFamily: 'Inter',
         fontweight: '700',
-        color: color.placeholderColor,
+        color: color.whiteWithfiftypercentOpacity,
     },
     contineContainer: {
-        marginTop: RFPercentage(23),
+        marginTop:Platform.OS === 'ios' ? RFPercentage(13) : RFPercentage(23),//23 on android
         alignItems: 'center'
     },
     descriptionContainer: {
         width: wp('80%'),
         alignSelf: 'center',
-        paddingTop: RFPercentage(3)
+        paddingTop: hp(3.5),
     },
     descriptionText: {
         // backgroundColor: 'red',
         fontFamily: 'Inter',
-        fontSize: 16,
+        fontSize: 15,
         fontWeight: '400',
         color: color.whiteFontColor,
         textAlign: 'center'

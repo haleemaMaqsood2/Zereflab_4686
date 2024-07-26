@@ -153,15 +153,16 @@ const VerifyCode = () => {
                             maxLength={1}
                         />
                     </View>
+                    <Text style={styles.timerText}>Resend code in {timer}s</Text>
                     
                     <View
                         style={[
                             styles.ButtonContainer,
-                            { marginTop: keyboardVisible ? hp(26) : hp(54) }, // Dynamic margin
+                            { marginTop: keyboardVisible ? hp(15) : hp(45) }, // Dynamic margin
                         ]}
                     >
-                        <TouchableOpacity onPress={moveNext}>
-                            <Text style={styles.resendText}>Resend code in {timer}s</Text>
+                        <TouchableOpacity onPress={moveNext} style={styles.touchableArea}>
+                            <Text style={styles.resendText}>Continue</Text>
                         </TouchableOpacity>
                     </View>                       
                   
@@ -201,9 +202,11 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 28,
         fontWeight: '700',
-        width:wp('70%'),
+        width:wp('75%'),
         textAlign:'center',
-       fontFamily:'inter'
+       fontFamily:'inter',
+    //    backgroundColor:'red'
+    //    lineHeight:128.646,
         // font:'urbanist'
     },
     
@@ -256,7 +259,20 @@ const styles = StyleSheet.create({
         fontWeight:'700',
         fontFamily:'inter'
 
-    }
+    },
+    timerText:{
+        color:'#6F6F70',
+        fontSize:15,
+        fontFamily:'Inter',
+        fontFamily:'700',
+        marginTop:hp(2.5),
+    },
+    touchableArea: {
+        width: '100%', // Make it the full width of the container
+        height: '100%', // Make it the full height of the container
+        alignItems: 'center', // Center the text
+        justifyContent: 'center', // Center the text
+      },
 
 });
 export default VerifyCode;

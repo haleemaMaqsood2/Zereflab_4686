@@ -12,8 +12,88 @@
         "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-xxxhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
     },
     {
-        "merged": "com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_addbottomicon.png.flat",
-        "source": "com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_addbottomicon.png"
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_addbottomicon.png.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_addbottomicon.png"
+    },
+    {
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_node_modules_reactnavigation_elements_src_assets_backiconmask.png.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/node_modules_reactnavigation_elements_src_assets_backiconmask.png"
+    },
+    {
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_notificationicon.png.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_notificationicon.png"
+    },
+    {
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_carousel2.png.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_carousel2.png"
+    },
+    {
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-xxhdpi_node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-xxhdpi/node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_closeicon.png.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_closeicon.png"
+    },
+    {
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable_rn_edit_text_material.xml.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable/rn_edit_text_material.xml"
+    },
+    {
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_circle.png.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_circle.png"
+    },
+    {
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_modalhideicon.png.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_modalhideicon.png"
+    },
+    {
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_arrow.png.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_arrow.png"
+    },
+    {
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_clockicon.png.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_clockicon.png"
+    },
+    {
+        "merged": "com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_partyuser.png.flat",
+        "source": "com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_partyuser.png"
+    },
+    {
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-hdpi_node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-hdpi/node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_profile.png.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_profile.png"
+    },
+    {
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_myprofileicon.png.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_myprofileicon.png"
+    },
+    {
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-xhdpi_node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-xhdpi/node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backiconmask.png.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backiconmask.png"
+    },
+    {
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_node_modules_reactnativecountrypickermodal_lib_assets_images_close.png.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/node_modules_reactnativecountrypickermodal_lib_assets_images_close.png"
     },
     {
         "merged": "com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_clockicon.png.flat",
@@ -24,32 +104,20 @@
         "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_addicon.png"
     },
     {
-        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_node_modules_reactnavigation_elements_src_assets_backiconmask.png.flat",
-        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/node_modules_reactnavigation_elements_src_assets_backiconmask.png"
-    },
-    {
-        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_carousel2.png.flat",
-        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_carousel2.png"
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_homeicon.png.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_homeicon.png"
     },
     {
         "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_logo.png.flat",
         "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_logo.png"
     },
     {
-        "merged": "com.secondproject.app-merged_res-34:/drawable-mdpi_node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backiconmask.png.flat",
-        "source": "com.secondproject.app-main-36:/drawable-mdpi/node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backiconmask.png"
+        "merged": "com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_birthdaylistscreen.png.flat",
+        "source": "com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_birthdaylistscreen.png"
     },
     {
-        "merged": "com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_myprofileicon.png.flat",
-        "source": "com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_myprofileicon.png"
-    },
-    {
-        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_closeicon.png.flat",
-        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_closeicon.png"
-    },
-    {
-        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable_rn_edit_text_material.xml.flat",
-        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable/rn_edit_text_material.xml"
+        "merged": "com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_shareicon.png.flat",
+        "source": "com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_shareicon.png"
     },
     {
         "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_userprofile.png.flat",
@@ -64,14 +132,6 @@
         "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_logohome.png"
     },
     {
-        "merged": "com.secondproject.app-merged_res-34:/drawable-hdpi_node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
-        "source": "com.secondproject.app-main-36:/drawable-hdpi/node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backicon.png"
-    },
-    {
-        "merged": "com.secondproject.app-merged_res-34:/drawable-xhdpi_node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
-        "source": "com.secondproject.app-main-36:/drawable-xhdpi/node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backicon.png"
-    },
-    {
         "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-xxhdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
         "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-xxhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
     },
@@ -84,10 +144,6 @@
         "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_googleicon.png"
     },
     {
-        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_arrow.png.flat",
-        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_arrow.png"
-    },
-    {
         "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_profile2.png.flat",
         "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_profile2.png"
     },
@@ -96,16 +152,20 @@
         "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_appleicon.png"
     },
     {
+        "merged": "com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_otherfriends.png.flat",
+        "source": "com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_otherfriends.png"
+    },
+    {
         "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/mipmap-hdpi_ic_launcher.png.flat",
         "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/mipmap-hdpi/ic_launcher.png"
     },
     {
-        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
-        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/mipmap-xxxhdpi/ic_launcher_round.png"
-    },
-    {
         "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_node_modules_reactnativecountrypickermodal_lib_assets_images_closeios.png.flat",
         "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/node_modules_reactnativecountrypickermodal_lib_assets_images_closeios.png"
+    },
+    {
+        "merged": "com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_otheruser.png.flat",
+        "source": "com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_otheruser.png"
     },
     {
         "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/mipmap-mdpi_ic_launcher_round.png.flat",
@@ -120,10 +180,6 @@
         "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_profile1.png"
     },
     {
-        "merged": "com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_usericon.png.flat",
-        "source": "com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_usericon.png"
-    },
-    {
         "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_doneicon.png.flat",
         "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_doneicon.png"
     },
@@ -136,14 +192,6 @@
         "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
     },
     {
-        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_profile.png.flat",
-        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_profile.png"
-    },
-    {
-        "merged": "com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_homeicon.png.flat",
-        "source": "com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_homeicon.png"
-    },
-    {
         "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/mipmap-xhdpi_ic_launcher.png.flat",
         "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/mipmap-xhdpi/ic_launcher.png"
     },
@@ -152,12 +200,8 @@
         "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/mipmap-hdpi/ic_launcher_round.png"
     },
     {
-        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/mipmap-xxhdpi/ic_launcher.png"
-    },
-    {
-        "merged": "com.secondproject.app-merged_res-34:/drawable-xxxhdpi_node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
-        "source": "com.secondproject.app-main-36:/drawable-xxxhdpi/node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backicon.png"
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-xxxhdpi_node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-xxxhdpi/node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backicon.png"
     },
     {
         "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/mipmap-mdpi_ic_launcher.png.flat",
@@ -172,19 +216,11 @@
         "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/mipmap-xhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "com.secondproject.app-merged_res-34:/drawable-mdpi_node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
-        "source": "com.secondproject.app-main-36:/drawable-mdpi/node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backicon.png"
-    },
-    {
         "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/mipmap-xxxhdpi_ic_launcher.png.flat",
         "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
-        "merged": "com.secondproject.app-merged_res-34:/drawable-xxhdpi_node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
-        "source": "com.secondproject.app-main-36:/drawable-xxhdpi/node_modules_reactnavigation_bottomtabs_node_modules_reactnavigation_elements_src_assets_backicon.png"
-    },
-    {
-        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_node_modules_reactnativecountrypickermodal_lib_assets_images_close.png.flat",
-        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/node_modules_reactnativecountrypickermodal_lib_assets_images_close.png"
+        "merged": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-merged_res-34:/drawable-mdpi_src_assets_images_usericon.png.flat",
+        "source": "/Users/zereflab/.gradle/daemon/8.6/com.secondproject.app-main-36:/drawable-mdpi/src_assets_images_usericon.png"
     }
 ]

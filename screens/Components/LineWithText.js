@@ -25,13 +25,15 @@ const styles = StyleSheet.create({
   line: {
     flex: 1,
     height: 1,
-    backgroundColor: color.placeholderColor,
+    backgroundColor: '#ffffff80',
   },
   text: {
     marginHorizontal: wp('1%'),
     fontSize: 17,
     // fontWeight: 'bold',
-    color: color.placeholderColor,
+    // color: color.placeholderColor,
+    color: '#ffffff80',
+
   },
 });
 

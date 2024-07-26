@@ -142,7 +142,7 @@ const AddFriendScreen = ({ navigation }) => {
 
                     {/* <View style={{justifyContent:'center'}}> */}
                         <View style={styles.ButtonContainer}>
-                            <TouchableOpacity onPress={moveNext}>
+                            <TouchableOpacity onPress={moveNext} style={styles.touchableArea}>
                                 <Text style={styles.conTinueText}>Continue</Text>
                             </TouchableOpacity>
                         </View>
@@ -184,7 +184,12 @@ const styles = StyleSheet.create({
         fontFamily: 'inter'
         // font:'urbanist'
     },
-
+    touchableArea: {
+        width: '100%', // Make it the full width of the container
+        height: '100%', // Make it the full height of the container
+        alignItems: 'center', // Center the text
+        justifyContent: 'center', // Center the text
+      },
 
 
 
@@ -201,7 +206,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         position: 'absolute',
-        top: hp('65%'),
+        // top: hp('60%'),//65 on android
+        top:Platform.OS === 'ios' ? hp('60%') :hp('65%'),
         left:hp('2%')
 
 

@@ -146,6 +146,7 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         width: wp('70%'),
         textAlign: 'center',
+        lineHeight:36.02,
         // fontFamily: 'Inter'
         font:'Urbanist'
     },

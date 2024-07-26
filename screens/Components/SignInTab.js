@@ -62,7 +62,7 @@ const SignInTab = () => {
               // onChangeText={value => setV1(value)}
               onChangeText={value => handleChange(value)}
               placeholder='Email'
-              placeholderTextColor={color.buttonColor}
+              placeholderTextColor='#ffffff80'
 
               keyboardAppearance="dark"
               value={email}
@@ -73,7 +73,7 @@ const SignInTab = () => {
           </View>
           <View style={styles.ButtonContainer}>
 
-            <TouchableOpacity onPress={moveNext}>
+            <TouchableOpacity onPress={moveNext} style={styles.touchableArea} >
               <Text style={styles.conTinueText}>Continue</Text>
             </TouchableOpacity>
           </View>
@@ -131,7 +131,7 @@ const SignInTab = () => {
               codeTextStyle={styles.phoneCodeText}
               textInputProps={{
                 placeholder: "Phone number",
-                placeholderTextColor: color.placeholderColor
+                placeholderTextColor:'#ffffff80'
               }}
 
             />
@@ -156,7 +156,7 @@ const SignInTab = () => {
           </View>
           <View style={styles.ButtonContainer}>
 
-            <TouchableOpacity onPress={moveNext}> 
+            <TouchableOpacity onPress={moveNext} style={styles.touchableArea}> 
               <Text style={styles.conTinueText}>Continue</Text>
             </TouchableOpacity>
           </View>
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
 
   },
   tabText: {
-    color: color.placeholderColor,
+    color: color.whiteWithfiftypercentOpacity,
     fontWeight: '400',
     fontSize: 14,
     fontFamily: 'Inter',
@@ -247,8 +247,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // backgroundColor: 'blue' ,   // alignItems: 'center',
   },
+  touchableArea: {
+    width: '100%', // Make it the full width of the container
+    height: '100%', // Make it the full height of the container
+    alignItems: 'center', // Center the text
+    justifyContent: 'center', // Center the text
+  },
   ButtonContainer: {
-    backgroundColor: color.buttonColor,
+    backgroundColor: '#ffffff33',
     // height:hp('7%'),
     height: 50,
     // width:363,
@@ -364,8 +370,8 @@ const styles = StyleSheet.create({
     backgroundColor: color.inputFieldColor,
     marginTop: '0%',
     borderRadius: 10,
-    borderWidth: 0.2,
-    borderColor: color.whiteColor,
+    borderWidth:1,
+    borderColor:'#ffffff4d',
     alignItems: 'center',
     justifyContent: 'center',
 

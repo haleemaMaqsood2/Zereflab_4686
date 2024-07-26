@@ -11,7 +11,8 @@ import {
     TouchableOpacity,
     Image,
     KeyboardAvoidingView,
-    Keyboard
+    Keyboard,
+    Platform
 
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -24,7 +25,7 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 const UserNameScreen = ({navigation}) => {
     //   const navigation = useNavigation();
-    const [keyboardVisible, setKeyboardVisible] = useState(false);
+    const [keyboardVisible, setKeyboardVisible] = useState(true);
 
 const [userName,setUserName]=useState('')
 
@@ -49,16 +50,18 @@ const handleChange = (value) => {
         return () => clearTimeout(focusTimeout);
     }, []);
 
-    // useFocusEffect(
-    //     React.useCallback(() => {
-    //         const focusTimeout = setTimeout(() => {
-    //             if (userNameRef.current) {
-    //                 userNameRef.current.focus();
-    //             }
-    //         }, 100);
-    //         return () => clearTimeout(focusTimeout);
-    //     }, [])
-    // );
+    useFocusEffect(
+        React.useCallback(() => {
+            const focusTimeout = setTimeout(() => {
+                if (userNameRef.current) {
+                    userNameRef.current.focus();
+                }
+            }, 100);
+            return () => clearTimeout(focusTimeout);
+        }, [])
+    );
+
+    
     useEffect(() => {
         const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
             setKeyboardVisible(true);
@@ -85,6 +88,7 @@ const handleChange = (value) => {
                     <View style={styles.input}>
                     <TextInput
                             // style={styles.input}
+                            style={{color:color.placeholderColor,height:Platform.OS === 'ios' ? hp(5):null}}
                             onChangeText={value => handleChange(value)}
                             placeholder='Username'
                             placeholderTextColor={color.placeholderColor}
@@ -108,9 +112,9 @@ const handleChange = (value) => {
                     
                     <View style={[
                             styles.ButtonContainer,
-                            { marginTop: keyboardVisible ? hp(20) : hp(54) }, // Dynamic margin
+                            { marginTop: keyboardVisible ? hp(15) : hp(50) }, // Dynamic margin
                         ]}>
-                        <TouchableOpacity onPress={moveNext}>
+                        <TouchableOpacity onPress={moveNext} style={styles.touchableArea}>
                             <Text style={styles.conTinueText}>Sign Up</Text>
                         </TouchableOpacity>
                     </View>
@@ -151,7 +155,7 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 28,
         fontWeight: '700',
-        width:wp('70%'),
+        width:wp('80%'),
         textAlign:'center',
        fontFamily:'inter'
         // font:'urbanist'
@@ -180,8 +184,9 @@ const styles = StyleSheet.create({
 
         borderRadius: 15,
         borderColor: '#414142',
-        borderWidth: 0.5,
-        color: color.placeholderColor,
+        borderWidth: 1,
+        color: '#ffffff33',//backgroundColor: '#ffffff33',
+
         fontSize: 16,
         fontWeight:'500',
         paddingLeft:wp(5),
@@ -195,7 +200,7 @@ const styles = StyleSheet.create({
        
     },
     ButtonContainer:{
-        backgroundColor:color.buttonColor,
+        backgroundColor: '#ffffff33',
         // height:hp('7%'),
         height:hp('6%'),
         // width:363,
@@ -212,6 +217,12 @@ const styles = StyleSheet.create({
 
 
     },
+    touchableArea: {
+        width: '100%', // Make it the full width of the container
+        height: '100%', // Make it the full height of the container
+        alignItems: 'center', // Center the text
+        justifyContent: 'center', // Center the text
+      },
     conTinueText:{
         alignItems:'center',
         color:'#FFFFFF',

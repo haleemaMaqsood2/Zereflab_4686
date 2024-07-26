@@ -8,6 +8,7 @@ import {
     TouchableOpacity,
     Image,
     FlatList,
+    Platform
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 28,
         fontWeight: '700',
-        width: wp('70%'),
+        width: wp('80%'),
         textAlign: 'center',
         fontFamily: 'inter',
     },
@@ -134,10 +135,12 @@ const styles = StyleSheet.create({
     },
     buttonDisabled: {
         backgroundColor: color.inputFieldColor,
-        marginTop:'100%'
+        marginTop:'90%'
     },
     buttonEnabled: {
         backgroundColor: color.onBoardingButton,
+        marginTop:'25%'
+
     },
     conTinueText: {
         color: '#FFFFFF',
@@ -149,6 +152,7 @@ const styles = StyleSheet.create({
         backgroundColor: color.inputFieldColor,
         width: wp('75%'),
         borderWidth: 0.5,
+        height:Platform.OS === 'ios' ? RFPercentage(5):null,
         color: color.placeholderColor,
         // backgroundColor: 'red',
 
