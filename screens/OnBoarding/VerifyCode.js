@@ -97,7 +97,7 @@ const VerifyCode = () => {
     {
         return (
             <SafeAreaView style={styles.safeArea}>
-                <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+                <KeyboardAvoidingView >
                 <Header/>
 
                 <View style={styles.titleContainer}>
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
         color:'#6F6F70',
         fontSize:15,
         fontFamily:'Inter',
-        fontFamily:'700',
+        fontWeight:'700',
         marginTop:hp(2.5),
     },
     touchableArea: {

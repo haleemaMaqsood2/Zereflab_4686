@@ -38,10 +38,10 @@ const Location = ({ navigation }) => {
     };
 
     const moveNext = () => {
-        dispatch(setOnBoardingComplete(true));
+        // dispatch(setOnBoardingComplete(true));
         // console.log("continue press",onBoardingComplete)
         
-        navigation.navigate('HomePage')
+        // navigation.navigate('HomePage')
         // navigation.navigate('MainStack', { screen: 'HomePage' });
     };
 

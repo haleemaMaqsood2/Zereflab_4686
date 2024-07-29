@@ -1,154 +1,162 @@
 import React, { useState, useRef, useEffect } from 'react';
 import {
     SafeAreaView,
-    ScrollView,
-    StatusBar,
     StyleSheet,
     Text,
-    useColorScheme,
     View,
     TextInput,
     TouchableOpacity,
-    Image,
     Modal,
+    Animated,
+    Easing,
     KeyboardAvoidingView,
+    Platform
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { color } from '../../src/styles/color';
 import Header from '../Components/Header';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import { RFPercentage } from "react-native-responsive-fontsize";
 import DatePicker from 'react-native-date-picker';
 
+const CustomModal = ({ visible, onClose, children }) => {
+    const translateY = useRef(new Animated.Value(500)).current;
+
+    useEffect(() => {
+        if (visible) {
+            Animated.timing(translateY, {
+                toValue: 0,
+                duration: 300,
+                easing: Easing.out(Easing.ease),
+                useNativeDriver: true,
+            }).start();
+        } else {
+            Animated.timing(translateY, {
+                toValue: 500,
+                duration: 300,
+                easing: Easing.in(Easing.ease),
+                useNativeDriver: true,
+            }).start(onClose);
+        }
+    }, [visible]);
+
+    if (!visible) return null;
+
+    return (
+        <View style={styles.modalOverlay}>
+            <Animated.View style={[styles.modalContainer, { transform: [{ translateY }] }]}>
+                <View style={styles.modalHeaderContainer}>
+                    {/* <Header title="Date of Birth" /> */}
+                </View>
+                {children}
+            </Animated.View>
+        </View>
+    );
+};
 
 const DateOfBirth = () => {
-      const navigation = useNavigation();
-    const [date, setDate] = useState(new Date())
+    const navigation = useNavigation();
+    const [date, setDate] = useState(new Date());
     const [open, setOpen] = useState(true);
+    const [formattedDate, setFormattedDate] = useState('');
     const dobRef = useRef(null);
-    const handleChange = (value) => {
-        setDate(value);
-        dobRef.current.focus();
 
-
+    const handleDateChange = (selectedDate) => {
+        setDate(selectedDate);
+        const formatted = formatDate(selectedDate);
+        setFormattedDate(formatted);
     };
+
+    const formatDate = (date) => {
+        const day = date.getDate();
+        const month = date.getMonth() + 1; // Months are zero indexed
+        const year = date.getFullYear();
+        return `${month}-${day}-${year}`;
+    };
+
+    useFocusEffect(
+        React.useCallback(() => {
+            setOpen(true); // Open the date picker when screen is focused
+            return () => {
+                setOpen(false); // Optionally close the picker when unfocused
+            };
+        }, [])
+    );
+
     const calculateAge = (birthDate) => {
         const today = new Date();
         const age = today.getFullYear() - birthDate.getFullYear();
         const monthDiff = today.getMonth() - birthDate.getMonth();
         if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-          return age - 1;
+            return age - 1;
         }
         return age;
-      };
+    };
 
-    function moveNext() {
-        console.log(">>>>>>>>dfdfde",date)
-
+    const moveNext = () => {
         const age = calculateAge(date);
-    if (age >= 17) {
-          setOpen(false)
+        if (age >= 17) {
+            setOpen(false);
+            navigation.navigate('UserNameScreen'); // Navigate if age is 17 or older
+        } else {
+            alert("You must be at least 17 years old to continue.");
+        }
+    };
 
-      navigation.navigate('UserNameScreen'); // Navigate if age is 17 or older
-    } else {
-      alert("You must be at least 17 years old to continue.");
-    }
-        // navigation.navigate('UserNameScreen')
-    }
- 
-
-
-    {
-        return (
-            <SafeAreaView style={styles.safeArea}>
-                <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-                    <Header />
-
-                    <View style={styles.titleContainer}>
-                        <Text style={styles.titleText}>What's your birthday?</Text>
-                        <View style={styles.inputContainer}>
-                            <TextInput
+    return (
+        <SafeAreaView style={styles.safeArea}>
+            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+                <Header title="Date of Birth" />
+                <View style={styles.titleContainer}>
+                    <Text style={styles.titleText}>What's your birthday?</Text>
+                    <View style={styles.inputContainer}>
+                        <TextInput
                             style={styles.input}
-                            // onChangeText={value => setV1(value)}
-                            onChangeText={value => handleChange(value)}
                             placeholder='MM-DD-YY'
                             placeholderTextColor={color.placeholderColor}
-
                             keyboardAppearance="dark"
                             textColor="white" // Text color
-                            // value={name}
-                            // ref={nameRef}
+                            value={formattedDate}
+                            onFocus={() => setOpen(true)}
+                            ref={dobRef}
                         />
-                           
-                        </View>
-
-
-
-                        {/* <View style={styles.ButtonContainer}>
-                            <TouchableOpacity onPress={moveNext}>
-                                <Text style={styles.conTinueText}>Continue</Text>
-                            </TouchableOpacity>
-                        </View> */}
-                        <Modal
-                transparent={true}
-                visible={open}
-                animationType="slide"
-                onRequestClose={() => setOpen(false)}
-            >
-                <View style={styles.modalContainer}>
-                <View style={styles.ButtonContainer}>
-                            <TouchableOpacity onPress={moveNext} style={styles.touchableArea}>
-                                <Text style={styles.conTinueText}>Continue</Text>
-                            </TouchableOpacity>
-                        </View>
+                    </View>
+                </View>
+            </KeyboardAvoidingView>
+            <CustomModal visible={open} onClose={() => setOpen(false)}>
+            <View style={styles.ButtonContainer}>
+                        <TouchableOpacity onPress={moveNext} style={styles.touchableArea}>
+                            <Text style={styles.conTinueText}>Continue</Text>
+                        </TouchableOpacity>
+                    </View>
+                <View style={styles.modalContent}>
                     <View style={styles.datePickerContainer}>
                         <DatePicker
                             date={date}
-                            onDateChange={setDate}
+                            onDateChange={handleDateChange}
                             mode="date"
-                                    textColor="white" // Set text color to white
+                            textColor="white" // Set text color to white
                             androidVariant="nativeAndroid"
                             onConfirm={(date) => {
                                 setOpen(false);
-                                setDate(date);
+                                handleDateChange(date);
                             }}
                             onCancel={() => setOpen(false)}
                             color={'red'}
                             theme={'dark'}
-
                         />
-                        {/* <TouchableOpacity style={styles.confirmButton} onPress={() => setOpen(false)}>
-                            <Text style={styles.confirmButtonText}>Confirm</Text>
-                        </TouchableOpacity> */}
                     </View>
+                   
                 </View>
-            </Modal>
+            </CustomModal>
+        </SafeAreaView>
+    );
+};
 
-                    </View>
-                </KeyboardAvoidingView>
-              
-
-            </SafeAreaView>
-
-        );
-    }
-
-
-
-}
 const styles = StyleSheet.create({
-
     safeArea: {
         flex: 1,
         backgroundColor: color.backgroundColor,
-
-    },
-    container: {
-        // flex: 1,
-    },
-    background: {
-        flex: 1,
     },
     titleContainer: {
         width: wp('95%'),
@@ -156,7 +164,6 @@ const styles = StyleSheet.create({
         marginTop: hp('1%'),
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor:'red'
     },
     titleText: {
         color: '#FFFFFF',
@@ -165,29 +172,17 @@ const styles = StyleSheet.create({
         width: wp('80%'),
         textAlign: 'center',
         fontFamily: 'Inter'
-        // font:'urbanist'
     },
-
-    textInput: {
-        width: wp('70%'),
-        height: hp("60%"),
-
-    },
-
     inputContainer: {
         width: '100%',
         height: 55,
         marginTop: '10%',
         flexDirection: 'row',
         justifyContent: 'space-around',
-        // backgroundColor:'red',
-
     },
     input: {
         backgroundColor: color.inputFieldColor,
-        // width: '96%',
         width: wp('92%'),
-
         borderRadius: 15,
         borderColor: '#414142',
         borderWidth: 1,
@@ -196,33 +191,24 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         paddingLeft: wp(5),
         fontFamily: 'inter'
-
-
     },
     touchableArea: {
-        width: '100%', // Make it the full width of the container
-        height: '100%', // Make it the full height of the container
-        alignItems: 'center', // Center the text
-        justifyContent: 'center', // Center the text
-      },
+        width: '100%',
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     ButtonContainer: {
         backgroundColor: '#ffffff33',
-        // height:hp('7%'),
         height: RFPercentage(7),
-        // width:363,
-
         width: wp('92%'),
-        // marginTop: hp(28),
         textAlign: 'center',
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
-        zIndex: 1, // Ensure button is above modal
-        marginBottom:'10%'
-
-
-
-
+        // marginBottom: '5%',
+        justifyContent: 'center',
+        alignSelf: 'center'
     },
     conTinueText: {
         alignItems: 'center',
@@ -230,41 +216,42 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '700',
         fontFamily: 'inter'
+    },
+    modalOverlay: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        // backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        backgroundColor: 'red',
 
     },
     modalContainer: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        backgroundColor: 'rgba(0,0,0,0.0)',
-        alignItems:'center',
-        width:'100%'
-        
+        backgroundColor: '#090A12',
+        height: '50%', // Set modal height to cover half the screen
+        width: '100%',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        paddingTop: 10,
+        paddingHorizontal: 20,
+        zIndex: 1000,
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf:'center'
+    },
+    modalHeaderContainer: {
+        width: '100%',
+        alignItems: 'center'
+    },
+    modalContent: {
+        width: '100%',
+        alignItems: 'center',
     },
     datePickerContainer: {
         backgroundColor: '#090A12',
-        // backgroundColor:'white',
         padding: 20,
-        color:'white',
-        paddingBottom:RFPercentage(10),
-        width:'94%',
-        alignItems:'center'
-        // paddingtop:RFPercentage(20)
-       
+        color: 'white',
+        width: '100%',
+        alignItems: 'center'
     },
-    confirmButton: {
-        backgroundColor: color.buttonColor,
-        borderRadius: 10,
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        alignItems: 'center',
-        marginTop: 10,
-    },
-    confirmButtonText: {
-        color: '#FFFFFF',
-        fontSize: 16,
-        fontWeight: '700',
-        fontFamily: 'inter',
-    },
-
 });
+
 export default DateOfBirth;

@@ -20,7 +20,29 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import SignInTab from '../Components/SignInTab';
 
-
+// class ErrorBoundary extends React.Component {
+//     constructor(props) {
+//       super(props);
+//       this.state = { hasError: false };
+//     }
+  
+//     static getDerivedStateFromError(error) {
+//       return { hasError: true };
+//     }
+  
+//     componentDidCatch(error, errorInfo) {
+//       console.log('Error:', error, errorInfo);
+//     }
+  
+//     render() {
+//       if (this.state.hasError) {
+//         return <Text>Something went wrong.</Text>;
+//       }
+  
+//       return this.props.children; 
+//     }
+//   }
+  
 const SignIn = () => {
     //   const navigation = useNavigation();
 
@@ -36,7 +58,7 @@ const SignIn = () => {
     {
         return (
             <SafeAreaView style={styles.safeArea}>
-                <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+                <KeyboardAvoidingView >
                 <Header/>
                 <SignInTab/>
 

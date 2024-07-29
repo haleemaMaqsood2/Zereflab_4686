@@ -136,7 +136,7 @@ const AddFriendScreen = ({ navigation }) => {
     {
         return (
             <SafeAreaView style={styles.safeArea}>
-                <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+                <KeyboardAvoidingView >
                     <Header />
                     <AddFriendList data={addFriendData} inviteFriends={inviteFriendData}/>
 

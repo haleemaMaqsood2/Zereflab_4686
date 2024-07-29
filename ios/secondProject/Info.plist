@@ -29,7 +29,8 @@
 <!-- Contacts Access -->
 <key>NSContactsUsageDescription</key>
 <string>We need access to your contacts to enhance your experience.</string>
-
+<key>ITSAppUsesNonExemptEncryption</key>  
+<false/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>

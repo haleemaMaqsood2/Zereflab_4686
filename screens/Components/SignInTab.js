@@ -136,23 +136,7 @@ const SignInTab = () => {
 
             />
 
-            {/* <PhoneInput
-            ref={phoneRef}
-            defaultValue={value}
-            defaultCode="DM"
-            layout="first"
-            onChangeText={(text) => {
-              setValue(text);
-            }}
-            onChangeFormattedText={(text) => {
-              setFormattedValue(text);
-            }}
-            withDarkTheme
-            withShadow
-            autoFocus
-            containerStyle={styles.phoneInput}
-
-          /> */}
+           
           </View>
           <View style={styles.ButtonContainer}>
 
