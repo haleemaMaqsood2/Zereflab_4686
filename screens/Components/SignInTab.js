@@ -19,6 +19,8 @@ const SignInTab = () => {
   const [value, setValue] = useState();
   const [email, setEmail] = useState('')
   const EmailRef = useRef(null);
+  const [countryCode, setCountryCode] = useState('US'); // Default country code
+
   const handleChange = (value) => {
     setEmail(value);
     EmailRef.current.focus();
@@ -114,7 +116,8 @@ const SignInTab = () => {
             <PhoneInput
               ref={phoneRef}
               defaultValue={value}
-              defaultCode="PK"
+              defaultCode={countryCode} // Use the state for country code
+              // defaultCode="US"
               layout="first"
               onChangeText={(text) => {
                 setValue(text);
@@ -122,6 +125,9 @@ const SignInTab = () => {
               onChangeFormattedText={(text) => {
                 setFormattedValue(text);
               }}
+              onChangeCountry={(country) => {
+                setCountryCode(country.cca2); // Update the state with selected country code
+            }}
               withDarkTheme
               withShadow
               autoFocus

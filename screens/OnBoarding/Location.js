@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     input: {
         backgroundColor: color.inputFieldColor,
         width: wp('75%'),
-        borderWidth: 0.5,
+        // borderWidth: 0.5,
         height:Platform.OS === 'ios' ? RFPercentage(5):null,
         color: color.placeholderColor,
         // backgroundColor: 'red',

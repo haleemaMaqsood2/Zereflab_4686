@@ -13,7 +13,7 @@ import {
     KeyboardAvoidingView,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation,useFocusEffect } from '@react-navigation/native';
 import { color } from '../../src/styles/color';
 import Header from '../Components/Header';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -27,6 +27,13 @@ const Carousel = ({ navigation }) => {
     function moveNext() {
         navigation.navigate('SignIn')
     }
+    useFocusEffect(
+        React.useCallback(() => {
+            if (swiper.current) {
+                swiper.current.scrollTo(0, false); // Reset to first slide
+            }
+        }, [])
+    );
 
     const RenderDot = () => {
         return (
