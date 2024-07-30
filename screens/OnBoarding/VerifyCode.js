@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
        
     },
     ButtonContainer:{
-        backgroundColor:color.buttonColor,
+        backgroundColor:color.WhiteWithThirtypercentOpacity,
         // height:hp('7%'),
         height:50,
         // width:363,

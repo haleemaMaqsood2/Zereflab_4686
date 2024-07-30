@@ -1,6 +1,8 @@
 #import "AppDelegate.h"
 
 #import <React/RCTBundleURLProvider.h>
+#import <BVLinearGradient/BVLinearGradient.h> // Add this line
+
 
 @implementation AppDelegate
 
