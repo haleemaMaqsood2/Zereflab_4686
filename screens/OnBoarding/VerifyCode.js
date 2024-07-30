@@ -97,7 +97,7 @@ const VerifyCode = () => {
     {
         return (
             <SafeAreaView style={styles.safeArea}>
-                <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+                <KeyboardAvoidingView >
                 <Header/>
 
                 <View style={styles.titleContainer}>
@@ -161,7 +161,7 @@ const VerifyCode = () => {
                             { marginTop: keyboardVisible ? hp(15) : hp(45) }, // Dynamic margin
                         ]}
                     >
-                        <TouchableOpacity onPress={moveNext}>
+                        <TouchableOpacity onPress={moveNext} style={styles.touchableArea}>
                             <Text style={styles.resendText}>Continue</Text>
                         </TouchableOpacity>
                     </View>                       
@@ -264,9 +264,15 @@ const styles = StyleSheet.create({
         color:'#6F6F70',
         fontSize:15,
         fontFamily:'Inter',
-        fontFamily:'700',
+        fontWeight:'700',
         marginTop:hp(2.5),
-    }
+    },
+    touchableArea: {
+        width: '100%', // Make it the full width of the container
+        height: '100%', // Make it the full height of the container
+        alignItems: 'center', // Center the text
+        justifyContent: 'center', // Center the text
+      },
 
 });
 export default VerifyCode;

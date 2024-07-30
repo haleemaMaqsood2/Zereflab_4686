@@ -36,6 +36,7 @@
 		8E8E8D0F80484487BE7C28F2 /* Urbanist-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D4D425436C4D4F0BAF7E6156 /* Urbanist-SemiBoldItalic.ttf */; };
 		8FC6BAB4F09045EAB1E01EBC /* Urbanist-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E814300BF614B729A9B11A9 /* Urbanist-BlackItalic.ttf */; };
 		906F09D30D894A5B91286273 /* Urbanist-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B4210CA904AD4B73A4AFC27D /* Urbanist-Black.ttf */; };
+		91339C372C538C8A0025B8CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91339C362C538C8A0025B8CD /* Assets.xcassets */; };
 		91F0F5EC19A64247AFEDB385 /* Urbanist-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36F508639213420DA141CE13 /* Urbanist-Light.ttf */; };
 		9B52151C420B4C75B4185A65 /* Urbanist-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4574E7CB2FD24433A1006220 /* Urbanist-ExtraLight.ttf */; };
 		AACDEB805EF34C49AC547DF0 /* Urbanist-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC174C98B634494CB3546EAA /* Urbanist-Bold.ttf */; };
@@ -96,6 +97,7 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = secondProject/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-secondProject-secondProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-secondProject-secondProjectTests.release.xcconfig"; path = "Target Support Files/Pods-secondProject-secondProjectTests/Pods-secondProject-secondProjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		8B8AC8039E504A9D87A588EB /* Inter-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-ExtraLight.ttf"; path = "../src/assets/fonts/Inter/static/Inter-ExtraLight.ttf"; sourceTree = "<group>"; };
+		91339C362C538C8A0025B8CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		934739F67EA6489A8D883863 /* Inter-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Light.ttf"; path = "../src/assets/fonts/Inter/static/Inter-Light.ttf"; sourceTree = "<group>"; };
 		99C4C216DD7C4B4CA66DE9EB /* Urbanist-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Urbanist-ThinItalic.ttf"; path = "../src/assets/fonts/Urbanist/static/Urbanist-ThinItalic.ttf"; sourceTree = "<group>"; };
 		B4210CA904AD4B73A4AFC27D /* Urbanist-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Urbanist-Black.ttf"; path = "../src/assets/fonts/Urbanist/static/Urbanist-Black.ttf"; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				91339C362C538C8A0025B8CD /* Assets.xcassets */,
 				13B07FAE1A68108700A75B9A /* secondProject */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* secondProjectTests */,
@@ -384,6 +387,7 @@
 				8E8E8D0F80484487BE7C28F2 /* Urbanist-SemiBoldItalic.ttf in Resources */,
 				83C90E601DDE48B09136EEF0 /* Urbanist-Thin.ttf in Resources */,
 				094C71ACB94A492B9E0CB7C3 /* Urbanist-ThinItalic.ttf in Resources */,
+				91339C372C538C8A0025B8CD /* Assets.xcassets in Resources */,
 				CF62A796980E9FF545D88F3F /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -607,7 +611,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 7PG2M4NDRC;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = secondProject/Info.plist;
@@ -636,7 +640,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 7PG2M4NDRC;
 				INFOPLIST_FILE = secondProject/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Where2;
@@ -730,10 +734,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -805,10 +806,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;

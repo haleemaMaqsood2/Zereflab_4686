@@ -19,6 +19,8 @@ const SignInTab = () => {
   const [value, setValue] = useState();
   const [email, setEmail] = useState('')
   const EmailRef = useRef(null);
+  const [countryCode, setCountryCode] = useState('US'); // Default country code
+
   const handleChange = (value) => {
     setEmail(value);
     EmailRef.current.focus();
@@ -73,7 +75,7 @@ const SignInTab = () => {
           </View>
           <View style={styles.ButtonContainer}>
 
-            <TouchableOpacity onPress={moveNext}>
+            <TouchableOpacity onPress={moveNext} style={styles.touchableArea} >
               <Text style={styles.conTinueText}>Continue</Text>
             </TouchableOpacity>
           </View>
@@ -114,7 +116,8 @@ const SignInTab = () => {
             <PhoneInput
               ref={phoneRef}
               defaultValue={value}
-              defaultCode="PK"
+              defaultCode={countryCode} // Use the state for country code
+              // defaultCode="US"
               layout="first"
               onChangeText={(text) => {
                 setValue(text);
@@ -122,6 +125,9 @@ const SignInTab = () => {
               onChangeFormattedText={(text) => {
                 setFormattedValue(text);
               }}
+              onChangeCountry={(country) => {
+                setCountryCode(country.cca2); // Update the state with selected country code
+            }}
               withDarkTheme
               withShadow
               autoFocus
@@ -136,27 +142,11 @@ const SignInTab = () => {
 
             />
 
-            {/* <PhoneInput
-            ref={phoneRef}
-            defaultValue={value}
-            defaultCode="DM"
-            layout="first"
-            onChangeText={(text) => {
-              setValue(text);
-            }}
-            onChangeFormattedText={(text) => {
-              setFormattedValue(text);
-            }}
-            withDarkTheme
-            withShadow
-            autoFocus
-            containerStyle={styles.phoneInput}
-
-          /> */}
+           
           </View>
           <View style={styles.ButtonContainer}>
 
-            <TouchableOpacity onPress={moveNext}> 
+            <TouchableOpacity onPress={moveNext} style={styles.touchableArea}> 
               <Text style={styles.conTinueText}>Continue</Text>
             </TouchableOpacity>
           </View>
@@ -246,6 +236,12 @@ const styles = StyleSheet.create({
     width: wp('94%'),
     alignItems: 'center',
     // backgroundColor: 'blue' ,   // alignItems: 'center',
+  },
+  touchableArea: {
+    width: '100%', // Make it the full width of the container
+    height: '100%', // Make it the full height of the container
+    alignItems: 'center', // Center the text
+    justifyContent: 'center', // Center the text
   },
   ButtonContainer: {
     backgroundColor: '#ffffff33',

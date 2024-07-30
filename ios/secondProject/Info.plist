@@ -2,6 +2,35 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+<!-- Camera Access -->
+<key>NSCameraUsageDescription</key>
+<string>We need access to your camera to allow you to take photos and videos.</string>
+
+<!-- Photo Library Access -->
+<key>NSPhotoLibraryUsageDescription</key>
+<string>We need access to your photo library to select photos and videos.</string>
+
+<!-- Microphone Access -->
+<key>NSMicrophoneUsageDescription</key>
+<string>We need access to your microphone to record audio.</string>
+
+<!-- Location Access -->
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>We need access to your location to provide location-based services.</string>
+
+<!-- Location Access Always -->
+<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+<string>We need access to your location even when the app is in the background.</string>
+
+<!-- Bluetooth Access -->
+<key>NSBluetoothAlwaysUsageDescription</key>
+<string>We need access to Bluetooth to connect with external devices.</string>
+
+<!-- Contacts Access -->
+<key>NSContactsUsageDescription</key>
+<string>We need access to your contacts to enhance your experience.</string>
+<key>ITSAppUsesNonExemptEncryption</key>  
+<false/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>

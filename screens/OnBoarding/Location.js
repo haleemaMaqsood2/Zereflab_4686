@@ -8,6 +8,7 @@ import {
     TouchableOpacity,
     Image,
     FlatList,
+    Platform
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -37,10 +38,10 @@ const Location = ({ navigation }) => {
     };
 
     const moveNext = () => {
-        dispatch(setOnBoardingComplete(true));
+        // dispatch(setOnBoardingComplete(true));
         // console.log("continue press",onBoardingComplete)
         
-        navigation.navigate('HomePage')
+        // navigation.navigate('HomePage')
         // navigation.navigate('MainStack', { screen: 'HomePage' });
     };
 
@@ -150,8 +151,8 @@ const styles = StyleSheet.create({
     input: {
         backgroundColor: color.inputFieldColor,
         width: wp('75%'),
-        borderWidth: 0.5,
-        height:RFPercentage(5),
+        // borderWidth: 0.5,
+        height:Platform.OS === 'ios' ? RFPercentage(5):null,
         color: color.placeholderColor,
         // backgroundColor: 'red',
 

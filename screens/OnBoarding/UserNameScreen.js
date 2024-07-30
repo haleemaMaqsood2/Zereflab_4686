@@ -11,7 +11,8 @@ import {
     TouchableOpacity,
     Image,
     KeyboardAvoidingView,
-    Keyboard
+    Keyboard,
+    Platform
 
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -79,7 +80,7 @@ const handleChange = (value) => {
     {
         return (
             <SafeAreaView style={styles.safeArea}>
-                <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+                <KeyboardAvoidingView >
                 <Header/>
 
                 <View style={styles.titleContainer}>
@@ -87,7 +88,7 @@ const handleChange = (value) => {
                     <View style={styles.input}>
                     <TextInput
                             // style={styles.input}
-                            style={{color:color.placeholderColor,height:hp(5)}}
+                            style={{color:color.placeholderColor,height:Platform.OS === 'ios' ? hp(5):null}}
                             onChangeText={value => handleChange(value)}
                             placeholder='Username'
                             placeholderTextColor={color.placeholderColor}
@@ -113,7 +114,7 @@ const handleChange = (value) => {
                             styles.ButtonContainer,
                             { marginTop: keyboardVisible ? hp(15) : hp(50) }, // Dynamic margin
                         ]}>
-                        <TouchableOpacity onPress={moveNext}>
+                        <TouchableOpacity onPress={moveNext} style={styles.touchableArea}>
                             <Text style={styles.conTinueText}>Sign Up</Text>
                         </TouchableOpacity>
                     </View>
@@ -216,6 +217,12 @@ const styles = StyleSheet.create({
 
 
     },
+    touchableArea: {
+        width: '100%', // Make it the full width of the container
+        height: '100%', // Make it the full height of the container
+        alignItems: 'center', // Center the text
+        justifyContent: 'center', // Center the text
+      },
     conTinueText:{
         alignItems:'center',
         color:'#FFFFFF',

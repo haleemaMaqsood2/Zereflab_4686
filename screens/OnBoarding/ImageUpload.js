@@ -40,7 +40,7 @@ const ImageUpload = ({ navigation }) => {
     {
         return (
             <SafeAreaView style={styles.safeArea}>
-                <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+                <KeyboardAvoidingView >
                     <Header />
 
                     <View style={styles.titleContainer}>

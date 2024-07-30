@@ -74,7 +74,7 @@ const handleChange = (value) => {
     {
         return (
             <SafeAreaView style={styles.safeArea}>
-                <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+                <KeyboardAvoidingView >
                 <Header/>
 
                 <View style={styles.titleContainer}>
@@ -100,7 +100,7 @@ const handleChange = (value) => {
                             styles.ButtonContainer,
                             { marginTop: keyboardVisible ? hp(20) : hp(54) }, // Dynamic margin
                         ]}>
-                        <TouchableOpacity onPress={moveNext}>
+                        <TouchableOpacity onPress={moveNext} style={styles.touchableArea}>
                             <Text style={styles.conTinueText}>Continue</Text>
                         </TouchableOpacity>
                     </View>
@@ -203,7 +203,13 @@ const styles = StyleSheet.create({
         fontWeight:'700',
         fontFamily:'inter'
 
-    }
+    },
+    touchableArea: {
+        width: '100%', // Make it the full width of the container
+        height: '100%', // Make it the full height of the container
+        alignItems: 'center', // Center the text
+        justifyContent: 'center', // Center the text
+      },
 
 });
 export default NameInputScreen;
