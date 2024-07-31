@@ -41,8 +41,8 @@ const styles = StyleSheet.create({
     width: wp('94%'),
     backgroundColor: color.inputFieldColor, // Use inputField color for tab container
     alignSelf: 'center',
-    borderWidth: 0.3,
-    borderColor: color.whiteColor,
+    borderWidth: 0.5,
+    borderColor: color.whitewithThirty,
     borderRadius: 25,
     paddingTop:'1%',
     paddingBottom:'1%',
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
   tabText: {
     fontSize: 12, // Use responsive font size
-    color: color.placeholderColor, // Default text color
+    color: color.whiteWithfiftypercentOpacity, // Default text color
   },
   selectedTabText: {
     fontWeight: 'bold', // Bold text for selected tab

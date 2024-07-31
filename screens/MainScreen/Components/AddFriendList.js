@@ -2,8 +2,8 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { RFPercentage } from "react-native-responsive-fontsize";
-import { color } from '../../src/styles/color';
-import { font } from '../../src/styles/font';
+import { color } from '../../../src/styles/color';
+import { font } from '../../../src/styles/font';
 
 const AddFriendList = ({ data,inviteFriends}) => {
     const renderItem = ({ item }) => (
@@ -11,10 +11,11 @@ const AddFriendList = ({ data,inviteFriends}) => {
             <Image source={item.image} style={styles.image} />
             <View style={styles.infoContainer}>
                 <Text style={styles.nameText}>{item.name}</Text>
+                <Text style={styles.usernameText}>{item.username}</Text>
             </View>
-            <TouchableOpacity >
-                <Image source={require('../../src/assets/images/LeftArrow.png')} style={styles.addIcon} />
-                
+            <TouchableOpacity style={styles.addButton}>
+                <Image source={require('../../../src/assets/images/AddIcon.png')} style={styles.addIcon} />
+                <Text style={styles.addText}>Add</Text>
             </TouchableOpacity>
         </View>
     );
@@ -24,17 +25,17 @@ const AddFriendList = ({ data,inviteFriends}) => {
           <View style={styles.infoContainer}>
               <Text style={styles.nameText}>{item.name}</Text>
           </View>
-          <TouchableOpacity style={styles.addButton}>
-                <Image source={require('../../src/assets/images/AddIcon.png')} style={styles.addIcon} />
-                <Text style={styles.addText}>Add</Text>
-            </TouchableOpacity>
+          <TouchableOpacity style={styles.addButton1}>
+              <Image source={require('../../../src/assets/images/AddIcon.png')} style={styles.addIcon} />
+              <Text style={styles.addText}>{item.status}</Text>
+          </TouchableOpacity>
       </View>
   );
 
     return (
         <View style={styles.container}>
-            <Text style={styles.titleText}>Friends(2)</Text>
-            <View style={{height:hp('14%')}}>
+            <Text style={styles.titleText}>Add Friends</Text>
+            <View style={{height:hp('12%')}}>
             <FlatList
                 data={data}
                 renderItem={renderItem}
@@ -42,7 +43,7 @@ const AddFriendList = ({ data,inviteFriends}) => {
                 contentContainerStyle={styles.list}
             />
             </View>
-            <Text style={styles.titleText1}>Others (100)</Text>
+            <Text style={styles.titleText1}>Invite Friends</Text>
             <FlatList
                 data={inviteFriends}
                 renderItem={renderItem1}
@@ -56,25 +57,23 @@ const AddFriendList = ({ data,inviteFriends}) => {
 const styles = StyleSheet.create({
     container: {
         height: hp('90%'),
-        width: wp('95%'), // 90% of the screen width
+        width: wp('90%'), // 90% of the screen width
         alignSelf: 'center',
     },
     titleText: {
-        fontSize: 15,
+        fontSize: 17,
         fontWeight: '700',
         fontFamily: font.Regular,
         color: color.whiteColor,
         marginBottom: hp('1%'),
-        lineHeight:18.15,
     },
     titleText1: {
-        fontSize: 15,
+        fontSize: 17,
         fontWeight: '700',
         fontFamily: font.Regular,
         color: color.whiteColor,
         marginBottom: hp('1%'),
-        marginTop:hp('2%'),
-        lineHeight:18.15,
+        marginTop:hp('2%')
     },
     list: {
         marginTop: hp('1%'),
@@ -82,7 +81,7 @@ const styles = StyleSheet.create({
     friendContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingBottom:'4%',
+        paddingBottom:'5%',
         // paddingVertical: hp('1%'),
         // borderBottomWidth: 1,
         borderBottomColor: color.placeholderColor,
@@ -90,7 +89,6 @@ const styles = StyleSheet.create({
     friendContainer1: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom:hp(2),
         // paddingBottom:'5%',
         // paddingVertical: hp('1%'),
         // borderBottomWidth: 1,
@@ -106,11 +104,10 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     nameText: {
-        fontSize: 15,
+        fontSize: RFPercentage(2.0),
+        fontWeight: '400',
         fontFamily: font.Regular,
         color: color.whiteColor,
-        lineHeight:18.15,
-
     },
     usernameText: {
         fontSize: RFPercentage(2),
@@ -136,7 +133,7 @@ const styles = StyleSheet.create({
     },
     addText: {
         color: color.whiteColor,
-        fontSize: 14,
+        fontSize: RFPercentage(2),
         fontWeight: '500',
         fontFamily: font.Regular,
     },

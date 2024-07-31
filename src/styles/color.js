@@ -11,5 +11,7 @@ export const color ={
     modalDescriptionText:'#D9D9D9',
     whiteWithfiftypercentOpacity:'#ffffff80',
     WhiteWithThirtypercentOpacity:'#ffffff33',
-    shareButtonColor:'#232121'
+    shareButtonColor:'#232121',
+    whiteWithFifteenPercentOpacity:'#ffffff26',
+    whitewithThirty:'#ffffff4D',
 };

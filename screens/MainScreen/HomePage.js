@@ -75,7 +75,7 @@ const HomePage = () => {
    
 }; 
   useEffect(()=>{
-    dispatch(setOnBoardingComplete(false));
+    dispatch(setOnBoardingComplete(true));
 
     // setModalVisible(true)
 
@@ -85,7 +85,7 @@ const HomePage = () => {
     return (
       <SafeAreaView style={styles.safeArea}>
         <SafeAreaView style={styles.safeArea}>
-          <Header />
+          <Header  />
           <HomeTab data={TabData} />
 
 
@@ -165,6 +165,8 @@ const styles = StyleSheet.create({
   },
   container:{
     backgroundColor:color.backgroundColor,
+    // backgroundColor:'red',
+
   },
   centeredContainer: {
     backgroundColor: '#050507',
@@ -244,7 +246,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     height:hp('6%'),
     alignItems:'center',
-    borderColor:'#ffffff4d',
+    borderColor:'#ffffff4d',//white with 30%opacity
     borderWidth:1
 
 
