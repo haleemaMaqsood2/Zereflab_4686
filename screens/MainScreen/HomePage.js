@@ -85,7 +85,7 @@ const HomePage = () => {
     return (
       <SafeAreaView style={styles.safeArea}>
         <SafeAreaView style={styles.safeArea}>
-          <Header />
+          <Header  />
           <HomeTab data={TabData} />
 
 

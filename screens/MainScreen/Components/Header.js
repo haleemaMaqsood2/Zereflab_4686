@@ -38,7 +38,7 @@ import { color } from '../../../src/styles/color';
 //     </View>
 //   );
 // };
-const Header = () => {
+const Header = ({title}) => {
   const navigation = useNavigation();
 
   const goBack = () => {
@@ -48,23 +48,45 @@ const Header = () => {
   return (
     <View style={styles.container}>
 
-      <View style={{flexDirection:'row',alignItems:'center',   justifyContent:'space-between',width:wp('100%')
-}}>
-      <Image
+{title ? (
+        <>
+         <View style={styles.leftContainer}>
+        <TouchableOpacity onPress={goBack} style={styles.circleContainer}>
+          <Image
+            source={require('../../../src/assets/images/circle.png')}
+            style={styles.circleImage}
+            resizeMode="contain"
+          />
+          <Image
+            source={require('../../../src/assets/images/arrow.png')}
+            style={styles.arrowImage}
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
+      </View>
+      <View style={{width:'75%',alignItems:'center'}}>
+       <Text style={styles.titleContainer}>{title}</Text>
+      </View>
+      <TouchableOpacity>
+        <Text style={styles.counter}></Text>
+      </TouchableOpacity>
+     </>
+      ) : (
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: wp('100%') }}>
+          <Image
             source={require('../../../src/assets/images/LogoHome.png')}
             style={styles.profileIcon}
             resizeMode="contain"
-
           />
           <TouchableOpacity>
-          <Image
-            source={require('../../../src/assets/images/userProfile.png')}
-            style={styles.profileIcon}
-            resizeMode="contain"
-
-          />
+            <Image
+              source={require('../../../src/assets/images/userProfile.png')}
+              style={styles.profileIcon}
+              resizeMode="contain"
+            />
           </TouchableOpacity>
-      </View>
+        </View>
+      )}
      
     </View>
   );
@@ -77,17 +99,57 @@ const styles = StyleSheet.create({
     paddingHorizontal: '3%',
     paddingVertical: '2%',
     backgroundColor:color.backgroundColor,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    width:'100%'
   },
-
+  container1: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: '3%',
+    paddingVertical: '2%',
+    borderBottomColor: '#ccc',
+    alignSelf: 'center',
+  },
+  leftContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  circleContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative', // Allows absolute positioning inside
+  },
+  circleImage: {
+    width: 50,
+    height: 50,
+  },
+  arrowImage: {
+    position: 'absolute',
+    width: 16, // Adjust size as needed
+    height: 16, // Adjust size as needed
+    alignItems:'center',
+    alignSelf:'center',
+    // top: '50%',
+    // left: '50%',
+    transform: [{ translateX: -2.5 }], // Center the arrow
+  },
   
-  // centerContainer: {
-  //   flex: 1,
-  //   // backgroundColor:'red',
-  //   width:'30%'
-   
-  // },
-  
+  centerContainer: {
+    // flex: 1,
+    alignItems: 'center',
+  },
+  counter: {
+    color: 'white',
+  },
+  titleContainer:{
+    color:color.whiteColor,
+    fontSize:17,
+    fontWeight:'500',
+    fontFamily:'Inter',
+    lineHeight:21.87
+  }
+ 
   
 });
 
