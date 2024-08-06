@@ -23,27 +23,28 @@ const SignInTab = () => {
 
   const handleChange = (value) => {
     setEmail(value);
-    EmailRef.current.focus();
+    // EmailRef.current.focus();
 
 
   };
   const moveNext = () => {
     navigation.navigate('VerifyCode');
   };
-  useEffect(() => {
-    const focusTimeout = setTimeout(() => {
-      EmailRef.current.focus();
-    }, 500);
+  // useEffect(() => {
+  //   const focusTimeout = setTimeout(() => {
+  //     EmailRef.current.focus();
+  //   }, 500);
 
-    return () => clearTimeout(focusTimeout);
-  }, []);
+  //   return () => clearTimeout(focusTimeout);
+  // }, []);
 
 
   return (
     <View style={styles.container}>
       <View style={styles.tabContainer}>
         <View style={styles.signInTabContainer}>
-          <TouchableOpacity onPress={() => setSelectedTab('Email')} style={[styles.tab, selectedTab === 'Email' && styles.activeTab]}>
+          <TouchableOpacity 
+          onPress={() => setSelectedTab('Email')} style={[styles.tab, selectedTab === 'Email' && styles.activeTab]}>
             <Text style={[styles.tabText, selectedTab === 'Email' && styles.activeTabText]}>Email</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => setSelectedTab('Number')} style={[styles.tab, selectedTab === 'Number' && styles.activeTab]}>
@@ -66,6 +67,8 @@ const SignInTab = () => {
               placeholder='Email'
               placeholderTextColor='#ffffff80'
 
+              // placeholderTextColor='#ffffff80'
+
               keyboardAppearance="dark"
               value={email}
               ref={EmailRef}
@@ -75,16 +78,18 @@ const SignInTab = () => {
           </View>
           <View style={styles.ButtonContainer}>
 
-            <TouchableOpacity onPress={moveNext} style={styles.touchableArea} >
+            <TouchableOpacity onPress={moveNext} 
+style={[styles.touchableArea, email ? styles.buttonActive : styles.buttonInactive]}
+>
               <Text style={styles.conTinueText}>Continue</Text>
             </TouchableOpacity>
           </View>
           <LineWithText text="or" />
 
-          <View style={{ ...styles.inputContainer, marginBottom: hp('1%') }}>
+          <View style={{ ...styles.inputContainer,marginBottom:hp(1)}}>
 
             <TouchableOpacity style={styles.accountButton}>
-              <Image style={styles.image} source={require('../../src/assets/images/appleIcon.png')} resizeMode="contain" />
+              <Image style={styles.image} source={require('../../src/assets/images/apple.png')} resizeMode="contain" />
 
               <Text style={styles.buttonText}>Continue with Apple</Text>
             </TouchableOpacity>
@@ -130,15 +135,18 @@ const SignInTab = () => {
             }}
               withDarkTheme
               withShadow
-              autoFocus
+              // autoFocus
               containerStyle={styles.phoneInput}
               textContainerStyle={styles.phoneTextContainer}
               textInputStyle={styles.phoneTextInput}
               codeTextStyle={styles.phoneCodeText}
               textInputProps={{
                 placeholder: "Phone number",
-                placeholderTextColor:'#ffffff80'
+                placeholderTextColor:'#ffffff80',
+                selectionColor: color.onBoardingButton,
               }}
+               // This sets the cursor color to blue
+
 
             />
 
@@ -146,12 +154,14 @@ const SignInTab = () => {
           </View>
           <View style={styles.ButtonContainer}>
 
-            <TouchableOpacity onPress={moveNext} style={styles.touchableArea}> 
+            <TouchableOpacity onPress={moveNext} 
+style={[styles.touchableArea, value ? styles.buttonActive : styles.buttonInactive]}
+> 
               <Text style={styles.conTinueText}>Continue</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.privacyPolicyContainer}>
-            <Text style={styles.privacyPolicyText}>By continuing, you agree to our <Text style={styles.privacyText}>Privacy Policy</Text> and <Text style={styles.privacyText}>Terms of Service.</Text> </Text>
+          <View style={{...styles.privacyPolicyContainer,marginTop:hp('15%')}}>
+            <Text style={styles.privacyPolicyText1}>By continuing, you agree to our <Text style={styles.privacyText}>Privacy Policy</Text> and <Text style={styles.privacyText}>Terms of Service.</Text> </Text>
           </View>
         </View>
       )}
@@ -164,7 +174,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // flex:1,
     height: hp('90%'),
-    width: wp('94%'),
+    width: wp('100%'),
     // backgroundColor: 'red',
 
     alignSelf: 'center'
@@ -175,8 +185,9 @@ const styles = StyleSheet.create({
     // paddingHorizontal: '5%',
     // paddingVertical: '4%',
     width: wp('87%'),
-    height: hp('4%'),
+    height: hp('5%'),
     borderBottomColor: '#ccc',
+    borderRadius:10,
     // width:'95%',
     backgroundColor: color.inputFieldColor,
     // backgroundColor: 'red',
@@ -185,9 +196,10 @@ const styles = StyleSheet.create({
   },
   signInTabContainer: {
     width: wp('85%'),
-    height: hp('4%'),
+    height: hp('4.1%'),
     flexDirection: 'row',
     alignItems: 'center',
+    paddingLeft:hp('0.5%',)
     // backgroundColor:'pink'
     // justifyContent:'space-around',
   },
@@ -197,22 +209,38 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: '50%'
   },
+  activeTab: {
+    backgroundColor: 'white',
+    width: wp('45%'),
+    height: '100%',
+    alignItems: 'center',
+    justifyContent:'center',
+    borderRadius:10
+
+    // heigh:hp('4%'),
+
+  },
+  buttonActive: {
+    backgroundColor: color.onBoardingButton,
+    borderRadius: 10,
+
+  },
+  buttonInactive: {
+    backgroundColor: '#ffffff33',
+    borderRadius: 10,
+
+  },
+  image:{
+    height:'40%',
+    width:40,
+  },
   emailTab: {
     color: color.placeholderColor,
     fontWeight: '400',
     fontSize: 14,
     fontFamily: 'Inter',
   },
-  activeTab: {
-    backgroundColor: 'white',
-    width: '55%',
-    height: '100%',
-    alignItems: 'center',
-    // borderRadius:40
-
-    // heigh:hp('4%'),
-
-  },
+  
   tabText: {
     color: color.whiteWithfiftypercentOpacity,
     fontWeight: '400',
@@ -227,8 +255,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     alignItems: 'center',
-    paddingTop: '3%',
+    // paddingTop: '3%',
     fontWeight: '700',
+    fontSize:14,
+    fontFamily: 'Inter',
+
 
   },
   contentContainer: {
@@ -246,7 +277,7 @@ const styles = StyleSheet.create({
   ButtonContainer: {
     backgroundColor: '#ffffff33',
     // height:hp('7%'),
-    height: 50,
+    height:hp(6),
     // width:363,
 
     width: wp('90%'),
@@ -268,11 +299,17 @@ const styles = StyleSheet.create({
     fontFamily: 'inter',
 
   },
-  phonContainer: { alignSelf: 'center', borderWidth: 0.3, borderRadius: 10, paddingHorizontal: '1.5%' },
+  phonContainer: { 
+    alignSelf: 'center', 
+    borderWidth: 0.3, 
+    borderRadius: 10, 
+    
+    // paddingHorizontal: '1.5%'
+   },
   phoneInput: {
     width: wp('90%'),
     alignItems: 'center',
-    height: hp('7%'),
+    height: hp('6%'),
     backgroundColor: color.inputFieldColor,
     borderRadius: 10,
     borderColor: 'white',
@@ -284,6 +321,8 @@ const styles = StyleSheet.create({
   },
   phoneTextContainer: {
     backgroundColor: color.inputFieldColor, // Adjust as necessary
+    // backgroundColor: 'red',// Adjust as necessary
+
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
@@ -301,6 +340,7 @@ const styles = StyleSheet.create({
   },
   phoneCodeText: {
     color: 'white',
+    // alignContent:'center'
   },
   privacyPolicyText: {
     color: color.placeholderColor,
@@ -312,7 +352,7 @@ const styles = StyleSheet.create({
 
   },
   privacyPolicyText1: {
-    color: color.placeholderColor,
+    color: color.whitewithThirty,
     textAlign: 'center',
     fontSize: 13,
     fontFamily: 'Inter',
@@ -329,7 +369,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     width: wp('100%'),
-    height: hp('7%'),
+    height: hp('6%'),
     flexDirection: 'row',
     justifyContent: 'center',
     // alignItems: 'center'
@@ -340,11 +380,12 @@ const styles = StyleSheet.create({
     backgroundColor: color.inputFieldColor,
     // width: '96%',
     width: wp('90%'),
+    // height:hp(6),
 
     borderRadius: 10,
     borderColor: '#414142',
     borderWidth: 1,
-    color: color.placeholderColor,
+    color: color.whiteColor,
     fontSize: 16,
     fontWeight: '500',
     paddingLeft: wp(5),
@@ -356,7 +397,7 @@ const styles = StyleSheet.create({
     // alignSelf:'center',
     flexDirection: 'row',
     width: wp('90%'),
-    height: hp('7%'),
+    height: hp('6%'),
     backgroundColor: color.inputFieldColor,
     marginTop: '0%',
     borderRadius: 10,
@@ -372,7 +413,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     color: color.whiteFontColor,
     fontFamily: 'Inter',
-    paddingLeft: wp('3%')
+    paddingLeft: wp('1%')
   }
 
 });

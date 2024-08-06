@@ -20,7 +20,7 @@ const Header = () => {
             resizeMode="contain"
           />
           <Image
-            source={require('../../src/assets/images/arrow.png')}
+            source={require('../../src/assets/images/arrow-right.png')}
             style={styles.arrowImage}
             resizeMode="contain"
           />
@@ -28,7 +28,7 @@ const Header = () => {
       </View>
       <View style={styles.centerContainer}>
         <Image
-          source={require('../../src/assets/images/logo.png')}
+          source={require('../../src/assets/images/logo1.png')}
           style={styles.logoIcon}
           resizeMode="contain"
         />
@@ -71,16 +71,18 @@ const styles = StyleSheet.create({
     alignSelf:'center',
     // top: '50%',
     // left: '50%',
-    transform: [{ translateX: -2.5 }], // Center the arrow
+    transform: [{ translateX: -2.0 }], // Center the arrow
   },
   logoIcon: {
     alignSelf: 'center',
     marginRight: wp('18%'),
-    width: wp(30),
+    width: wp(25),
   },
   centerContainer: {
     flex: 1,
     alignItems: 'center',
+    justifyContent:'center'
+    // backgroundColor:'red'
   },
   counter: {
     color: 'white',

@@ -17,9 +17,11 @@ import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import AddFriendList from '../Components/AddFriendList';
+// import AddFriendList from '../Components/AddFriendList1';
+
 import Header from '../Components/Header';
 import { color } from '../../../src/styles/color';
+import AddFriendList from '../../Components/AddFriendList';
 
 
 

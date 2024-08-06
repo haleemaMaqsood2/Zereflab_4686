@@ -18,7 +18,8 @@ import { color } from '../../src/styles/color';
 import Header from '../Components/Header';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import AddFriendList from '../Components/AddFriendList';
+import AddFriendList1 from '../MainScreen/Components/AddFriendList1';
+// import AddFriendList from '../Components/AddFriendList';
 
 
 const AddFriendScreen = ({ navigation }) => {
@@ -138,7 +139,7 @@ const AddFriendScreen = ({ navigation }) => {
             <SafeAreaView style={styles.safeArea}>
                 <KeyboardAvoidingView >
                     <Header />
-                    <AddFriendList data={addFriendData} inviteFriends={inviteFriendData}/>
+                    <AddFriendList1 data={addFriendData} inviteFriends={inviteFriendData}/>
 
                     {/* <View style={{justifyContent:'center'}}> */}
                         <View style={styles.ButtonContainer}>
@@ -196,7 +197,7 @@ const styles = StyleSheet.create({
     ButtonContainer: {
         backgroundColor: color.onBoardingButton,
         // height:hp('7%'),
-        height: 50,
+        height: hp(6),
         // width:363,
 
         width: wp('92%'),

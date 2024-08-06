@@ -60,7 +60,7 @@ const Location = ({ navigation }) => {
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Where are you located?</Text>
                 <Text style={styles.title2Text}>Enter your location to discover events nearby.</Text>
-                <View style={{ backgroundColor: color.inputFieldColor, borderRadius: RFPercentage(2), flexDirection: 'row', width: '97%', alignItems: 'center', paddingLeft: '3%', marginTop: hp('5%') }}>
+                <View style={{ backgroundColor: color.inputFieldColor, borderRadius: 10, flexDirection: 'row', width: '97%', alignItems: 'center', paddingLeft: '3%', marginTop: hp('5%') }}>
                     <Image source={require('../../src/assets/images/searchIcon.png')} style={styles.addIcon} />
                     <TextInput
                         style={styles.input}
@@ -125,9 +125,9 @@ const styles = StyleSheet.create({
         marginTop: hp('1.5%'),
     },
     ButtonContainer: {
-        height: 50,
+        height: hp(6),
         width: wp('92%'),
-        marginTop: hp('28%'),
+        // marginTop: hp('28%'),
         textAlign: 'center',
         borderRadius: 10,
         alignItems: 'center',
@@ -135,11 +135,11 @@ const styles = StyleSheet.create({
     },
     buttonDisabled: {
         backgroundColor: color.inputFieldColor,
-        marginTop:'90%'
+        marginTop:'100%'
     },
     buttonEnabled: {
         backgroundColor: color.onBoardingButton,
-        marginTop:'25%'
+        marginTop:'45%'
 
     },
     conTinueText: {
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
         backgroundColor: color.inputFieldColor,
         width: wp('75%'),
         // borderWidth: 0.5,
-        height:Platform.OS === 'ios' ? RFPercentage(5):null,
+        height:Platform.OS === 'ios' ? RFPercentage(6):null,
         color: color.placeholderColor,
         // backgroundColor: 'red',
 
