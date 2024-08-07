@@ -405,7 +405,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         borderColor: '#414142',
         borderWidth: 1,
-        color: '#ffffff33',
+        color: '#ffffff',
         fontSize: 16,
         fontWeight: '500',
         paddingLeft: wp(5),
@@ -425,7 +425,7 @@ const styles = StyleSheet.create({
     },
     ButtonContainer: {
         backgroundColor: '#ffffff33',
-        height: RFPercentage(7),
+        height: RFPercentage(6),
         width: wp('92%'),
         textAlign: 'center',
         borderRadius: 10,

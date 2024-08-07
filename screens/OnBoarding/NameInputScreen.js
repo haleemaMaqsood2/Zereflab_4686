@@ -19,7 +19,7 @@ import { color } from '../../src/styles/color';
 import Header from '../Components/Header';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-
+import HeadingText from '../Components/HeadingText';
 
 const NameInputScreen = ({navigation}) => {
     const [keyboardVisible, setKeyboardVisible] = useState(false);
@@ -38,22 +38,22 @@ const handleChange = (value) => {
     function moveNext() {
         navigation.navigate('DateOfBirth')
     }
-    useEffect(() => {
-        const focusTimeout = setTimeout(() => {
-            nameRef.current.focus();
-        }, 500);
+    // useEffect(() => {
+    //     const focusTimeout = setTimeout(() => {
+    //         nameRef.current.focus();
+    //     }, 500);
 
-        return () => clearTimeout(focusTimeout);
-    }, []);
+    //     return () => clearTimeout(focusTimeout);
+    // }, []);
     //To make keyboard remain open if user navigate back case
-    useFocusEffect(
-        React.useCallback(() => {
-          const focusTimeout = setTimeout(() => {
-            nameRef.current.focus();
-          }, 100);
-          return () => clearTimeout(focusTimeout);
-        }, [])
-      );
+    // useFocusEffect(
+    //     React.useCallback(() => {
+    //       const focusTimeout = setTimeout(() => {
+    //         nameRef.current.focus();
+    //       }, 100);
+    //       return () => clearTimeout(focusTimeout);
+    //     }, [])
+    //   );
       ///useEffect to manage keyboard state
       useEffect(() => {
         const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
@@ -78,7 +78,8 @@ const handleChange = (value) => {
                 <Header/>
 
                 <View style={styles.titleContainer}>
-                    <Text style={styles.titleText}>What's your name?</Text>
+                    <HeadingText title={"What's your name?"}/>
+                    {/* <Text style={styles.titleText}>What's your name?</Text> */}
                     <View style={styles.inputContainer}>
                     <TextInput
                             style={styles.input}
@@ -98,10 +99,11 @@ const handleChange = (value) => {
                     
                     <View style={[
                             styles.ButtonContainer,
-                            { marginTop: keyboardVisible ? hp(20) : hp(54) }, // Dynamic margin
+
+                            { marginTop: keyboardVisible ? hp(18) : hp(54) }, // Dynamic margin
                         ]}>
-                        <TouchableOpacity onPress={moveNext} style={styles.touchableArea}>
-                            <Text style={styles.conTinueText}>Continue</Text>
+                        <TouchableOpacity onPress={moveNext} style={[styles.touchableArea, name ? styles.buttonActive : styles.buttonInactive]}>
+                            <Text style={styles.conTinueText}>Continue{keyboardVisible}</Text>
                         </TouchableOpacity>
                     </View>
                   
@@ -153,10 +155,19 @@ const styles = StyleSheet.create({
         height:hp("60%"),
        
     },
+    buttonActive: {
+        backgroundColor: color.onBoardingButton,
+        borderRadius: 10,
     
+      },
+      buttonInactive: {
+        backgroundColor: '#ffffff33',
+        borderRadius: 10,
+    
+      },
     inputContainer: {
         width: '100%',
-        height:55,
+        height:hp(6),
         marginTop: hp('5%'),
         // marginTop:40,
         flexDirection: 'row',
@@ -169,10 +180,10 @@ const styles = StyleSheet.create({
         // width: '96%',
         width:wp('92%'),
 
-        borderRadius: 15,
+        borderRadius: 10,
         borderColor: '#414142',
         borderWidth: 1,
-        color: color.placeholderColor,
+        color: color.whiteColor,
         fontSize: 16,
         fontWeight:'500',
         paddingLeft:wp(5),
@@ -183,7 +194,7 @@ const styles = StyleSheet.create({
     ButtonContainer:{
         backgroundColor: '#ffffff33',
         // height:hp('7%'),
-        height:50,
+        height:hp(6),
         // width:363,
 
          width:wp('92%'),

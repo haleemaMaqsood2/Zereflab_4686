@@ -11,12 +11,14 @@ import {
 } from 'react-native';
 import HomePage from '../../../screens/MainScreen/HomePage';
 import { color } from '../../styles/color';
+
 const Tab = createBottomTabNavigator();
 import { RFPercentage } from "react-native-responsive-fontsize";
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import ActivityStack from './ActivityStack';
 export default function BottomTabStack() {
     const Tab = createBottomTabNavigator();
 
@@ -92,8 +94,8 @@ export default function BottomTabStack() {
                     }}
                 />
                 <Tab.Screen
-                    name="HomePage2"
-                    component={HomePage}
+                    name="ActivityStack"
+                    component={ActivityStack}
                     options={{
                         // tabBarLabel: "HomePage",
                         tabBarIcon: ({ color, size }) => (

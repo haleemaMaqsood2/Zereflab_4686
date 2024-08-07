@@ -12,7 +12,8 @@ import {
     Image,
     KeyboardAvoidingView,
     Keyboard,
-    Platform
+    Platform,
+    Dimensions
 
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -21,45 +22,54 @@ import { color } from '../../src/styles/color';
 import Header from '../Components/Header';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import HeadingText from '../Components/HeadingText';
 
 
 const UserNameScreen = ({navigation}) => {
     //   const navigation = useNavigation();
-    const [keyboardVisible, setKeyboardVisible] = useState(true);
+    const [keyboardVisible, setKeyboardVisible] = useState(false);
 
 const [userName,setUserName]=useState('')
+const [keyboardHeight, setKeyboardHeight] = useState(0);
 
 const userNameRef = useRef(null);
 const handleChange = (value) => {
     setUserName(value);
-        userNameRef.current.focus();
+        // userNameRef.current.focus();
     
    
+};
+const getButtonMarginTop = () => {
+    if (keyboardVisible) {
+        return keyboardHeight+hp(13); // height of button and 5% margin
+    } else {
+        return keyboardHeight+hp(45); // height of button and 5% margin
+    }
 };
     
     function moveNext() {
         navigation.navigate('ImageUpload')
     }
-    useEffect(() => {
-        const focusTimeout = setTimeout(() => {
-            if (userNameRef.current) {
-                userNameRef.current.focus();
-            }
-        }, 500);
+    // useEffect(() => {
+    //     const focusTimeout = setTimeout(() => {
+    //         if (userNameRef.current) {
+    //             userNameRef.current.focus();
+    //         }
+    //     }, 500);
 
-        return () => clearTimeout(focusTimeout);
-    }, []);
+    //     return () => clearTimeout(focusTimeout);
+    // }, []);
 
-    useFocusEffect(
-        React.useCallback(() => {
-            const focusTimeout = setTimeout(() => {
-                if (userNameRef.current) {
-                    userNameRef.current.focus();
-                }
-            }, 100);
-            return () => clearTimeout(focusTimeout);
-        }, [])
-    );
+    // useFocusEffect(
+    //     React.useCallback(() => {
+    //         const focusTimeout = setTimeout(() => {
+    //             if (userNameRef.current) {
+    //                 userNameRef.current.focus();
+    //             }
+    //         }, 100);
+    //         return () => clearTimeout(focusTimeout);
+    //     }, [])
+    // );
 
     
     useEffect(() => {
@@ -84,24 +94,32 @@ const handleChange = (value) => {
                 <Header/>
 
                 <View style={styles.titleContainer}>
-                    <Text style={styles.titleText}>Create a username</Text>
+                <HeadingText title={'Create a username'}/>
+                    {/* <Text style={styles.titleText}>Create a username</Text> */}
                     <View style={styles.input}>
                     <TextInput
                             // style={styles.input}
-                            style={{color:color.placeholderColor,height:Platform.OS === 'ios' ? hp(5):null}}
+                            style={{color:color.whiteColor,height:Platform.OS === 'ios' ? hp(5):null}}
                             onChangeText={value => handleChange(value)}
                             placeholder='Username'
                             placeholderTextColor={color.placeholderColor}
 
                             keyboardAppearance="dark"
                             value={userName}
-                            ref={userNameRef}
+                            // ref={userNameRef}
                         />
-                          <Image
+                         {userName ? (
+                            <Image
+                                style={styles.image}
+                                source={require('../../src/assets/images/doneIcon.png')}
+                                resizeMode="contain"
+                            />
+                        ) : null}
+                          {/* <Image
                                     style={styles.image}
                                     source={require('../../src/assets/images/doneIcon.png')}
                                     resizeMode="contain"
-                                />
+                                /> */}
 
                     </View>
                     <View style={styles.descriptionContainer}>
@@ -112,9 +130,12 @@ const handleChange = (value) => {
                     
                     <View style={[
                             styles.ButtonContainer,
-                            { marginTop: keyboardVisible ? hp(15) : hp(50) }, // Dynamic margin
+                            // { marginTop: keyboardVisible ? hp(12) : hp(50) }, // Dynamic margin
+                                // styles.ButtonContainer,
+                                { marginTop: getButtonMarginTop() }, // Dynamic margin
+    
                         ]}>
-                        <TouchableOpacity onPress={moveNext} style={styles.touchableArea}>
+                        <TouchableOpacity onPress={moveNext} style={[styles.touchableArea, userName ? styles.buttonActive : styles.buttonInactive]}>
                             <Text style={styles.conTinueText}>Sign Up</Text>
                         </TouchableOpacity>
                     </View>
@@ -176,24 +197,34 @@ const styles = StyleSheet.create({
         // backgroundColor:'red',
 
     },
+    buttonActive: {
+        backgroundColor: color.onBoardingButton,
+        borderRadius: 10,
+    
+      },
+      buttonInactive: {
+        backgroundColor: '#ffffff33',
+        borderRadius: 10,
+    
+      },
     input: {
         backgroundColor: color.inputFieldColor,
         // width: '96%',
         width:wp('92%'),
         marginTop: '10%',
 
-        borderRadius: 15,
+        borderRadius: 10,
         borderColor: '#414142',
         borderWidth: 1,
         color: '#ffffff33',//backgroundColor: '#ffffff33',
-
+        height:hp(6),
         fontSize: 16,
         fontWeight:'500',
         paddingLeft:wp(5),
         fontFamily:'inter',
         flexDirection:'row',
         justifyContent:'space-between',
-        paddingLeft:RFPercentage('3'),
+        // paddingLeft:RFPercentage('3'),
         paddingRight:RFPercentage('3')
 
         

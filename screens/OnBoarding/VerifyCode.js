@@ -17,8 +17,9 @@ import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation,useFocusEffect } from '@react-navigation/native';
 import { color } from '../../src/styles/color';
 import Header from '../Components/Header';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp, heightPercentageToDP} from 'react-native-responsive-screen';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import HeadingText from '../Components/HeadingText';
 
 
 const VerifyCode = () => {
@@ -62,13 +63,13 @@ const VerifyCode = () => {
         };
     }, []);
 
-    useEffect(() => {
-        const focusTimeout = setTimeout(() => {
-            v1Ref.current.focus();
-        }, 500);
+    // useEffect(() => {
+    //     const focusTimeout = setTimeout(() => {
+    //         v1Ref.current.focus();
+    //     }, 500);
 
-        return () => clearTimeout(focusTimeout);
-    }, []);
+    //     return () => clearTimeout(focusTimeout);
+    // }, []);
 
     useEffect(() => {
         if (timer > 0) {
@@ -79,15 +80,16 @@ const VerifyCode = () => {
         }
     }, [timer]);
 
-    useFocusEffect(
-        React.useCallback(() => {
-            const focusTimeout = setTimeout(() => {
-                v1Ref.current.focus();
-            }, 100);
+    // useFocusEffect(
+    //     React.useCallback(() => {
+    //         const focusTimeout = setTimeout(() => {
+    //             v1Ref.current.focus();
+    //         }, 100);
 
-            return () => clearTimeout(focusTimeout);
-        }, [])
-    );
+    //         return () => clearTimeout(focusTimeout);
+    //     }, [])
+    // );
+    const isAllFieldsFilled = v1 && v2 && v3 && v4;
 
     function moveNext() {
         navigation.navigate('NameInputScreen');
@@ -101,7 +103,8 @@ const VerifyCode = () => {
                 <Header/>
 
                 <View style={styles.titleContainer}>
-                    <Text style={styles.titleText}>Enter the verification code</Text>
+                <HeadingText title={'Enter the verification code'}/>
+                    {/* <Text style={styles.titleText}>Enter the verification code</Text> */}
 
 
                      <View style={styles.inputContainer}>
@@ -153,7 +156,13 @@ const VerifyCode = () => {
                             maxLength={1}
                         />
                     </View>
-                    <Text style={styles.timerText}>Resend code in {timer}s</Text>
+                    {timer > 0 ? (
+                        <Text style={styles.timerText}>Resend code in {timer}s</Text>
+                    ) : (
+                        <Text style={styles.resendTextBlue}>Resend code</Text>
+                    )}
+                    {/* <Text style={styles.timerText}>Resend code in {timer}s</Text> */}
+                    
                     
                     <View
                         style={[
@@ -161,7 +170,7 @@ const VerifyCode = () => {
                             { marginTop: keyboardVisible ? hp(15) : hp(45) }, // Dynamic margin
                         ]}
                     >
-                        <TouchableOpacity onPress={moveNext} style={styles.touchableArea}>
+                        <TouchableOpacity onPress={moveNext} style={[styles.touchableArea,isAllFieldsFilled && styles.resendTextActive]}>
                             <Text style={styles.resendText}>Continue</Text>
                         </TouchableOpacity>
                     </View>                       
@@ -215,10 +224,17 @@ const styles = StyleSheet.create({
         height:hp("60%"),
        
     },
+    resendTextBlue:{
+        color:color.onBoardingButton,
+        fontSize:15,
+        fontFamily:'Inter',
+        fontWeight:'700',
+        marginTop:hp(2.5),
+    },
     
     inputContainer: {
         width: '100%',
-        height:55,
+        height:hp(6),
         marginTop: '10%',
         flexDirection: 'row',
         justifyContent: 'space-around',
@@ -239,13 +255,12 @@ const styles = StyleSheet.create({
     ButtonContainer:{
         backgroundColor:color.WhiteWithThirtypercentOpacity,
         // height:hp('7%'),
-        height:50,
+        height:hp(6),
         // width:363,
-
+        borderRadius:10,
          width:wp('92%'),
          marginTop:hp(26),
          textAlign: 'center',
-         borderRadius:10,
          alignItems:'center',
          justifyContent:'center'
 
@@ -260,6 +275,10 @@ const styles = StyleSheet.create({
         fontFamily:'inter'
 
     },
+    resendTextActive: {
+        backgroundColor:color.onBoardingButton,       
+
+    },
     timerText:{
         color:'#6F6F70',
         fontSize:15,
@@ -272,6 +291,7 @@ const styles = StyleSheet.create({
         height: '100%', // Make it the full height of the container
         alignItems: 'center', // Center the text
         justifyContent: 'center', // Center the text
+        borderRadius:10,
       },
 
 });

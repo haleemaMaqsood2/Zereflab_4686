@@ -19,6 +19,7 @@ import { color } from '../../src/styles/color';
 import Header from '../Components/Header';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import HeadingText from '../Components/HeadingText';
 
 
 const DiscoverFriends = ({ navigation }) => {
@@ -49,25 +50,23 @@ const DiscoverFriends = ({ navigation }) => {
                     <Header />
 
                     <View style={styles.titleContainer}>
-                        <Text style={styles.titleText}>Discover your friends</Text>
-
-
-
-
-
-
-
+                    <HeadingText title={'Discover your friends'}/>
+                        {/* <Text style={styles.titleText}>Discover your friends</Text> */}
                     </View>
+                     <View style={styles.descriptionContainer}>
+                            <Text style={styles.descriptionText}>Allow Where2 access to your contacts so we can help you find your friends. Your contacts will not be shared with anyone.</Text>
+                        </View>
                     <View style={styles.ImageContainer}>
                         <Image
                             style={styles.image}
-                            source={require('../../src/assets/images/discoverFriend.png')}
-                            resizeMode="cover"
+                            source={require('../../src/assets/images/discoverFriend1x4.png')}
+                            resizeMode="contain"
                         />
-                        <View style={styles.descriptionContainer}>
+                        {/* <View style={styles.descriptionContainer}>
                             <Text style={styles.descriptionText}>Allow Where2 access to your contacts so we can help you find your friends. Your contacts will not be shared with anyone.</Text>
-                        </View>
+                        </View> */}
                     </View>
+                   
                     <View style={styles.contineContainer}>
                             <TouchableOpacity style={styles.uploadContainer} onPress={moveNext}>
                                 <Text style={styles.uploadText}>Continue</Text>
@@ -78,34 +77,6 @@ const DiscoverFriends = ({ navigation }) => {
 
                             </TouchableOpacity>
                         </View>
-{/* ///hIDE this modal because of Figma Change */}
-
-                    {/* {(!continuePress) ?
-                        <View style={styles.contineContainer}>
-                            <TouchableOpacity style={styles.uploadContainer} onPress={onPressContinue}>
-                                <Text style={styles.uploadText}>Continue</Text>
-
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.SkipContainer} onPress={moveNext}>
-                                <Text style={styles.skipText}>Skip</Text>
-
-                            </TouchableOpacity>
-                        </View> :
-                        <View style={styles.modalContainer}>
-                            <View style={styles.titleContainer2}>
-                                <Text style={styles.titleText}>“Where2” would like to access your contacts</Text>
-                                <Text style={styles.descriptionText2}>This helps you discover friends and connect with them. Your contacts will be synced and securely stored on Where2's servers.</Text>
-                                <View style={styles.modalButtonContainer}>
-                                <TouchableOpacity style={styles.allowButtonContainer} onPress={moveNext}>
-                                    <Text style={styles.allowButtonText}>Allow</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.dontAllowButtonContainer}onPress={moveNext}>
-                                    <Text style={styles.dontAllowButtonText}>Don't Allow</Text>
-                                </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
-                    } */}
 
                 </KeyboardAvoidingView>
 
@@ -213,16 +184,18 @@ const styles = StyleSheet.create({
 
     },
     image: {
-        marginTop: '0%',
-        // backgroundColor:'red'
-        // width: wp(100),
-        // height: hp(100)
+        // width: wp(50),
+        // height: hp(20)
+        width: wp(50),
+        height: hp(50)
     },
     ImageContainer: {
         alignSelf: "center",
         alignItems:'center',
         height: RFPercentage(40),
-        marginTop:hp('5')
+        marginTop:hp('5'),
+        justifyContent:'center',
+        // backgroundColor:'red'
     },
     uploadContainer: {
         backgroundColor: color.onBoardingButton,
@@ -234,9 +207,13 @@ const styles = StyleSheet.create({
         marginBottom: hp('2%')
     },
     uploadText: {
+        // fontSize: 16,
+        // fontFamily: 'Inter',
+        // fontweight: '700',
+        color: '#FFFFFF',
         fontSize: 16,
-        fontFamily: 'Inter',
-        fontweight: '700',
+        fontWeight: '700',
+        fontFamily: 'inter',
         color: color.whiteFontColor,
     },
     SkipContainer: {
@@ -250,9 +227,10 @@ const styles = StyleSheet.create({
         borderColor: color.whiteWithfiftypercentOpacity,
     },
     skipText: {
+        color: '#FFFFFF',
         fontSize: 16,
-        fontFamily: 'Inter',
-        fontweight: '700',
+        fontWeight: '700',
+        fontFamily: 'inter',
         color: color.whiteWithfiftypercentOpacity,
     },
     contineContainer: {
@@ -262,7 +240,10 @@ const styles = StyleSheet.create({
     descriptionContainer: {
         width: wp('80%'),
         alignSelf: 'center',
-        paddingTop: hp(3.5),
+        position:'absolute',
+        top:hp(60)
+        // paddingTop: hp(3.5),
+        // backgroundColor:'pink'
     },
     descriptionText: {
         // backgroundColor: 'red',
