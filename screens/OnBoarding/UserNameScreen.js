@@ -23,6 +23,7 @@ import Header from '../Components/Header';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import HeadingText from '../Components/HeadingText';
+import CustomInput from '../Components/CustomInput';
 
 
 const UserNameScreen = ({navigation}) => {
@@ -41,7 +42,7 @@ const handleChange = (value) => {
 };
 const getButtonMarginTop = () => {
     if (keyboardVisible) {
-        return keyboardHeight+hp(13); // height of button and 5% margin
+        return keyboardHeight+hp(18); // height of button and 5% margin
     } else {
         return keyboardHeight+hp(45); // height of button and 5% margin
     }
@@ -50,27 +51,7 @@ const getButtonMarginTop = () => {
     function moveNext() {
         navigation.navigate('ImageUpload')
     }
-    // useEffect(() => {
-    //     const focusTimeout = setTimeout(() => {
-    //         if (userNameRef.current) {
-    //             userNameRef.current.focus();
-    //         }
-    //     }, 500);
-
-    //     return () => clearTimeout(focusTimeout);
-    // }, []);
-
-    // useFocusEffect(
-    //     React.useCallback(() => {
-    //         const focusTimeout = setTimeout(() => {
-    //             if (userNameRef.current) {
-    //                 userNameRef.current.focus();
-    //             }
-    //         }, 100);
-    //         return () => clearTimeout(focusTimeout);
-    //     }, [])
-    // );
-
+  
     
     useEffect(() => {
         const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
@@ -96,32 +77,13 @@ const getButtonMarginTop = () => {
                 <View style={styles.titleContainer}>
                 <HeadingText title={'Create a username'}/>
                     {/* <Text style={styles.titleText}>Create a username</Text> */}
-                    <View style={styles.input}>
-                    <TextInput
-                            // style={styles.input}
-                            style={{color:color.whiteColor,height:Platform.OS === 'ios' ? hp(5):null}}
-                            onChangeText={value => handleChange(value)}
-                            placeholder='Username'
-                            placeholderTextColor={color.placeholderColor}
-
-                            keyboardAppearance="dark"
-                            value={userName}
-                            // ref={userNameRef}
-                        />
-                         {userName ? (
-                            <Image
-                                style={styles.image}
-                                source={require('../../src/assets/images/doneIcon.png')}
-                                resizeMode="contain"
-                            />
-                        ) : null}
-                          {/* <Image
-                                    style={styles.image}
-                                    source={require('../../src/assets/images/doneIcon.png')}
-                                    resizeMode="contain"
-                                /> */}
-
-                    </View>
+                    <CustomInput
+                        value={userName}
+                        onChangeText={handleChange}
+                        placeholder='Username'
+                        placeholderTextColor={color.placeholderColor}
+                        ref={userNameRef}
+                    />               
                     <View style={styles.descriptionContainer}>
                         <Text style={styles.descriptionText}>Your username is unique. You can always change it later</Text>
                     </View>
@@ -203,7 +165,7 @@ const styles = StyleSheet.create({
     
       },
       buttonInactive: {
-        backgroundColor: '#ffffff33',
+        // backgroundColor: '#ffffff33',
         borderRadius: 10,
     
       },

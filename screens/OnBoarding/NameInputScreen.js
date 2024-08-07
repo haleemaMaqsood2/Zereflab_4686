@@ -20,6 +20,7 @@ import Header from '../Components/Header';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import HeadingText from '../Components/HeadingText';
+import CustomTextInput from '../Components/CustomTextInput';
 
 const NameInputScreen = ({navigation}) => {
     const [keyboardVisible, setKeyboardVisible] = useState(false);
@@ -38,22 +39,7 @@ const handleChange = (value) => {
     function moveNext() {
         navigation.navigate('DateOfBirth')
     }
-    // useEffect(() => {
-    //     const focusTimeout = setTimeout(() => {
-    //         nameRef.current.focus();
-    //     }, 500);
 
-    //     return () => clearTimeout(focusTimeout);
-    // }, []);
-    //To make keyboard remain open if user navigate back case
-    // useFocusEffect(
-    //     React.useCallback(() => {
-    //       const focusTimeout = setTimeout(() => {
-    //         nameRef.current.focus();
-    //       }, 100);
-    //       return () => clearTimeout(focusTimeout);
-    //     }, [])
-    //   );
       ///useEffect to manage keyboard state
       useEffect(() => {
         const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
@@ -79,28 +65,19 @@ const handleChange = (value) => {
 
                 <View style={styles.titleContainer}>
                     <HeadingText title={"What's your name?"}/>
+                    <CustomTextInput
+                        value={name}
+                        onChangeText={handleChange}
+                        placeholder='Full name'
+                        placeholderTextColor={color.placeholderColor}
+                        ref={nameRef}
+                    />
                     {/* <Text style={styles.titleText}>What's your name?</Text> */}
-                    <View style={styles.inputContainer}>
-                    <TextInput
-                            style={styles.input}
-                            // onChangeText={value => setV1(value)}
-                            onChangeText={value => handleChange(value)}
-                            placeholder='Full name'
-                            placeholderTextColor={color.placeholderColor}
-
-                            keyboardAppearance="dark"
-                            value={name}
-                            ref={nameRef}
-                        />
-
-                    </View>
-
-                    
-                    
+                
                     <View style={[
                             styles.ButtonContainer,
 
-                            { marginTop: keyboardVisible ? hp(18) : hp(54) }, // Dynamic margin
+                            { marginTop: keyboardVisible ? hp(24) : hp(54) }, // Dynamic margin
                         ]}>
                         <TouchableOpacity onPress={moveNext} style={[styles.touchableArea, name ? styles.buttonActive : styles.buttonInactive]}>
                             <Text style={styles.conTinueText}>Continue{keyboardVisible}</Text>
@@ -161,7 +138,9 @@ const styles = StyleSheet.create({
     
       },
       buttonInactive: {
-        backgroundColor: '#ffffff33',
+        // backgroundColor: '#ffffff33',
+        // backgroundColor:color.WhiteWithThirtypercentOpacity,
+
         borderRadius: 10,
     
       },
@@ -192,7 +171,7 @@ const styles = StyleSheet.create({
        
     },
     ButtonContainer:{
-        backgroundColor: '#ffffff33',
+        backgroundColor:color.WhiteWithThirtypercentOpacity,
         // height:hp('7%'),
         height:hp(6),
         // width:363,

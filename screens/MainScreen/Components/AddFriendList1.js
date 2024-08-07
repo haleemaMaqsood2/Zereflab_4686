@@ -23,7 +23,7 @@ const AddFriendList1 = ({ data, inviteFriends }) => {
                         <Text style={styles.usernameText}>{item.username}</Text>
                     </View>
                     <TouchableOpacity style={styles.addButton}>
-                        <Image source={require('../../../src/assets/images/AddIcon.png')} style={styles.addIcon} />
+                        <Image source={require('../../../src/assets/images/addIcon1x4.png')} style={styles.addIcon} />
                         <Text style={styles.addText}>Add</Text>
                     </TouchableOpacity>
                 </View>
@@ -36,8 +36,8 @@ const AddFriendList1 = ({ data, inviteFriends }) => {
                         <Text style={styles.nameText}>{item.name}</Text>
                     </View>
                     <TouchableOpacity style={styles.addButton1}>
-                        <Image source={require('../../../src/assets/images/AddIcon.png')} style={styles.addIcon} />
-                        <Text style={styles.addText}>{item.status}</Text>
+                    <Image source={require('../../../src/assets/images/addIcon1x4.png')} style={styles.addIcon} />
+                    <Text style={styles.addText}>{item.status}</Text>
                     </TouchableOpacity>
                 </View>
             );
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         fontFamily: font.Regular,
         color: color.whiteColor,
-        marginBottom: hp('1%'),
+        marginBottom: hp('2%'),
     },
     titleText1: {
         fontSize: 17,
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     friendContainer1: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingBottom: '2%',
+        paddingBottom: '5%',
         borderBottomColor: color.placeholderColor,
     },
     image: {
@@ -108,8 +108,8 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     nameText: {
-        fontSize: RFPercentage(2.0),
-        fontWeight: '400',
+        fontSize: 15,
+        fontWeight: '600',
         fontFamily: font.Regular,
         color: color.whiteColor,
     },
@@ -134,8 +134,8 @@ const styles = StyleSheet.create({
     },
     addText: {
         color: color.whiteColor,
-        fontSize: RFPercentage(2),
-        fontWeight: '500',
+        fontSize: 14,
+        // fontWeight: 'medium',
         fontFamily: font.Regular,
     },
     addButton1: {

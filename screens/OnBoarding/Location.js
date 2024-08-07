@@ -8,7 +8,8 @@ import {
     TouchableOpacity,
     Image,
     FlatList,
-    Platform
+    Platform,ScrollView,
+    Keyboard,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -21,6 +22,8 @@ import { setOnBoardingComplete } from '../../src/store/slices/onBoardingSlice/on
 const Location = ({ navigation }) => {
     const [location, setLocation] = useState('');
     const dispatch = useDispatch();
+    const [keyboardHeight, setKeyboardHeight] = useState(0);
+
     const onBoardingComplete = useSelector(
         (state) => state.onBoardingSlice.onBoardingComplete
       );
@@ -32,6 +35,25 @@ const Location = ({ navigation }) => {
         { id: 4, locationName: 'Phi Gamma Delta House' },
         { id: 5, locationName: 'Phi Gamma Delta House' },
     ];
+    useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener(
+          'keyboardDidShow',
+          (event) => {
+            setKeyboardHeight(event.endCoordinates.height);
+          }
+        );
+        const keyboardDidHideListener = Keyboard.addListener(
+          'keyboardDidHide',
+          () => {
+            setKeyboardHeight(0);
+          }
+        );
+    
+        return () => {
+          keyboardDidHideListener.remove();
+          keyboardDidShowListener.remove();
+        };
+      }, []);
 
     const handleChange = (value) => {
         setLocation('Phi Gamma Delta House');
@@ -57,11 +79,16 @@ const Location = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.safeArea}>
             <Header />
+            <ScrollView
+        contentContainerStyle={[
+          styles.scrollViewContent,
+        ]}
+      >
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Where are you located?</Text>
                 <Text style={styles.title2Text}>Enter your location to discover events nearby.</Text>
-                <View style={{ backgroundColor: color.inputFieldColor, borderRadius: 10, flexDirection: 'row', width: '97%', alignItems: 'center', paddingLeft: '3%', marginTop: hp('5%') }}>
-                    <Image source={require('../../src/assets/images/searchIcon.png')} style={styles.addIcon} />
+                <View style={{ backgroundColor: color.inputFieldColor, borderRadius: 10, flexDirection: 'row', width: '97%', alignItems: 'center', paddingLeft: '5%', marginTop: hp('5%') }}>
+                    <Image source={require('../../src/assets/images/searchIcon1x4.png')} style={styles.addIcon} />
                     <TextInput
                         style={styles.input}
                         onChangeText={handleChange}
@@ -72,7 +99,7 @@ const Location = ({ navigation }) => {
                     />
                     {location !== '' && (
                         <TouchableOpacity onPress={() => setLocation('')}>
-                            <Image source={require('../../src/assets/images/closeIcon.png')} style={styles.imageClose} />
+                            <Image source={require('../../src/assets/images/crossIcon1x4.png')} style={styles.imageClose} />
                         </TouchableOpacity>
                     )}
                 </View>
@@ -87,7 +114,8 @@ const Location = ({ navigation }) => {
                     />
                 </View>
             )}
-            <View style={{ alignItems: 'center' }}>
+
+            <View style={{ alignItems: 'center' , marginTop: keyboardHeight ? hp('5%') : hp(5)}}>
                 <TouchableOpacity
                     onPress={moveNext}
                     style={[styles.ButtonContainer, location !== '' ? styles.buttonEnabled : styles.buttonDisabled]}
@@ -96,6 +124,7 @@ const Location = ({ navigation }) => {
                     <Text style={styles.conTinueText}>Continue</Text>
                 </TouchableOpacity>
             </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }
@@ -116,12 +145,14 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 28,
         fontWeight: '700',
-        width: wp('80%'),
+        width: wp('95%'),
         textAlign: 'center',
         fontFamily: 'inter',
     },
     title2Text: {
         color: color.whiteFontColor,
+        fontSize:15,
+        fontFamily:'inter',
         marginTop: hp('1.5%'),
     },
     ButtonContainer: {
@@ -134,7 +165,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     buttonDisabled: {
-        backgroundColor: color.inputFieldColor,
+        backgroundColor:color.WhiteWithThirtypercentOpacity,
+        // backgroundColor: color.inputFieldColor,
         marginTop:'100%'
     },
     buttonEnabled: {
@@ -150,19 +182,21 @@ const styles = StyleSheet.create({
     },
     input: {
         backgroundColor: color.inputFieldColor,
-        width: wp('75%'),
+        width: wp('72%'),
         // borderWidth: 0.5,
         height:Platform.OS === 'ios' ? RFPercentage(6):null,
-        color: color.placeholderColor,
+        color: color.whiteWithfiftypercentOpacity,
         // backgroundColor: 'red',
 
         fontSize: 16,
         fontWeight: '500',
-        paddingLeft: wp(5),
+        paddingLeft: wp(0),
         fontFamily: 'inter',
+        color:color.whiteColor
     },
     imageClose: {
-        marginRight: wp(3),
+        height:RFPercentage(2),
+        width:RFPercentage(2),
     },
     locationName: {
         color: color.whiteFontColor,
@@ -185,6 +219,8 @@ const styles = StyleSheet.create({
     },
     addIcon: {
         marginRight: wp('3%'),
+        height:RFPercentage(2),
+        width:RFPercentage(2),
     },
 });
 

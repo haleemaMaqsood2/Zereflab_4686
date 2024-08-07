@@ -68,7 +68,7 @@ titleText: {
     color: '#FFFFFF',
     fontSize: 28,
     fontWeight: '700',
-    width:wp('75%'),
+    width:wp('85%'),
     textAlign:'center',
    fontFamily:'inter',
 //    backgroundColor:'red'

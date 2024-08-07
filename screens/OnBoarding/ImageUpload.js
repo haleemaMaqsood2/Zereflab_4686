@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 10,
-        width: wp('85%'),
+        width: wp('90%'),
         marginBottom: hp('2%')
     },
     uploadText: {
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 10,
-        width: wp('85%'),
+        width: wp('90%'),
         borderWidth: 1,
         borderColor: '#ffffff80',
     },
