@@ -114,10 +114,10 @@ const styles = StyleSheet.create({
         color: color.whiteColor,
     },
     usernameText: {
-        fontSize: RFPercentage(2),
-        fontWeight: '500',
+        fontSize: 14,
+        fontWeight: '400',
         fontFamily: font.Regular,
-        color: color.placeholderColor,
+        color: '#727272',
     },
     addButton: {
         flexDirection: 'row',

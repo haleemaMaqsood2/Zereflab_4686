@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, ScrollView, Keyboard, TouchableOpacity, Image, StyleSheet, TextInput } from 'react-native';
+import { View, Text, ScrollView, Keyboard, Dimensions,TouchableOpacity, Image, StyleSheet, TextInput,LayoutAnimation, KeyboardAvoidingView,Animated} from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
@@ -23,6 +23,8 @@ const SignInTab = () => {
   const [countryCode, setCountryCode] = useState('US'); // Default country code
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+  const [marginBottom, setMarginBottom] = useState(hp(35)); // Default margin when keyboard is hidden
+  const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 
   const handleChange = (value) => {
     setEmail(value);
@@ -34,13 +36,17 @@ const SignInTab = () => {
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       (event) => {
-        setKeyboardHeight(event.endCoordinates.height);
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut); // Smooth transition
+        setKeyboardHeight(((event.endCoordinates.height / screenHeight) * 100).toFixed(1));
+        setMarginBottom(hp(35-keyboardHeight+10)); // Adjust margin when keyboard is shown
       }
     );
     const keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       () => {
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut); // Smooth transition
         setKeyboardHeight(0);
+        setMarginBottom(35); // Reset margin when keyboard is hidden
       }
     );
 
@@ -95,6 +101,11 @@ const SignInTab = () => {
                 keyboardAppearance="dark"
                 value={email}
                 ref={EmailRef}
+                autoCorrect={false}
+                autoCompleteType="off"
+                autoCapitalize="none" // Disable auto capitalization
+                keyboardType="default" // Default keyboard type
+                spellCheck={false} // Disable spell check
               />
 
 
@@ -129,7 +140,9 @@ const SignInTab = () => {
 
 
             </View>
-            <View style={{ justifyContent: 'flex-end', height: keyboardHeight ? hp('8%') : hp(keyboardHeight + 35) }}>
+            <View style={{ justifyContent: 'flex-end', height: keyboardHeight ? hp('8%') : hp('35%') }}>
+            {/* <View style={{ backgroundColor:'red',height: keyboardHeight ? hp(marginBottom) : hp(marginBottom) }}> */}
+
               <PrivacyPolicy />
             </View>
             {/* <View style={styles.privacyPolicyContainer}>
@@ -176,6 +189,7 @@ const SignInTab = () => {
 
 
               />
+
 
 
             </View>
@@ -238,6 +252,12 @@ const styles = StyleSheet.create({
     // paddingHorizontal: 20,
     borderRadius: 5,
     width: '50%'
+  },
+  separator: {
+    width: 1,
+    height: '100%',
+    backgroundColor: 'white',
+    marginHorizontal: 10,
   },
   activeTab: {
     backgroundColor: 'white',
@@ -339,8 +359,9 @@ const styles = StyleSheet.create({
   },
   phonContainer: {
     alignSelf: 'center',
-    borderWidth: 0.3,
+    borderWidth: 1,
     borderRadius: 10,
+    borderColor:color.WhiteWithThirtypercentOpacity
 
     // paddingHorizontal: '1.5%'
   },
@@ -351,9 +372,10 @@ const styles = StyleSheet.create({
     backgroundColor: color.inputFieldColor,
     borderRadius: 10,
     borderColor: 'white',
-    borderWidth: 0.3,
+    // borderWidth: 0.3,
     paddingHorizontal: '1.5%',
-    paddingVertical: '0.5%',
+    // paddingVertical: '0.5%',
+    // backgroundColor: 'red'
 
 
   },
@@ -363,9 +385,12 @@ const styles = StyleSheet.create({
 
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100%',
+    height: hp(6.2),
     color: 'white',
-    paddingRight: '1%'
+    paddingRight: '1%',
+    // backgroundColor: 'blue'
+
+
 
 
   },
@@ -375,6 +400,14 @@ const styles = StyleSheet.create({
     backgroundColor: color.inputFieldColor,
     paddingVertical: 0, // Adjust padding to fit the reduced height
     marginVertical: 0,
+    // backgroundColor:'red',
+    height:hp(6.2),
+    borderLeftWidth:1,
+    // borderLe
+    borderLeftColor:color.WhiteWithThirtypercentOpacity,
+    paddingLeft:'5%'
+
+
   
   },
   phoneCodeText: {

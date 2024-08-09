@@ -15,6 +15,12 @@ const CustomTextInput = forwardRef(({ value, onChangeText, placeholder, placehol
                 keyboardAppearance="dark"
                 value={value}
                 ref={ref}
+                 autoCorrect={false}
+               autoCompleteType="off"
+               autoCapitalize="none" // Disable auto capitalization
+               keyboardType="default" // Default keyboard type
+               spellCheck={false} // Disable spell check
+
             />
         </View>
     );

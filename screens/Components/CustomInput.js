@@ -16,6 +16,11 @@ const CustomInput = forwardRef(({ value, onChangeText, placeholder, placeholderT
                 keyboardAppearance="dark"
                 value={value}
                 ref={ref}
+                autoCorrect={false}
+                autoCompleteType="off"
+                autoCapitalize="none" // Disable auto capitalization
+                keyboardType="default" // Default keyboard type
+                spellCheck={false} // Disable spell check
             />
             {value ? (
                 <Image
@@ -40,7 +45,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingLeft: wp(5),
-        paddingRight: RFPercentage('3')
+        paddingRight: RFPercentage('3'),
+        alignItems:'center'
     },
     input: {
         flex: 1,
@@ -49,7 +55,8 @@ const styles = StyleSheet.create({
         fontFamily: 'inter',
     },
     image: {
-        marginTop: '4.5%',
+        // marginTop: '4.5%',
+        alignItems:'center',
         paddingLeft: RFPercentage(-8),
         height:RFPercentage(2),
         width:RFPercentage(2),

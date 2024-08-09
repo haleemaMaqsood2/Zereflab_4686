@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     width: wp('100%'),
-    alignSelf: 'center'
+    alignSelf: 'center',
+    backgroundColor:'red'
   },
   titleContainer: {
     width: wp('95%'),

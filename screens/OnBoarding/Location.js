@@ -8,8 +8,9 @@ import {
     TouchableOpacity,
     Image,
     FlatList,
-    Platform,ScrollView,
-    Keyboard,
+    Platform,
+    Dimensions,
+    Keyboard
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -19,14 +20,19 @@ import Header from '../Components/Header';
 import { font } from '../../src/styles/font';
 import { useDispatch,useSelector } from 'react-redux';
 import { setOnBoardingComplete } from '../../src/store/slices/onBoardingSlice/onBoardingSlice';
+import CustomButton from '../Components/CustomButton';
+
 const Location = ({ navigation }) => {
     const [location, setLocation] = useState('');
     const dispatch = useDispatch();
-    const [keyboardHeight, setKeyboardHeight] = useState(0);
-
     const onBoardingComplete = useSelector(
         (state) => state.onBoardingSlice.onBoardingComplete
       );
+      const [keyboardVisible, setKeyboardVisible] = useState(false);
+
+      const [keyboardHeight, setKeyboardHeight] = useState(0);
+      const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
+  
 
     const searchResult = [
         { id: 1, locationName: 'Phi Gamma Delta House' },
@@ -35,25 +41,6 @@ const Location = ({ navigation }) => {
         { id: 4, locationName: 'Phi Gamma Delta House' },
         { id: 5, locationName: 'Phi Gamma Delta House' },
     ];
-    useEffect(() => {
-        const keyboardDidShowListener = Keyboard.addListener(
-          'keyboardDidShow',
-          (event) => {
-            setKeyboardHeight(event.endCoordinates.height);
-          }
-        );
-        const keyboardDidHideListener = Keyboard.addListener(
-          'keyboardDidHide',
-          () => {
-            setKeyboardHeight(0);
-          }
-        );
-    
-        return () => {
-          keyboardDidHideListener.remove();
-          keyboardDidShowListener.remove();
-        };
-      }, []);
 
     const handleChange = (value) => {
         setLocation('Phi Gamma Delta House');
@@ -66,10 +53,40 @@ const Location = ({ navigation }) => {
         navigation.navigate('HomePage')
         // navigation.navigate('MainStack', { screen: 'HomePage' });
     };
+    useEffect(() => {
+        const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+            setKeyboardVisible(true);
+        });
+        const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+            setKeyboardVisible(false);
+        });
+
+        return () => {
+            showSubscription.remove();
+            hideSubscription.remove();
+        };
+    }, []);
+    useEffect(() => {
+        const showSubscription = Keyboard.addListener('keyboardDidShow', (event) => {
+            const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
+            setKeyboardVisible(true);
+            setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
+        });
+        const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+            setKeyboardVisible(false);
+            setKeyboardHeight(0);
+        });
+
+        return () => {
+            showSubscription.remove();
+            hideSubscription.remove();
+        };
+    }, [screenHeight]);
+
 
     const renderItem = ({ item }) => (
         <View style={styles.ResultContainer}>
-            <Image source={require('../../src/assets/images/LocationIcon.png')} style={styles.image} />
+            <Image style={styles.locationImage}source={require('../../src/assets/images/location1x4.png')}/>
             <View style={styles.infoContainer}>
                 <Text style={styles.locationName}>{item.locationName}</Text>
             </View>
@@ -79,16 +96,19 @@ const Location = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.safeArea}>
             <Header />
-            <ScrollView
-        contentContainerStyle={[
-          styles.scrollViewContent,
-        ]}
-      >
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Where are you located?</Text>
                 <Text style={styles.title2Text}>Enter your location to discover events nearby.</Text>
                 <View style={{ backgroundColor: color.inputFieldColor, borderRadius: 10, flexDirection: 'row', width: '97%', alignItems: 'center', paddingLeft: '5%', marginTop: hp('5%') }}>
-                    <Image source={require('../../src/assets/images/searchIcon1x4.png')} style={styles.addIcon} />
+                {location !== '' ? (
+                                            <Image source={require('../../src/assets/images/WhiteSearch.png')} style={styles.addIcon} />
+
+                    ) : (
+                        <Image source={require('../../src/assets/images/searchIcon1x4.png')} style={styles.addIcon} />
+
+                    )}
+                    {/* <Image source={require('../../src/assets/images/searchIcon1x4.png')} style={styles.addIcon} /> */}
+                    
                     <TextInput
                         style={styles.input}
                         onChangeText={handleChange}
@@ -96,6 +116,11 @@ const Location = ({ navigation }) => {
                         placeholderTextColor={color.placeholderColor}
                         keyboardAppearance="dark"
                         value={location}
+                        autoCorrect={false}
+                        autoCompleteType="off"
+                        autoCapitalize="none" // Disable auto capitalization
+                        keyboardType="default" // Default keyboard type
+                        spellCheck={false} // Disable spell check
                     />
                     {location !== '' && (
                         <TouchableOpacity onPress={() => setLocation('')}>
@@ -114,8 +139,7 @@ const Location = ({ navigation }) => {
                     />
                 </View>
             )}
-
-            <View style={{ alignItems: 'center' , marginTop: keyboardHeight ? hp('5%') : hp(5)}}>
+            <View style={{ alignItems: 'center' }}>
                 <TouchableOpacity
                     onPress={moveNext}
                     style={[styles.ButtonContainer, location !== '' ? styles.buttonEnabled : styles.buttonDisabled]}
@@ -124,7 +148,6 @@ const Location = ({ navigation }) => {
                     <Text style={styles.conTinueText}>Continue</Text>
                 </TouchableOpacity>
             </View>
-            </ScrollView>
         </SafeAreaView>
     );
 }
@@ -167,11 +190,11 @@ const styles = StyleSheet.create({
     buttonDisabled: {
         backgroundColor:color.WhiteWithThirtypercentOpacity,
         // backgroundColor: color.inputFieldColor,
-        marginTop:'100%'
+        marginTop:'115%'
     },
     buttonEnabled: {
         backgroundColor: color.onBoardingButton,
-        marginTop:'45%'
+        marginTop:'60%'
 
     },
     conTinueText: {
@@ -200,9 +223,10 @@ const styles = StyleSheet.create({
     },
     locationName: {
         color: color.whiteFontColor,
-        fontSize: RFValue(12),
+        fontSize: 12,
         fontWeight: '400',
         fontFamily: font.Regular,
+        paddingLeft:wp(2)
     },
     ResultContainer: {
         flexDirection: 'row',
@@ -222,6 +246,10 @@ const styles = StyleSheet.create({
         height:RFPercentage(2),
         width:RFPercentage(2),
     },
+    locationImage:{
+        height:RFPercentage(1.9),
+        width:RFPercentage(1.5)
+    }
 });
 
 export default Location;

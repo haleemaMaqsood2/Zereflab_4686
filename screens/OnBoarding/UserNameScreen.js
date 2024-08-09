@@ -1,4 +1,4 @@
-import React, { useState, useRef,useEffect} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -17,42 +17,38 @@ import {
 
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { useNavigation,useFocusEffect } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { color } from '../../src/styles/color';
 import Header from '../Components/Header';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import HeadingText from '../Components/HeadingText';
 import CustomInput from '../Components/CustomInput';
+import CustomButton from '../Components/CustomButton';
 
 
-const UserNameScreen = ({navigation}) => {
+const UserNameScreen = ({ navigation }) => {
     //   const navigation = useNavigation();
     const [keyboardVisible, setKeyboardVisible] = useState(false);
 
-const [userName,setUserName]=useState('')
-const [keyboardHeight, setKeyboardHeight] = useState(0);
+    const [userName, setUserName] = useState('')
+    const [keyboardHeight, setKeyboardHeight] = useState(0);
+    const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 
-const userNameRef = useRef(null);
-const handleChange = (value) => {
-    setUserName(value);
+    const userNameRef = useRef(null);
+    const handleChange = (value) => {
+        setUserName(value);
         // userNameRef.current.focus();
+
+
+    };
     
-   
-};
-const getButtonMarginTop = () => {
-    if (keyboardVisible) {
-        return keyboardHeight+hp(18); // height of button and 5% margin
-    } else {
-        return keyboardHeight+hp(45); // height of button and 5% margin
-    }
-};
-    
+
     function moveNext() {
         navigation.navigate('ImageUpload')
     }
-  
-    
+
+
     useEffect(() => {
         const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
             setKeyboardVisible(true);
@@ -66,31 +62,47 @@ const getButtonMarginTop = () => {
             hideSubscription.remove();
         };
     }, []);
+    useEffect(() => {
+        const showSubscription = Keyboard.addListener('keyboardDidShow', (event) => {
+            const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
+            setKeyboardVisible(true);
+            setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
+        });
+        const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+            setKeyboardVisible(false);
+            setKeyboardHeight(0);
+        });
+
+        return () => {
+            showSubscription.remove();
+            hideSubscription.remove();
+        };
+    }, [screenHeight]);
 
 
     {
         return (
             <SafeAreaView style={styles.safeArea}>
-                <KeyboardAvoidingView >
-                <Header/>
+                <KeyboardAvoidingView>
+                    <Header />
 
-                <View style={styles.titleContainer}>
-                <HeadingText title={'Create a username'}/>
-                    {/* <Text style={styles.titleText}>Create a username</Text> */}
-                    <CustomInput
-                        value={userName}
-                        onChangeText={handleChange}
-                        placeholder='Username'
-                        placeholderTextColor={color.placeholderColor}
-                        ref={userNameRef}
-                    />               
-                    <View style={styles.descriptionContainer}>
-                        <Text style={styles.descriptionText}>Your username is unique. You can always change it later</Text>
-                    </View>
+                    <View style={styles.titleContainer}>
+                        <HeadingText title={'Create a username'} />
+                        {/* <Text style={styles.titleText}>Create a username</Text> */}
+                        <CustomInput
+                            value={userName}
+                            onChangeText={handleChange}
+                            placeholder='Username'
+                            placeholderTextColor={color.placeholderColor}
+                            ref={userNameRef}
+                        />
+                        <View style={styles.descriptionContainer}>
+                            <Text style={styles.descriptionText}>Your username is unique. You can always change it later</Text>
+                        </View>
 
-                    
-                    
-                    <View style={[
+
+
+                        {/* <View style={[
                             styles.ButtonContainer,
                             // { marginTop: keyboardVisible ? hp(12) : hp(50) }, // Dynamic margin
                                 // styles.ButtonContainer,
@@ -100,9 +112,22 @@ const getButtonMarginTop = () => {
                         <TouchableOpacity onPress={moveNext} style={[styles.touchableArea, userName ? styles.buttonActive : styles.buttonInactive]}>
                             <Text style={styles.conTinueText}>Sign Up</Text>
                         </TouchableOpacity>
+                    </View> */}
+
+
+                        <CustomButton
+                            title="Sign Up"
+                            buttonState={userName}
+                            keyboardVisible={keyboardVisible}
+                            keyboardHeight={keyboardHeight}
+                            nextScreenName="ImageUpload"
+                            marginTop={53}
+                            onPress={moveNext}
+                            extraSpace={3.5}
+
+                        />
+
                     </View>
-                  
-                </View>
                 </KeyboardAvoidingView>
 
             </SafeAreaView>
@@ -130,29 +155,29 @@ const styles = StyleSheet.create({
         width: wp('95%'),
         alignSelf: 'center',
         marginTop: hp('1%'),
-        justifyContent:'center',
-        alignItems:'center',
+        justifyContent: 'center',
+        alignItems: 'center',
         // backgroundColor:'red'
     },
     titleText: {
         color: '#FFFFFF',
         fontSize: 28,
         fontWeight: '700',
-        width:wp('80%'),
-        textAlign:'center',
-       fontFamily:'inter'
+        width: wp('80%'),
+        textAlign: 'center',
+        fontFamily: 'inter'
         // font:'urbanist'
     },
-    
+
     textInput: {
         width: wp('70%'),
-        height:hp("60%"),
-       
+        height: hp("60%"),
+
     },
-    
+
     inputContainer: {
         width: '100%',
-        height:55,
+        height: 55,
         marginTop: '10%',
         flexDirection: 'row',
         justifyContent: 'space-around',
@@ -162,50 +187,50 @@ const styles = StyleSheet.create({
     buttonActive: {
         backgroundColor: color.onBoardingButton,
         borderRadius: 10,
-    
-      },
-      buttonInactive: {
+
+    },
+    buttonInactive: {
         // backgroundColor: '#ffffff33',
         borderRadius: 10,
-    
-      },
+
+    },
     input: {
         backgroundColor: color.inputFieldColor,
         // width: '96%',
-        width:wp('92%'),
+        width: wp('92%'),
         marginTop: '10%',
 
         borderRadius: 10,
         borderColor: '#414142',
         borderWidth: 1,
         color: '#ffffff33',//backgroundColor: '#ffffff33',
-        height:hp(6),
+        height: hp(6),
         fontSize: 16,
-        fontWeight:'500',
-        paddingLeft:wp(5),
-        fontFamily:'inter',
-        flexDirection:'row',
-        justifyContent:'space-between',
+        fontWeight: '500',
+        paddingLeft: wp(5),
+        fontFamily: 'inter',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         // paddingLeft:RFPercentage('3'),
-        paddingRight:RFPercentage('3')
+        paddingRight: RFPercentage('3')
 
-        
-       
+
+
     },
-    ButtonContainer:{
+    ButtonContainer: {
         backgroundColor: '#ffffff33',
         // height:hp('7%'),
-        height:hp('6%'),
+        height: hp('6%'),
         // width:363,
 
-         width:wp('92%'),
+        width: wp('92%'),
         //  marginTop:hp(22),
-        marginTop:hp(18),
+        marginTop: hp(18),
 
-         textAlign: 'center',
-         borderRadius:10,
-         alignItems:'center',
-         justifyContent:'center'
+        textAlign: 'center',
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center'
 
 
 
@@ -215,31 +240,31 @@ const styles = StyleSheet.create({
         height: '100%', // Make it the full height of the container
         alignItems: 'center', // Center the text
         justifyContent: 'center', // Center the text
-      },
-    conTinueText:{
-        alignItems:'center',
-        color:'#FFFFFF',
-        fontSize:16,
-        fontWeight:'700',
-        fontFamily:'inter'
+    },
+    conTinueText: {
+        alignItems: 'center',
+        color: '#FFFFFF',
+        fontSize: 16,
+        fontWeight: '700',
+        fontFamily: 'inter'
 
     },
-    descriptionContainer:{
+    descriptionContainer: {
         // backgroundColor:'white',
-        fontSize:RFPercentage(14),
-        fontWeight:'500',
-        fontFamily:'Inter',
-        marginTop:RFPercentage(2),
-        width:wp('70%')
+        fontSize: RFPercentage(14),
+        fontWeight: '500',
+        fontFamily: 'Inter',
+        marginTop: RFPercentage(2),
+        width: wp('80%')
     },
-    descriptionText:{
-        textAlign:'center',
-        color:color.placeholderColor
+    descriptionText: {
+        textAlign: 'center',
+        color: color.placeholderColor
     },
     image: {
-        marginTop:'4.5%',
-        paddingLeft:RFPercentage(-3)
- 
+        marginTop: '4.5%',
+        paddingLeft: RFPercentage(-3)
+
     },
 
 });

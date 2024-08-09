@@ -20,7 +20,7 @@ import Header from '../Components/Header';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import HeadingText from '../Components/HeadingText';
-
+import CustomButtonContainer from '../Components/CustomButtonContainer';
 
 const DiscoverFriends = ({ navigation }) => {
     //   const navigation = useNavigation();
@@ -62,21 +62,18 @@ const DiscoverFriends = ({ navigation }) => {
                             source={require('../../src/assets/images/discoverFriend1x4.png')}
                             resizeMode="contain"
                         />
+                        
                         {/* <View style={styles.descriptionContainer}>
                             <Text style={styles.descriptionText}>Allow Where2 access to your contacts so we can help you find your friends. Your contacts will not be shared with anyone.</Text>
                         </View> */}
                     </View>
-                   
-                    <View style={styles.contineContainer}>
-                            <TouchableOpacity style={styles.uploadContainer} onPress={moveNext}>
-                                <Text style={styles.uploadText}>Continue</Text>
-
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.SkipContainer} onPress={moveNext}>
-                                <Text style={styles.skipText}>Skip</Text>
-
-                            </TouchableOpacity>
-                        </View>
+              
+                         <CustomButtonContainer
+                    button1Name="Continue"
+                    button2Name="Skip"
+                    onPressButton1={moveNext}
+                    onPressButton2={moveNext}
+                />
 
                 </KeyboardAvoidingView>
 
@@ -195,6 +192,8 @@ const styles = StyleSheet.create({
         height: RFPercentage(40),
         marginTop:hp('5'),
         justifyContent:'center',
+        marginBottom:hp('5')
+
         // backgroundColor:'red'
     },
     uploadContainer: {
@@ -238,10 +237,10 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     descriptionContainer: {
-        width: wp('80%'),
+        width: wp('85%'),
         alignSelf: 'center',
         position:'absolute',
-        top:hp(60)
+        top:hp(54)
         // paddingTop: hp(3.5),
         // backgroundColor:'pink'
     },
