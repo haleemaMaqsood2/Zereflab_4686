@@ -59,7 +59,7 @@ const Location = () => {
                 <TouchableOpacity style={styles.searchContainer}>
                         <Image
                             style={styles.searchImage}
-                            source={require('../src/assets/images/location.png')}
+                            source={require('../src/assets/images/location1x4.png')}
                         />
                         <TextInput
                             style={styles.searchInput}
@@ -67,6 +67,11 @@ const Location = () => {
                             placeholderTextColor="#5E6368"
                             onChangeText={value => setSearch(value)}
                             value={search}
+                            autoCorrect={false}
+                            autoCompleteType="off"
+                            autoCapitalize="none" // Disable auto capitalization
+                            keyboardType="default" // Default keyboard type
+                            spellCheck={false} // Disable spell check
                         />
                         <Image
                             style={styles.searchImage}

@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         width: wp('85%'),
         // top:hp(50),
-        marginBottom: hp('3%'),
+        marginBottom: hp('1%'),
         // position:'absolute'
     },
     getStarted: {

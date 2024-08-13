@@ -44,14 +44,14 @@ const AddFriendScreen = ({ navigation }) => {
     const inviteFriendData=[
         {
             id:1,
-            name:"Full Name",
+            name:"Cristofer Nolan ",
             username:'@Username',
             image: require('../../src/assets/images/Profile2.png'),
             status:'Invite'
         },
         {
             id:2,
-            name:"Full Name",
+            name:"Ronald C",
             username:'@Username',
             image: require('../../src/assets/images/Profile2.png'),
             status:'Invite'
@@ -80,14 +80,14 @@ const AddFriendScreen = ({ navigation }) => {
 
         },{
             id:6,
-            name:"Full Name",
+            name:"Ronald C",
             username:'@Username',
             image: require('../../src/assets/images/Profile2.png'),
             status:'Invite'
 
         },{
             id:7,
-            name:"Full Name",
+            name:"Cristofer Nolan",
             username:'@Username',
             image: require('../../src/assets/images/Profile2.png'),
             status:'Invite'
@@ -201,14 +201,14 @@ const styles = StyleSheet.create({
         // width:363,
 
         width: wp('92%'),
-        marginTop: hp(25),
+        marginTop: hp(30),
         textAlign: 'center',
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
         position: 'absolute',
         // top: hp('60%'),//65 on android
-        top:Platform.OS === 'ios' ? hp('60%') :hp('65%'),
+        top:Platform.OS === 'ios' ? hp('54%') :hp('65%'),
         left:hp('2%')
 
 

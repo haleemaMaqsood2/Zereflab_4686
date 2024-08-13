@@ -19,7 +19,7 @@ import Header from '../Components/Header';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import HeadingText from '../Components/HeadingText';
-
+import CustomButtonContainer from '../Components/CustomButtonContainer';
 
 const ImageUpload = ({ navigation }) => {
     //   const navigation = useNavigation();
@@ -43,14 +43,14 @@ const ImageUpload = ({ navigation }) => {
             <SafeAreaView style={styles.safeArea}>
                 <KeyboardAvoidingView >
                     <Header />
+                    <HeadingText title={'Add profile picture'}/>
 
                     <View style={styles.titleContainer}>
-                        <HeadingText title={'Add profile picture'}/>
                         {/* <Text style={styles.titleText}>Add profile picture</Text> */}
-                        <View style={styles.inputContainer}>
+                        {/* <View style={styles.inputContainer}>
 
 
-                        </View>
+                        </View> */}
 
 
 
@@ -65,17 +65,13 @@ const ImageUpload = ({ navigation }) => {
                             resizeMode="contain"
                         />
                     </View>
-                    {/* //android=23 Platform.OS === 'ios' ? RFPercentage(13) : RFPercentage(23),*/}
-                    <View style={{ marginTop: Platform.OS === 'ios' ? RFPercentage(13) : RFPercentage(23), alignItems: 'center' }}>
-                        <TouchableOpacity style={styles.uploadContainer} onPress={moveNext}>
-                            <Text style={styles.uploadText}>Upload</Text>
-
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.SkipContainer} onPress={moveNext}>
-                            <Text style={styles.skipText}>Skip</Text>
-
-                        </TouchableOpacity>
-                    </View>
+           
+                     <CustomButtonContainer
+                    button1Name="Upload"
+                    button2Name="Skip"
+                    onPressButton1={moveNext}
+                    onPressButton2={moveNext}
+                />
 
                 </KeyboardAvoidingView>
 
@@ -129,7 +125,7 @@ const styles = StyleSheet.create({
     inputContainer: {
         width: '100%',
         height: 55,
-        marginTop: '10%',
+        // marginTop: '5%',
         flexDirection: 'row',
         justifyContent: 'space-around',
         // backgroundColor:'red',
@@ -178,7 +174,8 @@ const styles = StyleSheet.create({
     image: {
         // marginTop: '5%',
         width: wp(50),
-        height: hp(40)
+        height: hp(40),
+        marginBottom:hp('10')
     },
     ImageContainer: {
         alignSelf: "center",
@@ -192,7 +189,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 10,
-        width: wp('85%'),
+        width: wp('90%'),
         marginBottom: hp('2%')
     },
     uploadText: {
@@ -212,7 +209,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 10,
-        width: wp('85%'),
+        width: wp('90%'),
         borderWidth: 1,
         borderColor: '#ffffff80',
     },
