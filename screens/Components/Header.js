@@ -12,7 +12,7 @@ const Header = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.leftContainer}>
+  <View style={styles.leftContainer}>
         <TouchableOpacity onPress={goBack} style={styles.circleContainer}>
           <Image
             source={require('../../src/assets/images/circle.png')}

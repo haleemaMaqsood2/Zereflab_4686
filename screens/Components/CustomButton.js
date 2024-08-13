@@ -4,12 +4,18 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 import { color } from '../../src/styles/color';
 
 const CustomButton = ({ title, buttonState, keyboardVisible, keyboardHeight, nextScreenName, marginTop, onPress,extraSpace }) => {
+  const calculatedMarginTop = keyboardVisible 
+  ?  hp(marginTop - keyboardHeight+extraSpace)
+  : hp(marginTop);
+
   return (
     <TouchableOpacity
       onPress={onPress}
       style={[
         styles.buttonContainer,
-        { marginTop: keyboardVisible ? hp(marginTop - keyboardHeight+extraSpace) : hp(marginTop) },
+        // { marginTop: keyboardVisible ? hp(marginTop - keyboardHeight+extraSpace) : hp(marginTop) },
+        { marginTop: calculatedMarginTop },
+
         buttonState ? styles.activeButton : styles.inactiveButton
       ]}
     >

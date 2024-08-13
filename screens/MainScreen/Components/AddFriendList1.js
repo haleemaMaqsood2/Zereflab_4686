@@ -125,6 +125,7 @@ const styles = StyleSheet.create({
         backgroundColor: color.onBoardingButton,
         padding: wp('1.5%'),
         borderRadius: 8,
+        width:wp('30%'),
         paddingHorizontal: wp('7%'), // Adjust horizontal padding for increased width
     },
     addIcon: {
@@ -135,6 +136,7 @@ const styles = StyleSheet.create({
     addText: {
         color: color.whiteColor,
         fontSize: 14,
+        fontWeight:'500',
         // fontWeight: 'medium',
         fontFamily: font.Regular,
     },
@@ -144,6 +146,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#373739',
         padding: wp('1.5%'),
         borderRadius: 8,
+        width:wp('30%'),
+
         paddingHorizontal: wp('6%'), // Adjust horizontal padding for increased width
     },
 });

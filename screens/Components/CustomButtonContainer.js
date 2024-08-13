@@ -19,7 +19,7 @@ const CustomButtonContainer = ({ button1Name, button2Name, onPressButton1, onPre
 
 const styles = StyleSheet.create({
     contineContainer: {
-        marginTop: Platform.OS === 'ios' ? hp(13) : hp(23),
+        marginTop: Platform.OS === 'ios' ? hp(8.5) : hp(23),
         alignItems: 'center',
         // backgroundColor:'pink'
     },

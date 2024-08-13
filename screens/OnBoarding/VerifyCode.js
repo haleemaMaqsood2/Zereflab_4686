@@ -193,9 +193,9 @@ const VerifyCode = () => {
                             keyboardVisible={keyboardVisible}
                             keyboardHeight={keyboardHeight}
                             nextScreenName="NameInputScreen"
-                            marginTop={50}
+                            marginTop={47}
                             onPress={moveNext}
-                            extraSpace={6}
+                            extraSpace={3.5}
 
                         />
                     </View>

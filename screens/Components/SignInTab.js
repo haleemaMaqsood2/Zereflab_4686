@@ -1,5 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, ScrollView, Keyboard, Dimensions,TouchableOpacity, Image, StyleSheet, TextInput,LayoutAnimation, KeyboardAvoidingView,Animated} from 'react-native';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import {
+  View, Text, ScrollView, Keyboard, Dimensions, TouchableOpacity, TouchableWithoutFeedback,
+  Image, StyleSheet, TextInput, LayoutAnimation, KeyboardAvoidingView, Animated
+} from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
@@ -7,210 +10,210 @@ import { color } from '../../src/styles/color';
 import PhoneInput from "react-native-phone-number-input";
 import LineWithText from './LineWithText';
 import PrivacyPolicy from './PrivacyPolicy';
+import CustomTextInput from './CustomTextInput';
 
 
 const SignInTab = () => {
   const navigation = useNavigation();
   const [selectedTab, setSelectedTab] = useState('Email')
-  const phoneInput = useRef < PhoneInput > (null);
   const phoneRef = useRef(null);
-  const [phone, setPhone] = useState()
   const [formattedValue, setFormattedValue] = useState("");
 
+  const [phone, setPhone] = useState()
+
   const [value, setValue] = useState();
+  const [count, setCount] = useState(0);
+
   const [email, setEmail] = useState('')
   const EmailRef = useRef(null);
   const [countryCode, setCountryCode] = useState('US'); // Default country code
+
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
-  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
-  const [marginBottom, setMarginBottom] = useState(hp(35)); // Default margin when keyboard is hidden
   const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
-
-  const handleChange = (value) => {
-    setEmail(value);
-    // EmailRef.current.focus();
-
-
-  };
   useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      (event) => {
-        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut); // Smooth transition
-        setKeyboardHeight(((event.endCoordinates.height / screenHeight) * 100).toFixed(1));
-        setMarginBottom(hp(35-keyboardHeight+10)); // Adjust margin when keyboard is shown
-      }
-    );
-    const keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      () => {
-        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut); // Smooth transition
-        setKeyboardHeight(0);
-        setMarginBottom(35); // Reset margin when keyboard is hidden
-      }
-    );
+    const showSubscription = Keyboard.addListener('keyboardDidShow', (event) => {
+      const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
+      setKeyboardVisible(true);
+      setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
+    });
+    const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+      setKeyboardVisible(false);
+      setKeyboardHeight(0);
+    });
 
     return () => {
-      keyboardDidHideListener.remove();
-      keyboardDidShowListener.remove();
+      showSubscription.remove();
+      hideSubscription.remove();
     };
-  }, []);
-  const moveNext = () => {
-    navigation.navigate('VerifyCode');
+  }, [screenHeight]);
+
+
+
+  const [name, setName] = useState('')
+  const nameRef = useRef(null);
+  const handleChange = (value) => {
+    setEmail(value);
+    EmailRef.current.focus();
+
+
   };
- 
+
+  function moveNext() {
+    navigation.navigate('VerifyCode');
+  }
+
 
 
   return (
-    <View style={styles.container}>
-      <ScrollView
-        contentContainerStyle={[
-          // styles.scrollViewContent,
-          { paddingBottom: isKeyboardVisible ? keyboardHeight : 0 }
 
-        ]}
-      >
-        <View style={styles.tabContainer}>
-          <View style={styles.signInTabContainer}>
+    <View style={styles.container}>
+
+
+
+      <View style={styles.tabContainer}>
+        <View style={styles.signInTabContainer}>
+          <TouchableOpacity
+            onPress={() => setSelectedTab('Email')} style={[styles.tab, selectedTab === 'Email' && styles.activeTab]}>
+            <Text style={[styles.tabText, selectedTab === 'Email' && styles.activeTabText]}>Email</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => setSelectedTab('Number')} style={[styles.tab, selectedTab === 'Number' && styles.activeTab]}>
+            <Text style={[styles.tabText, selectedTab === 'Number' && styles.activeTabText]}>Number</Text>
+          </TouchableOpacity>
+        </View>
+
+
+
+
+      </View>
+      {selectedTab === 'Email' && (
+
+        <View style={styles.contentContainer}>
+
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              onChangeText={handleChange}
+              placeholder='Email'
+              placeholderTextColor='#ffffff80'
+              keyboardAppearance="dark"
+              value={email}
+              ref={EmailRef}
+              autoCorrect={false}
+              autoCompleteType="off"
+              autoCapitalize="none"
+              keyboardType="default"
+              spellCheck={false}
+
+            />
+
+
+          </View>
+          <View style={styles.ButtonContainer} >
             <TouchableOpacity
-              onPress={() => setSelectedTab('Email')} style={[styles.tab, selectedTab === 'Email' && styles.activeTab]}>
-              <Text style={[styles.tabText, selectedTab === 'Email' && styles.activeTabText]}>Email</Text>
+              style={[styles.touchableArea, email ? styles.buttonActive : styles.buttonInactive]}
+              onPress={moveNext}
+            >
+              <Text style={styles.conTinueText}>Continue</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setSelectedTab('Number')} style={[styles.tab, selectedTab === 'Number' && styles.activeTab]}>
-              <Text style={[styles.tabText, selectedTab === 'Number' && styles.activeTabText]}>Number</Text>
+          </View>
+          <LineWithText text="or" />
+
+          <View style={{ ...styles.inputContainer, marginBottom: hp(1) }}>
+
+            <TouchableOpacity style={styles.accountButton}>
+              <Image style={styles.image} source={require('../../src/assets/images/apple.png')} resizeMode="contain" />
+
+              <Text style={styles.buttonText}>Continue with Apple</Text>
             </TouchableOpacity>
+
+
+          </View>
+          <View style={styles.inputContainer}>
+
+            <TouchableOpacity style={styles.accountButton}>
+              <Image style={styles.image} source={require('../../src/assets/images/GoogleIcon1x4.png')} resizeMode="contain" />
+
+              <Text style={styles.buttonText}>Continue with Google</Text>
+            </TouchableOpacity>
+
+
+
+          </View>
+          <View style={{ justifyContent: 'flex-end', height: keyboardHeight ? hp('8%') : hp('35%') }}>
+            {/* <View style={{ backgroundColor:'red',height: keyboardHeight ? hp(marginBottom) : hp(marginBottom) }}> */}
+
+            <PrivacyPolicy />
           </View>
 
 
 
 
         </View>
-        {selectedTab === 'Email' && (
-          <View style={styles.contentContainer}>
+      )}
+      {selectedTab === 'Number' && (
+        <View style={styles.contentContainer}>
+          {/* Your number input field or view goes here */}
+          <View style={styles.phonContainer}>
+            <PhoneInput
+              ref={phoneRef}
+              defaultValue={value}
+              defaultCode={countryCode} // Use the state for country code
+              // defaultCode="US"
+              layout="first"
+              onChangeText={(text) => {
+                setValue(text);
+              }}
+              onChangeFormattedText={(text) => {
+                setFormattedValue(text);
+              }}
+              onChangeCountry={(country) => {
+                setCountryCode(country.cca2); // Update the state with selected country code
+              }}
+              withDarkTheme
+              withShadow
+              // autoFocus
+              flagButtonStyle={{ alignSelf: 'center', width: wp(13) }}
+              containerStyle={styles.phoneInput}
+              textContainerStyle={styles.phoneTextContainer}
+              textInputStyle={styles.phoneTextInput}
+              codeTextStyle={styles.phoneCodeText}
+              // dropdownIcon={{backgroundColor:'white'}}
+              // renderDropdownImage={require('../../src/assets/images/apple.png')}
 
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.input}
-                // onChangeText={value => setV1(value)}
-                onChangeText={value => handleChange(value)}
-                placeholder='Email'
-                placeholderTextColor='#ffffff80'
-
-                // placeholderTextColor='#ffffff80'
-
-                keyboardAppearance="dark"
-                value={email}
-                ref={EmailRef}
-                autoCorrect={false}
-                autoCompleteType="off"
-                autoCapitalize="none" // Disable auto capitalization
-                keyboardType="default" // Default keyboard type
-                spellCheck={false} // Disable spell check
-              />
-
-
-            </View>
-            <View style={styles.ButtonContainer}>
-
-              <TouchableOpacity onPress={moveNext}
-                style={[styles.touchableArea, email ? styles.buttonActive : styles.buttonInactive]}
-              >
-                <Text style={styles.conTinueText}>Continue</Text>
-              </TouchableOpacity>
-            </View>
-            <LineWithText text="or" />
-
-            <View style={{ ...styles.inputContainer, marginBottom: hp(1) }}>
-
-              <TouchableOpacity style={styles.accountButton}>
-                <Image style={styles.image} source={require('../../src/assets/images/apple.png')} resizeMode="contain" />
-
-                <Text style={styles.buttonText}>Continue with Apple</Text>
-              </TouchableOpacity>
+              // dropdownIcon={require('../../src/assets/images/apple.png')}
+              textInputProps={{
+                placeholder: "Phone number",
+                placeholderTextColor: '#ffffff80',
+                selectionColor: color.onBoardingButton,
+              }}
+            // This sets the cursor color to blue
 
 
-            </View>
-            <View style={styles.inputContainer}>
+            />
 
-              <TouchableOpacity style={styles.accountButton}>
-                <Image style={styles.image} source={require('../../src/assets/images/googleIcon.png')} resizeMode="contain" />
-
-                <Text style={styles.buttonText}>Continue with Google</Text>
-              </TouchableOpacity>
-
-
-            </View>
-            <View style={{ justifyContent: 'flex-end', height: keyboardHeight ? hp('8%') : hp('35%') }}>
-            {/* <View style={{ backgroundColor:'red',height: keyboardHeight ? hp(marginBottom) : hp(marginBottom) }}> */}
-
-              <PrivacyPolicy />
-            </View>
-            {/* <View style={styles.privacyPolicyContainer}>
-            <Text style={styles.privacyPolicyText1}>By continuing, you agree to our <Text style={styles.privacyText}>Privacy Policy</Text> and <Text style={styles.privacyText}>Terms of Service.</Text> </Text>
-          </View> */}
 
 
           </View>
-        )}
+          <View style={styles.ButtonContainer}>
 
-        {selectedTab === 'Number' && (
-          <View style={styles.contentContainer}>
-            {/* Your number input field or view goes here */}
-            <View style={styles.phonContainer}>
-              <PhoneInput
-                ref={phoneRef}
-                defaultValue={value}
-                defaultCode={countryCode} // Use the state for country code
-                // defaultCode="US"
-                layout="first"
-                onChangeText={(text) => {
-                  setValue(text);
-                }}
-                onChangeFormattedText={(text) => {
-                  setFormattedValue(text);
-                }}
-                onChangeCountry={(country) => {
-                  setCountryCode(country.cca2); // Update the state with selected country code
-                }}
-                withDarkTheme
-                withShadow
-                // autoFocus
-                containerStyle={styles.phoneInput}
-                textContainerStyle={styles.phoneTextContainer}
-                textInputStyle={styles.phoneTextInput}
-                codeTextStyle={styles.phoneCodeText}
-                dropdownIcon={styles.dropdownIcon}
-                textInputProps={{
-                  placeholder: "Phone number",
-                  placeholderTextColor: '#ffffff80',
-                  selectionColor: color.onBoardingButton,
-                }}
-              // This sets the cursor color to blue
-
-
-              />
-
-
-
-            </View>
-            <View style={styles.ButtonContainer}>
-
-              <TouchableOpacity onPress={moveNext}
-                style={[styles.touchableArea, value ? styles.buttonActive : styles.buttonInactive]}
-              >
-                <Text style={styles.conTinueText}>Continue</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={{ justifyContent: 'flex-end', height: keyboardHeight ? hp('25%') : hp(keyboardHeight + 53) }}>
-              <PrivacyPolicy />
-            </View>
-           
+            <TouchableOpacity onPress={moveNext}
+              style={[styles.touchableArea, value ? styles.buttonActive : styles.buttonInactive]}
+            >
+              <Text style={styles.conTinueText}>Continue</Text>
+            </TouchableOpacity>
           </View>
-        )}
-      </ScrollView>
+          <View style={{ justifyContent: 'flex-end', height: keyboardHeight ? hp('25%') : hp(keyboardHeight + 53) }}>
+            <PrivacyPolicy />
+          </View>
 
+        </View>
+      )}
 
     </View>
+
   );
 };
 const styles = StyleSheet.create({
@@ -251,7 +254,9 @@ const styles = StyleSheet.create({
     // paddingVertical: 15,
     // paddingHorizontal: 20,
     borderRadius: 5,
-    width: '50%'
+    width: '50%',
+        // backgroundColor:'pink'
+
   },
   separator: {
     width: 1,
@@ -287,6 +292,7 @@ const styles = StyleSheet.create({
   image: {
     height: '40%',
     width: 40,
+    // backgroundColor:'orange',
   },
   emailTab: {
     color: color.placeholderColor,
@@ -306,7 +312,7 @@ const styles = StyleSheet.create({
   },
   dropdownIcon: {
     color: 'white',
-    marginRight: 10, // Adjust as needed to position the arrow
+    marginRight: 5, // Adjust as needed to position the arrow
   },
   activeTabText: {
     color: 'black',
@@ -361,7 +367,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderWidth: 1,
     borderRadius: 10,
-    borderColor:color.WhiteWithThirtypercentOpacity
+    borderColor: color.WhiteWithThirtypercentOpacity,
+    // alignItems:'center'
 
     // paddingHorizontal: '1.5%'
   },
@@ -374,6 +381,7 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     // borderWidth: 0.3,
     paddingHorizontal: '1.5%',
+    alignItems: 'center'
     // paddingVertical: '0.5%',
     // backgroundColor: 'red'
 
@@ -388,6 +396,8 @@ const styles = StyleSheet.create({
     height: hp(6.2),
     color: 'white',
     paddingRight: '1%',
+    alignItems: 'center'
+
     // backgroundColor: 'blue'
 
 
@@ -401,18 +411,22 @@ const styles = StyleSheet.create({
     paddingVertical: 0, // Adjust padding to fit the reduced height
     marginVertical: 0,
     // backgroundColor:'red',
-    height:hp(6.2),
-    borderLeftWidth:1,
+    height: hp(6.2),
+    borderLeftWidth: 1,
     // borderLe
-    borderLeftColor:color.WhiteWithThirtypercentOpacity,
-    paddingLeft:'5%'
+    borderLeftColor: color.WhiteWithThirtypercentOpacity,
+    paddingLeft: '5%',
+    alignItems: 'center'
 
 
-  
+
+
   },
   phoneCodeText: {
     color: 'white',
-    alignItems: 'center', 
+    alignItems: 'center',
+    fontSize: 16, // Adjust size if needed
+    // backgroundColor:'red',
     // justifyContent:'center',
     // alignContent:'center'
   },
@@ -479,6 +493,8 @@ const styles = StyleSheet.create({
     borderColor: '#ffffff4d',
     alignItems: 'center',
     justifyContent: 'center',
+    alignSelf: 'center',
+    // backgroundColor:'blue',
 
 
   },
@@ -487,7 +503,10 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     color: color.whiteFontColor,
     fontFamily: 'Inter',
-    paddingLeft: wp('1%')
+    paddingLeft: wp('1%'),
+    // backgroundColor:'red',
+    alignSelf: 'center',
+    width: wp('50%')
   }
 
 });

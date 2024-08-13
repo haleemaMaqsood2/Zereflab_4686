@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         position: 'absolute',
         // top: hp('60%'),//65 on android
-        top:Platform.OS === 'ios' ? hp('55%') :hp('65%'),
+        top:Platform.OS === 'ios' ? hp('54%') :hp('65%'),
         left:hp('2%')
 
 

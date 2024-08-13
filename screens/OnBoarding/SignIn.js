@@ -50,10 +50,7 @@ const SignIn = () => {
     const navigation = useNavigation();
    
 
-    // function moveNext() {
-    //     navigation.navigate('SignUp')
-    // }
-
+  
 
     {
         return (

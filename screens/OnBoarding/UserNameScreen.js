@@ -121,9 +121,9 @@ const UserNameScreen = ({ navigation }) => {
                             keyboardVisible={keyboardVisible}
                             keyboardHeight={keyboardHeight}
                             nextScreenName="ImageUpload"
-                            marginTop={53}
+                            marginTop={49}
                             onPress={moveNext}
-                            extraSpace={3.5}
+                            extraSpace={3.6}
 
                         />
 

@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     inputContainer: {
         width: '100%',
         height: 55,
-        marginTop: '10%',
+        // marginTop: '5%',
         flexDirection: 'row',
         justifyContent: 'space-around',
         // backgroundColor:'red',

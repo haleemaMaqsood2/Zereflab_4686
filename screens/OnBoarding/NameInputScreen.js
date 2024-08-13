@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect,useLayoutEffect } from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -13,6 +13,8 @@ import {
     KeyboardAvoidingView,
     Keyboard,
     Dimensions,
+    InteractionManager,
+    unstable_batchedUpdates
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
@@ -44,39 +46,48 @@ const NameInputScreen = ({ navigation }) => {
         navigation.navigate('DateOfBirth')
     }
 
-    ///useEffect to manage keyboard state
-    useEffect(() => {
-        const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
-            setKeyboardVisible(true);
-        });
-        const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
-            setKeyboardVisible(false);
-        });
-
-        return () => {
-            showSubscription.remove();
-            hideSubscription.remove();
-        };
-    }, []);
 
 
-    useEffect(() => {
+    // useEffect(() => {
+    //     const showSubscription = Keyboard.addListener('keyboardDidShow', (event) => {
+    //         const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
+    //         setKeyboardVisible(true);
+    //         console.log("jhjhh")
+    //         setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
+    //     });
+    //     const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+    //         setKeyboardVisible(false);
+    //         setKeyboardHeight(0);
+    //     });
+
+    //     return () => {
+    //         showSubscription.remove();
+    //         hideSubscription.remove();
+    //     };
+    // }, [screenHeight]);
+  
+    useLayoutEffect(() => {
         const showSubscription = Keyboard.addListener('keyboardDidShow', (event) => {
-            const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
-            setKeyboardVisible(true);
-            setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
+            unstable_batchedUpdates(() => {
+                const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
+                setKeyboardVisible(true);
+                setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
+            });
         });
+    
         const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
-            setKeyboardVisible(false);
-            setKeyboardHeight(0);
+            unstable_batchedUpdates(() => {
+                setKeyboardVisible(false);
+                setKeyboardHeight(0);
+            });
         });
-
+    
         return () => {
             showSubscription.remove();
             hideSubscription.remove();
         };
     }, [screenHeight]);
-
+    
     {
         return (
             <SafeAreaView style={styles.safeArea}>
@@ -100,9 +111,9 @@ const NameInputScreen = ({ navigation }) => {
                             keyboardVisible={keyboardVisible}
                             keyboardHeight={keyboardHeight}
                             nextScreenName="DateOfBirth"
-                            marginTop={58}
+                            marginTop={55}
                             onPress={moveNext}
-                            extraSpace={5}
+                            extraSpace={3.4}
 
                         />
 
