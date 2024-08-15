@@ -3,11 +3,12 @@ import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList } from 'react
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { color } from '../../../src/styles/color';
 import { useNavigation } from '@react-navigation/native';
+import { RFPercentage } from 'react-native-responsive-fontsize';
 
 const EventListData = ({ data }) => {
     const navigation = useNavigation();
     function onPressItem() {
-        navigation.navigate('EventDetails')
+        // navigation.navigate('EventDetails')
 
     }
     const renderItem = ({ item }) => (
@@ -23,13 +24,14 @@ const EventListData = ({ data }) => {
                         <View style={styles.titleContainer}>
                             <Text style={styles.title}>{item.Title}</Text>
                             <Text style={styles.footerTime}>{item.time}</Text>
-                            <View style={styles.OtherContainer}>
-                                <Image source={require('../../../src/assets/images/otherUser.png')} />
+                           
+                        </View>
+                        <View style={styles.OtherContainer}>
+                                <Image source={require('../../../src/assets/images/otherUser1x4.png')} style={styles.otheruserImage}resizeMode='contain'/>
                                 <Text style={styles.otherUserText}>{item.other} Others</Text>
-                                <Image source={require('../../../src/assets/images/otherFriends.png')} />
+                                <Image source={require('../../../src/assets/images/otherFriends1x4.png')} style={styles.otheruserImage1}resizeMode='contain'/>
                                 <Text style={styles.otherUserText}>{item.friends} Friends</Text>
                             </View>
-                        </View>
                     </View>
                 </TouchableOpacity>
                 <View style={styles.bottom}>
@@ -37,7 +39,10 @@ const EventListData = ({ data }) => {
                         <Text style={styles.goingText}>Going</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.saveButton}>
-                        <Image source={require('../../../src/assets/images/shareIcon.png')} />
+                        <Image source={require('../../../src/assets/images/share1x4.png')} 
+                        style={styles.shareImage}
+                        resizeMode='contain'
+/>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -75,6 +80,14 @@ const styles = StyleSheet.create({
     listContent: {
         paddingBottom: hp(10), // Ensure there is enough space at the bottom
     },
+    otheruserImage:{
+        height:hp(1.7),
+        width:wp(10)
+    },
+    otheruserImage1:{
+        height:hp(2.0),
+        width:wp(10)
+    },
     card: {
         borderRadius: 10,
         marginTop: hp('1%'),
@@ -90,6 +103,11 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         marginRight: wp('3%'),
     },
+    shareImage:{
+        height: hp(2.0),
+        width:RFPercentage(2)
+        // width: wp(13),  
+      },
     username: {
         fontSize: 12,
         fontWeight: '700',
@@ -109,7 +127,7 @@ const styles = StyleSheet.create({
     },
     titleContainer: {
         position: 'absolute',
-        bottom: hp(0.5), // Adjust this value to position the text
+        bottom: hp(2.5), // Adjust this value to position the text
         left: 10, // Adjust this value to position the text
         padding: wp(1.5),
     },
@@ -132,13 +150,19 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         fontFamily: 'Inter',
         color: color.whiteColor,
-        paddingLeft: wp(1.2),
+        // paddingLeft: wp(1.2),
         paddingRight: wp(2)
     },
     OtherContainer: {
         flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
+        // justifyContent: 'center',
+        alignItems: 'center',
+        // backgroundColor:'pink',
+        position: 'absolute',
+        bottom: hp(0.5), // Adjust this value to position the text
+        // left: 10, // Adjust this value to position the text
+        // padding: wp(1.5),
+        // justifyContent:'flex-start'
     },
     bottom: {
         flexDirection: 'row',

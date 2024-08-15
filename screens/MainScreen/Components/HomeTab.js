@@ -38,8 +38,9 @@ const styles = StyleSheet.create({
   tabContainer: {
     alignItems: 'center',
     height: hp('6%'),
-    width: wp('94%'),
+    width: '95%',
     backgroundColor: color.inputFieldColor, // Use inputField color for tab container
+    // backgroundColor:'red',
     alignSelf: 'center',
     borderWidth: 0.5,
     borderColor: color.whitewithThirty,
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
   },
   tab: {
     paddingVertical: 10,
-    paddingHorizontal: 40,
+    paddingHorizontal: 36,
     marginRight: 10,
     borderRadius: 20,
     backgroundColor: color.inputFieldColor, // Default tab color

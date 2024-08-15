@@ -22,20 +22,20 @@ import ActivityStack from './ActivityStack';
 export default function BottomTabStack() {
     const Tab = createBottomTabNavigator();
 
-    const RenderIcon = ({ name }) => (
+    const RenderIcon = ({ name,size}) => (
         <Image
             source={name}
             // source={require("../../assets/images/homeIcon.png")}
             style={{
-                height: RFPercentage(3),
-                width: RFPercentage(3),
+                height:size,
+                width: size,
             }}
             resizeMode="contain"
         />
     );
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1,backgroundColor:color.backgroundColor}}>
             <Tab.Navigator
                 screenOptions={{
                     tabBarShowLabel: false, // Hide the labels
@@ -43,7 +43,7 @@ export default function BottomTabStack() {
                     tabBarInactiveTintColor: color.balckFontColor,
                     tabBarStyle: {
                         backgroundColor: color.inputFieldColor, // Set tab bar color to black
-                        height: Platform.OS === 'ios' ? hp(9) : hp(8), // Adjust height for Android
+                        height: Platform.OS === 'ios' ? hp(7) : hp(8), // Adjust height for Android
                         justifyContent: 'center',
                         alignItems: 'center',
                         paddingBottom: Platform.OS === 'ios' ? 10 : 0,
@@ -62,7 +62,8 @@ export default function BottomTabStack() {
                         tabBarIcon: ({ color, size }) => (
                             <RenderIcon
                                 name={
-                                    require("../../assets/images/homeIcon.png")}
+                                    require("../../assets/images/BottomHome1x4.png")}
+                                size= {RFPercentage(3)}
                             />
                         ),
                     }}
@@ -75,7 +76,9 @@ export default function BottomTabStack() {
                         tabBarIcon: ({ color, size }) => (
                             <RenderIcon
                                 name={
-                                    require("../../assets/images/userIcon.png")}
+                                    require("../../assets/images/bottomProfile1x4.png")}
+                                    size= {RFPercentage(3)}
+
                             />
                         ),
                     }}
@@ -88,7 +91,9 @@ export default function BottomTabStack() {
                         tabBarIcon: ({ color, size }) => (
                             <RenderIcon
                                 name={
-                                    require("../../assets/images/addBottomIcon.png")}
+                                    require("../../assets/images/bottomPlus1x4.png")}
+                                    size= {RFPercentage(3)}
+
                             />
                         ),
                     }}
@@ -101,7 +106,9 @@ export default function BottomTabStack() {
                         tabBarIcon: ({ color, size }) => (
                             <RenderIcon
                                 name={
-                                    require("../../assets/images/clockIcon.png")}
+                                    require("../../assets/images/bottonClock1x4.png")}
+                                    size= {RFPercentage(4.5)}
+
                             />
                         ),
                     }}
@@ -114,7 +121,9 @@ export default function BottomTabStack() {
                         tabBarIcon: ({ color, size }) => (
                             <RenderIcon
                                 name={
-                                    require("../../assets/images/MyProfileIcon.png")}
+                                    require("../../assets/images/BottomUser1x4.png")}
+                                    size= {RFPercentage(3.5)}
+
                             />
                         ),
                     }}

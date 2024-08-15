@@ -23,12 +23,15 @@ import { font } from '../../src/styles/font';
 const Location = ({ navigation }) => {
     const [location, setLocation] = useState('');
     const dispatch = useDispatch();
+    const locationRef = useRef(null);
+
     const onBoardingComplete = useSelector(
         (state) => state.onBoardingSlice.onBoardingComplete
     );
     const [keyboardVisible, setKeyboardVisible] = useState(false);
 
     useEffect(() => {
+        locationRef.current.focus();
         const showSubscription = Keyboard.addListener('keyboardWillShow', (event) => {
             // const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
             setKeyboardVisible(true);
@@ -96,6 +99,7 @@ const Location = ({ navigation }) => {
                         autoCapitalize="none"
                         keyboardType="default"
                         spellCheck={false}
+                        ref={locationRef}
                     />
                     {location !== '' && (
                         <TouchableOpacity onPress={() => setLocation('')}>

@@ -74,16 +74,16 @@ const Header = ({title}) => {
       ) : (
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: wp('100%') }}>
           <Image
-            source={require('../../../src/assets/images/LogoHome.png')}
+            source={require('../../../src/assets/images/logo1.png')}
             style={styles.profileIcon}
             resizeMode="contain"
           />
           <TouchableOpacity>
-            <Image
+            {/* <Image
               source={require('../../../src/assets/images/userProfile.png')}
               style={styles.profileIcon}
               resizeMode="contain"
-            />
+            /> */}
           </TouchableOpacity>
         </View>
       )}
@@ -96,11 +96,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     // justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: '3%',
+    paddingHorizontal: '4%',
     paddingVertical: '2%',
     backgroundColor:color.backgroundColor,
     alignSelf: 'center',
     width:'100%'
+  },
+  profileIcon:{
+    width:100,
+    height:(50),
   },
   container1: {
     flexDirection: 'row',
