@@ -190,11 +190,12 @@ const styles = StyleSheet.create({
     buttonDisabled: {
         backgroundColor:color.WhiteWithThirtypercentOpacity,
         // backgroundColor: color.inputFieldColor,
-        marginTop:'115%'
+        marginTop:'111%'
     },
     buttonEnabled: {
         backgroundColor: color.onBoardingButton,
-        marginTop:'60%'
+        marginTop:'-10%',
+        position:'absolute'
 
     },
     conTinueText: {
@@ -247,8 +248,8 @@ const styles = StyleSheet.create({
         width:RFPercentage(2),
     },
     locationImage:{
-        height:RFPercentage(1.9),
-        width:RFPercentage(1.5)
+        height:14,
+        width:14,
     }
 });
 

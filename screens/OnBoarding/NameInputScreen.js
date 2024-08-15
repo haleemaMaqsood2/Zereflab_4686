@@ -44,6 +44,8 @@ const NameInputScreen = ({ navigation }) => {
 
     function moveNext() {
         navigation.navigate('DateOfBirth')
+        // navigation.navigate('UserNameScreen'); // Navigate if age is 17 or older
+
     }
 
 

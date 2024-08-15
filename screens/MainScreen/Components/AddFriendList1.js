@@ -56,6 +56,8 @@ const AddFriendList1 = ({ data, inviteFriends }) => {
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id.toString()}
                 contentContainerStyle={styles.list}
+                showsVerticalScrollIndicator={false}  // Hide vertical scrollbar
+                showsHorizontalScrollIndicator={false} // Hide horizontal scrollbar
             />
         </View>
     );
@@ -73,6 +75,8 @@ const styles = StyleSheet.create({
         fontFamily: font.Regular,
         color: color.whiteColor,
         marginBottom: hp('2%'),
+        marginTop:'3%'
+        
     },
     titleText1: {
         fontSize: 17,
@@ -95,7 +99,7 @@ const styles = StyleSheet.create({
     friendContainer1: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingBottom: '5%',
+        paddingBottom: '3%',
         borderBottomColor: color.placeholderColor,
     },
     image: {

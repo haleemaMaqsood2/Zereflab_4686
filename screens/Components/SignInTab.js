@@ -142,7 +142,7 @@ const SignInTab = () => {
 
 
           </View>
-          <View style={{ justifyContent: 'flex-end', height: keyboardHeight ? hp('8%') : hp('35%') }}>
+          <View style={{ justifyContent: 'flex-end', height: keyboardHeight ? hp('8%') : hp('37%') }}>
             {/* <View style={{ backgroundColor:'red',height: keyboardHeight ? hp(marginBottom) : hp(marginBottom) }}> */}
 
             <PrivacyPolicy />
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // paddingHorizontal: '5%',
     // paddingVertical: '4%',
-    width: wp('87%'),
+    width: wp('90%'),
     height: hp('5%'),
     borderBottomColor: '#ccc',
     borderRadius: 10,
@@ -242,11 +242,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   signInTabContainer: {
-    width: wp('85%'),
+    width: wp('90%'),
     height: hp('4.1%'),
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: hp('0.5%',)
+    paddingLeft: hp('0.5%'),
     // backgroundColor:'pink'
     // justifyContent:'space-around',
   },
@@ -255,6 +255,9 @@ const styles = StyleSheet.create({
     // paddingHorizontal: 20,
     borderRadius: 5,
     width: '50%',
+    height:'90%',
+    alignItems: 'center',
+    justifyContent: 'center',
         // backgroundColor:'pink'
 
   },
@@ -368,6 +371,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     borderColor: color.WhiteWithThirtypercentOpacity,
+    // borderColor:'red',
+
     // alignItems:'center'
 
     // paddingHorizontal: '1.5%'
@@ -375,13 +380,13 @@ const styles = StyleSheet.create({
   phoneInput: {
     width: wp('90%'),
     alignItems: 'center',
-    height: hp('6.2%'),
+    height: hp('6.0%'),
     backgroundColor: color.inputFieldColor,
     borderRadius: 10,
     borderColor: 'white',
     // borderWidth: 0.3,
     paddingHorizontal: '1.5%',
-    alignItems: 'center'
+    alignItems: 'center',
     // paddingVertical: '0.5%',
     // backgroundColor: 'red'
 
@@ -393,7 +398,7 @@ const styles = StyleSheet.create({
 
     justifyContent: 'center',
     alignItems: 'center',
-    height: hp(6.2),
+    height: hp(6.0),
     color: 'white',
     paddingRight: '1%',
     alignItems: 'center'
@@ -411,7 +416,7 @@ const styles = StyleSheet.create({
     paddingVertical: 0, // Adjust padding to fit the reduced height
     marginVertical: 0,
     // backgroundColor:'red',
-    height: hp(6.2),
+    height: hp(6.0),
     borderLeftWidth: 1,
     // borderLe
     borderLeftColor: color.WhiteWithThirtypercentOpacity,

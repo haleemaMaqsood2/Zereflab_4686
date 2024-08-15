@@ -12,30 +12,28 @@ const Header = () => {
 
   return (
     <View style={styles.container}>
-  <View style={styles.leftContainer}>
-        <TouchableOpacity onPress={goBack} style={styles.circleContainer}>
+       <>
+     
+      <View style={styles.centerContainer}>
+         <TouchableOpacity onPress={goBack} style={styles.circleContainer}>
+          
           <Image
-            source={require('../../src/assets/images/circle.png')}
-            style={styles.circleImage}
-            resizeMode="contain"
-          />
-          <Image
-            source={require('../../src/assets/images/arrow-right.png')}
+            source={require('../../src/assets/images/BackNew1x4.png')}
             style={styles.arrowImage}
             resizeMode="contain"
           />
         </TouchableOpacity>
-      </View>
-      <View style={styles.centerContainer}>
-        <Image
-          source={require('../../src/assets/images/logo1.png')}
-          style={styles.logoIcon}
-          resizeMode="contain"
-        />
-      </View>
-      <TouchableOpacity>
+      <Image
+            source={require('../../src/assets/images/logo1.png')}
+            style={styles.logoIcon}
+            resizeMode="contain"
+          />
+          <TouchableOpacity style={{width:'10%',height:'100%'}}>
         <Text style={styles.counter}></Text>
       </TouchableOpacity>
+      </View>
+      
+     </>
     </View>
   );
 };
@@ -57,32 +55,40 @@ const styles = StyleSheet.create({
   circleContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'relative', // Allows absolute positioning inside
+    // backgroundColor:'yellow',
+    width:'10%',
   },
   circleImage: {
     width: 50,
     height: 50,
   },
   arrowImage: {
-    position: 'absolute',
-    width: 16, // Adjust size as needed
-    height: 16, // Adjust size as needed
+    // position: 'absolute',
+    width: 45, // Adjust size as needed
+    height: 45, // Adjust size as needed
     alignItems:'center',
     alignSelf:'center',
     // top: '50%',
     // left: '50%',
-    transform: [{ translateX: -2.0 }], // Center the arrow
+    // transform: [{ translateX: -2.0 }], // Center the arrow
   },
   logoIcon: {
     alignSelf: 'center',
-    marginRight: wp('18%'),
-    width: wp(25),
+    alignItems:'center',
+    // backgroundColor:'pink',
+    justifyContent:'center',
+
+    // marginRight: wp('18%'),
+    width: 97.91,
+    // height:19.58,
   },
   centerContainer: {
-    flex: 1,
+    // flex: 1,
     alignItems: 'center',
-    justifyContent:'center'
-    // backgroundColor:'red'
+    width:wp('90%'),
+    justifyContent:'space-between',
+    // backgroundColor:'red',
+    flexDirection:'row'
   },
   counter: {
     color: 'white',
