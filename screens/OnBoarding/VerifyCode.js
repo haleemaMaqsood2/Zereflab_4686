@@ -72,16 +72,32 @@ const VerifyCode = () => {
         };
     }, []);
     useEffect(() => {
-        const showSubscription = Keyboard.addListener('keyboardDidShow', (event) => {
+        v1Ref.current.focus();  // Automatically focus the first input field when the component mounts
+
+        // const showSubscription = Keyboard.addListener('keyboardDidShow', (event) => {
+        //     const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
+        //     setKeyboardVisible(true);
+        //     setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
+        // });
+        // const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+        //     setKeyboardVisible(false);
+        //     setKeyboardHeight(0);
+        // });
+
+        // return () => {
+        //     showSubscription.remove();
+        //     hideSubscription.remove();
+        // };
+        const showSubscription = Keyboard.addListener('keyboardWillShow', (event) => {
             const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
             setKeyboardVisible(true);
             setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
         });
-        const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+        const hideSubscription = Keyboard.addListener('keyboardWillHide', () => {
             setKeyboardVisible(false);
             setKeyboardHeight(0);
         });
-
+    
         return () => {
             showSubscription.remove();
             hideSubscription.remove();

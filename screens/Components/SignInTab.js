@@ -20,6 +20,9 @@ const SignInTab = () => {
   const [formattedValue, setFormattedValue] = useState("");
 
   const [phone, setPhone] = useState()
+ const [name, setName] = useState('')
+  const nameRef = useRef(null);
+  const internalTextInputRef = useRef(null);
 
   const [value, setValue] = useState();
   const [count, setCount] = useState(0);
@@ -34,29 +37,34 @@ const SignInTab = () => {
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
   useEffect(() => {
-    const showSubscription = Keyboard.addListener('keyboardDidShow', (event) => {
+    // phoneRef.current.focus();  // Automatically focus the first input field when the component mounts
+
+    const showSubscription = Keyboard.addListener('keyboardWillShow', (event) => {
       const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
       setKeyboardVisible(true);
       setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
-    });
-    const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+  });
+  const hideSubscription = Keyboard.addListener('keyboardWillHide', () => {
       setKeyboardVisible(false);
       setKeyboardHeight(0);
-    });
+  });
 
-    return () => {
+  return () => {
       showSubscription.remove();
       hideSubscription.remove();
-    };
+  };              
   }, [screenHeight]);
 
+  useEffect(() => {
+    if (selectedTab === 'Number' && internalTextInputRef.current) {
+      internalTextInputRef.current.focus();
+    }
+  }, [selectedTab]);
 
-
-  const [name, setName] = useState('')
-  const nameRef = useRef(null);
+ 
   const handleChange = (value) => {
     setEmail(value);
-    EmailRef.current.focus();
+    // EmailRef.current.focus();
 
 
   };
@@ -188,6 +196,8 @@ const SignInTab = () => {
                 placeholder: "Phone number",
                 placeholderTextColor: '#ffffff80',
                 selectionColor: color.onBoardingButton,
+                ref: internalTextInputRef, // Assigning the internal ref
+
               }}
             // This sets the cursor color to blue
 

@@ -63,20 +63,22 @@ const UserNameScreen = ({ navigation }) => {
         };
     }, []);
     useEffect(() => {
-        const showSubscription = Keyboard.addListener('keyboardDidShow', (event) => {
+        userNameRef.current.focus();
+
+        const showSubscription = Keyboard.addListener('keyboardWillShow', (event) => {
             const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
             setKeyboardVisible(true);
             setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
         });
-        const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+        const hideSubscription = Keyboard.addListener('keyboardWillHide', () => {
             setKeyboardVisible(false);
             setKeyboardHeight(0);
         });
-
+    
         return () => {
             showSubscription.remove();
             hideSubscription.remove();
-        };
+        };              
     }, [screenHeight]);
 
 

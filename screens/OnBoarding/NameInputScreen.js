@@ -69,25 +69,42 @@ const NameInputScreen = ({ navigation }) => {
     // }, [screenHeight]);
   
     useLayoutEffect(() => {
-        const showSubscription = Keyboard.addListener('keyboardDidShow', (event) => {
-            unstable_batchedUpdates(() => {
-                const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
-                setKeyboardVisible(true);
-                setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
-            });
-        });
+        nameRef.current.focus();
+
+        // const showSubscription = Keyboard.addListener('keyboardWillShow', (event) => {
+        //     unstable_batchedUpdates(() => {
+        //         const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
+        //         setKeyboardVisible(true);
+        //         setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
+        //     });
+        // });
     
-        const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
-            unstable_batchedUpdates(() => {
-                setKeyboardVisible(false);
-                setKeyboardHeight(0);
-            });
+        // const hideSubscription = Keyboard.addListener('keyboardWillShow', () => {
+        //     unstable_batchedUpdates(() => {
+        //         setKeyboardVisible(false);
+        //         setKeyboardHeight(0);
+        //     });
+        // });
+    
+        // return () => {
+        //     showSubscription.remove();
+        //     hideSubscription.remove();
+        // };
+        const showSubscription = Keyboard.addListener('keyboardWillShow', (event) => {
+            const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
+            setKeyboardVisible(true);
+            setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
+        });
+        const hideSubscription = Keyboard.addListener('keyboardWillHide', () => {
+            setKeyboardVisible(false);
+            setKeyboardHeight(0);
         });
     
         return () => {
             showSubscription.remove();
             hideSubscription.remove();
-        };
+        };                              
+    
     }, [screenHeight]);
     
     {
