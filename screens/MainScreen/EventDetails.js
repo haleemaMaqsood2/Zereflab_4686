@@ -12,22 +12,26 @@ import {
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { color } from '../../src/styles/color';
 import { useNavigation } from '@react-navigation/native';
+import UserName from './Components/userName';
+import DescriptionSection from './Components/DescriptionSection';
+
+
 
 const EventDetails = () => {
     const today = 'Today - 12:00 PM';
     const navigation = useNavigation();
     function onPressCard() {
-        navigation.navigate('Attendees')
+        // navigation.navigate('Attendees')
     }
 
-function backPress() {
-    navigation.goBack();
-}
+    function backPress() {
+        navigation.goBack();
+    }
     const data = [
         {
             id: 1,
-            username: 'msu-figi',
-            userProfileIcon: require('../../src/assets/images/partyUser.png'),
+            username: 'msu-fiji',
+            userProfileIcon: require('../../src/assets/images/partyUser1x4.png'),
             Title: 'FIJI DARTY',
             partyImage: require('../../src/assets/images/BirthdayListScreen.png'),
             partyMainImage: require('../../src/assets/images/eventDetail.png'),
@@ -46,49 +50,34 @@ function backPress() {
                     <View style={styles.overlay}>
                         <View style={styles.topIconsContainer}>
                             <TouchableOpacity style={styles.backButton} onPress={backPress}>
-                                <Image source={require('../../src/assets/images/EventBackArrowImage.png')} style={styles.iconImage} />
+                                <Image source={require('../../src/assets/images/EventBackArrowImage1x4.png')} style={styles.iconImage} />
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.shareButton}>
-                                <Image source={require('../../src/assets/images/EventBackShareImage.png')} style={styles.iconImage} />
+                                <Image source={require('../../src/assets/images/EventBackShareImage1x4.png')} style={styles.iconImage} />
                             </TouchableOpacity>
                         </View>
                         <View style={styles.mainImageContainer}>
                             <Image source={data[0].partyMainImage} style={styles.mainImage} resizeMode='stretch' />
                         </View>
-                        <View style={styles.secondHalf}>
-                            <View style={styles.titleContainer}>
-                                <Text style={styles.title}>{data[0].Title}</Text>
-                                <Text style={styles.footerTime}>{data[0].time}</Text>
-                            </View>
-                            <View style={styles.locationContainer}>
-                                <Image source={require('../../src/assets/images/Location2.png')} resizeMode='contain' style={styles.locationIconStyle} />
-                                <Text style={styles.locationText}>{data[0].Location}</Text>
-                            </View>
-                            <View style={styles.flatlistContainer}>
-                                <Image source={data[0].userProfileIcon} style={styles.profileIcon} />
-                                <Text style={styles.username}>{data[0].username}</Text>
-                            </View>
-                        </View>
+
+
+                        <UserName data={data[0]} />
+
                     </View>
                 </ImageBackground>
+                {/* DEscription scection */}
 
-                <View style={styles.descriptionContainer}>
-                    <Text style={styles.descriptionText}>
-                        {data[0].description}
-                        <Text style={[styles.descriptionText, { color: color.privacyPolicyColor }]}>
-                            Show More
-                        </Text>
-                    </Text>
-                </View>
 
-                {/* <View style={styles.FriendSection}> */}
-                    <TouchableOpacity onPress={onPressCard} style={styles.FriendSection}>
-                    <Image source={require('../../src/assets/images/EventDetailFriendImages.png')} style={styles.friendImage} resizeMode='contain' />
+                <DescriptionSection description={data[0].description} />
+
+                {/* Friend scection */}
+                <TouchableOpacity onPress={onPressCard} style={styles.FriendSection}>
+                    <Image source={require('../../src/assets/images/EventDetailFriendImages1x4.png')} style={styles.friendImage} resizeMode='contain' />
                     <Text style={styles.friendCountText}>35 friends and 100 others going</Text>
                     <Text style={styles.tapText}>Tap to see who's going</Text>
-                    </TouchableOpacity>
-                {/* </View> */}
-                
+                </TouchableOpacity>
+                {/* button     zzz scection */}
+
                 <View style={styles.GoingContainer}>
                     <TouchableOpacity style={styles.continueButton}>
                         <Text style={styles.goingText}>Going</Text>
@@ -144,6 +133,7 @@ const styles = StyleSheet.create({
     },
     secondHalf: {
         flex: 1,
+        marginTop: '3%'
         // backgroundColor: 'rgba(0, 0, 0, 0.9)',
     },
     username: {
@@ -184,7 +174,7 @@ const styles = StyleSheet.create({
     },
     locationContainer: {
         flexDirection: 'row',
-        left: 10,
+        left: 13,
         alignItems: 'center',
     },
     locationIconStyle: {

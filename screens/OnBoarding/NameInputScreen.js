@@ -50,24 +50,7 @@ const NameInputScreen = ({ navigation }) => {
 
 
 
-    // useEffect(() => {
-    //     const showSubscription = Keyboard.addListener('keyboardDidShow', (event) => {
-    //         const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
-    //         setKeyboardVisible(true);
-    //         console.log("jhjhh")
-    //         setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
-    //     });
-    //     const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
-    //         setKeyboardVisible(false);
-    //         setKeyboardHeight(0);
-    //     });
-
-    //     return () => {
-    //         showSubscription.remove();
-    //         hideSubscription.remove();
-    //     };
-    // }, [screenHeight]);
-  
+    
     useLayoutEffect(() => {
         nameRef.current.focus();
 
@@ -106,6 +89,12 @@ const NameInputScreen = ({ navigation }) => {
         };                              
     
     }, [screenHeight]);
+    useFocusEffect(
+        React.useCallback(() => {
+            // Refocus the first input field when the screen is focused
+            nameRef.current.focus();
+        }, [])
+    );
     
     {
         return (

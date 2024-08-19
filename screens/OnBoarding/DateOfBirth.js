@@ -143,9 +143,10 @@ const styles = StyleSheet.create({
     titleContainer: {
         width: wp('95%'),
         alignSelf: 'center',
-        marginTop: hp('10%'),//1
+        marginTop: hp('12%'),//1
         justifyContent: 'center',
         alignItems: 'center',
+        // backgroundColor:'red'
     },
     titleText: {
         color: '#FFFFFF',

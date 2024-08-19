@@ -13,7 +13,7 @@ import {
   Modal
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation} from '@react-navigation/native';
 import { color } from '../../src/styles/color';
 import Header from './Components/Header';
 import { BottomTabBar } from '@react-navigation/bottom-tabs';
@@ -34,7 +34,7 @@ const HomePage = () => {
   const data = [
     {
       id: 1,
-      username: 'msu-figi',
+      username: 'msu-fiji',
       userProfileIcon: require('../../src/assets/images/partyUser1x4.png'),
       Title: 'FIJI DARTY',
       partyImage: require('../../src/assets/images/BirthdayListScreen1x4.png'),
@@ -44,7 +44,7 @@ const HomePage = () => {
     },
     {
       id: 2,
-      username: 'msu-figi',
+      username: 'msu-fiji',
       userProfileIcon: require('../../src/assets/images/partyUser1x4.png'),
       Title: 'FIJI DARTY',
       partyImage: require('../../src/assets/images/BirthdayListScreen1x4.png'),
@@ -89,7 +89,7 @@ const HomePage = () => {
         <HomeTab data={TabData} />
 
 
-         <View style={styles.container}>
+          <View style={styles.container}>
           <EventListData data={data} />
         </View>
         <View style={styles.centeredContainer}>
@@ -131,11 +131,11 @@ const HomePage = () => {
                 resizeMode='contain'
               />
               <View style={{alignItems:'center',width:'90%'}}>
-              <Text style={styles.modalTitle}>Turn on Notifications</Text>
+              <Text style={styles.modalTitle}>Turn on notifications</Text>
               <Text style={styles.modalDescription}>You’ll be able to see what your friends are doing and stay updated on new events!
               </Text>
               </View>
-              <View style={{ }}>
+              <View style={{marginBottom:'5%' }}>
                 <CustomButtonContainer
                   button1Name="Continue"
                   button2Name="Maybe Later"
@@ -187,22 +187,28 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     width: '100%',
-    height: hp(65), // 60% of the screen height
+    height: hp(67), // 60% of the screen height
     backgroundColor: color.inputFieldColor,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     // padding: 20,
     alignItems: 'center',
-    // justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   hideIcon: {
-    marginTop: hp('1%'),
-    marginBottom: hp('2%')//5
+    // marginTop: hp('1%'),
+    marginBottom: hp('2%'),//5
+    // backgroundColor:'red',
+    width:'40%',
+    height:'5%',
+    justifyContent:'center',
+
   },
   Notificationimage: {
     width:wp('35%'),
     marginBottom: hp('2%'),
-    height:hp('24%')
+    height:hp('20%'),
+    // backgroundColor:'pink'
 
 
   },
@@ -219,7 +225,10 @@ const styles = StyleSheet.create({
   barIcon:{
     width:50,
     height:4,
-    alignItems:'center'
+    // alignItems:'center'
+    alignSelf:'center',
+    // backgroundColor:'pink'
+
 
   },
   modalDescription: {

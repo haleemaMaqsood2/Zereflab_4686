@@ -35,7 +35,15 @@ export default function BottomTabStack() {
     );
 
     return (
-        <SafeAreaView style={{ flex: 1,backgroundColor:color.backgroundColor}}>
+        <SafeAreaView style={{ 
+            flex: 1
+        // ,backgroundColor:color.inputFieldColor
+        }}>
+                        <View style={styles.topArea} />
+                        <View style={styles.contentArea}>
+
+
+    
             <Tab.Navigator
                 screenOptions={{
                     tabBarShowLabel: false, // Hide the labels
@@ -43,10 +51,12 @@ export default function BottomTabStack() {
                     tabBarInactiveTintColor: color.balckFontColor,
                     tabBarStyle: {
                         backgroundColor: color.inputFieldColor, // Set tab bar color to black
-                        height: Platform.OS === 'ios' ? hp(7) : hp(8), // Adjust height for Android
+                        height: Platform.OS === 'ios' ? hp(5.5) : hp(8), // Adjust height for Android
                         justifyContent: 'center',
                         alignItems: 'center',
-                        paddingBottom: Platform.OS === 'ios' ? 10 : 0,
+                        paddingBottom: Platform.OS === 'ios' ? 0 : 0,
+                        paddingTop: Platform.OS === 'ios' ?3 : 0,
+
                         borderTopWidth: 0, // Remove top border
 
                     },
@@ -63,7 +73,7 @@ export default function BottomTabStack() {
                             <RenderIcon
                                 name={
                                     require("../../assets/images/BottomHome1x4.png")}
-                                size= {RFPercentage(3)}
+                                size= {RFPercentage(4)}
                             />
                         ),
                     }}
@@ -107,7 +117,7 @@ export default function BottomTabStack() {
                             <RenderIcon
                                 name={
                                     require("../../assets/images/bottonClock1x4.png")}
-                                    size= {RFPercentage(4.5)}
+                                    size= {RFPercentage(4.9)}
 
                             />
                         ),
@@ -130,6 +140,36 @@ export default function BottomTabStack() {
                 />
 
             </Tab.Navigator>
+            </View>
+            <View style={styles.bottomArea} />
+
         </SafeAreaView>
     );
 }
+const styles = StyleSheet.create({
+    safeArea: {
+        flex: 1,
+    },
+    topArea: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: hp('7%'), // Adjust this value to change the height of the top color section
+        backgroundColor: color.backgroundColor,
+        zIndex: 1,
+    },
+    contentArea: {
+        flex: 1,
+        backgroundColor: color.inputFieldColor,
+    },
+    bottomArea: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: hp('5%'), // Adjust this value to change the height of the bottom color section
+        backgroundColor: color.inputFieldColor,
+        zIndex: 1,
+    },
+});

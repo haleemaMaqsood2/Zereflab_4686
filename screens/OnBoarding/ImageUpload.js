@@ -43,6 +43,7 @@ const ImageUpload = ({ navigation }) => {
             <SafeAreaView style={styles.safeArea}>
                 <KeyboardAvoidingView >
                     <Header />
+                    <View style={{marginTop:'2%'}}></View>
                     <HeadingText title={'Add profile picture'}/>
 
                     <View style={styles.titleContainer}>

@@ -80,6 +80,12 @@ const UserNameScreen = ({ navigation }) => {
             hideSubscription.remove();
         };              
     }, [screenHeight]);
+    useFocusEffect(
+        React.useCallback(() => {
+            // Refocus the first input field when the screen is focused
+            userNameRef.current.focus();
+        }, [])
+    );
 
 
     {

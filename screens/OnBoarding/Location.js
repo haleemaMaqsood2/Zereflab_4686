@@ -144,6 +144,7 @@ const styles = StyleSheet.create({
         marginTop: hp('1%'),
         justifyContent: 'center',
         alignItems: 'center',
+        // backgroundColor:'red'
     },
     titleText: {
         color: '#FFFFFF',

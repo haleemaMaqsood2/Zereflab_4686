@@ -1,0 +1,37 @@
+// DescriptionSection.js
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { color } from '../../../src/styles/color';
+
+const DescriptionSection = ({ description }) => {
+    return (
+        <View style={styles.descriptionContainer}>
+            <Text style={styles.descriptionText}>
+                {description}
+                <Text style={[styles.descriptionText, { color: color.privacyPolicyColor }]}>
+                    Show More
+                </Text>
+            </Text>
+        </View>
+    );
+};
+
+const styles = StyleSheet.create({
+    descriptionContainer: {
+        left: 10,
+        marginTop: hp(2.5),
+        marginBottom: hp(3),
+        width:'94%',
+        justifyContent:'center'
+    },
+    descriptionText: {
+        color: 'white',
+        fontSize: 13,
+        fontWeight: '300',
+        fontFamily: 'Inter',
+        lineHeight: 19.5,
+    },
+});
+
+export default DescriptionSection;

@@ -8,7 +8,7 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 const EventListData = ({ data }) => {
     const navigation = useNavigation();
     function onPressItem() {
-        // navigation.navigate('EventDetails')
+        navigation.navigate('EventDetails')
 
     }
     const renderItem = ({ item }) => (
@@ -30,7 +30,7 @@ const EventListData = ({ data }) => {
                                 <Image source={require('../../../src/assets/images/otherUser1x4.png')} style={styles.otheruserImage}resizeMode='contain'/>
                                 <Text style={styles.otherUserText}>{item.other} Others</Text>
                                 <Image source={require('../../../src/assets/images/otherFriends1x4.png')} style={styles.otheruserImage1}resizeMode='contain'/>
-                                <Text style={styles.otherUserText}>{item.friends} Friends</Text>
+                                <Text style={styles.otherUserText1}>{item.friends} Friends</Text>
                             </View>
                     </View>
                 </TouchableOpacity>
@@ -82,8 +82,11 @@ const styles = StyleSheet.create({
     },
     otheruserImage:{
         height:hp(1.7),
-        width:wp(10)
+        width:wp(5),
+        // backgroundColor:'red',
+        // paddingLeft:'10%'
     },
+    
     otheruserImage1:{
         height:hp(2.0),
         width:wp(10)
@@ -153,14 +156,22 @@ const styles = StyleSheet.create({
         // paddingLeft: wp(1.2),
         paddingRight: wp(2)
     },
+    otherUserText1: {
+        fontSize: 10,
+        fontWeight: '500',
+        fontFamily: 'Inter',
+        color: color.whiteColor,
+        paddingLeft: wp(1.2),
+        // paddingRight: wp(2)
+    },
     OtherContainer: {
         flexDirection: 'row',
         // justifyContent: 'center',
         alignItems: 'center',
         // backgroundColor:'pink',
         position: 'absolute',
-        bottom: hp(0.5), // Adjust this value to position the text
-        // left: 10, // Adjust this value to position the text
+        bottom: hp(1), // Adjust this value to position the text
+        left: 10, // Adjust this value to position the text
         // padding: wp(1.5),
         // justifyContent:'flex-start'
     },
@@ -174,7 +185,7 @@ const styles = StyleSheet.create({
     goingButton: {
         backgroundColor: color.onBoardingButton,
         width: wp(80),
-        height: hp(4.5),
+        height: hp(4.5),//6
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
@@ -189,7 +200,7 @@ const styles = StyleSheet.create({
     },
     saveButton: {
         backgroundColor: color.shareButtonColor,
-        height: hp(4.5),
+        height: hp(4.5),//6
         width: wp(13),
         justifyContent: 'center',
         alignItems: 'center',

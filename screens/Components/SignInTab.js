@@ -73,6 +73,13 @@ const SignInTab = () => {
     navigation.navigate('VerifyCode');
   }
 
+          useFocusEffect(
+            React.useCallback(() => {
+                // Refocus the first input field when the screen is focused
+                if (selectedTab === 'Number' && internalTextInputRef.current) {
+                  internalTextInputRef.current.focus();
+                }            }, [selectedTab])
+        );
 
 
   return (

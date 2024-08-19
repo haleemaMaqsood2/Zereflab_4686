@@ -74,20 +74,7 @@ const VerifyCode = () => {
     useEffect(() => {
         v1Ref.current.focus();  // Automatically focus the first input field when the component mounts
 
-        // const showSubscription = Keyboard.addListener('keyboardDidShow', (event) => {
-        //     const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
-        //     setKeyboardVisible(true);
-        //     setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
-        // });
-        // const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
-        //     setKeyboardVisible(false);
-        //     setKeyboardHeight(0);
-        // });
-
-        // return () => {
-        //     showSubscription.remove();
-        //     hideSubscription.remove();
-        // };
+        
         const showSubscription = Keyboard.addListener('keyboardWillShow', (event) => {
             const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
             setKeyboardVisible(true);
@@ -103,6 +90,12 @@ const VerifyCode = () => {
             hideSubscription.remove();
         };
     }, [screenHeight]);
+    useFocusEffect(
+        React.useCallback(() => {
+            // Refocus the first input field when the screen is focused
+            v1Ref.current.focus();
+        }, [])
+    );
 
     function startTimer() {
         console.log("Timere started again")

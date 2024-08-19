@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
   tabContainer: {
     alignItems: 'center',
     height: hp('6%'),
+    // height:'25%',
     width: '95%',
     backgroundColor: color.inputFieldColor, // Use inputField color for tab container
     // backgroundColor:'red',
@@ -50,8 +51,9 @@ const styles = StyleSheet.create({
 
   },
   tab: {
-    paddingVertical: 10,
-    paddingHorizontal: 36,
+    // paddingVertical: 10,
+    // paddingHorizontal: 33,
+    paddingHorizontal: 33.5,
     marginRight: 10,
     borderRadius: 20,
     backgroundColor: color.inputFieldColor, // Default tab color
@@ -67,7 +69,7 @@ const styles = StyleSheet.create({
     color: color.whiteWithfiftypercentOpacity, // Default text color
   },
   selectedTabText: {
-    fontWeight: 'bold', // Bold text for selected tab
+    // fontWeight: 'bold', // Bold text for selected tab
     color: color.balckFontColor, // Black text color for selected tab
   },
 });
