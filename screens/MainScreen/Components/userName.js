@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     },
     flatlistContainer: {
         flexDirection: 'row',
-        paddingLeft: hp(1.5),
+        paddingLeft: hp(1.4),
         marginTop: hp(3)
     },
     profileIcon: {
@@ -52,8 +52,8 @@ const styles = StyleSheet.create({
         marginRight: wp('3%'),
     },
     titleContainer: {
-        left: 10, // Adjust this value to position the text
-        padding: wp(1.5),
+        left: 7, // 10
+        padding: wp(1.0),
     },
     title: {
         fontSize: 24,
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     },
     locationContainer: {
         flexDirection: 'row',
-        left: 13,
+        left: 10,
         alignItems: 'center',
     },
     locationIconStyle: {

@@ -5,7 +5,9 @@ import { color } from '../../src/styles/color';
 
 const CustomButton = ({ title, buttonState, keyboardVisible, keyboardHeight, nextScreenName, marginTop, onPress,extraSpace }) => {
   const calculatedMarginTop = keyboardVisible 
-  ?  hp(marginTop - keyboardHeight+extraSpace)
+  ?  hp(marginTop - keyboardHeight)+extraSpace
+  // ? hp(30)
+
   : hp(marginTop);
 
   return (
@@ -19,7 +21,7 @@ const CustomButton = ({ title, buttonState, keyboardVisible, keyboardHeight, nex
         buttonState ? styles.activeButton : styles.inactiveButton
       ]}
     >
-      <Text style={styles.buttonText}>{title}</Text>
+      <Text style={styles.buttonText}>{title}{marginTop}</Text>
     </TouchableOpacity>
   );
 };
@@ -31,7 +33,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
-    alignSelf:'center'
+    alignSelf:'center',
+    // position:'absolute'
   },
   activeButton: {
     backgroundColor: color.onBoardingButton,

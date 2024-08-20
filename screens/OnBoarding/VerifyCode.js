@@ -127,11 +127,16 @@ const VerifyCode = () => {
         navigation.navigate('NameInputScreen');
     }
 
+    const keyboardVerticalOffset = Platform.OS === 'ios' ? 20 : 0;
 
     {
         return (
             <SafeAreaView style={styles.safeArea}>
-                <KeyboardAvoidingView >
+                <KeyboardAvoidingView
+                  style={{ flex: 1 }}
+                //   behavior={Platform.OS === 'ios' ? 'padding' : null}
+                //   keyboardVerticalOffset={keyboardVerticalOffset}
+                   >
                     <Header />
 
                     <View style={styles.titleContainer}>

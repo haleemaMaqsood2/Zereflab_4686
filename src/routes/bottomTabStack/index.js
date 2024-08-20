@@ -22,9 +22,9 @@ import ActivityStack from './ActivityStack';
 export default function BottomTabStack() {
     const Tab = createBottomTabNavigator();
 
-    const RenderIcon = ({ name,size}) => (
+    const RenderIcon = ({ focused,activeIcon,inactiveIcon,size}) => (
         <Image
-            source={name}
+        source={focused ? activeIcon : inactiveIcon}
             // source={require("../../assets/images/homeIcon.png")}
             style={{
                 height:size,
@@ -69,12 +69,16 @@ export default function BottomTabStack() {
                     component={HomePage}
                     options={{
                         // tabBarLabel: "HomePage",
-                        tabBarIcon: ({ color, size }) => (
+                        tabBarIcon: ({ focused, size }) => (
                             <RenderIcon
-                                name={
-                                    require("../../assets/images/BottomHome1x4.png")}
-                                size= {RFPercentage(4)}
-                            />
+                                // name={
+                                //     require("../../assets/images/BottomHome1x4.png")}
+                                focused={focused}
+                                activeIcon={require("../../assets/images/BottomHome1x4.png")}
+                                inactiveIcon={require("../../assets/images/BottomHomeInactive.png")}
+
+                                size= {focused?RFPercentage(4.0):RFPercentage(2.5)}
+                                />
                         ),
                     }}
                 />
@@ -83,10 +87,13 @@ export default function BottomTabStack() {
                     component={HomePage}
                     options={{
                         // tabBarLabel: "HomePage",
-                        tabBarIcon: ({ color, size }) => (
+                        tabBarIcon: ({ focused, size }) => (
                             <RenderIcon
-                                name={
-                                    require("../../assets/images/bottomProfile1x4.png")}
+                                // name={
+                                    // require("../../assets/images/bottomProfile1x4.png")}
+                                    focused={focused}
+                                activeIcon={require("../../assets/images/bottomProfile1x4.png")}
+                                inactiveIcon={require("../../assets/images/bottomProfile1x4.png")}
                                     size= {RFPercentage(3)}
 
                             />
@@ -98,10 +105,13 @@ export default function BottomTabStack() {
                     component={HomePage}
                     options={{
                         // tabBarLabel: "HomePage",
-                        tabBarIcon: ({ color, size }) => (
+                        tabBarIcon: ({ focused, size }) => (
                             <RenderIcon
-                                name={
-                                    require("../../assets/images/bottomPlus1x4.png")}
+                                // name={
+                                //     require("../../assets/images/bottomPlus1x4.png")}
+                                focused={focused}
+                                activeIcon={require("../../assets/images/bottomPlus1x4.png")}
+                                inactiveIcon={require("../../assets/images/bottomPlus1x4.png")}
                                     size= {RFPercentage(3)}
 
                             />
@@ -113,11 +123,14 @@ export default function BottomTabStack() {
                     component={ActivityStack}
                     options={{
                         // tabBarLabel: "HomePage",
-                        tabBarIcon: ({ color, size }) => (
+                        tabBarIcon: ({ focused, size }) => (
                             <RenderIcon
-                                name={
-                                    require("../../assets/images/bottonClock1x4.png")}
-                                    size= {RFPercentage(4.9)}
+                                // name={
+                                //     require("../../assets/images/bottonClock1x4.png")}
+                                focused={focused}
+                                inactiveIcon={require("../../assets/images/bottonClock1x4.png")}
+                                activeIcon={require("../../assets/images/bottonClockSelected.png")}
+                                    size= {focused?RFPercentage(3.0):RFPercentage(4.9)}
 
                             />
                         ),
@@ -128,10 +141,13 @@ export default function BottomTabStack() {
                     component={HomePage}
                     options={{
                         // tabBarLabel: "HomePage",
-                        tabBarIcon: ({ color, size }) => (
+                        tabBarIcon: ({ focused, size }) => (
                             <RenderIcon
-                                name={
-                                    require("../../assets/images/BottomUser1x4.png")}
+                                // name={
+                                //     require("../../assets/images/BottomUser1x4.png")}
+                                focused={focused}
+                                activeIcon={require("../../assets/images/BottomUser1x4.png")}
+                                inactiveIcon={require("../../assets/images/BottomUser1x4.png")}
                                     size= {RFPercentage(3.5)}
 
                             />

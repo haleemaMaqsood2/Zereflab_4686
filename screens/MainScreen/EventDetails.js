@@ -21,7 +21,7 @@ const EventDetails = () => {
     const today = 'Today - 12:00 PM';
     const navigation = useNavigation();
     function onPressCard() {
-        // navigation.navigate('Attendees')
+        navigation.navigate('Attendees')
     }
 
     function backPress() {

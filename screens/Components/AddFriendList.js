@@ -1,57 +1,107 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList,SectionList } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { RFPercentage } from "react-native-responsive-fontsize";
 import { color } from '../../src/styles/color';
 import { font } from '../../src/styles/font';
+const AddFriendList = ({ data, inviteFriends }) => {
+    // Transform the data into sections
+    const sections = [
+        {
+            title: 'Friends',
+            data: data.filter(item => item.status === 'friend'),
+        },
+        {
+            title: 'Others',
+            data: inviteFriends.filter(item => item.status === 'Add'),
+        },
+    ];
 
-const AddFriendList = ({ data,inviteFriends}) => {
     const renderItem = ({ item }) => (
-        <View style={styles.friendContainer1}>
+        <View style={item.status === 'friend' ? styles.friendContainer1 : styles.friendContainer}>
             <Image source={item.image} style={styles.image} />
             <View style={styles.infoContainer}>
                 <Text style={styles.nameText}>{item.name}</Text>
             </View>
-            <TouchableOpacity >
-                <Image source={require('../../src/assets/images/LeftArrow.png')} style={styles.addIcon} />
-                
-            </TouchableOpacity>
+            {item.status === 'Add' ? (
+                <TouchableOpacity style={styles.addButton}>
+                    <Image source={require('../../src/assets/images/Add1x4.png')} style={styles.addIcon} />
+                    <Text style={styles.addText}>Add</Text>
+                </TouchableOpacity>
+            ) : (
+                <TouchableOpacity >
+                    <Image source={require('../../src/assets/images/LeftArrow1x4.png')} style={styles.addIcon} />
+                </TouchableOpacity>
+            )}
         </View>
     );
-    const renderItem1 = ({ item }) => (
-      <View style={styles.friendContainer}>
-          <Image source={item.image} style={styles.image} />
-          <View style={styles.infoContainer}>
-              <Text style={styles.nameText}>{item.name}</Text>
-          </View>
-          <TouchableOpacity style={styles.addButton}>
-                <Image source={require('../../src/assets/images/AddIcon.png')} style={styles.addIcon} />
-                <Text style={styles.addText}>Add</Text>
-            </TouchableOpacity>
-      </View>
-  );
+
+    const renderSectionHeader = ({ section: { title } }) => (
+        <Text style={title === 'Friends' ? styles.titleText : styles.titleText1}>
+            {title} ({sections.find(section => section.title === title).data.length})
+        </Text>
+    );
 
     return (
         <View style={styles.container}>
-            <Text style={styles.titleText}>Friends(2)</Text>
-            <View style={{height:hp('14%')}}>
-            <FlatList
-                data={data}
+            <SectionList
+                sections={sections}
                 renderItem={renderItem}
-                keyExtractor={(item) => item.id.toString()}
-                contentContainerStyle={styles.list}
-            />
-            </View>
-            <Text style={styles.titleText1}>Others (100)</Text>
-            <FlatList
-                data={inviteFriends}
-                renderItem={renderItem1}
+                renderSectionHeader={renderSectionHeader}
                 keyExtractor={(item) => item.id.toString()}
                 contentContainerStyle={styles.list}
             />
         </View>
     );
 };
+
+// const AddFriendList = ({ data,inviteFriends}) => {
+//     const renderItem = ({ item }) => (
+//         <View style={styles.friendContainer1}>
+//             <Image source={item.image} style={styles.image} />
+//             <View style={styles.infoContainer}>
+//                 <Text style={styles.nameText}>{item.name}</Text>
+//             </View>
+//             <TouchableOpacity >
+//                 <Image source={require('../../src/assets/images/LeftArrow1x4.png')} style={styles.addIcon} />
+                
+//             </TouchableOpacity>
+//         </View>
+//     );
+//     const renderItem1 = ({ item }) => (
+//       <View style={styles.friendContainer}>
+//           <Image source={item.image} style={styles.image} />
+//           <View style={styles.infoContainer}>
+//               <Text style={styles.nameText}>{item.name}</Text>
+//           </View>
+//           <TouchableOpacity style={styles.addButton}>
+//                 <Image source={require('../../src/assets/images/Add1x4.png')} style={styles.addIcon} />
+//                 <Text style={styles.addText}>Add</Text>
+//             </TouchableOpacity>
+//       </View>
+//   );
+
+//     return (
+//         <View style={styles.container}>
+//             <Text style={styles.titleText}>Friends(2)</Text>
+//             <View style={{height:hp('14%')}}>
+//             <FlatList
+//                 data={data}
+//                 renderItem={renderItem}
+//                 keyExtractor={(item) => item.id.toString()}
+//                 contentContainerStyle={styles.list}
+//             />
+//             </View>
+//             <Text style={styles.titleText1}>Others (100)</Text>
+//             <FlatList
+//                 data={inviteFriends}
+//                 renderItem={renderItem1}
+//                 keyExtractor={(item) => item.id.toString()}
+//                 contentContainerStyle={styles.list}
+//             />
+//         </View>
+//     );
+// };
 
 const styles = StyleSheet.create({
     container: {
@@ -61,7 +111,7 @@ const styles = StyleSheet.create({
     },
     titleText: {
         fontSize: 15,
-        fontWeight: '700',
+        fontWeight: 'bold',
         fontFamily: font.Regular,
         color: color.whiteColor,
         marginBottom: hp('1%'),
@@ -69,7 +119,7 @@ const styles = StyleSheet.create({
     },
     titleText1: {
         fontSize: 15,
-        fontWeight: '700',
+        fontWeight: 'bold',
         fontFamily: font.Regular,
         color: color.whiteColor,
         marginBottom: hp('1%'),
@@ -107,6 +157,7 @@ const styles = StyleSheet.create({
     },
     nameText: {
         fontSize: 15,
+        fontWeight:'semibold',
         fontFamily: font.Regular,
         color: color.whiteColor,
         lineHeight:18.15,
@@ -123,8 +174,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: color.onBoardingButton,//373739
         padding: wp('1.5%'),
-        borderRadius: 5,
-        paddingHorizontal: wp('6%'), // Adjust horizontal padding for increased width
+        borderRadius: 8,
+        paddingHorizontal: wp('6.5%'), // Adjust horizontal padding for increased width
 
         // width:'10%'
     },
