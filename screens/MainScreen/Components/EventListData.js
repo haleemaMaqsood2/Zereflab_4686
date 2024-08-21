@@ -20,7 +20,7 @@ const EventListData = ({ data }) => {
             <View style={styles.card}>
                 <TouchableOpacity onPress={onPressItem}>
                     <View style={styles.imageContainer}>
-                        <Image source={item.partyImage} style={styles.image} />
+                        <Image source={item.partyImage} style={styles.image} resizeMode='contain'/>
                         <View style={styles.titleContainer}>
                             <Text style={styles.title}>{item.Title}</Text>
                             <Text style={styles.footerTime}>{item.time}</Text>
@@ -56,6 +56,7 @@ const EventListData = ({ data }) => {
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id.toString()}
                 contentContainerStyle={styles.listContent}
+                showsVerticalScrollIndicator={false}
                 ListFooterComponent={<View style={{ height: hp(10) }} />} // Adding space at the bottom
             />
         </View>
@@ -69,13 +70,18 @@ const styles = StyleSheet.create({
     },
     itemContainer: {
         width: '100%',
-        marginBottom: hp(2),
+        paddingTop:2,
+        // height:'50%',
+        // marginBottom: hp(2),
+                // backgroundColor: 'red',
+
     },
     flatlistContainer: {
         backgroundColor: color.backgroundColor,
         flexDirection: 'row',
         paddingLeft: hp(1.5),
-        marginTop: hp(3)
+        marginTop: hp(1.7),
+        // marginBottom:10,
     },
     listContent: {
         paddingBottom: hp(10), // Ensure there is enough space at the bottom
@@ -83,7 +89,6 @@ const styles = StyleSheet.create({
     otheruserImage:{
         height:hp(1.7),
         width:wp(5),
-        // backgroundColor:'red',
         // paddingLeft:'10%'
     },
     
@@ -93,12 +98,15 @@ const styles = StyleSheet.create({
     },
     card: {
         borderRadius: 10,
-        marginTop: hp('1%'),
+        // height:'40%',
+        // backgroundColor:'red',
+        // marginTop: hp('1%'),
         elevation: 3, // for Android shadow
         shadowColor: '#000', // for iOS shadow
-        shadowOffset: { width: 0, height: 2 }, // for iOS shadow
+        shadowOffset: { width: 0, height: 2}, // for iOS shadow
         shadowOpacity: 0.2, // for iOS shadow
         shadowRadius: 3, // for iOS shadow
+     
     },
     profileIcon: {
         width: 40,
@@ -121,7 +129,7 @@ const styles = StyleSheet.create({
     imageContainer: {
         position: 'relative',
         width: '100%',
-        height: hp('40%') // Adjust this height as needed
+        height: hp('38%') // Adjust this height as needed
     },
     image: {
         width: '100%',

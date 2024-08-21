@@ -30,11 +30,59 @@ const HomePage = () => {
   const [modalVisible, setModalVisible] = useState(true); // Start with the modal visible
   const dispatch = useDispatch();
   const today = 'Today - 12:00 PM';
+  const [filteredData, setFilteredData] = useState([]);
+
 
   const data = [
     {
       id: 1,
       username: 'msu-fiji',
+      userProfileIcon: require('../../src/assets/images/partyUser1x4.png'),
+      Title: 'FIJI DARTY',
+      partyImage: require('../../src/assets/images/BirthdayListScreen1x4.png'),
+      time: today,
+      other: 130,
+      friends: 12
+    },
+    {
+      id: 2,
+      username: 'msu-fiji',
+      userProfileIcon: require('../../src/assets/images/partyUser1x4.png'),
+      Title: 'FIJI DARTY',
+      partyImage: require('../../src/assets/images/BirthdayListScreen1x4.png'),
+
+      time: today,
+      other: 130,
+      friends: 12
+    },
+  ]
+  const upcomingData = [
+    {
+      id: 1,
+      username: 'msu-fiji1',
+      userProfileIcon: require('../../src/assets/images/partyUser1x4.png'),
+      Title: 'FIJI DARTY',
+      partyImage: require('../../src/assets/images/BirthdayListScreen1x4.png'),
+      time: today,
+      other: 130,
+      friends: 12
+    },
+    {
+      id: 2,
+      username: 'msu-fiji',
+      userProfileIcon: require('../../src/assets/images/partyUser1x4.png'),
+      Title: 'FIJI DARTY',
+      partyImage: require('../../src/assets/images/BirthdayListScreen1x4.png'),
+
+      time: today,
+      other: 130,
+      friends: 12
+    },
+  ]
+  const friendsData = [
+    {
+      id: 1,
+      username: 'msu-fiji3',
       userProfileIcon: require('../../src/assets/images/partyUser1x4.png'),
       Title: 'FIJI DARTY',
       partyImage: require('../../src/assets/images/BirthdayListScreen1x4.png'),
@@ -70,6 +118,8 @@ const HomePage = () => {
       name: 'Friends',
     },
   ]
+  const [selectedTab, setSelectedTab] = useState('Popular')
+
 
   const onPressModalClose = () => {
     setModalVisible(false)
@@ -79,18 +129,25 @@ const HomePage = () => {
     dispatch(setOnBoardingComplete(true));
 
     // setModalVisible(true)
-
-  })
+    // Dynamically update the data based on the selected tab
+    if (selectedTab === 'Popular') {
+      setFilteredData(data);
+    } else if (selectedTab === 'Upcoming') {
+      setFilteredData(upcomingData);
+    } else if (selectedTab === 'Friends') {
+      setFilteredData(friendsData);
+    }
+  }, [selectedTab]);
 
   {
     return (
       <SafeAreaView style={styles.safeArea}>
         <Header />
-        <HomeTab data={TabData} />
+        <HomeTab data={TabData} onTabSelect={setSelectedTab} />
 
 
           <View style={styles.container}>
-          <EventListData data={data} />
+          <EventListData data={filteredData} />
         </View>
         <View style={styles.centeredContainer}>
         </View>
@@ -135,7 +192,9 @@ const HomePage = () => {
               <Text style={styles.modalDescription}>You’ll be able to see what your friends are doing and stay updated on new events!
               </Text>
               </View>
-              <View style={{marginBottom:'5%' }}>
+              <View 
+              style={{marginBottom:'5%' }}
+              >
                 <CustomButtonContainer
                   button1Name="Continue"
                   button2Name="Maybe Later"

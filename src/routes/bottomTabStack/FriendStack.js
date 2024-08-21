@@ -3,7 +3,7 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Notification from "../../../screens/MainScreen/Activity/Notification";
 import Friends from "../../../screens/MainScreen/Friends/Friends";
-export default function ActivityStack() {
+export default function FriendStack() {
   const NavigationStack = createNativeStackNavigator();
   return (
     <NavigationStack.Navigator
@@ -12,10 +12,7 @@ export default function ActivityStack() {
       }}
     >
       {/* <NavigationStack.Screen name="hospital" component={Hospital} /> */}
-      <NavigationStack.Screen
-        name="Notification"
-        component={Notification}
-      />
+   
       <NavigationStack.Screen
         name="Friends"
         component={Friends}

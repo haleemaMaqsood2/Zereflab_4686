@@ -22,10 +22,12 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp, heightPercentage
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import HeadingText from '../Components/HeadingText';
 import CustomButton from '../Components/CustomButton';
+import { getTabBarHeight } from '@react-navigation/bottom-tabs/lib/typescript/src/views/BottomTabBar';
 
 
 const VerifyCode = () => {
     //   const navigation = useNavigation();
+    const customKeyboardHeight = hp(30); // For example, 40% of screen height
 
     const [keyboardVisible, setKeyboardVisible] = useState(false);
     const [keyboardHeight, setKeyboardHeight] = useState(0);
@@ -135,7 +137,7 @@ const VerifyCode = () => {
                 <KeyboardAvoidingView
                   style={{ flex: 1 }}
                 //   behavior={Platform.OS === 'ios' ? 'padding' : null}
-                //   keyboardVerticalOffset={keyboardVerticalOffset}
+                keyboardVerticalOffset={customKeyboardHeight}
                    >
                     <Header />
 
@@ -201,18 +203,29 @@ const VerifyCode = () => {
                             </TouchableOpacity>
                         )}
 
-                        <CustomButton
+                      
+                    </View>
+                    <View style={{flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            // backgroundColor:'pink',
+            marginBottom:(270)
+        } 
+            }>
+                    <CustomButton
                             title="Continue"
                             buttonState={isAllFieldsFilled}
                             keyboardVisible={keyboardVisible}
                             keyboardHeight={keyboardHeight}
                             nextScreenName="NameInputScreen"
-                            marginTop={47}
+                            marginTop={0}
                             onPress={moveNext}
-                            extraSpace={3.5}
+                            // extraSpace={3.5}
+                            extraSpace={0}
+
 
                         />
-                    </View>
+                        </View>
                 </KeyboardAvoidingView>
 
             </SafeAreaView>
@@ -290,17 +303,17 @@ const styles = StyleSheet.create({
 
     },
     ButtonContainer: {
-        backgroundColor: color.WhiteWithThirtypercentOpacity,
-        // height:hp('7%'),
-        height: hp(6),
-        // width:363,
-        borderRadius: 10,
-        width: wp('92%'),
-        marginTop: hp(26),
-        textAlign: 'center',
-        alignItems: 'center',
-        justifyContent: 'center'
-
+        // backgroundColor: color.WhiteWithThirtypercentOpacity,
+        // // height:hp('7%'),
+        // height: hp(6),
+        // // width:363,
+        // borderRadius: 10,
+        // width: wp('92%'),
+        // marginTop: hp(26),
+        // textAlign: 'center',
+        // alignItems: 'center',
+        // justifyContent: 'center'
+            
 
 
     },

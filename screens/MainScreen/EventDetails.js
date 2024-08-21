@@ -45,7 +45,9 @@ const EventDetails = () => {
 
     return (
         <SafeAreaView style={styles.safeArea}>
-            <ScrollView>
+            <ScrollView
+                            showsVerticalScrollIndicator={false}
+>
                 <ImageBackground source={require('../../src/assets/images/EventDetailBlurr.png')} style={styles.mainImage} resizeMode='stretch'>
                     <View style={styles.overlay}>
                         <View style={styles.topIconsContainer}>
@@ -122,8 +124,10 @@ const styles = StyleSheet.create({
         right: 0,
     },
     iconImage: {
-        width: wp('10%'),
-        height: wp('10%'),
+        // width: wp('10%'),
+        // height: wp('10%'),
+        width:45,
+        height:45,
     },
     mainImage: {
         flex: 1,
@@ -198,7 +202,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         height: hp('6%'),
         alignItems: 'center',
-        marginBottom: hp('1.5%')
+        marginBottom: hp('0.5%')
     },
     closeButtonText: {
         color: 'white',

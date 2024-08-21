@@ -19,6 +19,8 @@ import {
     heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import ActivityStack from './ActivityStack';
+import FriendStack from './FriendStack';
+
 export default function BottomTabStack() {
     const Tab = createBottomTabNavigator();
 
@@ -51,7 +53,7 @@ export default function BottomTabStack() {
                     tabBarInactiveTintColor: color.balckFontColor,
                     tabBarStyle: {
                         backgroundColor: color.inputFieldColor, // Set tab bar color to black
-                        height: Platform.OS === 'ios' ? hp(5.5) : hp(8), // Adjust height for Android
+                        height: Platform.OS === 'ios' ? hp(6) : hp(8), // Adjust height for Android
                         justifyContent: 'center',
                         alignItems: 'center',
                         paddingBottom: Platform.OS === 'ios' ? 0 : 0,
@@ -77,14 +79,14 @@ export default function BottomTabStack() {
                                 activeIcon={require("../../assets/images/BottomHome1x4.png")}
                                 inactiveIcon={require("../../assets/images/BottomHomeInactive.png")}
 
-                                size= {focused?RFPercentage(4.0):RFPercentage(2.5)}
+                                size= {focused?RFPercentage(4.4):RFPercentage(2.5)}
                                 />
                         ),
                     }}
                 />
                  <Tab.Screen
-                    name="HomePage4"
-                    component={HomePage}
+                    name="FriendStack"
+                    component={FriendStack}
                     options={{
                         // tabBarLabel: "HomePage",
                         tabBarIcon: ({ focused, size }) => (
@@ -148,7 +150,7 @@ export default function BottomTabStack() {
                                 focused={focused}
                                 activeIcon={require("../../assets/images/BottomUser1x4.png")}
                                 inactiveIcon={require("../../assets/images/BottomUser1x4.png")}
-                                    size= {RFPercentage(3.5)}
+                                    size= {RFPercentage(3.2)}
 
                             />
                         ),
@@ -173,6 +175,8 @@ const styles = StyleSheet.create({
         right: 0,
         height: hp('7%'), // Adjust this value to change the height of the top color section
         backgroundColor: color.backgroundColor,
+        // backgroundColor: color.whiteColor,
+
         zIndex: 1,
     },
     contentArea: {

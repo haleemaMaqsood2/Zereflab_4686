@@ -126,6 +126,28 @@ const NameInputScreen = ({ navigation }) => {
                         />
 
                     </View>
+                    {/* <View style={{flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor:'pink',
+            marginTop:250,
+            marginBottom:(100)
+        } 
+            }>
+                    <CustomButton
+                            title="Continue"
+                            buttonState={name}
+                            keyboardVisible={keyboardVisible}
+                            keyboardHeight={keyboardHeight}
+                            nextScreenName="NameInputScreen"
+                            marginTop={0}
+                            onPress={moveNext}
+                            // extraSpace={3.5}
+                            extraSpace={0}
+
+
+                        />
+                        </View> */}
                 </KeyboardAvoidingView>
 
             </SafeAreaView>

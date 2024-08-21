@@ -19,7 +19,7 @@ const CustomButtonContainer = ({ button1Name, button2Name, onPressButton1, onPre
 
 const styles = StyleSheet.create({
     contineContainer: {
-        marginTop: Platform.OS === 'ios' ? hp(8.5) : hp(23),
+        marginTop: Platform.OS === 'ios' ? hp(11.5) : hp(23),//ios 8.5
         alignItems: 'center',
         // backgroundColor:'pink'
     },
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 10,
         width: wp('90%'),
-        marginBottom: hp('2%')
+        marginBottom: hp('1.5%')
     },
     uploadText: {
         color: color.whiteFontColor,

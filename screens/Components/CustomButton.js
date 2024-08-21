@@ -1,40 +1,51 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, View, SafeAreaView, KeyboardAvoidingView, Text, StyleSheet, Platform } from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { color } from '../../src/styles/color';
 
-const CustomButton = ({ title, buttonState, keyboardVisible, keyboardHeight, nextScreenName, marginTop, onPress,extraSpace }) => {
-  const calculatedMarginTop = keyboardVisible 
-  ?  hp(marginTop - keyboardHeight)+extraSpace
-  // ? hp(30)
-
-  : hp(marginTop);
-
+const CustomButton = ({ title, buttonState, keyboardVisible, keyboardHeight, onPress }) => {
   return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={[
-        styles.buttonContainer,
-        // { marginTop: keyboardVisible ? hp(marginTop - keyboardHeight+extraSpace) : hp(marginTop) },
-        { marginTop: calculatedMarginTop },
+    <SafeAreaView style={{ flex: 1 }}>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : null}
+      >
+        <View style={{ flex: 1 }} />
 
-        buttonState ? styles.activeButton : styles.inactiveButton
-      ]}
-    >
-      <Text style={styles.buttonText}>{title}{marginTop}</Text>
-    </TouchableOpacity>
+        <View style={[
+          styles.buttonContainer,
+          { marginBottom: keyboardVisible ? keyboardHeight + hp(2) : hp(2) }
+        ]}>
+          <TouchableOpacity
+            onPress={onPress}
+            style={[
+              styles.button,
+              buttonState ? styles.activeButton : styles.inactiveButton
+            ]}
+          >
+            <Text style={styles.buttonText}>{title}</Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    height: hp(6),
+    position: 'absolute',
+    left: wp(2),
+    right: wp(2),
+    alignItems: 'center',
+    width:'100%',
+    bottom: 0, // Position the button at the bottom and adjust with marginBottom
+  },
+  button: {
     width: wp('92%'),
+    height: hp(6),
+    borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 10,
-    alignSelf:'center',
-    // position:'absolute'
   },
   activeButton: {
     backgroundColor: color.onBoardingButton,
@@ -46,7 +57,6 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '700',
-    fontFamily: 'inter',
   },
 });
 

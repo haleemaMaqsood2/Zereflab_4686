@@ -50,9 +50,11 @@ const Header = ({title}) => {
 
 {title ? (
         <>
-         <View style={styles.leftContainer}>
-        <TouchableOpacity onPress={goBack} style={styles.circleContainer}>
-          <Image
+         {/* <View style={styles.leftContainer}>
+        <TouchableOpacity onPress={goBack}  
+        // style={styles.circleContainer}*/}
+        {/* > */}
+          {/* <Image
             source={require('../../../src/assets/images/circle.png')}
             style={styles.circleImage}
             resizeMode="contain"
@@ -61,10 +63,25 @@ const Header = ({title}) => {
             source={require('../../../src/assets/images/arrow.png')}
             style={styles.arrowImage}
             resizeMode="contain"
+          /> */}
+                    {/* <Image
+            source={require('../../../src/assets/images/BackNew1x4.png')}
+            style={styles.arrowImage}
+            resizeMode="contain"
+          /> */}
+        {/* </TouchableOpacity> 
+      </View>*/}
+      <View style={{width:'100%',alignItems:'center',flexDirection:'row'}}>
+      <TouchableOpacity onPress={goBack} style={{width:'15%'}} >
+      <Image
+            source={require('../../../src/assets/images/BackNew1x4.png')}
+            style={styles.arrowImage}
+            resizeMode="contain"
           />
-        </TouchableOpacity>
-      </View>
-      <View style={{width:'75%',alignItems:'center'}}>
+                  </TouchableOpacity>
+
+
+
        <Text style={styles.titleContainer}>{title}</Text>
       </View>
       <TouchableOpacity>
@@ -72,7 +89,7 @@ const Header = ({title}) => {
       </TouchableOpacity>
      </>
       ) : (
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: wp('100%') }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: wp('100%'), height:25}}>
           <Image
             source={require('../../../src/assets/images/logo1.png')}
             style={styles.profileIcon}
@@ -129,14 +146,14 @@ const styles = StyleSheet.create({
     height: 50,
   },
   arrowImage: {
-    position: 'absolute',
-    width: 16, // Adjust size as needed
-    height: 16, // Adjust size as needed
+    // position: 'absolute',
+    width: 45, // Adjust size as needed
+    height: 45,
     alignItems:'center',
-    alignSelf:'center',
+    // alignSelf:'center',
     // top: '50%',
     // left: '50%',
-    transform: [{ translateX: -2.5 }], // Center the arrow
+    // transform: [{ translateX: -2.5 }], // Center the arrow
   },
   
   centerContainer: {
@@ -151,7 +168,11 @@ const styles = StyleSheet.create({
     fontSize:17,
     fontWeight:'500',
     fontFamily:'Inter',
-    lineHeight:21.87
+    lineHeight:21.87,
+    justifyContent:'center',
+    // backgroundColor:'red',
+    width:'70%',
+    textAlign:'center'
   }
  
   
