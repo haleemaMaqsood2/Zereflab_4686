@@ -14,4 +14,5 @@ export const color ={
     shareButtonColor:'#232121',
     whiteWithFifteenPercentOpacity:'#ffffff26',
     whitewithThirty:'#ffffff4D',
+    whiteWithTenPercencentOpacity:'#ffffff1a',
 };

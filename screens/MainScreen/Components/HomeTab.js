@@ -43,7 +43,7 @@ const HomeTab = ({ data, onTabSelect }) => {
 const styles = StyleSheet.create({
   tabContainer: {
     alignItems: 'center',
-    height: hp('6%'),
+    height: hp('5%'),
     // height:'25%',
     width: '95%',
     backgroundColor: color.inputFieldColor, // Use inputField color for tab container

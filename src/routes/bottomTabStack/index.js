@@ -20,7 +20,8 @@ import {
 } from "react-native-responsive-screen";
 import ActivityStack from './ActivityStack';
 import FriendStack from './FriendStack';
-
+import CreateEventStack from './CreateEventStack';
+CreateEventStack
 export default function BottomTabStack() {
     const Tab = createBottomTabNavigator();
 
@@ -103,8 +104,8 @@ export default function BottomTabStack() {
                     }}
                 />
                 <Tab.Screen
-                    name="HomePage1"
-                    component={HomePage}
+                    name="CreateEventStack"
+                    component={CreateEventStack}
                     options={{
                         // tabBarLabel: "HomePage",
                         tabBarIcon: ({ focused, size }) => (
