@@ -72,6 +72,7 @@ const ImageUpload = ({ navigation }) => {
                     button2Name="Skip"
                     onPressButton1={moveNext}
                     onPressButton2={moveNext}
+                    marginTop={7}
                 />
 
                 </KeyboardAvoidingView>

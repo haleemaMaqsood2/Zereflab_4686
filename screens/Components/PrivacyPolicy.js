@@ -51,20 +51,26 @@ const PrivacyPolicy = () => {
 
 const styles = StyleSheet.create({
     privacyPolicyContainer: {
-        width: wp('90%'),
-        alignSelf: 'center',
+        width: wp('84%'),
+        // alignItems:'flex-start',
+        // backgroundColor:'red'
+        // alignSelf: 'center',
 
     },
     privacyPolicyText1: {
-        color: color.whitewithThirty,
-        textAlign: 'center',
-        fontSize: 13,
+        // color: color.whitewithThirty,
+        color: color.whiteWithfiftypercentOpacity,
+        width:'90%',
+
+        textAlign: 'left',
+        fontSize: 12,
         fontFamily: 'Inter',
-        fontWeight: '400',
+        fontWeight: '500',
+        letterSpacing:'0.267'
         // marginTop: hp('3%'),
     },
     privacyText: {
-        color: color.privacyPolicyColor,
+        // color: color.privacyPolicyColor,
     },
 });
 

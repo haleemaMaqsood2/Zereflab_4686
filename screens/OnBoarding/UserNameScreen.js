@@ -25,6 +25,7 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import HeadingText from '../Components/HeadingText';
 import CustomInput from '../Components/CustomInput';
 import CustomButton from '../Components/CustomButton';
+import ResponsiveButton from '../Components/ResponsiveButton';
 
 
 const UserNameScreen = ({ navigation }) => {
@@ -42,7 +43,7 @@ const UserNameScreen = ({ navigation }) => {
 
 
     };
-    
+
 
     function moveNext() {
         navigation.navigate('ImageUpload')
@@ -74,11 +75,11 @@ const UserNameScreen = ({ navigation }) => {
             setKeyboardVisible(false);
             setKeyboardHeight(0);
         });
-    
+
         return () => {
             showSubscription.remove();
             hideSubscription.remove();
-        };              
+        };
     }, [screenHeight]);
     useFocusEffect(
         React.useCallback(() => {
@@ -110,20 +111,22 @@ const UserNameScreen = ({ navigation }) => {
 
 
 
-                        {/* <View style={[
-                            styles.ButtonContainer,
-                            // { marginTop: keyboardVisible ? hp(12) : hp(50) }, // Dynamic margin
-                                // styles.ButtonContainer,
-                                { marginTop: getButtonMarginTop() }, // Dynamic margin
-    
-                        ]}>
-                        <TouchableOpacity onPress={moveNext} style={[styles.touchableArea, userName ? styles.buttonActive : styles.buttonInactive]}>
-                            <Text style={styles.conTinueText}>Sign Up</Text>
-                        </TouchableOpacity>
-                    </View> */}
+               
 
+                        <View style={styles.ResposiveContainer}>
 
-                        <CustomButton
+                            <ResponsiveButton
+                                title="Sign Up"
+                                buttonState={userName}
+                                keyboardVisible={keyboardVisible}
+                                keyboardHeight={keyboardHeight}
+                                nextScreenName="ImageUpload"
+                                onPress={moveNext}
+                                marginTop={(screenHeight < 890) ? hp('18.5%') : hp('23%')} // Example margin top value
+                            />
+                        </View>
+
+                        {/* <CustomButton
                             title="Sign Up"
                             buttonState={userName}
                             keyboardVisible={keyboardVisible}
@@ -133,7 +136,7 @@ const UserNameScreen = ({ navigation }) => {
                             onPress={moveNext}
                             extraSpace={3.6}
 
-                        />
+                        /> */}
 
                     </View>
                 </KeyboardAvoidingView>

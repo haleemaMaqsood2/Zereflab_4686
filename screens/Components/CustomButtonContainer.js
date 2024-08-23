@@ -4,9 +4,10 @@ import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { color } from '../../src/styles/color';
 
-const CustomButtonContainer = ({ button1Name, button2Name, onPressButton1, onPressButton2 }) => {
+const CustomButtonContainer = ({ button1Name, button2Name, onPressButton1, onPressButton2 ,marginTop}) => {
     return (
-        <View style={styles.contineContainer}>
+        <View style={[styles.contineContainer, {marginTop: Platform.OS === 'ios' ? hp(marginTop) : hp(23)}
+        ]}>
             <TouchableOpacity style={styles.uploadContainer} onPress={onPressButton1}>
                 <Text style={styles.uploadText}>{button1Name}</Text>
             </TouchableOpacity>
@@ -19,7 +20,7 @@ const CustomButtonContainer = ({ button1Name, button2Name, onPressButton1, onPre
 
 const styles = StyleSheet.create({
     contineContainer: {
-        marginTop: Platform.OS === 'ios' ? hp(11.5) : hp(23),//ios 8.5
+        // marginTop: Platform.OS === 'ios' ? hp(11.5) : hp(23),//ios 8.5
         alignItems: 'center',
         // backgroundColor:'pink'
     },

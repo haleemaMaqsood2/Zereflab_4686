@@ -24,6 +24,8 @@ const Location = ({ navigation }) => {
     const [location, setLocation] = useState('');
     const dispatch = useDispatch();
     const locationRef = useRef(null);
+    const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
+
 
     const onBoardingComplete = useSelector(
         (state) => state.onBoardingSlice.onBoardingComplete
@@ -119,16 +121,25 @@ const Location = ({ navigation }) => {
                 </View>
             )}
             <TouchableOpacity
-                onPress={moveNext}
-                style={[
-                    styles.ButtonContainer,
-                    location !== '' ? styles.buttonEnabled : styles.buttonDisabled,
-                    keyboardVisible ? styles.buttonWithKeyboard : styles.buttonWithoutKeyboard
-                ]}
-                disabled={location === ''}
-            >
-                <Text style={styles.conTinueText}>Continue</Text>
-            </TouchableOpacity>
+    onPress={moveNext}
+    style={[
+        styles.ButtonContainer,
+        // { bottom: screenHeight > 890 ? 35 : 4 }, // Correctly placed `bottom` property inside an object
+        location !== '' ? styles.buttonEnabled : styles.buttonDisabled,
+        {
+            bottom: (screenHeight > 890 && keyboardVisible) 
+                ? hp(34) 
+                : (screenHeight > 890 ) 
+                    ? hp(4) 
+                    : (!keyboardVisible && screenHeight < 890)
+                    ? hp(4) // If screenHeight < 890 and keyboard is not visible
+                    : hp(35) 
+        }
+    ]}
+    disabled={location === ''}
+>
+    <Text style={styles.conTinueText}>Continue</Text>
+</TouchableOpacity>
         </SafeAreaView>
     );
 };

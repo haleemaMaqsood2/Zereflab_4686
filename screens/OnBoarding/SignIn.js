@@ -19,6 +19,7 @@ import Header from '../Components/Header';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import SignInTab from '../Components/SignInTab';
+import HeadingText from '../Components/HeadingText';
 
 // class ErrorBoundary extends React.Component {
 //     constructor(props) {
@@ -57,6 +58,7 @@ const SignIn = () => {
             <SafeAreaView style={styles.safeArea}>
                 <KeyboardAvoidingView >
                 <Header/>
+                <HeadingText title={"What's your number?"}/>
                 <SignInTab/>
 
                 

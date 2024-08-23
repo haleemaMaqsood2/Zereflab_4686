@@ -200,6 +200,8 @@ const HomePage = () => {
                   button2Name="Maybe Later"
                   onPressButton1={onPressModalClose}
                   onPressButton2={onPressModalClose}
+                  marginTop={10}
+
                 />
               </View>
 

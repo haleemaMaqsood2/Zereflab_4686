@@ -25,54 +25,35 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import HeadingText from '../Components/HeadingText';
 import CustomTextInput from '../Components/CustomTextInput';
 import CustomButton from '../Components/CustomButton';
+import PrivacyPolicy from '../Components/PrivacyPolicy';
 import ResponsiveButton from '../Components/ResponsiveButton';
-const NameInputScreen = ({ navigation }) => {
+const SignInEmail = ({ navigation }) => {
+    const [selectedTab, setSelectedTab] = useState('Email')
+    const phoneRef = useRef(null);
+    const [formattedValue, setFormattedValue] = useState("");
+
+    const [phone, setPhone] = useState()
+    const [name, setName] = useState('')
+    const nameRef = useRef(null);
+    const internalTextInputRef = useRef(null);
+
+    const [value, setValue] = useState();
+    const [count, setCount] = useState(0);
+
+    const [email, setEmail] = useState('')
+    const EmailRef = useRef(null);
+    const [countryCode, setCountryCode] = useState('US'); // Default country code
+
+    const [isProcessing, setIsProcessing] = useState(false);
+
     const [keyboardVisible, setKeyboardVisible] = useState(false);
     const [keyboardHeight, setKeyboardHeight] = useState(0);
     const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
+    const continueTextHeight = hp(6); // Adjust this value based on your design needs
 
+    useEffect(() => {
+        // phoneRef.current.focus();  // Automatically focus the first input field when the component mounts
 
-    //   const navigation = useNavigation();
-    const [name, setName] = useState('')
-    const nameRef = useRef(null);
-    const handleChange = (value) => {
-        setName(value);
-        nameRef.current.focus();
-
-
-    };
-
-    function moveNext() {
-        navigation.navigate('DateOfBirth')
-        // navigation.navigate('UserNameScreen'); // Navigate if age is 17 or older
-
-    }
-
-
-
-
-    useLayoutEffect(() => {
-        nameRef.current.focus();
-
-        // const showSubscription = Keyboard.addListener('keyboardWillShow', (event) => {
-        //     unstable_batchedUpdates(() => {
-        //         const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
-        //         setKeyboardVisible(true);
-        //         setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
-        //     });
-        // });
-
-        // const hideSubscription = Keyboard.addListener('keyboardWillShow', () => {
-        //     unstable_batchedUpdates(() => {
-        //         setKeyboardVisible(false);
-        //         setKeyboardHeight(0);
-        //     });
-        // });
-
-        // return () => {
-        //     showSubscription.remove();
-        //     hideSubscription.remove();
-        // };
         const showSubscription = Keyboard.addListener('keyboardWillShow', (event) => {
             const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
             setKeyboardVisible(true);
@@ -87,12 +68,34 @@ const NameInputScreen = ({ navigation }) => {
             showSubscription.remove();
             hideSubscription.remove();
         };
-
     }, [screenHeight]);
+
+    useEffect(() => {
+        if (selectedTab === 'Number' && internalTextInputRef.current) {
+            internalTextInputRef.current.focus();
+        }
+    }, [selectedTab]);
+
+
+    const handleChange = (value) => {
+        setEmail(value);
+        // EmailRef.current.focus();
+
+
+    };
+
+    function moveNext() {
+        navigation.navigate('VerifyCode');
+    }
+    function onPressPhone() {
+        navigation.navigate('SignIn');
+    }
+
+
     useFocusEffect(
         React.useCallback(() => {
             // Refocus the first input field when the screen is focused
-            nameRef.current.focus();
+            EmailRef.current.focus();
         }, [])
     );
 
@@ -103,64 +106,50 @@ const NameInputScreen = ({ navigation }) => {
                     <Header />
 
                     <View style={styles.titleContainer}>
-                        <HeadingText title={"What's your name?"} />
+                        <HeadingText title={"What's your email?"} />
                         <CustomTextInput
                             value={name}
                             onChangeText={handleChange}
-                            placeholder='Full name'
+                            placeholder='Email'
                             placeholderTextColor={color.placeholderColor}
-                            ref={nameRef}
+                            ref={EmailRef}
                         />
-                        <View style={styles.ResposiveContainer}>
+                        <View style={{ marginTop: '4%', paddingLeft: 0 }}>
+                            <PrivacyPolicy />
+                        </View>
+                        <TouchableOpacity style={styles.emailTextContainer} onPress={onPressPhone}>
+                            <Text style={styles.emailText}>Use phone number instead</Text>
+                        </TouchableOpacity>
+                        {/* <View style={{ marginTop: (screenHeight < 890) ? hp('16%') : hp('20%'), flex: 1 }}>
+                            <View style={styles.ButtonContainer}>
+
+                                <TouchableOpacity onPress={moveNext}
+                                    style={[styles.touchableArea, value ? styles.buttonActive : styles.buttonInactive]}
+                                >
+                                    <Text style={styles.conTinueText}>Continue</Text>
+                                </TouchableOpacity>
+                            </View>
+
+                        </View> */}
+                        {/* <View style={styles.ResposiveContainer}> */}
 
                             <ResponsiveButton
                                 title="Continue"
-                                buttonState={name}
+                                buttonState={email}
                                 keyboardVisible={keyboardVisible}
                                 keyboardHeight={keyboardHeight}
-                                nextScreenName="DateOfBirth"
+                                nextScreenName="VerifyCode"
                                 onPress={moveNext}
-                                marginTop={(screenHeight < 890) ? hp('24%') : hp('28%')} // Example margin top value
+                                marginTop={(screenHeight < 890) ? hp('15%') : hp('19%')} // Example margin top value
                             />
 
-                        </View>
+                        {/* </View> */}
 
 
-                        {/* <CustomButton
-                            title="Continue"
-                            buttonState={name}
-                            keyboardVisible={keyboardVisible}
-                            keyboardHeight={keyboardHeight}
-                            nextScreenName="DateOfBirth"
-                            marginTop={55}
-                            onPress={moveNext}
-                            extraSpace={3.4}
 
-                        /> */}
 
                     </View>
-                    {/* <View style={{flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor:'pink',
-            marginTop:250,
-            marginBottom:(100)
-        } 
-            }>
-                    <CustomButton
-                            title="Continue"
-                            buttonState={name}
-                            keyboardVisible={keyboardVisible}
-                            keyboardHeight={keyboardHeight}
-                            nextScreenName="NameInputScreen"
-                            marginTop={0}
-                            onPress={moveNext}
-                            // extraSpace={3.5}
-                            extraSpace={0}
 
-
-                        />
-                        </View> */}
                 </KeyboardAvoidingView>
 
             </SafeAreaView>
@@ -213,6 +202,52 @@ const styles = StyleSheet.create({
         borderRadius: 10,
 
     },
+    buttonActive: {
+        backgroundColor: color.onBoardingButton,
+        borderRadius: 10,
+
+    },
+    ResposiveContainer: {
+        // flex: 1,
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        alignSelf:'center'
+    },
+    buttonInactive: {
+        // backgroundColor: '#ffffff33',
+        borderRadius: 10,
+
+    },
+    conTinueText: {
+        alignItems: 'center',
+        color: '#FFFFFF',
+        fontSize: 16,
+        fontWeight: '700',
+        fontFamily: 'inter',
+
+    },
+    buttonText: {
+        fontSize: 16,
+        fontWeight: '400',
+        color: color.whiteFontColor,
+        fontFamily: 'Inter',
+        paddingLeft: wp('1%'),
+        // backgroundColor:'red',
+        alignSelf: 'center',
+        width: wp('50%')
+    },
+
+    emailTextContainer: {
+        alignSelf: 'flex-start',
+        paddingLeft: '5%'
+    },
+    emailText: {
+        color: color.privacyPolicyColor,
+        fontSize: 12,
+        fontWeight: '500',
+        fontFamily: 'Inter',
+        textAlign: 'left'
+    },
     buttonInactive: {
         // backgroundColor: '#ffffff33',
         // backgroundColor:color.WhiteWithThirtypercentOpacity,
@@ -247,17 +282,18 @@ const styles = StyleSheet.create({
 
     },
     ButtonContainer: {
-        backgroundColor: color.WhiteWithThirtypercentOpacity,
+        backgroundColor: '#ffffff33',
         // height:hp('7%'),
         height: hp(6),
         // width:363,
 
-        width: wp('92%'),
-        marginTop: hp(25),
+        width: wp('90%'),
+        marginTop: hp('-1%'),
         textAlign: 'center',
         borderRadius: 10,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignSelf: 'center'
 
 
 
@@ -278,4 +314,4 @@ const styles = StyleSheet.create({
     },
 
 });
-export default NameInputScreen;
+export default SignInEmail;

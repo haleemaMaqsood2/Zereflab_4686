@@ -23,6 +23,7 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import HeadingText from '../Components/HeadingText';
 import CustomButton from '../Components/CustomButton';
 import { getTabBarHeight } from '@react-navigation/bottom-tabs/lib/typescript/src/views/BottomTabBar';
+import ResponsiveButton from '../Components/ResponsiveButton';
 
 
 const VerifyCode = () => {
@@ -76,7 +77,7 @@ const VerifyCode = () => {
     useEffect(() => {
         v1Ref.current.focus();  // Automatically focus the first input field when the component mounts
 
-        
+
         const showSubscription = Keyboard.addListener('keyboardWillShow', (event) => {
             const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
             setKeyboardVisible(true);
@@ -86,7 +87,7 @@ const VerifyCode = () => {
             setKeyboardVisible(false);
             setKeyboardHeight(0);
         });
-    
+
         return () => {
             showSubscription.remove();
             hideSubscription.remove();
@@ -94,9 +95,18 @@ const VerifyCode = () => {
     }, [screenHeight]);
     useFocusEffect(
         React.useCallback(() => {
-            // Refocus the first input field when the screen is focused
-            v1Ref.current.focus();
-        }, [])
+            if (v1 && v2 && v3 && v4) {
+                v4Ref.current.focus();
+            } else if (!v1) {
+                v1Ref.current.focus();
+            } else if (!v2) {
+                v2Ref.current.focus();
+            } else if (!v3) {
+                v3Ref.current.focus();
+            } else if (!v4) {
+                v4Ref.current.focus();
+            }
+        }, [v1, v2, v3, v4])
     );
 
     function startTimer() {
@@ -135,10 +145,10 @@ const VerifyCode = () => {
         return (
             <SafeAreaView style={styles.safeArea}>
                 <KeyboardAvoidingView
-                  style={{ flex: 1 }}
-                //   behavior={Platform.OS === 'ios' ? 'padding' : null}
-                keyboardVerticalOffset={customKeyboardHeight}
-                   >
+                    style={{ flex: 1 }}
+                    //   behavior={Platform.OS === 'ios' ? 'padding' : null}
+                    keyboardVerticalOffset={customKeyboardHeight}
+                >
                     <Header />
 
                     <View style={styles.titleContainer}>
@@ -203,16 +213,17 @@ const VerifyCode = () => {
                             </TouchableOpacity>
                         )}
 
-                      
+
                     </View>
-                    <View style={{flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            // backgroundColor:'pink',
-            marginBottom:(270)
-        } 
-            }>
-                    <CustomButton
+                    <View style={{
+                        flex: 1,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        // backgroundColor:'pink',
+                        marginBottom: (270)
+                    }
+                    }>
+                        {/* <CustomButton
                             title="Continue"
                             buttonState={isAllFieldsFilled}
                             keyboardVisible={keyboardVisible}
@@ -224,8 +235,21 @@ const VerifyCode = () => {
                             extraSpace={0}
 
 
-                        />
+                        /> */}
+                        <View style={styles.ResposiveContainer}>
+
+                            <ResponsiveButton
+                                title="Continue"
+                                buttonState={isAllFieldsFilled}
+                                keyboardVisible={keyboardVisible}
+                                keyboardHeight={keyboardHeight}
+                                nextScreenName="NameInputScreen"
+                                onPress={moveNext}
+                                marginTop={(screenHeight < 890) ? hp('16%') : hp('23.5%')} // Example margin top value
+                            />
+
                         </View>
+                    </View>
                 </KeyboardAvoidingView>
 
             </SafeAreaView>
@@ -249,6 +273,12 @@ const styles = StyleSheet.create({
     background: {
         flex: 1,
     },
+    ResposiveContainer: {
+        // flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
     titleContainer: {
         width: wp('95%'),
         alignSelf: 'center',
@@ -313,7 +343,7 @@ const styles = StyleSheet.create({
         // textAlign: 'center',
         // alignItems: 'center',
         // justifyContent: 'center'
-            
+
 
 
     },

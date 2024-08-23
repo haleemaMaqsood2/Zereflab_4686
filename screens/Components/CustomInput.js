@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     image: {
         // marginTop: '4.5%',
         alignItems:'center',
-        paddingLeft: RFPercentage(-8),
+        paddingLeft: RFPercentage(0),
         height:RFPercentage(2),
         width:RFPercentage(2),
     },

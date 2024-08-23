@@ -13,6 +13,8 @@ import DiscoverFriends from "../../screens/OnBoarding/DiscoverFriends";
 import AddFriendScreen from "../../screens/OnBoarding/AddFriendScreen";
 import Location from "../../screens/OnBoarding/Location";
 import Splash from "../../screens/OnBoarding/Splash";
+import SignInEmail from "../../screens/OnBoarding/SignInEmail";
+
 // import OnBoarding from "../screens/onBoarding/OnBoarding";
 
 const OnBoardingStack = () => {
@@ -39,6 +41,7 @@ const OnBoardingStack = () => {
         <OnBoardingStack.Screen name="DiscoverFriends" component={DiscoverFriends} />
         <OnBoardingStack.Screen name="AddFriendScreen" component={AddFriendScreen} />
         <OnBoardingStack.Screen name="Location" component={Location} />
+        <OnBoardingStack.Screen name="SignInEmail" component={SignInEmail} />
 
 
     </OnBoardingStack.Navigator>
