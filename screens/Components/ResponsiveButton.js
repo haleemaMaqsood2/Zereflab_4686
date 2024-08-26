@@ -128,6 +128,8 @@ const styles = StyleSheet.create({
   },
   inactiveButton: {
     backgroundColor: color.WhiteWithThirtypercentOpacity,
+    // backgroundColor: 'white',
+
   },
   buttonText: {
     color: '#FFFFFF',

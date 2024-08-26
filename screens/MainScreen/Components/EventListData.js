@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
 
     },
     flatlistContainer: {
+        // backgroundColor:'red',
         backgroundColor: color.backgroundColor,
         flexDirection: 'row',
         paddingLeft: hp(1.5),

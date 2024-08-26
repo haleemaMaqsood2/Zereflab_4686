@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 1,
-        marginBottom: '3%',//10
+        marginBottom: '3.5%',//10
         alignSelf:'center'
     },
     conTinueText: {

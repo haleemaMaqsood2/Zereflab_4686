@@ -738,6 +738,7 @@ const styles = StyleSheet.create({
     // backgroundColor: 'red',
 
     alignSelf: 'center'
+    
   },
   signInTabContainer: {
     width: wp('90%'),
@@ -856,13 +857,15 @@ const styles = StyleSheet.create({
     height: hp(6),
     // width:363,
 
-    width: wp('90%'),
+    width: wp('92%'),
     marginTop: hp('-1%'),
     textAlign: 'center',
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    // backgroundColor: 'white',
+
 
 
 

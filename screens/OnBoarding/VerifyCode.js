@@ -245,7 +245,7 @@ const VerifyCode = () => {
                                 keyboardHeight={keyboardHeight}
                                 nextScreenName="NameInputScreen"
                                 onPress={moveNext}
-                                marginTop={(screenHeight < 890) ? hp('16%') : hp('23.5%')} // Example margin top value
+                                marginTop={(screenHeight < 890) ? hp('16%') : hp('23.0%')} // Example margin top value
                             />
 
                         </View>

@@ -126,7 +126,7 @@ const HomePage = () => {
 
   };
   useEffect(() => {
-    dispatch(setOnBoardingComplete(true));
+    dispatch(setOnBoardingComplete(true));//false//true
 
     // setModalVisible(true)
     // Dynamically update the data based on the selected tab
