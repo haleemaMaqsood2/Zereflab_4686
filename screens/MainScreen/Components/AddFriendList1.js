@@ -56,6 +56,8 @@ const AddFriendList1 = ({ data, inviteFriends }) => {
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id.toString()}
                 contentContainerStyle={styles.list}
+                showsVerticalScrollIndicator={false}  // Hide vertical scrollbar
+                showsHorizontalScrollIndicator={false} // Hide horizontal scrollbar
             />
         </View>
     );
@@ -73,6 +75,8 @@ const styles = StyleSheet.create({
         fontFamily: font.Regular,
         color: color.whiteColor,
         marginBottom: hp('2%'),
+        marginTop:'3%'
+        
     },
     titleText1: {
         fontSize: 17,
@@ -95,7 +99,7 @@ const styles = StyleSheet.create({
     friendContainer1: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingBottom: '5%',
+        paddingBottom: '3%',
         borderBottomColor: color.placeholderColor,
     },
     image: {
@@ -122,16 +126,20 @@ const styles = StyleSheet.create({
     addButton: {
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent:'center',
+        // alignSelf:'center',
         backgroundColor: color.onBoardingButton,
-        padding: wp('1.5%'),
+        // padding: wp('1.5%'),
         borderRadius: 8,
-        width:wp('30%'),
+        width:wp('27%'),
+        height:hp(4),
         paddingHorizontal: wp('7%'), // Adjust horizontal padding for increased width
     },
     addIcon: {
-        width: RFPercentage(2),
-        height: RFPercentage(2),
-        marginRight: wp('2%'),
+        width: RFPercentage(1.8),
+        height: RFPercentage(1.5),
+        marginRight: wp('1%'),
+        // backgroundColor:'red'
     },
     addText: {
         color: color.whiteColor,
@@ -139,6 +147,7 @@ const styles = StyleSheet.create({
         fontWeight:'500',
         // fontWeight: 'medium',
         fontFamily: font.Regular,
+        // backgroundColor:'red'
     },
     addButton1: {
         flexDirection: 'row',
@@ -146,9 +155,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#373739',
         padding: wp('1.5%'),
         borderRadius: 8,
-        width:wp('30%'),
+        width:wp('27%'),
+        justifyContent:'center',
+        height:hp(4),
 
-        paddingHorizontal: wp('6%'), // Adjust horizontal padding for increased width
+
+
+        paddingHorizontal: wp('7%'), // Adjust horizontal padding for increased width
     },
 });
 

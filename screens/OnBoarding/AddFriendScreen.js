@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
         // width:363,
 
         width: wp('92%'),
-        marginTop: hp(30),
+        marginTop: hp(29),
         textAlign: 'center',
         borderRadius: 10,
         alignItems: 'center',

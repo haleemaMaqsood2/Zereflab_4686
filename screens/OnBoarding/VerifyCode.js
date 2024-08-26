@@ -22,10 +22,13 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp, heightPercentage
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import HeadingText from '../Components/HeadingText';
 import CustomButton from '../Components/CustomButton';
+import { getTabBarHeight } from '@react-navigation/bottom-tabs/lib/typescript/src/views/BottomTabBar';
+import ResponsiveButton from '../Components/ResponsiveButton';
 
 
 const VerifyCode = () => {
     //   const navigation = useNavigation();
+    const customKeyboardHeight = hp(30); // For example, 40% of screen height
 
     const [keyboardVisible, setKeyboardVisible] = useState(false);
     const [keyboardHeight, setKeyboardHeight] = useState(0);
@@ -72,12 +75,15 @@ const VerifyCode = () => {
         };
     }, []);
     useEffect(() => {
-        const showSubscription = Keyboard.addListener('keyboardDidShow', (event) => {
+        v1Ref.current.focus();  // Automatically focus the first input field when the component mounts
+
+
+        const showSubscription = Keyboard.addListener('keyboardWillShow', (event) => {
             const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
             setKeyboardVisible(true);
             setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
         });
-        const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+        const hideSubscription = Keyboard.addListener('keyboardWillHide', () => {
             setKeyboardVisible(false);
             setKeyboardHeight(0);
         });
@@ -87,6 +93,21 @@ const VerifyCode = () => {
             hideSubscription.remove();
         };
     }, [screenHeight]);
+    useFocusEffect(
+        React.useCallback(() => {
+            if (v1 && v2 && v3 && v4) {
+                v4Ref.current.focus();
+            } else if (!v1) {
+                v1Ref.current.focus();
+            } else if (!v2) {
+                v2Ref.current.focus();
+            } else if (!v3) {
+                v3Ref.current.focus();
+            } else if (!v4) {
+                v4Ref.current.focus();
+            }
+        }, [v1, v2, v3, v4])
+    );
 
     function startTimer() {
         console.log("Timere started again")
@@ -118,11 +139,16 @@ const VerifyCode = () => {
         navigation.navigate('NameInputScreen');
     }
 
+    const keyboardVerticalOffset = Platform.OS === 'ios' ? 20 : 0;
 
     {
         return (
             <SafeAreaView style={styles.safeArea}>
-                <KeyboardAvoidingView >
+                <KeyboardAvoidingView
+                    style={{ flex: 1 }}
+                    //   behavior={Platform.OS === 'ios' ? 'padding' : null}
+                    keyboardVerticalOffset={customKeyboardHeight}
+                >
                     <Header />
 
                     <View style={styles.titleContainer}>
@@ -187,17 +213,42 @@ const VerifyCode = () => {
                             </TouchableOpacity>
                         )}
 
-                        <CustomButton
+
+                    </View>
+                    <View style={{
+                        flex: 1,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        // backgroundColor:'pink',
+                        marginBottom: (270)
+                    }
+                    }>
+                        {/* <CustomButton
                             title="Continue"
                             buttonState={isAllFieldsFilled}
                             keyboardVisible={keyboardVisible}
                             keyboardHeight={keyboardHeight}
                             nextScreenName="NameInputScreen"
-                            marginTop={47}
+                            marginTop={0}
                             onPress={moveNext}
-                            extraSpace={3.5}
+                            // extraSpace={3.5}
+                            extraSpace={0}
 
-                        />
+
+                        /> */}
+                        <View style={styles.ResposiveContainer}>
+
+                            <ResponsiveButton
+                                title="Continue"
+                                buttonState={isAllFieldsFilled}
+                                keyboardVisible={keyboardVisible}
+                                keyboardHeight={keyboardHeight}
+                                nextScreenName="NameInputScreen"
+                                onPress={moveNext}
+                                marginTop={(screenHeight < 890) ? hp('16%') : hp('23.0%')} // Example margin top value
+                            />
+
+                        </View>
                     </View>
                 </KeyboardAvoidingView>
 
@@ -222,6 +273,12 @@ const styles = StyleSheet.create({
     background: {
         flex: 1,
     },
+    ResposiveContainer: {
+        // flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
     titleContainer: {
         width: wp('95%'),
         alignSelf: 'center',
@@ -276,16 +333,16 @@ const styles = StyleSheet.create({
 
     },
     ButtonContainer: {
-        backgroundColor: color.WhiteWithThirtypercentOpacity,
-        // height:hp('7%'),
-        height: hp(6),
-        // width:363,
-        borderRadius: 10,
-        width: wp('92%'),
-        marginTop: hp(26),
-        textAlign: 'center',
-        alignItems: 'center',
-        justifyContent: 'center'
+        // backgroundColor: color.WhiteWithThirtypercentOpacity,
+        // // height:hp('7%'),
+        // height: hp(6),
+        // // width:363,
+        // borderRadius: 10,
+        // width: wp('92%'),
+        // marginTop: hp(26),
+        // textAlign: 'center',
+        // alignItems: 'center',
+        // justifyContent: 'center'
 
 
 

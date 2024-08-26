@@ -26,79 +26,131 @@ const Attendees = ({ navigation }) => {
     const addFriendData=[
         {
             id:1,
-            name:"Full Name",
+            name:"David Silbia",
             username:'@Username',
-            image: require('../../src/assets/images/Profile2.png'),
-            status:'Add'
+            image: require('../../src/assets/images/avatar/Avatar6.png'),
+            status:'friend'
         },
         {
             id:2,
-            name:"Full Name",
+            name:"Cristofer",
             username:'@Username',
-            image: require('../../src/assets/images/Profile2.png'),
-            status:'Add'
+            image: require('../../src/assets/images/avatar/Avatar7.png'),
+            status:'friend'
 
         },
+        // {
+        //     id:3,
+        //     name:"Ronald C",
+        //     username:'@Username',
+        //     image: require('../../src/assets/images/avatar/Avatar3.png'),
+        //     status:'Add'
+        // },
+        // {
+        //     id:4,
+        //     name:"Cristofer Nolan ",
+        //     username:'@Username',
+        //     image: require('../../src/assets/images/avatar/Avatar5.png'),
+        //     status:'Add'
+
+        // },
+        // {
+        //     id:5,
+        //     name:"Rayn howard",
+        //     username:'@Username',
+        //     image: require('../../src/assets/images/avatar/Avatar1.png'),
+        //     status:'Add'
+
+        // },{
+        //     id:6,
+        //     name:"Alex M",
+        //     username:'@Username',
+        //     image: require('../../src/assets/images/Profile2.png'),
+        //     status:'Add'
+
+        // },{
+        //     id:7,
+        //     name:"Joan Baker",
+        //     username:'@Username',
+        //     image: require('../../src/assets/images/avatar/Avatar4.png'),
+        //     status:'Add'
+
+        // },{
+        //     id:8,
+        //     name:"Ronald C",
+        //     username:'@Username',
+        //     image: require('../../src/assets/images/avatar/Avatar3.png'),
+        //     status:'Add'
+
+        // },{
+        //     id:9,
+        //     name:"Cristofer Nolan ",
+        //     username:'@Username',
+        //     image: require('../../src/assets/images/avatar/Avatar5.png'),
+        //     status:'Add'
+
+        // },
     ];
     const inviteFriendData=[
         {
             id:1,
-            name:"Full Name",
+            name:"Ronald C",
             username:'@Username',
-            image: require('../../src/assets/images/Profile2.png'),
-            status:'Invite'
+            image: require('../../src/assets/images/avatar/Avatar3.png'),
+            status:'Add'
         },
         {
             id:2,
-            name:"Full Name",
+            name:"Cristofer Nolan ",
             username:'@Username',
-            image: require('../../src/assets/images/Profile2.png'),
-            status:'Invite'
+            image: require('../../src/assets/images/avatar/Avatar5.png'),
+            status:'Add'
 
         },
         {
             id:3,
-            name:"Full Name",
+            name:"Rayn howard",
             username:'@Username',
-            image: require('../../src/assets/images/Profile2.png'),
-            status:'Invite'
+            image: require('../../src/assets/images/avatar/Avatar1.png'),
+            status:'Add'
 
         },{
             id:4,
-            name:"Full Name",
+            name:"Alex M",
             username:'@Username',
             image: require('../../src/assets/images/Profile2.png'),
-            status:'Invite'
+            status:'Add'
 
         },{
             id:5,
-            name:"Full Name",
+            name:"Joan Baker",
             username:'@Username',
-            image: require('../../src/assets/images/Profile2.png'),
-            status:'Invite'
+            image: require('../../src/assets/images/avatar/Avatar4.png'),
+            status:'Add'
 
         },{
             id:6,
-            name:"Full Name",
+            name:"Ronald C",
             username:'@Username',
-            image: require('../../src/assets/images/Profile2.png'),
-            status:'Invite'
+            image: require('../../src/assets/images/avatar/Avatar3.png'),
+            status:'Add'
 
         },{
             id:7,
-            name:"Full Name",
+            name:"Cristofer Nolan ",
             username:'@Username',
-            image: require('../../src/assets/images/Profile2.png'),
-            status:'Invite'
-
-        },{
-            id:8,
-            name:"Full Name",
-            username:'@Username',
-            image: require('../../src/assets/images/Profile2.png'),
-            status:'Invite'
+            image: require('../../src/assets/images/avatar/Avatar5.png'),
+            status:'Add'
 
         },
+        // {
+        //     id:8,
+        //     name:"Full Name",
+        //     username:'@Username',
+        //     image: require('../../src/assets/images/Profile2.png'),
+        //     status:'Invite'
+
+        // },
     ]
     function moveNext() {
         navigation.navigate('Location')

@@ -13,7 +13,7 @@ import {
   Modal
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation} from '@react-navigation/native';
 import { color } from '../../src/styles/color';
 import Header from './Components/Header';
 import { BottomTabBar } from '@react-navigation/bottom-tabs';
@@ -23,34 +23,83 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { useDispatch } from 'react-redux';
 import { setOnBoardingComplete } from '../../src/store/slices/onBoardingSlice/onBoardingSlice';
 import EventListData from './Components/EventListData';
+import CustomButtonContainer from '../Components/CustomButtonContainer';
 
 
 const HomePage = () => {
   const [modalVisible, setModalVisible] = useState(true); // Start with the modal visible
   const dispatch = useDispatch();
   const today = 'Today - 12:00 PM';
+  const [filteredData, setFilteredData] = useState([]);
 
-  const data=[
+
+  const data = [
     {
-      id:1,
-      username:'msu-figi',
-      userProfileIcon:require('../../src/assets/images/partyUser.png'),
-      Title:'FIJI DARTY',
-      partyImage:require('../../src/assets/images/BirthdayListScreen.png'),
-      time:today,
-      other:130,
-      friends:12
+      id: 1,
+      username: 'msu-fiji',
+      userProfileIcon: require('../../src/assets/images/partyUser1x4.png'),
+      Title: 'FIJI DARTY',
+      partyImage: require('../../src/assets/images/BirthdayListScreen1x4.png'),
+      time: today,
+      other: 130,
+      friends: 12
     },
     {
-      id:2,
-      username:'msu-figi',
-      userProfileIcon:require('../../src/assets/images/partyUser.png'),
-      Title:'FIJI DARTY',
-      partyImage:require('../../src/assets/images/BirthdayListScreen.png'),
+      id: 2,
+      username: 'msu-fiji',
+      userProfileIcon: require('../../src/assets/images/partyUser1x4.png'),
+      Title: 'FIJI DARTY',
+      partyImage: require('../../src/assets/images/BirthdayListScreen1x4.png'),
 
-      time:today,
-      other:130,
-      friends:12
+      time: today,
+      other: 130,
+      friends: 12
+    },
+  ]
+  const upcomingData = [
+    {
+      id: 1,
+      username: 'msu-fiji1',
+      userProfileIcon: require('../../src/assets/images/partyUser1x4.png'),
+      Title: 'FIJI DARTY',
+      partyImage: require('../../src/assets/images/BirthdayListScreen1x4.png'),
+      time: today,
+      other: 130,
+      friends: 12
+    },
+    {
+      id: 2,
+      username: 'msu-fiji',
+      userProfileIcon: require('../../src/assets/images/partyUser1x4.png'),
+      Title: 'FIJI DARTY',
+      partyImage: require('../../src/assets/images/BirthdayListScreen1x4.png'),
+
+      time: today,
+      other: 130,
+      friends: 12
+    },
+  ]
+  const friendsData = [
+    {
+      id: 1,
+      username: 'msu-fiji3',
+      userProfileIcon: require('../../src/assets/images/partyUser1x4.png'),
+      Title: 'FIJI DARTY',
+      partyImage: require('../../src/assets/images/BirthdayListScreen1x4.png'),
+      time: today,
+      other: 130,
+      friends: 12
+    },
+    {
+      id: 2,
+      username: 'msu-fiji',
+      userProfileIcon: require('../../src/assets/images/partyUser1x4.png'),
+      Title: 'FIJI DARTY',
+      partyImage: require('../../src/assets/images/BirthdayListScreen1x4.png'),
+
+      time: today,
+      other: 130,
+      friends: 12
     },
   ]
 
@@ -69,42 +118,42 @@ const HomePage = () => {
       name: 'Friends',
     },
   ]
+  const [selectedTab, setSelectedTab] = useState('Popular')
+
 
   const onPressModalClose = () => {
     setModalVisible(false)
-   
-}; 
-  useEffect(()=>{
-    dispatch(setOnBoardingComplete(true));
+
+  };
+  useEffect(() => {
+    dispatch(setOnBoardingComplete(true));//false//true
 
     // setModalVisible(true)
-
-   })
+    // Dynamically update the data based on the selected tab
+    if (selectedTab === 'Popular') {
+      setFilteredData(data);
+    } else if (selectedTab === 'Upcoming') {
+      setFilteredData(upcomingData);
+    } else if (selectedTab === 'Friends') {
+      setFilteredData(friendsData);
+    }
+  }, [selectedTab]);
 
   {
     return (
       <SafeAreaView style={styles.safeArea}>
-        <SafeAreaView style={styles.safeArea}>
-          <Header  />
-          <HomeTab data={TabData} />
+        <Header />
+        <HomeTab data={TabData} onTabSelect={setSelectedTab} />
 
 
           <View style={styles.container}>
-        <EventListData data={data} />
-      </View>
+          <EventListData data={filteredData} />
+        </View>
         <View style={styles.centeredContainer}>
-        {/* <EventListData data={data}/> */}
-
-             {/*  <View style={styles.textContainer}>
-              <Image
-                source={require('../../src/assets/images/logo.png')}
-              />
-
-            </View>*/}
-          </View> 
+        </View>
 
 
-          {/* FLATLIST daTA>>>>>>> */}
+        {/* FLATLIST daTA>>>>>>> */}
 
 
 
@@ -115,39 +164,50 @@ const HomePage = () => {
 
 
 
-          
-          {/* Modal Implementation */}
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => setModalVisible(false)}
-          >
-            <View style={styles.modalContainer}>
 
-              <View style={styles.modalContent}>
-                <TouchableOpacity style={styles.hideIcon} onPress={onPressModalClose}>
-                  <Image
-                    source={require('../../src/assets/images/ModalHideIcon.png')}
-                  />
-                </TouchableOpacity>
+        {/* Modal Implementation */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)}
+        >
+          <View style={styles.modalContainer}>
+
+            <View style={styles.modalContent}>
+              <TouchableOpacity style={styles.hideIcon} onPress={onPressModalClose}>
                 <Image
-                  source={require('../../src/assets/images/NotificationIcon.png')}
-                  style={styles.Notificationimage}
+                  source={require('../../src/assets/images/bar1x4.png')}
+                  style={styles.barIcon}
+                  resizeMode='contain'
                 />
-                <Text style={styles.modalTitle}>Turn on Notifications</Text>
-                <Text style={styles.modalDescription}>You’ll be able to see what your friends are doing and stay updated on new events!
-                </Text>
-                <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.continueButton}>
-                <Text style={styles.closeButtonText}>Continue</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.LaterButton}>
-                <Text style={styles.laterButtonText}>MayBe Later</Text>
-              </TouchableOpacity>
+              <Image
+                source={require('../../src/assets/images/Notification1x4.png')}
+                style={styles.Notificationimage}
+                resizeMode='contain'
+              />
+              <View style={{alignItems:'center',width:'90%'}}>
+              <Text style={styles.modalTitle}>Turn on notifications</Text>
+              <Text style={styles.modalDescription}>You’ll be able to see what your friends are doing and stay updated on new events!
+              </Text>
               </View>
+              <View 
+              style={{marginBottom:'5%' }}
+              >
+                <CustomButtonContainer
+                  button1Name="Continue"
+                  button2Name="Maybe Later"
+                  onPressButton1={onPressModalClose}
+                  onPressButton2={onPressModalClose}
+                  marginTop={10}
+
+                />
+              </View>
+
             </View>
-          </Modal>
-        </SafeAreaView>
+          </View>
+        </Modal>
 
       </SafeAreaView>
     );
@@ -157,15 +217,16 @@ const HomePage = () => {
 const styles = StyleSheet.create({
 
   safeArea: {
-    flex: 1,
-    backgroundColor:color.backgroundColor,
+    // flex: 1,
+    height:'100%',
+    backgroundColor: color.backgroundColor,
   },
   background: {
     flex: 1,
     backgroundColor: color.backgroundColor,
   },
-  container:{
-    backgroundColor:color.backgroundColor,
+  container: {
+    backgroundColor: color.backgroundColor,
     // backgroundColor:'red',
 
   },
@@ -187,20 +248,29 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     width: '100%',
-    height: hp(65), // 60% of the screen height
+    height: hp(67), // 60% of the screen height
     backgroundColor: color.inputFieldColor,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     // padding: 20,
     alignItems: 'center',
-    // justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
-  hideIcon:{
-    marginTop:hp('2%'),
-    marginBottom:hp('5%')
+  hideIcon: {
+    // marginTop: hp('1%'),
+    marginBottom: hp('2%'),//5
+    // backgroundColor:'red',
+    width:'40%',
+    height:'5%',
+    justifyContent:'center',
+
   },
-  Notificationimage:{
-    marginBottom:hp('5%')
+  Notificationimage: {
+    width:wp('35%'),
+    marginBottom: hp('2%'),
+    height:hp('20%'),
+    // backgroundColor:'pink'
+
 
   },
   modalTitle: {
@@ -208,7 +278,17 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontFamily: 'Inter',
     color: color.whiteFontColor,
-    marginBottom:hp('2.5%')
+    marginBottom: hp('2.25%'),
+    // lineHeight:128.646,
+
+
+  },
+  barIcon:{
+    width:50,
+    height:4,
+    // alignItems:'center'
+    alignSelf:'center',
+    // backgroundColor:'pink'
 
 
   },
@@ -218,7 +298,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter',
     color: color.whiteFontColor,
     textAlign: 'center',
-    marginBottom:hp('8.5%'),
+    // marginBottom: hp('8.5%'),
     // lineHeight:128.646
 
 
@@ -227,36 +307,36 @@ const styles = StyleSheet.create({
   continueButton: {
     backgroundColor: color.onBoardingButton,
     borderRadius: 10,
-    width:wp('94%'),
-    justifyContent:'center',
-    height:hp('6%'),
-    alignItems:'center',
-    marginBottom:hp('1.5%')
+    width: wp('94%'),
+    justifyContent: 'center',
+    height: hp('6%'),
+    alignItems: 'center',
+    marginBottom: hp('1.5%')
 
   },
   closeButtonText: {
     color: 'white',
     fontSize: 16,
-    fontWeight:'700',
-    fontFamily:'Inter'
+    fontWeight: '700',
+    fontFamily: 'Inter'
   },
   LaterButton: {
     // backgroundColor: color.onBoardingButton,
     borderRadius: 10,
-    width:wp('94%'),
-    justifyContent:'center',
-    height:hp('6%'),
-    alignItems:'center',
-    borderColor:'#ffffff4d',//white with 30%opacity
-    borderWidth:1
+    width: wp('94%'),
+    justifyContent: 'center',
+    height: hp('6%'),
+    alignItems: 'center',
+    borderColor: '#ffffff4d',//white with 30%opacity
+    borderWidth: 1
 
 
   },
   laterButtonText: {
-    color:'#ffffff4d',
+    color: '#ffffff4d',
     fontSize: 16,
-    fontWeight:'700',
-    fontFamily:'Inter'
+    fontWeight: '700',
+    fontFamily: 'Inter'
   },
 
 });

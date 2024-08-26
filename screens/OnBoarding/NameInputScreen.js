@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect,useLayoutEffect } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -25,7 +25,7 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import HeadingText from '../Components/HeadingText';
 import CustomTextInput from '../Components/CustomTextInput';
 import CustomButton from '../Components/CustomButton';
-
+import ResponsiveButton from '../Components/ResponsiveButton';
 const NameInputScreen = ({ navigation }) => {
     const [keyboardVisible, setKeyboardVisible] = useState(false);
     const [keyboardHeight, setKeyboardHeight] = useState(0);
@@ -44,50 +44,58 @@ const NameInputScreen = ({ navigation }) => {
 
     function moveNext() {
         navigation.navigate('DateOfBirth')
+        // navigation.navigate('UserNameScreen'); // Navigate if age is 17 or older
+
     }
 
 
 
-    // useEffect(() => {
-    //     const showSubscription = Keyboard.addListener('keyboardDidShow', (event) => {
-    //         const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
-    //         setKeyboardVisible(true);
-    //         console.log("jhjhh")
-    //         setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
-    //     });
-    //     const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
-    //         setKeyboardVisible(false);
-    //         setKeyboardHeight(0);
-    //     });
 
-    //     return () => {
-    //         showSubscription.remove();
-    //         hideSubscription.remove();
-    //     };
-    // }, [screenHeight]);
-  
     useLayoutEffect(() => {
-        const showSubscription = Keyboard.addListener('keyboardDidShow', (event) => {
-            unstable_batchedUpdates(() => {
-                const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
-                setKeyboardVisible(true);
-                setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
-            });
+        nameRef.current.focus();
+
+        // const showSubscription = Keyboard.addListener('keyboardWillShow', (event) => {
+        //     unstable_batchedUpdates(() => {
+        //         const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
+        //         setKeyboardVisible(true);
+        //         setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
+        //     });
+        // });
+
+        // const hideSubscription = Keyboard.addListener('keyboardWillShow', () => {
+        //     unstable_batchedUpdates(() => {
+        //         setKeyboardVisible(false);
+        //         setKeyboardHeight(0);
+        //     });
+        // });
+
+        // return () => {
+        //     showSubscription.remove();
+        //     hideSubscription.remove();
+        // };
+        const showSubscription = Keyboard.addListener('keyboardWillShow', (event) => {
+            const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
+            setKeyboardVisible(true);
+            setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
         });
-    
-        const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
-            unstable_batchedUpdates(() => {
-                setKeyboardVisible(false);
-                setKeyboardHeight(0);
-            });
+        const hideSubscription = Keyboard.addListener('keyboardWillHide', () => {
+            setKeyboardVisible(false);
+            setKeyboardHeight(0);
         });
-    
+
         return () => {
             showSubscription.remove();
             hideSubscription.remove();
         };
+
     }, [screenHeight]);
-    
+    useFocusEffect(
+        React.useCallback(() => {
+            // Refocus the first input field when the screen is focused
+            nameRef.current.focus();
+        }, [])
+    );
+
     {
         return (
             <SafeAreaView style={styles.safeArea}>
@@ -103,9 +111,22 @@ const NameInputScreen = ({ navigation }) => {
                             placeholderTextColor={color.placeholderColor}
                             ref={nameRef}
                         />
-                    
+                        <View style={styles.ResposiveContainer}>
 
-                        <CustomButton
+                            <ResponsiveButton
+                                title="Continue"
+                                buttonState={name}
+                                keyboardVisible={keyboardVisible}
+                                keyboardHeight={keyboardHeight}
+                                nextScreenName="DateOfBirth"
+                                onPress={moveNext}
+                                marginTop={(screenHeight < 890) ? hp('24%') : hp('28%')} // Example margin top value
+                            />
+
+                        </View>
+
+
+                        {/* <CustomButton
                             title="Continue"
                             buttonState={name}
                             keyboardVisible={keyboardVisible}
@@ -115,9 +136,31 @@ const NameInputScreen = ({ navigation }) => {
                             onPress={moveNext}
                             extraSpace={3.4}
 
-                        />
+                        /> */}
 
                     </View>
+                    {/* <View style={{flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor:'pink',
+            marginTop:250,
+            marginBottom:(100)
+        } 
+            }>
+                    <CustomButton
+                            title="Continue"
+                            buttonState={name}
+                            keyboardVisible={keyboardVisible}
+                            keyboardHeight={keyboardHeight}
+                            nextScreenName="NameInputScreen"
+                            marginTop={0}
+                            onPress={moveNext}
+                            // extraSpace={3.5}
+                            extraSpace={0}
+
+
+                        />
+                        </View> */}
                 </KeyboardAvoidingView>
 
             </SafeAreaView>

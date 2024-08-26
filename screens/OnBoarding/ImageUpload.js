@@ -43,6 +43,7 @@ const ImageUpload = ({ navigation }) => {
             <SafeAreaView style={styles.safeArea}>
                 <KeyboardAvoidingView >
                     <Header />
+                    <View style={{marginTop:'2%'}}></View>
                     <HeadingText title={'Add profile picture'}/>
 
                     <View style={styles.titleContainer}>
@@ -71,6 +72,7 @@ const ImageUpload = ({ navigation }) => {
                     button2Name="Skip"
                     onPressButton1={moveNext}
                     onPressButton2={moveNext}
+                    marginTop={7}
                 />
 
                 </KeyboardAvoidingView>

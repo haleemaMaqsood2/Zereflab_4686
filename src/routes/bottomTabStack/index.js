@@ -19,23 +19,34 @@ import {
     heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import ActivityStack from './ActivityStack';
+import FriendStack from './FriendStack';
+import CreateEventStack from './CreateEventStack';
+CreateEventStack
 export default function BottomTabStack() {
     const Tab = createBottomTabNavigator();
 
-    const RenderIcon = ({ name }) => (
+    const RenderIcon = ({ focused,activeIcon,inactiveIcon,size}) => (
         <Image
-            source={name}
+        source={focused ? activeIcon : inactiveIcon}
             // source={require("../../assets/images/homeIcon.png")}
             style={{
-                height: RFPercentage(3),
-                width: RFPercentage(3),
+                height:size,
+                width: size,
             }}
             resizeMode="contain"
         />
     );
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ 
+            flex: 1
+        // ,backgroundColor:color.inputFieldColor
+        }}>
+                        <View style={styles.topArea} />
+                        <View style={styles.contentArea}>
+
+
+    
             <Tab.Navigator
                 screenOptions={{
                     tabBarShowLabel: false, // Hide the labels
@@ -43,10 +54,12 @@ export default function BottomTabStack() {
                     tabBarInactiveTintColor: color.balckFontColor,
                     tabBarStyle: {
                         backgroundColor: color.inputFieldColor, // Set tab bar color to black
-                        height: Platform.OS === 'ios' ? hp(9) : hp(8), // Adjust height for Android
+                        height: Platform.OS === 'ios' ? hp(6) : hp(8), // Adjust height for Android
                         justifyContent: 'center',
                         alignItems: 'center',
-                        paddingBottom: Platform.OS === 'ios' ? 10 : 0,
+                        paddingBottom: Platform.OS === 'ios' ? 0 : 0,
+                        paddingTop: Platform.OS === 'ios' ?3 : 0,
+
                         borderTopWidth: 0, // Remove top border
 
                     },
@@ -59,36 +72,51 @@ export default function BottomTabStack() {
                     component={HomePage}
                     options={{
                         // tabBarLabel: "HomePage",
-                        tabBarIcon: ({ color, size }) => (
+                        tabBarIcon: ({ focused, size }) => (
                             <RenderIcon
-                                name={
-                                    require("../../assets/images/homeIcon.png")}
-                            />
+                                // name={
+                                //     require("../../assets/images/BottomHome1x4.png")}
+                                focused={focused}
+                                activeIcon={require("../../assets/images/BottomHome1x4.png")}
+                                inactiveIcon={require("../../assets/images/BottomHomeInactive.png")}
+
+                                size= {focused?RFPercentage(4.4):RFPercentage(2.5)}
+                                />
                         ),
                     }}
                 />
                  <Tab.Screen
-                    name="HomePage4"
-                    component={HomePage}
+                    name="FriendStack"
+                    component={FriendStack}
                     options={{
                         // tabBarLabel: "HomePage",
-                        tabBarIcon: ({ color, size }) => (
+                        tabBarIcon: ({ focused, size }) => (
                             <RenderIcon
-                                name={
-                                    require("../../assets/images/userIcon.png")}
+                                // name={
+                                    // require("../../assets/images/bottomProfile1x4.png")}
+                                    focused={focused}
+                                activeIcon={require("../../assets/images/bottomProfile1x4.png")}
+                                inactiveIcon={require("../../assets/images/bottomProfile1x4.png")}
+                                    size= {RFPercentage(3)}
+
                             />
                         ),
                     }}
                 />
                 <Tab.Screen
-                    name="HomePage1"
-                    component={HomePage}
+                    name="CreateEventStack"
+                    component={CreateEventStack}
                     options={{
                         // tabBarLabel: "HomePage",
-                        tabBarIcon: ({ color, size }) => (
+                        tabBarIcon: ({ focused, size }) => (
                             <RenderIcon
-                                name={
-                                    require("../../assets/images/addBottomIcon.png")}
+                                // name={
+                                //     require("../../assets/images/bottomPlus1x4.png")}
+                                focused={focused}
+                                activeIcon={require("../../assets/images/bottomPlus1x4.png")}
+                                inactiveIcon={require("../../assets/images/bottomPlus1x4.png")}
+                                    size= {RFPercentage(3)}
+
                             />
                         ),
                     }}
@@ -98,10 +126,15 @@ export default function BottomTabStack() {
                     component={ActivityStack}
                     options={{
                         // tabBarLabel: "HomePage",
-                        tabBarIcon: ({ color, size }) => (
+                        tabBarIcon: ({ focused, size }) => (
                             <RenderIcon
-                                name={
-                                    require("../../assets/images/clockIcon.png")}
+                                // name={
+                                //     require("../../assets/images/bottonClock1x4.png")}
+                                focused={focused}
+                                inactiveIcon={require("../../assets/images/bottonClock1x4.png")}
+                                activeIcon={require("../../assets/images/bottonClockSelected.png")}
+                                    size= {focused?RFPercentage(3.0):RFPercentage(4.9)}
+
                             />
                         ),
                     }}
@@ -111,16 +144,53 @@ export default function BottomTabStack() {
                     component={HomePage}
                     options={{
                         // tabBarLabel: "HomePage",
-                        tabBarIcon: ({ color, size }) => (
+                        tabBarIcon: ({ focused, size }) => (
                             <RenderIcon
-                                name={
-                                    require("../../assets/images/MyProfileIcon.png")}
+                                // name={
+                                //     require("../../assets/images/BottomUser1x4.png")}
+                                focused={focused}
+                                activeIcon={require("../../assets/images/BottomUser1x4.png")}
+                                inactiveIcon={require("../../assets/images/BottomUser1x4.png")}
+                                    size= {RFPercentage(3.2)}
+
                             />
                         ),
                     }}
                 />
 
             </Tab.Navigator>
+            </View>
+            <View style={styles.bottomArea} />
+
         </SafeAreaView>
     );
 }
+const styles = StyleSheet.create({
+    safeArea: {
+        flex: 1,
+    },
+    topArea: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: hp('7%'), // Adjust this value to change the height of the top color section
+        backgroundColor: color.backgroundColor,
+        // backgroundColor: color.whiteColor,
+
+        zIndex: 1,
+    },
+    contentArea: {
+        flex: 1,
+        backgroundColor: color.inputFieldColor,
+    },
+    bottomArea: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: hp('5%'), // Adjust this value to change the height of the bottom color section
+        backgroundColor: color.inputFieldColor,
+        zIndex: 1,
+    },
+});

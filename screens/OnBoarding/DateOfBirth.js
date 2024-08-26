@@ -9,6 +9,7 @@ import {
     Modal,
     KeyboardAvoidingView,
     Platform,
+    Dimensions
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
@@ -19,6 +20,8 @@ import { RFPercentage } from "react-native-responsive-fontsize";
 import DatePicker from 'react-native-date-picker';
 
 const DateOfBirth = () => {
+    const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
+
     const navigation = useNavigation();
     const [date, setDate] = useState(new Date());
     const [open, setOpen] = useState(true);
@@ -59,12 +62,12 @@ const DateOfBirth = () => {
 
     const moveNext = () => {
         const age = calculateAge(date);
-        if (age >= 17) {
-            setOpen(false);
+        // if (age >= 17) {
+        //     setOpen(false);
             navigation.navigate('UserNameScreen'); // Navigate if age is 17 or older
-        } else {
-            alert("You must be at least 17 years old to continue.");
-        }
+        // } else {
+        //     alert("You must be at least 17 years old to continue.");
+        // }
     };
 
     return (
@@ -102,7 +105,7 @@ const DateOfBirth = () => {
                                         <Text style={styles.conTinueText}>Continue</Text>
                                     </TouchableOpacity>
                                 </View>
-                            <View style={styles.modalContainer}>
+                                <View style={[styles.modalContainer, { height: (screenHeight > 890) ? '32.5%' : '34%' }]}>
                                 
                                 <View style={styles.datePickerContainer}>
                                     <DatePicker
@@ -143,9 +146,10 @@ const styles = StyleSheet.create({
     titleContainer: {
         width: wp('95%'),
         alignSelf: 'center',
-        marginTop: hp('10%'),//1
+        marginTop: hp('12%'),//1
         justifyContent: 'center',
         alignItems: 'center',
+        // backgroundColor:'red'
     },
     titleText: {
         color: '#FFFFFF',
@@ -199,7 +203,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 1,
-        marginBottom: '3%',//10
+        marginBottom: '3.5%',//10
         alignSelf:'center'
     },
     conTinueText: {
@@ -216,7 +220,7 @@ const styles = StyleSheet.create({
     },
     modalContainer: {
         backgroundColor: '#090A12',
-        height: '35%', // Set modal height to cover half the screen
+        height: '32.5%', // Set modal height to cover half the screen
         width: '100%',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,

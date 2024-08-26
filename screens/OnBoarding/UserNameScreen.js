@@ -25,6 +25,7 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import HeadingText from '../Components/HeadingText';
 import CustomInput from '../Components/CustomInput';
 import CustomButton from '../Components/CustomButton';
+import ResponsiveButton from '../Components/ResponsiveButton';
 
 
 const UserNameScreen = ({ navigation }) => {
@@ -42,7 +43,7 @@ const UserNameScreen = ({ navigation }) => {
 
 
     };
-    
+
 
     function moveNext() {
         navigation.navigate('ImageUpload')
@@ -63,12 +64,14 @@ const UserNameScreen = ({ navigation }) => {
         };
     }, []);
     useEffect(() => {
-        const showSubscription = Keyboard.addListener('keyboardDidShow', (event) => {
+        userNameRef.current.focus();
+
+        const showSubscription = Keyboard.addListener('keyboardWillShow', (event) => {
             const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
             setKeyboardVisible(true);
             setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
         });
-        const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+        const hideSubscription = Keyboard.addListener('keyboardWillHide', () => {
             setKeyboardVisible(false);
             setKeyboardHeight(0);
         });
@@ -78,6 +81,12 @@ const UserNameScreen = ({ navigation }) => {
             hideSubscription.remove();
         };
     }, [screenHeight]);
+    useFocusEffect(
+        React.useCallback(() => {
+            // Refocus the first input field when the screen is focused
+            userNameRef.current.focus();
+        }, [])
+    );
 
 
     {
@@ -102,30 +111,32 @@ const UserNameScreen = ({ navigation }) => {
 
 
 
-                        {/* <View style={[
-                            styles.ButtonContainer,
-                            // { marginTop: keyboardVisible ? hp(12) : hp(50) }, // Dynamic margin
-                                // styles.ButtonContainer,
-                                { marginTop: getButtonMarginTop() }, // Dynamic margin
-    
-                        ]}>
-                        <TouchableOpacity onPress={moveNext} style={[styles.touchableArea, userName ? styles.buttonActive : styles.buttonInactive]}>
-                            <Text style={styles.conTinueText}>Sign Up</Text>
-                        </TouchableOpacity>
-                    </View> */}
+               
 
+                        <View style={styles.ResposiveContainer}>
 
-                        <CustomButton
+                            <ResponsiveButton
+                                title="Sign Up"
+                                buttonState={userName}
+                                keyboardVisible={keyboardVisible}
+                                keyboardHeight={keyboardHeight}
+                                nextScreenName="ImageUpload"
+                                onPress={moveNext}
+                                marginTop={(screenHeight < 890) ? hp('18.5%') : hp('23%')} // Example margin top value
+                            />
+                        </View>
+
+                        {/* <CustomButton
                             title="Sign Up"
                             buttonState={userName}
                             keyboardVisible={keyboardVisible}
                             keyboardHeight={keyboardHeight}
                             nextScreenName="ImageUpload"
-                            marginTop={49}
+                            marginTop={50}
                             onPress={moveNext}
                             extraSpace={3.6}
 
-                        />
+                        /> */}
 
                     </View>
                 </KeyboardAvoidingView>
