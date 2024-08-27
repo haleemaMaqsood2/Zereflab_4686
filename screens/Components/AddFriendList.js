@@ -38,7 +38,9 @@ const AddFriendList = ({ data, inviteFriends }) => {
 
     const renderSectionHeader = ({ section: { title } }) => (
         <Text style={title === 'Friends' ? styles.titleText : styles.titleText1}>
-            {title} ({sections.find(section => section.title === title).data.length})
+            {/* {title} ({sections.find(section => section.title === title).data.length}) */}
+                        {title} ({sections.find(section => section.title === title).data.length})
+
         </Text>
     );
 
@@ -123,7 +125,7 @@ const styles = StyleSheet.create({
         fontFamily: font.Regular,
         color: color.whiteColor,
         marginBottom: hp('1%'),
-        marginTop:hp('2%'),
+        // marginTop:hp('2%'),
         lineHeight:18.15,
     },
     list: {
@@ -181,9 +183,11 @@ const styles = StyleSheet.create({
     },
     
     addIcon: {
-        width: RFPercentage(2),
-        height: RFPercentage(2),
-        marginRight: wp('2%'),
+        // width: RFPercentage(2),
+        // height: RFPercentage(2),
+        width: RFPercentage(1.8),
+        height: RFPercentage(1.5),
+        marginRight: wp('1%'),
     },
     addText: {
         color: color.whiteColor,
