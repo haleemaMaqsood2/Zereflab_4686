@@ -12,7 +12,8 @@ import {
     Image,
     FlatList,
     KeyboardAvoidingView,
-    
+    Modal
+
 
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -37,6 +38,33 @@ const EventForm = ({ navigation }) => {
     const [date, setDate] = useState(new Date());
     const [isDatePickerVisible, setDatePickerVisible] = useState(false); // State to control date picker visibility
     const [title, setTitle] = useState('')
+    const [modalVisible, setModalVisible] = useState(false); // Start with the modal visible
+    const [privacy, setPrivacy] = useState('Public'); // Default privacy set to 'Public'
+    const [privacyIcon, setPrivacyIcon] = useState(require('../../../src/assets/images/EventModule/publicImage.png')); // Default icon
+    const [leftArrow, setLeftArrow] = useState(require('../../../src/assets/images/LeftArrow.png'));
+    const [checklistData, setChecklistData] = useState([
+        { id: '1', icon: require('../../../src/assets/images/EventModule/publicImage.png'), title: 'Public', description: 'Anyone can see', selected: true },
+        { id: '2', icon: require('../../../src/assets/images/EventModule/PrivateIcon.png'), title: 'Private', description: 'Only those who are invited', selected: false },
+    ]);
+
+    const handleOptionSelect = (id) => {
+        const updatedData = checklistData.map(item =>
+            item.id === id ? { ...item, selected: !item.selected } : { ...item, selected: false }
+        );
+        setChecklistData(updatedData);
+        const selectedOption = updatedData.find(item => item.selected);
+        setPrivacy(selectedOption.title);
+        setPrivacyIcon(selectedOption.icon);
+        setModalVisible(false);
+    };
+    const onPressModalClose = () => {
+        setModalVisible(false)
+
+    };
+    const createEventPress = () => {
+        navigation.navigate('InviteFriend')
+    };
+
 
     const handleDateConfirm = (selectedDate) => {
         setDate(selectedDate);
@@ -51,16 +79,31 @@ const EventForm = ({ navigation }) => {
 
 
 
+    const renderChecklistItem = ({ item }) => (
+        <TouchableOpacity onPress={() => handleOptionSelect(item.id)} style={styles.checklistItem}>
+            <Image source={item.icon} style={styles.checklistIcon} />
+            <View style={styles.checklistTextContainer}>
+                <Text style={styles.checklistTitle}>{item.title}</Text>
+                <Text style={styles.checklistDescription}>{item.description}</Text>
+            </View>
+            <Image
+                source={item.selected ? require('../../../src/assets/images/EventModule/checked.png') : require('../../../src/assets/images/EventModule/unCheck.png')}
+                style={styles.checklistCheckbox}
+            />
+        </TouchableOpacity>
+    );
+
+
 
     {
         return (
             <SafeAreaView style={styles.safeArea}>
                 <KeyboardAwareScrollView
-                 showsVerticalScrollIndicator={false}  // Hide vertical scrollbar
-                 showsHorizontalScrollIndicator={false}>
+                    showsVerticalScrollIndicator={false}  // Hide vertical scrollbar
+                    showsHorizontalScrollIndicator={false}>
 
-                <Header title={"Create Event"} />
-                {/* <ScrollView contentContainerStyle={styles.scrollViewContent}
+                    <Header title={"Create Event"} />
+                    {/* <ScrollView contentContainerStyle={styles.scrollViewContent}
                     showsVerticalScrollIndicator={false}  // Hide vertical scrollbar
                     showsHorizontalScrollIndicator={false} // Hide horizontal scrollbar
                 > */}
@@ -111,38 +154,101 @@ const EventForm = ({ navigation }) => {
                         </View>
                         <View style={styles.fieldWrapper}>
                             <Text style={styles.fieldTitle}>Location <Text style={{ color: 'red' }}>*</Text></Text>
-                            <TextInput
+                            {/* <TextInput
                                 style={styles.locationInput} 
                                 placeholderTextColor={color.whiteColor}
                                 readOnly={'true'}
 
-                                placeholder='200 Park Lane, Anytown, CA 98765'/>
+                                placeholder='200 Park Lane, Anytown, CA 98765'/> */}
+                            <View style={styles.inputContainer}>
+                                {/* Icon */}
+                                <Image
+                                    source={require('../../../src/assets/images/location1x4.png')}
+                                    style={styles.icon}
+                                    resizeMode='Contain'
+                                />
+                                {/* TextInput */}
+                                <TextInput
+                                    style={styles.locationInput}
+                                    placeholderTextColor={color.whiteColor}
+                                    editable={false} // To make the input read-only
+                                    placeholder="200 Park Lane, Anytown, CA 98765"
+                                />
+                            </View>
                         </View>
                         <View style={styles.fieldWrapper}>
                             <Text style={styles.fieldTitle}>Description</Text>
                             <TextInput
-                                style={styles.descriptionInput} 
+                                style={styles.descriptionInput}
                                 placeholderTextColor={color.whiteWithfiftypercentOpacity}
                                 placeholder='(optional)'
-                                multiline={4}
-/>
+                                multiline={true}
+                                numberOfLines={4}
+                            />
                         </View>
                         <View style={styles.fieldWrapper}>
                             <Text style={styles.fieldTitle}>Privacy <Text style={{ color: 'red' }}>*</Text></Text>
+                            <TouchableOpacity style={styles.privacyTouch} onPress={() => setModalVisible(true)}>
+
+                                {/* <TextInput
+                                style={styles.PrivacyInput}
+                                placeholderTextColor={color.whiteWithfiftypercentOpacity}
+                                value={privacy}
+                                editable={false}
+                            /> */}
+                                <Image source={privacyIcon} style={styles.privacyIcon} />
+                                <Text style={styles.privacyText}>{privacy}</Text>
+                                <Image source={leftArrow} style={styles.leftArrow} />
+
+                            </TouchableOpacity>
                         </View>
                     </View>
-                    <TouchableOpacity style={styles.ButtonContainer}>
+                    <TouchableOpacity style={styles.ButtonContainer} onPress={createEventPress}>
                         <Text style={{ alignSelf: 'center', fontSize: 14, fontWeight: '700', fontFamily: 'Inter', color: color.whiteColor }}>
                             Create Event
                         </Text>
                     </TouchableOpacity>
-                {/* </ScrollView> */}
+                    {/* </ScrollView> */}
 
 
 
 
                 </KeyboardAwareScrollView>
+                {/* Modal Implementation */}
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => setModalVisible(false)}
+                >
+                    <View style={styles.modalContainer}>
 
+                        <View style={styles.modalContent}>
+                            <TouchableOpacity style={styles.hideIcon} onPress={onPressModalClose}>
+                                <Image
+                                    source={require('../../../src/assets/images/bar1x4.png')}
+                                    style={styles.barIcon}
+                                    resizeMode='contain'
+                                />
+                            </TouchableOpacity>
+
+                            <View style={{ alignItems: 'center', width: '100%' }}>
+                                <FlatList
+                                    data={checklistData}
+                                    renderItem={renderChecklistItem}
+                                    keyExtractor={item => item.id}
+                                />
+                            </View>
+                            <TouchableOpacity style={styles.ButtonContainer1} >
+                                <Text style={{ alignSelf: 'center', fontSize: 14, fontWeight: '700', fontFamily: 'Inter', color: color.whiteColor }}>
+                                    Done
+                                </Text>
+                            </TouchableOpacity>
+
+
+                        </View>
+                    </View>
+                </Modal>
             </SafeAreaView>
 
         );
@@ -162,6 +268,23 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold'
     },
+    privacyIcon: {
+        width: wp('8%'),
+        height: wp('8%'),
+        marginRight: wp('3%')
+    },
+    leftArrow: {
+        width: wp('5%'),
+        height: wp('5%'),
+        marginRight: wp('3%'),
+    },
+    privacyText: {
+        color: color.whiteColor,
+        fontSize: 13,
+        fontWeight: '400',
+        fontFamily: 'Inter',
+        width: '80%'
+    },
     scrollViewContent: {
         // flexGrow: 1,
         width: '100%',
@@ -171,35 +294,147 @@ const styles = StyleSheet.create({
         paddingHorizontal: wp('2%'),
         marginTop: hp('2%'),
     },
-    locationInput:{
+    inputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        // position: 'relative',
         backgroundColor: color.inputFieldColor,
-        width: wp('96%'),
         borderRadius: 10,
-        borderColor: '#414142',
         borderWidth: 1,
+        borderColor: color.whiteWithTenPercencentOpacity,
+        marginTop: '2%',
+        alignItems: 'center'
+
+    },
+    icon: {
+        width: RFPercentage(1.6), // Adjust size as needed
+        height: RFPercentage(1.7),
+        alignItems: 'center',
+        // top:1,
+        marginLeft: 10, // Adjust as needed
+        tintColor: color.whiteColor, // Optional: Change icon color
+        // position: 'absolute', // To position the icon inside the input field
+        // left: 10, // Distance from the left side
+        // backgroundColor:'red'
+    },
+
+    locationInput: {
+        backgroundColor: color.inputFieldColor,
+        // width: wp('96%'),
+        // borderRadius: 10,
+        // borderColor: '#414142',
+        // borderWidth: 1,
+        paddingLeft: 5, // Add padding to make space for the icon
+
+        // flex: 1,
         color: color.whiteColor,
-        fontSize: 16,
+        fontSize: 13,
         fontWeight: '500',
-        paddingLeft: wp(5),
+        paddingRight: 100,
+        // paddingLeft: wp(5),
         fontFamily: 'inter',
         height: hp(6),
-        marginTop: '2%',
+        // marginTop: '2%',
+        alignItems: 'center'
     },
-    descriptionInput:{
+    descriptionInput: {
         backgroundColor: color.inputFieldColor,
         width: wp('96%'),
         borderRadius: 10,
         borderColor: '#414142',
         borderWidth: 1,
         color: color.whiteColor,
-        fontSize: 16,
-        fontWeight: '500',
+        fontSize: 13,
+        fontWeight: '400',
         paddingLeft: wp(5),
+        paddingTop: hp(1.5),
         fontFamily: 'inter',
         height: hp(8),
         marginTop: '2%',
-        justifyContent:'flex-start',
-        alignItems:'flex-start'
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start'
+    },
+    PrivacyInput: {
+        backgroundColor: color.inputFieldColor,
+        width: wp('96%'),
+        borderRadius: 10,
+        borderColor: '#414142',
+        borderWidth: 1,
+        color: color.whiteColor,
+        fontSize: 13,
+        fontWeight: '400',
+        paddingLeft: wp(5),
+        paddingTop: hp(1.5),
+        fontFamily: 'inter',
+        height: hp(6),
+        marginTop: '2%',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start'
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        // alignItems: 'center',
+        // backgroundColor: 'rgba(0,0,0,0.5)', // Semi-transparent background
+    },
+    modalContent: {
+        width: '100%',
+        height: hp(25), // 60% of the screen height
+        backgroundColor: color.inputFieldColor,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        // padding: 20,
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+    },
+    hideIcon: {
+        // marginTop: hp('1%'),
+        marginBottom: hp('2%'),//5
+        // backgroundColor:'red',
+        width: '40%',
+        height: '5%',
+        justifyContent: 'center',
+
+    },
+    Notificationimage: {
+        width: wp('35%'),
+        marginBottom: hp('2%'),
+        height: hp('20%'),
+        // backgroundColor:'pink'
+
+
+    },
+    modalTitle: {
+        fontSize: 28,
+        fontWeight: '700',
+        fontFamily: 'Inter',
+        color: color.whiteFontColor,
+        marginBottom: hp('2.25%'),
+        // lineHeight:128.646,
+
+
+
+    },
+    barIcon: {
+        width: 50,
+        height: 4,
+        // alignItems:'center'
+        alignSelf: 'center',
+        // backgroundColor:'pink'
+
+
+    },
+    modalDescription: {
+        fontSize: 15,
+        fontWeight: '400',
+        fontFamily: 'Inter',
+        color: color.whiteFontColor,
+        textAlign: 'center',
+        // marginBottom: hp('8.5%'),
+        // lineHeight:128.646
+
+
+
     },
     fieldWrapper: {
         marginBottom: hp('2%'),
@@ -207,16 +442,16 @@ const styles = StyleSheet.create({
     endTimeContainer: {
         // backgroundColor: 'red',
         alignSelf: 'center',
-        marginTop:hp('2'),
-        marginBottom:hp('2'),
+        marginTop: hp('2'),
+        marginBottom: hp('0.5'),
 
     },
     endTimeText: {
         alignSelf: 'center',
-        color:color.privacyPolicyColor,
-        fontSize:14,
-        fontWeight:'500',
-        fontFamily:'Inter'
+        color: color.privacyPolicyColor,
+        fontSize: 14,
+        fontWeight: '500',
+        fontFamily: 'Inter'
     },
     image: {
         height: 350,
@@ -240,7 +475,7 @@ const styles = StyleSheet.create({
         borderColor: '#414142',
         borderWidth: 1,
         color: color.whiteColor,
-        fontSize: 16,
+        fontSize: 13,
         fontWeight: '500',
         paddingLeft: wp(5),
         fontFamily: 'inter',
@@ -253,6 +488,66 @@ const styles = StyleSheet.create({
     //     marginTop: '2%',
     //     borderColor: color.whiteWithTenPercencentOpacity
     // },
+    checklistItem: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingVertical: hp('1%'),
+        // borderBottomWidth: 1,
+        borderBottomColor: '#fff', // or any color you prefer
+        width: '100%',
+        paddingHorizontal: wp('5%'),
+    },
+    checklistIcon: {
+        width: wp('8%'),
+        height: wp('8%'),
+        marginRight: wp('5%'),
+    },
+    checklistTextContainer: {
+        // flex: 1,
+        width: '80%'
+    },
+    checklistTitle: {
+        color: 'white',
+        fontSize: 14,
+        fontWeight: 'bold',
+        fontFamily: 'Inter',
+        fontWeight: '500'
+
+
+    },
+    checklistDescription: {
+        color: color.whiteWithfiftypercentOpacity,
+        fontSize: 12,
+        fontFamily: 'Inter',
+        fontWeight: '400'
+    },
+    checklistCheckbox: {
+        width: wp('5%'),
+        height: wp('5%'),
+    },
+    privacyTouch: {
+        width: wp(100),
+        backgroundColor: 'red',
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: color.inputFieldColor,
+        // width: wp('96%'),
+        borderRadius: 10,
+        height: hp('6%'),
+        paddingLeft: 10,
+        borderColor: '#414142',
+        borderWidth: 1,
+        color: color.whiteColor,
+        fontSize: 13,
+        fontWeight: '400',
+        marginTop: '2%',
+        marginBottom: '3%',
+        width: '100%'
+
+
+
+        // height:6,
+    },
     ButtonContainer: {
         backgroundColor: color.onBoardingButton,
         alignSelf: 'center',
@@ -260,6 +555,16 @@ const styles = StyleSheet.create({
         width: '95%',
         height: hp(6),
         borderRadius: 10
+
+    },
+    ButtonContainer1: {
+        backgroundColor: color.onBoardingButton,
+        alignSelf: 'center',
+        justifyContent: 'center',
+        width: '95%',
+        height: hp(6),
+        borderRadius: 10,
+        marginTop: '5%'
     }
 
 
