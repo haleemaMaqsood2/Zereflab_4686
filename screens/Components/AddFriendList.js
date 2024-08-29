@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList,SectionList } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Image, StyleSheet, FlatList, SectionList } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { RFPercentage } from "react-native-responsive-fontsize";
 import { color } from '../../src/styles/color';
@@ -39,20 +39,27 @@ const AddFriendList = ({ data, inviteFriends }) => {
     const renderSectionHeader = ({ section: { title } }) => (
         <Text style={title === 'Friends' ? styles.titleText : styles.titleText1}>
             {/* {title} ({sections.find(section => section.title === title).data.length}) */}
-                        {title} ({sections.find(section => section.title === title).data.length})
+            {title} ({sections.find(section => section.title === title).data.length})
 
         </Text>
     );
 
     return (
         <View style={styles.container}>
-            <SectionList
-                sections={sections}
-                renderItem={renderItem}
-                renderSectionHeader={renderSectionHeader}
-                keyExtractor={(item) => item.id.toString()}
-                contentContainerStyle={styles.list}
-            />
+            <ScrollView
+
+                showsVerticalScrollIndicator={false}
+            >
+                <SectionList
+                    showsVerticalScrollIndicator={false}
+
+                    sections={sections}
+                    renderItem={renderItem}
+                    renderSectionHeader={renderSectionHeader}
+                    keyExtractor={(item) => item.id.toString()}
+                    contentContainerStyle={styles.list}
+                />
+            </ScrollView>
         </View>
     );
 };
@@ -66,7 +73,7 @@ const AddFriendList = ({ data, inviteFriends }) => {
 //             </View>
 //             <TouchableOpacity >
 //                 <Image source={require('../../src/assets/images/LeftArrow1x4.png')} style={styles.addIcon} />
-                
+
 //             </TouchableOpacity>
 //         </View>
 //     );
@@ -113,20 +120,20 @@ const styles = StyleSheet.create({
     },
     titleText: {
         fontSize: 15,
-        fontWeight: 'bold',
+        fontWeight: '700',
         fontFamily: font.Regular,
         color: color.whiteColor,
         marginBottom: hp('1%'),
-        lineHeight:18.15,
+        lineHeight: 18.15,
     },
     titleText1: {
         fontSize: 15,
-        fontWeight: 'bold',
+        fontWeight: '700',
         fontFamily: font.Regular,
         color: color.whiteColor,
         marginBottom: hp('1%'),
         // marginTop:hp('2%'),
-        lineHeight:18.15,
+        lineHeight: 18.15,
     },
     list: {
         marginTop: hp('1%'),
@@ -134,7 +141,7 @@ const styles = StyleSheet.create({
     friendContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingBottom:'4%',
+        paddingBottom: '4%',
         // paddingVertical: hp('1%'),
         // borderBottomWidth: 1,
         borderBottomColor: color.placeholderColor,
@@ -142,7 +149,7 @@ const styles = StyleSheet.create({
     friendContainer1: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom:hp(2),
+        marginBottom: hp(2),
         // paddingBottom:'5%',
         // paddingVertical: hp('1%'),
         // borderBottomWidth: 1,
@@ -159,10 +166,10 @@ const styles = StyleSheet.create({
     },
     nameText: {
         fontSize: 15,
-        fontWeight:'semibold',
+        fontWeight: '600',
         fontFamily: font.Regular,
         color: color.whiteColor,
-        lineHeight:18.15,
+        lineHeight: 18.15,
 
     },
     usernameText: {
@@ -178,10 +185,12 @@ const styles = StyleSheet.create({
         padding: wp('1.5%'),
         borderRadius: 8,
         paddingHorizontal: wp('6.5%'), // Adjust horizontal padding for increased width
-
+        height: 32,
+        width: 111,
+        alignSelf:'center'
         // width:'10%'
     },
-    
+
     addIcon: {
         // width: RFPercentage(2),
         // height: RFPercentage(2),
@@ -204,6 +213,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: wp('6%'), // Adjust horizontal padding for increased width
 
         // width:'10%'
-    },});
+    },
+});
 
 export default AddFriendList;

@@ -80,12 +80,17 @@ const EventDetails = () => {
                 </TouchableOpacity>
                 {/* button     zzz scection */}
 
-                <View style={styles.GoingContainer}>
+                {/* <View style={styles.GoingContainer}>
                     <TouchableOpacity style={styles.continueButton}>
                         <Text style={styles.goingText}>Going</Text>
                     </TouchableOpacity>
-                </View>
+                </View> */}
             </ScrollView>
+            <View style={styles.GoingContainer}>
+                    <TouchableOpacity style={styles.continueButton}>
+                        <Text style={styles.goingText}>Going</Text>
+                    </TouchableOpacity>
+                </View> 
         </SafeAreaView>
     );
 }
@@ -124,8 +129,6 @@ const styles = StyleSheet.create({
         right: 0,
     },
     iconImage: {
-        // width: wp('10%'),
-        // height: wp('10%'),
         width:45,
         height:45,
     },
@@ -231,7 +234,9 @@ const styles = StyleSheet.create({
         lineHeight: 19.36,
     },
     GoingContainer: {
-        alignSelf: 'center'
+        alignSelf: 'center',
+        // position:'absolute',
+        // top:hp(90)
     },
     FriendSection: {
         backgroundColor: '#D9D9D91A',

@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     flatlistContainer: {
         flexDirection: 'row',
         paddingLeft: hp(1.4),
-        marginTop: hp(3)
+        marginTop: hp(2)
     },
     profileIcon: {
         width: 40,

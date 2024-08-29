@@ -1,5 +1,5 @@
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState ,useEffect,useCallback} from 'react';
 import {
     SafeAreaView,
     StyleSheet,
@@ -7,6 +7,8 @@ import {
     View,
     TouchableOpacity,
     Image,
+    BackHandler,
+
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
@@ -31,6 +33,7 @@ const Carousel = ({ navigation }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     function moveNext() {
+
         navigation.navigate('SignIn');
     }
 
@@ -41,7 +44,36 @@ const Carousel = ({ navigation }) => {
             }
         }, [])
     );
+    // useFocusEffect(
+    //     React.useCallback(() => {
+    //         const onBackPress = () => {
+    //             // Do nothing when the back button is pressed
+    //             return true;
+    //         };
+    
+    //         // const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
+    
+    //         // return () => subscription.remove();
+    //         BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
+    //         // Clean up the event listener
+    //         return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    //     }, [])
+    // );
+     // Disable back button
+     const disableBackButton = useCallback(() => {
+        return true;  // Disable hardware back button
+    }, []);
+
+    useFocusEffect(
+        useCallback(() => {
+            BackHandler.addEventListener('hardwareBackPress', disableBackButton);
+
+            return () => {
+                BackHandler.removeEventListener('hardwareBackPress', disableBackButton);
+            };
+        }, [disableBackButton])
+    );
     const renderPagination = (index, total, context) => {
         const dots = [];
         for (let i = 0; i < total; i++) {
@@ -58,6 +90,7 @@ const Carousel = ({ navigation }) => {
         setCurrentIndex(params);
 
     }
+
     return (
         <SafeAreaView style={styles.safeArea}>
             <Swiper

@@ -11,6 +11,8 @@ import {
     TouchableOpacity,
     Image,
     KeyboardAvoidingView,
+    Dimensions,
+    Keyboard
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
@@ -25,6 +27,8 @@ const ImageUpload = ({ navigation }) => {
     //   const navigation = useNavigation();
     const [name, setName] = useState('')
     const nameRef = useRef(null);
+    const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
+
     const handleChange = (value) => {
         setName(value);
         nameRef.current.focus();
@@ -43,8 +47,8 @@ const ImageUpload = ({ navigation }) => {
             <SafeAreaView style={styles.safeArea}>
                 <KeyboardAvoidingView >
                     <Header />
-                    <View style={{marginTop:'2%'}}></View>
-                    <HeadingText title={'Add profile picture'}/>
+                    <View style={{ marginTop: '2%' }}></View>
+                    <HeadingText title={'Add profile picture'} />
 
                     <View style={styles.titleContainer}>
                         {/* <Text style={styles.titleText}>Add profile picture</Text> */}
@@ -66,14 +70,16 @@ const ImageUpload = ({ navigation }) => {
                             resizeMode="contain"
                         />
                     </View>
-           
-                     <CustomButtonContainer
-                    button1Name="Upload"
-                    button2Name="Skip"
-                    onPressButton1={moveNext}
-                    onPressButton2={moveNext}
-                    marginTop={7}
-                />
+                    <View style={{ marginTop: (screenHeight < 890 ? hp('2%') : hp('3%')) }}>
+
+                        <CustomButtonContainer
+                            button1Name="Upload"
+                            button2Name="Skip"
+                            onPressButton1={moveNext}
+                            onPressButton2={moveNext}
+                            marginTop={7}
+                        />
+                    </View>
 
                 </KeyboardAvoidingView>
 
@@ -177,13 +183,13 @@ const styles = StyleSheet.create({
         // marginTop: '5%',
         width: wp(50),
         height: hp(40),
-        marginBottom:hp('10')
+        marginBottom: hp('10')
     },
     ImageContainer: {
         alignSelf: "center",
         // backgroundColor:'red',
         height: RFPercentage(40),
-        justifyContent:'center'
+        justifyContent: 'center'
     },
     uploadContainer: {
         backgroundColor: color.onBoardingButton,

@@ -12,7 +12,7 @@ const HomeTab = ({ data, onTabSelect }) => {
   };
 
   return (
-    <View style={{ width: wp('100%'),marginTop:hp(1.1), backgroundColor:color.balckFontColor}}>
+    <View style={{ width: wp('100%'), backgroundColor:color.balckFontColor}}>
       <View style={styles.tabContainer}>
         {/* <ScrollView horizontal showsHorizontalScrollIndicator={false}> */}
           {data.map((tab) => (

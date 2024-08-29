@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState,useEffect, useRef } from 'react';
 import {
     SafeAreaView,
     StyleSheet,
@@ -9,7 +9,8 @@ import {
     Modal,
     KeyboardAvoidingView,
     Platform,
-    Dimensions
+    Dimensions,
+    Keyboard
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
@@ -18,7 +19,8 @@ import Header from '../Components/Header';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { RFPercentage } from "react-native-responsive-fontsize";
 import DatePicker from 'react-native-date-picker';
-
+import HeadingText from '../Components/HeadingText';
+HeadingText
 const DateOfBirth = () => {
     const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 
@@ -27,6 +29,8 @@ const DateOfBirth = () => {
     const [open, setOpen] = useState(true);
     const [formattedDate, setFormattedDate] = useState('');
     const dobRef = useRef(null);
+    const [keyboardHeight, setKeyboardHeight] = useState(0);
+    const [keyboardVisible, setKeyboardVisible] = useState(false);
 
     const handleDateChange = (selectedDate) => {
         setDate(selectedDate);
@@ -36,19 +40,45 @@ const DateOfBirth = () => {
 
     const formatDate = (date) => {
         const day = date.getDate();
-        const month = date.getMonth() + 1; // Months are zero indexed
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const month = monthNames[date.getMonth()]; // Get the month name
+        // const month = date.getMonth() + 1; // Months are zero indexed
         const year = date.getFullYear();
-        return `${month}-${day}-${year}`;
+        return `${month} ${day}, ${year}`;
     };
+    useEffect(() => {
+        // dobRef.current.focus();
 
-    useFocusEffect(
-        React.useCallback(() => {
-            setOpen(true); // Open the date picker when screen is focused
-            return () => {
-                setOpen(false); // Optionally close the picker when unfocused
-            };
-        }, [])
-    );
+        const showSubscription = Keyboard.addListener('keyboardWillShow', (event) => {
+            const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
+            setKeyboardVisible(true);
+            setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
+        });
+        const hideSubscription = Keyboard.addListener('keyboardWillHide', () => {
+            setKeyboardVisible(false);
+            setKeyboardHeight(0);
+        });
+
+        return () => {
+            showSubscription.remove();
+            hideSubscription.remove();
+        };
+    }, [screenHeight]);
+    // useFocusEffect(
+    //     React.useCallback(() => {
+    //         // Refocus the first input field when the screen is focused
+    //         userNameRef.current.focus();
+    //     }, [])
+    // );
+
+    // useFocusEffect(
+    //     React.useCallback(() => {
+    //         setOpen(true); // Open the date picker when screen is focused
+    //         return () => {
+    //             setOpen(false); // Optionally close the picker when unfocused
+    //         };
+    //     }, [])
+    // );
 
     const calculateAge = (birthDate) => {
         const today = new Date();
@@ -62,20 +92,27 @@ const DateOfBirth = () => {
 
     const moveNext = () => {
         const age = calculateAge(date);
-        // if (age >= 17) {
+        if (age >= 17) {
         //     setOpen(false);
-            navigation.navigate('UserNameScreen'); // Navigate if age is 17 or older
-        // } else {
-        //     alert("You must be at least 17 years old to continue.");
-        // }
+        navigation.navigate('UserNameScreen'); // Navigate if age is 17 or older
+        } else {
+            alert("You must be at least 17 years old to continue.");
+        }
     };
 
     return (
         <SafeAreaView style={styles.safeArea}>
             <KeyboardAvoidingView >
-                {/* <Header /> */}
+                <Header />
+                <View style={{marginTop:hp(1)}}> 
+                <HeadingText title={"What's your birthday?"} />
+
+                </View>
+
                 <View style={styles.titleContainer}>
-                    <Text style={styles.titleText}>What's your birthday?</Text>
+                    
+
+                    {/* <Text style={styles.titleText}>What's your birthday?</Text> */}
                     <View style={styles.inputContainer}>
                         <TextInput
                             style={styles.input}
@@ -86,10 +123,35 @@ const DateOfBirth = () => {
                             value={formattedDate}
                             onFocus={() => setOpen(true)}
                             ref={dobRef}
+                            readOnly={true}
                         />
+
+                    </View>
+                    <View style={{height:(screenHeight < 890 ? hp('32') : hp('36.5%')),justifyContent:'flex-end'}}>
+                    <View style={styles.ButtonContainer}>
+                        <TouchableOpacity onPress={moveNext} style={styles.touchableArea}>
+                            <Text style={styles.conTinueText}>Continue</Text>
+                        </TouchableOpacity>
+                    </View>
+                    </View>
+                    <View style={{alignSelf:'center'}}>
+                    <DatePicker
+                        date={date}
+                        onDateChange={handleDateChange}
+                        mode="date"
+                        textColor="white" // Set text color to white
+                        androidVariant="nativeAndroid"
+                        onConfirm={(date) => {
+                            setOpen(false);
+                            handleDateChange(date);
+                        }}
+                        onCancel={() => setOpen(false)}
+                        color={'red'}
+                        theme={'dark'}
+                    />
                     </View>
 
-                    <Modal
+                    {/* <Modal
                         transparent={true}
                         visible={open}
                         animationType="none"
@@ -125,7 +187,7 @@ const DateOfBirth = () => {
                                 </View>
                             </View>
                         </View>
-                    </Modal>
+                    </Modal> */}
 
                 </View>
             </KeyboardAvoidingView>
@@ -146,9 +208,9 @@ const styles = StyleSheet.create({
     titleContainer: {
         width: wp('95%'),
         alignSelf: 'center',
-        marginTop: hp('12%'),//1
+        // marginTop: hp('12%'),//1
         justifyContent: 'center',
-        alignItems: 'center',
+        // alignItems: 'center',
         // backgroundColor:'red'
     },
     titleText: {
@@ -165,7 +227,7 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         width: '100%',
-        height: 55,
+        height: hp(6),
         marginTop: '10%',
         flexDirection: 'row',
         justifyContent: 'space-around',
@@ -173,7 +235,7 @@ const styles = StyleSheet.create({
     input: {
         backgroundColor: color.inputFieldColor,
         width: wp('92%'),
-        borderRadius: 15,
+        borderRadius: 10,
         borderColor: '#414142',
         borderWidth: 1,
         color: '#ffffff',
@@ -204,7 +266,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         zIndex: 1,
         marginBottom: '3.5%',//10
-        alignSelf:'center'
+        alignSelf: 'center'
     },
     conTinueText: {
         alignItems: 'center',

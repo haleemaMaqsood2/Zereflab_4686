@@ -122,7 +122,12 @@ const UserNameScreen = ({ navigation }) => {
                                 keyboardHeight={keyboardHeight}
                                 nextScreenName="ImageUpload"
                                 onPress={moveNext}
-                                marginTop={(screenHeight < 890) ? hp('18.5%') : hp('23%')} // Example margin top value
+                                // marginTop={(screenHeight < 890) ? hp('18.5%') : hp('23%')} // Example margin top value
+                                marginTop={
+                                    keyboardVisible
+                                        ? (screenHeight < 890 ? hp('18.5%') : hp('23%')) // If the keyboard is visible
+                                        : (screenHeight < 890 ? hp('50.5%') : hp('53%'))     // If the keyboard is not visible
+                                }
                             />
                         </View>
 

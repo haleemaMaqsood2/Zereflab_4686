@@ -658,7 +658,7 @@ const SignInTab = () => {
             textContainerStyle={styles.phoneTextContainer}
             textInputStyle={styles.phoneTextInput}
             codeTextStyle={styles.phoneCodeText}
-            // dropdownIcon={{backgroundColor:'white'}}
+            // dropdownIcon={{color:'red'}}
             // renderDropdownImage={require('../../src/assets/images/apple.png')}
 
             // dropdownIcon={require('../../src/assets/images/apple.png')}
@@ -685,7 +685,7 @@ const SignInTab = () => {
           <Text style={styles.emailText}>Use email instead</Text>
         </TouchableOpacity>
         <View>
-          <View style={{ marginTop: (screenHeight < 890) ? hp('18%') : hp('22%'), flex: 1 }}>
+          <View style={{ marginTop: (screenHeight < 890) ? hp('14.5%') : hp('19%'), flex: 1 }}>
             {/* <Text style={styles.emailText}>Continue{screenHeight}</Text> */}
             <View style={styles.ButtonContainer}>
 
@@ -762,7 +762,11 @@ const styles = StyleSheet.create({
   },
   emailTextContainer: {
     alignSelf: 'flex-start',
-    paddingLeft: '5%'
+    paddingLeft: '5%',
+    width:'100%',
+    height:hp(5),
+    // backgroundColor:'red'
+    // paddingTop:'2.5%'
   },
   emailText: {
     color: color.privacyPolicyColor,
@@ -944,6 +948,8 @@ const styles = StyleSheet.create({
   phoneCodeText: {
     color: 'white',
     alignItems: 'center',
+    fontWeight: '500',
+
     fontSize: 16, // Adjust size if needed
     // backgroundColor:'red',
     // justifyContent:'center',

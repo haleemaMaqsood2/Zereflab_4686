@@ -277,6 +277,9 @@ const Friends = ({ navigation }) => {
         return (
             <SafeAreaView style={styles.safeArea}>
                 <KeyboardAvoidingView >
+                    <ScrollView
+                                            showsVerticalScrollIndicator={false}
+>
                     <Header title={"Friends"} />
                     <SearchInput
                         iconSource={require('../../../src/assets/images/searchTabIcon.png')} // Replace with your icon path
@@ -295,7 +298,7 @@ const Friends = ({ navigation }) => {
 
 
 
-
+                    </ScrollView>
                 </KeyboardAvoidingView>
 
             </SafeAreaView>

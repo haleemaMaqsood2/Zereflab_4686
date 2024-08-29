@@ -12,6 +12,8 @@ import {
     Image,
     KeyboardAvoidingView,
     DevToolsSettingsManager,
+    Dimensions
+
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
@@ -26,6 +28,9 @@ const DiscoverFriends = ({ navigation }) => {
     //   const navigation = useNavigation();
     const [name, setName] = useState('');
     const [continuePress, setContinuePress] = useState(false)
+    const [keyboardVisible, setKeyboardVisible] = useState(false);
+    const [keyboardHeight, setKeyboardHeight] = useState(0);
+    const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 
     const nameRef = useRef(null);
     const handleChange = (value) => {
@@ -67,8 +72,8 @@ const DiscoverFriends = ({ navigation }) => {
                             <Text style={styles.descriptionText}>Allow Where2 access to your contacts so we can help you find your friends. Your contacts will not be shared with anyone.</Text>
                         </View> */}
                     </View>
-              
-                         <CustomButtonContainer
+                    <View style={{marginTop:(screenHeight < 890 ? hp('2%') : hp('3%'))}}>
+                    <CustomButtonContainer
                     button1Name="Continue"
                     button2Name="Skip"
                     onPressButton1={moveNext}
@@ -77,6 +82,10 @@ const DiscoverFriends = ({ navigation }) => {
 
                 />
 
+
+                    </View>
+              
+                      
                 </KeyboardAvoidingView>
 
             </SafeAreaView>

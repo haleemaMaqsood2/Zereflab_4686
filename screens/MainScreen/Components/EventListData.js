@@ -125,7 +125,8 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         color: color.whiteColor,
         alignSelf: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        fontFamily:'Inter'
     },
     imageContainer: {
         position: 'relative',

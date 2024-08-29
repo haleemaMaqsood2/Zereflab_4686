@@ -36,6 +36,8 @@ import CustomTextInputMain from '../../Components/CustomTextInputMain';
 const EventForm = ({ navigation }) => {
     //   const navigation = useNavigation();
     const [date, setDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
+
     const [isDatePickerVisible, setDatePickerVisible] = useState(false); // State to control date picker visibility
     const [title, setTitle] = useState('')
     const [modalVisible, setModalVisible] = useState(false); // Start with the modal visible
@@ -46,6 +48,7 @@ const EventForm = ({ navigation }) => {
         { id: '1', icon: require('../../../src/assets/images/EventModule/publicImage.png'), title: 'Public', description: 'Anyone can see', selected: true },
         { id: '2', icon: require('../../../src/assets/images/EventModule/PrivateIcon.png'), title: 'Private', description: 'Only those who are invited', selected: false },
     ]);
+    const [isEndTimeVisible, setEndTimeVisible] = useState(false); // State to control end time field visibility
 
     const handleOptionSelect = (id) => {
         const updatedData = checklistData.map(item =>
@@ -76,8 +79,18 @@ const EventForm = ({ navigation }) => {
 
 
     };
+    const handleEndTimeConfirm = (selectedDate) => {
+        setEndDate(selectedDate);
+        // setEndTimeVisible(false);
+    };
+    const endTimePress = () => {
+        setEndTimeVisible(true);
 
+    };
+    const removePress = () => {
+        setEndTimeVisible(false);
 
+    };
 
     const renderChecklistItem = ({ item }) => (
         <TouchableOpacity onPress={() => handleOptionSelect(item.id)} style={styles.checklistItem}>
@@ -126,7 +139,13 @@ const EventForm = ({ navigation }) => {
                             />
                         </View>
                         <View style={styles.fieldWrapper}>
-                            <Text style={styles.fieldTitle}>Date and Time <Text style={{ color: 'red' }}>*</Text></Text>
+                            {(isEndTimeVisible == 0) ?
+                                <Text style={styles.fieldTitle}>Date and Time<Text style={{ color: 'red' }}>*</Text></Text>
+                                :
+                                <Text style={styles.fieldTitle}>Start Time<Text style={{ color: 'red' }}>*</Text></Text>
+
+                            }
+                            {/* <Text style={styles.fieldTitle}>Date and Time<Text style={{ color: 'red' }}>*</Text></Text> */}
                             <TouchableOpacity onPress={() => setDatePickerVisible(true)}>
                                 <TextInput
                                     style={styles.dateInput}
@@ -136,9 +155,10 @@ const EventForm = ({ navigation }) => {
 
                                 />
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.endTimeContainer} onPress={() => setDatePickerVisible(true)}>
-                                <Text style={styles.endTimeText}>+ End Time</Text>
-                            </TouchableOpacity>
+
+
+
+
                             <DatePicker
                                 modal
                                 open={isDatePickerVisible}
@@ -152,6 +172,47 @@ const EventForm = ({ navigation }) => {
 
                             />
                         </View>
+
+
+
+                        {isEndTimeVisible && (
+                            <View style={styles.fieldWrapper}>
+                                <Text style={styles.fieldTitle}>End Time</Text>
+                                <TouchableOpacity
+                                    onPress={() => setEndTimeVisible(true)}
+                                >
+                                    <TextInput
+                                        style={styles.dateInput}
+                                        editable={false}
+                                        value={endDate.toLocaleString()}
+                                        pointerEvents="none"
+                                    />
+                                </TouchableOpacity>
+                                <DatePicker
+                                    modal
+                                    open={isEndTimeVisible}
+                                    date={endDate}
+                                    mode="datetime"
+                                    onConfirm={handleEndTimeConfirm}
+                                    onCancel={() => setEndTimeVisible(false)}
+                                    theme={'dark'}
+                                    textColor="white"
+                                />
+                            </View>
+                        )}
+
+                        {(isEndTimeVisible == 0) ?
+                            <TouchableOpacity style={styles.endTimeContainer} onPress={endTimePress}>
+                                <Text style={styles.endTimeText}>+ End Time{isEndTimeVisible}</Text>
+                            </TouchableOpacity> :
+                            <TouchableOpacity style={styles.endTimeContainer} onPress={removePress}>
+                                <Text style={styles.endTimeText}>Remove End Time{isEndTimeVisible}</Text>
+                            </TouchableOpacity>
+                        }
+
+
+
+
                         <View style={styles.fieldWrapper}>
                             <Text style={styles.fieldTitle}>Location <Text style={{ color: 'red' }}>*</Text></Text>
                             {/* <TextInput
@@ -442,8 +503,8 @@ const styles = StyleSheet.create({
     endTimeContainer: {
         // backgroundColor: 'red',
         alignSelf: 'center',
-        marginTop: hp('2'),
-        marginBottom: hp('0.5'),
+        // marginTop: hp('2'),
+        marginBottom: hp('2'),
 
     },
     endTimeText: {

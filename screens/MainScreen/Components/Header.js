@@ -89,7 +89,7 @@ const Header = ({title}) => {
       </TouchableOpacity>
      </>
       ) : (
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: wp('100%'), height:25}}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', flex:1, }}>
           <Image
             source={require('../../../src/assets/images/logo1.png')}
             style={styles.profileIcon}
@@ -121,7 +121,8 @@ const styles = StyleSheet.create({
   },
   profileIcon:{
     width:100,
-    height:(50),
+    height:40,
+    // backgroundColor:'red'
   },
   container1: {
     flexDirection: 'row',

@@ -51,7 +51,7 @@ const PrivacyPolicy = () => {
 
 const styles = StyleSheet.create({
     privacyPolicyContainer: {
-        width: wp('84%'),
+        width: wp('85%'),
         // alignItems:'flex-start',
         // backgroundColor:'red'
         // alignSelf: 'center',

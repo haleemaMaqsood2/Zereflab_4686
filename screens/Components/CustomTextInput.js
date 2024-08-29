@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     inputContainer: {
         width: '100%',
         height: hp(6),
-        marginTop: hp('5%'),
+        marginTop: hp('4%'),
         flexDirection: 'row',
         justifyContent: 'space-around',
     },

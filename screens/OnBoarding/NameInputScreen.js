@@ -120,7 +120,12 @@ const NameInputScreen = ({ navigation }) => {
                                 keyboardHeight={keyboardHeight}
                                 nextScreenName="DateOfBirth"
                                 onPress={moveNext}
-                                marginTop={(screenHeight < 890) ? hp('24%') : hp('28%')} // Example margin top value
+                                // marginTop={(screenHeight < 890) ? hp('24%') : hp('28%')} // Example margin top value
+                                marginTop={
+                                    keyboardVisible
+                                        ? (screenHeight < 890 ? hp('25') : hp('29%')) // If the keyboard is visible
+                                        : (screenHeight < 890 ? hp('57%') : hp('59%'))     // If the keyboard is not visible
+                                }
                             />
 
                         </View>

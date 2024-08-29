@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef,useEffect } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -10,10 +10,10 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
-  Modal
+  Modal,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { useNavigation} from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { color } from '../../src/styles/color';
 import Header from './Components/Header';
 import { BottomTabBar } from '@react-navigation/bottom-tabs';
@@ -32,6 +32,7 @@ const HomePage = () => {
   const today = 'Today - 12:00 PM';
   const [filteredData, setFilteredData] = useState([]);
 
+  const scrollViewRef = useRef(null); // Reference for ScrollView
 
   const data = [
     {
@@ -46,6 +47,27 @@ const HomePage = () => {
     },
     {
       id: 2,
+      username: 'msu-fiji',
+      userProfileIcon: require('../../src/assets/images/partyUser1x4.png'),
+      Title: 'FIJI DARTY',
+      partyImage: require('../../src/assets/images/BirthdayListScreen1x4.png'),
+
+      time: today,
+      other: 130,
+      friends: 12
+    },
+    {
+      id: 3,
+      username: 'msu-fiji1',
+      userProfileIcon: require('../../src/assets/images/partyUser1x4.png'),
+      Title: 'FIJI DARTY',
+      partyImage: require('../../src/assets/images/BirthdayListScreen1x4.png'),
+      time: today,
+      other: 130,
+      friends: 12
+    },
+    {
+      id: 4,
       username: 'msu-fiji',
       userProfileIcon: require('../../src/assets/images/partyUser1x4.png'),
       Title: 'FIJI DARTY',
@@ -78,6 +100,7 @@ const HomePage = () => {
       other: 130,
       friends: 12
     },
+   
   ]
   const friendsData = [
     {
@@ -125,6 +148,22 @@ const HomePage = () => {
     setModalVisible(false)
 
   };
+  useFocusEffect(() => {
+    if (scrollViewRef.current) {
+      scrollViewRef.current.scrollTo({ y: 0, animated: true }); // Scroll to top when the component is mounted
+    }
+  }, []); // Empty dependency array ensures this runs only once when the component mounts
+  useFocusEffect(
+    React.useCallback(() => {
+      const unsubscribe = navigation.addListener('tabPress', (e) => {
+        if (scrollViewRef.current) {
+          scrollViewRef.current.scrollTo({ y: 0, animated: true });
+        }
+      });
+
+      return unsubscribe;
+    }, [navigation])
+  );
   useEffect(() => {
     dispatch(setOnBoardingComplete(true));//false//true
 
@@ -142,21 +181,23 @@ const HomePage = () => {
   {
     return (
       <SafeAreaView style={styles.safeArea}>
-        <Header />
-        <HomeTab data={TabData} onTabSelect={setSelectedTab} />
+        <ScrollView
+                ref={scrollViewRef} // Assign ref to ScrollView
+
+                        showsVerticalScrollIndicator={false}
+>
+          <Header />
+          <HomeTab data={TabData} onTabSelect={setSelectedTab} />
 
 
           <View style={styles.container}>
-          <EventListData data={filteredData} />
-        </View>
-        <View style={styles.centeredContainer}>
-        </View>
+            <EventListData data={filteredData} />
+          </View>
+          <View style={styles.centeredContainer}>
+          </View>
 
 
-        {/* FLATLIST daTA>>>>>>> */}
-
-
-
+          {/* FLATLIST daTA>>>>>>> */}
 
 
 
@@ -165,50 +206,53 @@ const HomePage = () => {
 
 
 
-        {/* Modal Implementation */}
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => setModalVisible(false)}
-        >
-          <View style={styles.modalContainer}>
 
-            <View style={styles.modalContent}>
-              <TouchableOpacity style={styles.hideIcon} onPress={onPressModalClose}>
+
+
+          {/* Modal Implementation */}
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => setModalVisible(false)}
+          >
+            <View style={styles.modalContainer}>
+
+              <View style={styles.modalContent}>
+                <TouchableOpacity style={styles.hideIcon} onPress={onPressModalClose}>
+                  <Image
+                    source={require('../../src/assets/images/bar1x4.png')}
+                    style={styles.barIcon}
+                    resizeMode='contain'
+                  />
+                </TouchableOpacity>
                 <Image
-                  source={require('../../src/assets/images/bar1x4.png')}
-                  style={styles.barIcon}
+                  source={require('../../src/assets/images/Notification1x4.png')}
+                  style={styles.Notificationimage}
                   resizeMode='contain'
                 />
-              </TouchableOpacity>
-              <Image
-                source={require('../../src/assets/images/Notification1x4.png')}
-                style={styles.Notificationimage}
-                resizeMode='contain'
-              />
-              <View style={{alignItems:'center',width:'90%'}}>
-              <Text style={styles.modalTitle}>Turn on notifications</Text>
-              <Text style={styles.modalDescription}>You’ll be able to see what your friends are doing and stay updated on new events!
-              </Text>
-              </View>
-              <View 
-              style={{marginBottom:'5%' }}
-              >
-                <CustomButtonContainer
-                  button1Name="Continue"
-                  button2Name="Maybe Later"
-                  onPressButton1={onPressModalClose}
-                  onPressButton2={onPressModalClose}
-                  marginTop={10}
+                <View style={{ alignItems: 'center', width: '90%' }}>
+                  <Text style={styles.modalTitle}>Turn on notifications</Text>
+                  <Text style={styles.modalDescription}>You’ll be able to see what your friends are doing and stay updated on new events!
+                  </Text>
+                </View>
+                <View
+                  style={{ marginBottom: '5%' }}
+                >
+                  <CustomButtonContainer
+                    button1Name="Continue"
+                    button2Name="Maybe Later"
+                    onPressButton1={onPressModalClose}
+                    onPressButton2={onPressModalClose}
+                    marginTop={10}
 
-                />
-              </View>
+                  />
+                </View>
 
+              </View>
             </View>
-          </View>
-        </Modal>
-
+          </Modal>
+        </ScrollView>
       </SafeAreaView>
     );
   }
@@ -218,7 +262,7 @@ const styles = StyleSheet.create({
 
   safeArea: {
     // flex: 1,
-    height:'100%',
+    height: '100%',
     backgroundColor: color.backgroundColor,
   },
   background: {
@@ -260,15 +304,15 @@ const styles = StyleSheet.create({
     // marginTop: hp('1%'),
     marginBottom: hp('2%'),//5
     // backgroundColor:'red',
-    width:'40%',
-    height:'5%',
-    justifyContent:'center',
+    width: '40%',
+    height: '5%',
+    justifyContent: 'center',
 
   },
   Notificationimage: {
-    width:wp('35%'),
+    width: wp('35%'),
     marginBottom: hp('2%'),
-    height:hp('20%'),
+    height: hp('20%'),
     // backgroundColor:'pink'
 
 
@@ -283,11 +327,11 @@ const styles = StyleSheet.create({
 
 
   },
-  barIcon:{
-    width:50,
-    height:4,
+  barIcon: {
+    width: 50,
+    height: 4,
     // alignItems:'center'
-    alignSelf:'center',
+    alignSelf: 'center',
     // backgroundColor:'pink'
 
 
