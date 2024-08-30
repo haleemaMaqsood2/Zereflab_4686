@@ -260,7 +260,15 @@ const InviteFriend = ({ navigation }) => {
             setSelectedFriends([...selectedFriends, id]);
         }
     };
-
+    const handleSelectAll = () => {
+        if (selectedFriends.length === filteredData.length) {
+            // If all are selected, deselect all
+            setSelectedFriends([]);
+        } else {
+            // Otherwise, select all
+            setSelectedFriends(filteredData.map(friend => friend.id));
+        }
+    };
     const renderFriendItem = ({ item }) => {
         const isSelected = selectedFriends.includes(item.id);
         return (
@@ -269,11 +277,16 @@ const InviteFriend = ({ navigation }) => {
                 <View style={styles.infoContainer}>
                     <Text style={styles.descriptionText}>{item.name}</Text>
                 </View>
-                <View style={{width:wp(5),height:hp(2.5),borderWidth:1,borderColor:color.whiteColor,marginRight:hp(2)}}>
-                {isSelected && (
-                    <Image source={require('../../../src/assets/images/checkedIcon.png')}resizeMode='contain' style={styles.checkIcon} />
-                )}
-                </View>
+                {/* <View style={{width:wp(5),height:hp(2.5),borderWidth:1,borderColor:color.whiteColor,marginRight:hp(2)}}> */}
+                {isSelected ? (
+        <View style={{ width: wp(5), height: hp(2.5), borderWidth: 0, borderColor: color.whiteColor, marginRight: hp(2) }}>
+            <Image source={require('../../../src/assets/images/checkedIcon.png')} resizeMode='contain' style={styles.checkIcon} />
+        </View>
+    ) : (
+        <View style={{ width: wp(5), height: hp(2.5), borderWidth: 1, borderColor: color.whiteColor, marginRight: hp(2) }}>
+            {/* Empty view for spacing */}
+        </View>
+    )}
             </TouchableOpacity>
         );
     };
@@ -282,19 +295,10 @@ const InviteFriend = ({ navigation }) => {
 
 
         // Dynamically update the data based on the selected tab
-        if (selectedTab === 'Suggestions') {
-            setFilteredData(suggestedFriendData);
-            setSelectedTitle("People you may know")
-        } else if (selectedTab === 'Friends') {
+      
             setFilteredData(friendData);
-            setSelectedTitle("Friends (50)")
-
-        } else if (selectedTab === 'Requests') {
-            setFilteredData(RequestedFriendData);
-            setSelectedTitle("Friend Request (4)")
-
-        }
-    }, [selectedTab]);
+            
+    }, []);
 
 
 
@@ -302,7 +306,7 @@ const InviteFriend = ({ navigation }) => {
         return (
             <SafeAreaView style={styles.safeArea}>
                 <KeyboardAvoidingView >
-                    <Header title={"Invite Friends"} />
+                    <Header title={"Invite Friends"} rightText={"Skip"}/>
                     <View style={styles.inputContainer}>
                         {/* Icon */}
                         <Image
@@ -327,7 +331,10 @@ const InviteFriend = ({ navigation }) => {
                     {/* <HomeTab data={TabData} onTabSelect={setSelectedTab} /> */}
                     <View style={styles.titleHeader}>
                         <Text style={styles.titleText}>Suggested</Text>
+                        {/* <Text style={styles.selectAllText}>Select All</Text> */}
+                        <TouchableOpacity onPress={handleSelectAll}>
                         <Text style={styles.selectAllText}>Select All</Text>
+                    </TouchableOpacity>
 
                     </View>
                     <FlatList

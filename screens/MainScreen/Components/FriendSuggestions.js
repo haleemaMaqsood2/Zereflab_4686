@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         fontFamily: font.Regular,
         color: '#727272',
+        marginTop:hp(0.25)
     },
     addButton: {
         flexDirection: 'row',
@@ -140,8 +141,10 @@ const styles = StyleSheet.create({
         backgroundColor: color.onBoardingButton,
         // padding: wp('1.5%'),
         borderRadius: 8,
-        width: wp('27%'),
-        height: hp(4),
+        // width: wp('27%'),
+        // height: hp(4),
+        width:111,
+        height:32,
         paddingHorizontal: wp('7%'), // Adjust horizontal padding for increased width
     },
     addIcon: {
