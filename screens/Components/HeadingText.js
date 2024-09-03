@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     width: wp('95%'),
     alignSelf: 'center',
-    // marginTop: hp('1%'),
+    // marginBottom: hp('1%'),
     justifyContent:'center',
     alignItems:'center',
     // backgroundColor:'red'
@@ -72,6 +72,10 @@ titleText: {
     width:wp('85%'),
     textAlign:'center',
    fontFamily:'inter',
+  //  marginBottom: hp('2%'),
+
+
+
 //    backgroundColor:'red'
 //    lineHeight:128.646,
     // font:'urbanist'

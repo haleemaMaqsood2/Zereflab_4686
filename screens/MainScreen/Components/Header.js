@@ -74,7 +74,7 @@ const Header = ({ title }) => {
       </View>*/}
           <View style={{ width: '100%', alignItems: 'center', flexDirection: 'row' }}>
             <TouchableOpacity onPress={goBack} style={{ width: '15%' }} >
-              {(titleText == 'Notification' || titleText == 'Friends'||titleText == 'Create Event') ?
+              {(titleText == 'Notification' || titleText == 'Friends' || titleText == 'Create Event') ?
                 null :
                 <Image
                   source={require('../../../src/assets/images/BackNew1x4.png')}
@@ -87,19 +87,24 @@ const Header = ({ title }) => {
 
 
             <Text style={styles.titleContainer}>{title}</Text>
-            {(titleText=='Invite Friends')?
-            <TouchableOpacity style={{ width: '15%'}}>
-            <Text style={styles.counter}>Skip</Text>
-          </TouchableOpacity>:
-          <TouchableOpacity style={{}}>
-          <Text style={styles.counter}></Text>
-        </TouchableOpacity>
-
-
-          }
+            {title === 'Edit profile' ? (
+              <TouchableOpacity style={{ width: '15%' }}>
+                <Text style={styles.counter}>Save</Text>
+              </TouchableOpacity>
+            ) : (
+              title === 'Invite Friends' ? (
+                <TouchableOpacity style={{ width: '15%' }}>
+                  <Text style={styles.counter}>Skip</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity>
+                  <Text style={styles.counter}></Text>
+                </TouchableOpacity>
+              )
+            )}
           </View>
-        
-          
+
+
         </>
       ) : (
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', flex: 1, }}>
@@ -175,9 +180,9 @@ const styles = StyleSheet.create({
   },
   counter: {
     color: 'white',
-    fontSize:16,
-    fontWeight:'500',
-    fontFamily:'Inter'
+    fontSize: 16,
+    fontWeight: '500',
+    fontFamily: 'Inter'
   },
   titleContainer: {
     color: color.whiteColor,

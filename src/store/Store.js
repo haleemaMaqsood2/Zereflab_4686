@@ -2,8 +2,11 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { persistStore, persistReducer } from "redux-persist";
 import onBoardingSlice from "./slices/onBoardingSlice/onBoardingSlice";
+import eventDataSlice from "./slices/eventDataSlice/eventDataSlice";
 const rootReducer = combineReducers({
     onBoardingSlice: onBoardingSlice,
+    event:eventDataSlice,
+    
   
   });
   const persistConfig = {

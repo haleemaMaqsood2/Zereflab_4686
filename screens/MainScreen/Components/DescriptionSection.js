@@ -1,18 +1,28 @@
-// DescriptionSection.js
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { color } from '../../../src/styles/color';
-import CenteredTextScreen from '../../ContactLoading';
 
 const DescriptionSection = ({ description }) => {
+    const [showFullDescription, setShowFullDescription] = useState(false);
+
+    const toggleDescription = () => {
+        setShowFullDescription(!showFullDescription);
+    };
+
+    const isLongDescription = description.length > 172;
+    const displayedDescription = isLongDescription && !showFullDescription ? `${description.slice(0, 172)}...` : description;
+    const toggleText = showFullDescription ? ' Show Less' : ' Show More';
+
     return (
         <View style={styles.descriptionContainer}>
             <Text style={styles.descriptionText}>
-                {description}
-                <TouchableOpacity style={{height:17}}>
-                    <Text style={[styles.descriptionText, { color: color.privacyPolicyColor }]}> Show More</Text>
-                </TouchableOpacity>
+                {displayedDescription}
+                {isLongDescription && (
+                    <Text style={[styles.descriptionText, { color: color.privacyPolicyColor }]} onPress={toggleDescription}>
+                        {toggleText}
+                    </Text>
+                )}
             </Text>
         </View>
     );
@@ -24,9 +34,11 @@ const styles = StyleSheet.create({
         marginTop: hp(2.5),
         marginBottom: hp(3),
         width:'95%',//95
-        flexDirection:'row',
+        // flexWrap: 'wrap', // Allow text and button to wrap if needed
+
+        // flexDirection:'row',
         // alignItems:'flex-start'
-        justifyContent:'center',
+        // justifyContent:'center',
         // backgroundColor:'red'
     },
     descriptionText: {

@@ -7,22 +7,26 @@ import {
     StyleSheet
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { color } from '../../../src/styles/color';
+import { color } from '../../../../src/styles/color';
+// import { color } from '../../../src/styles/color';
 
-const UserName = ({ data }) => {
+
+const UserNamePost = ({ data }) => {
+    const formattedDate = data?.date ? new Date(data.date).toLocaleString() : 'Date not available';
+
     return (
         <View style={styles.secondHalf}>
         <View style={styles.titleContainer}>
             <Text style={styles.title}>{data.title}</Text>
-            <Text style={styles.footerTime}>{data.time}</Text>
+            <Text style={styles.footerTime}>{formattedDate}</Text>
         </View>
         <View style={styles.locationContainer}>
-            <Image source={require('../../../src/assets/images/Location2.png')} resizeMode='contain' style={styles.locationIconStyle} />
-            <Text style={styles.locationText}>{data.Location}</Text>
+            <Image source={require('../../../../src/assets/images/Location2.png')} resizeMode='contain' style={styles.locationIconStyle} />
+            <Text style={styles.locationText}>{data.location}</Text>
         </View>
         <View style={styles.flatlistContainer}>
-            <Image source={data.userProfileIcon} style={styles.profileIcon} />
-            <Text style={styles.username}>{data.username}</Text>
+            <Image source={require('../../../../src/assets/images/partyUser1x4.png')} style={styles.profileIcon} />
+            <Text style={styles.username}>msu-fiji</Text>
         </View>
     </View>
     );
@@ -89,4 +93,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default UserName;
+export default UserNamePost;

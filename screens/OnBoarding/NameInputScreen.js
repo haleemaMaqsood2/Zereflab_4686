@@ -103,7 +103,9 @@ const NameInputScreen = ({ navigation }) => {
                     <Header />
 
                     <View style={styles.titleContainer}>
-                        <HeadingText title={"What's your name?"} />
+                    <Text style={styles.titleText}>What's your name?</Text>
+
+                        {/* <HeadingText title={"What's your name?"} /> */}
                         <CustomTextInput
                             value={name}
                             onChangeText={handleChange}
@@ -123,7 +125,7 @@ const NameInputScreen = ({ navigation }) => {
                                 // marginTop={(screenHeight < 890) ? hp('24%') : hp('28%')} // Example margin top value
                                 marginTop={
                                     keyboardVisible
-                                        ? (screenHeight < 890 ? hp('25') : hp('29%')) // If the keyboard is visible
+                                        ? (screenHeight < 890 ? hp('26') : hp('30%')) // If the keyboard is visible
                                         : (screenHeight < 890 ? hp('57%') : hp('59%'))     // If the keyboard is not visible
                                 }
                             />
@@ -192,7 +194,7 @@ const styles = StyleSheet.create({
     titleContainer: {
         width: wp('95%'),
         alignSelf: 'center',
-        marginTop: hp('1%'),
+        // marginTop: hp('1%'),
         justifyContent: 'center',
         alignItems: 'center',
         // backgroundColor:'red'
@@ -205,6 +207,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontFamily: 'Inter',
         lineHeight: 36,
+        // marginTop:hp(1)
         // font:'urbanist'
     },
 

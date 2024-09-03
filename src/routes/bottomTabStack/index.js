@@ -21,7 +21,8 @@ import {
 import ActivityStack from './ActivityStack';
 import FriendStack from './FriendStack';
 import CreateEventStack from './CreateEventStack';
-CreateEventStack
+import ProfileStack from './ProfileStack';
+
 export default function BottomTabStack() {
     const Tab = createBottomTabNavigator();
 
@@ -95,7 +96,7 @@ export default function BottomTabStack() {
                                 // name={
                                     // require("../../assets/images/bottomProfile1x4.png")}
                                     focused={focused}
-                                activeIcon={require("../../assets/images/bottomProfile1x4.png")}
+                                activeIcon={require("../../assets/images/bottomFRiendActive.png")}
                                 inactiveIcon={require("../../assets/images/bottomProfile1x4.png")}
                                     size= {RFPercentage(3)}
 
@@ -140,8 +141,8 @@ export default function BottomTabStack() {
                     }}
                 />
                 <Tab.Screen
-                    name="HomePage3"
-                    component={HomePage}
+                    name="ProfileStack"
+                    component={ProfileStack}
                     options={{
                         // tabBarLabel: "HomePage",
                         tabBarIcon: ({ focused, size }) => (
@@ -149,9 +150,11 @@ export default function BottomTabStack() {
                                 // name={
                                 //     require("../../assets/images/BottomUser1x4.png")}
                                 focused={focused}
-                                activeIcon={require("../../assets/images/BottomUser1x4.png")}
+                                activeIcon={require("../../assets/images/ProfileSelected1x4.png")}
                                 inactiveIcon={require("../../assets/images/BottomUser1x4.png")}
-                                    size= {RFPercentage(3.2)}
+                                    // size= {RFPercentage(3.2)}
+                                    size= {focused?RFPercentage(3.0):RFPercentage(3.0)}
+
 
                             />
                         ),

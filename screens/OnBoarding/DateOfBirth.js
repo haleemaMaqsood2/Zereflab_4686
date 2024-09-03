@@ -104,7 +104,7 @@ const DateOfBirth = () => {
         <SafeAreaView style={styles.safeArea}>
             <KeyboardAvoidingView >
                 <Header />
-                <View style={{marginTop:hp(1)}}> 
+                <View style={{}}> 
                 <HeadingText title={"What's your birthday?"} />
 
                 </View>
@@ -127,7 +127,7 @@ const DateOfBirth = () => {
                         />
 
                     </View>
-                    <View style={{height:(screenHeight < 890 ? hp('32') : hp('36.5%')),justifyContent:'flex-end'}}>
+                    <View style={{height:(screenHeight < 890 ? hp('33') : hp('37.5%')),justifyContent:'flex-end'}}>
                     <View style={styles.ButtonContainer}>
                         <TouchableOpacity onPress={moveNext} style={styles.touchableArea}>
                             <Text style={styles.conTinueText}>Continue</Text>

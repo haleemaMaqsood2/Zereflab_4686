@@ -7,22 +7,36 @@ import {
     Text,
     TouchableOpacity,
     ScrollView,
-    ImageBackground
+    ImageBackground,
+    Modal,
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { color } from '../../src/styles/color';
 import { useNavigation } from '@react-navigation/native';
-import UserName from './Components/userName';
-import DescriptionSection from './Components/DescriptionSection';
 
+// import UserName from './Components/userName';
+import DescriptionSection from '../Components/DescriptionSection';
 
-
-const EventDetails = () => {
+import { color } from '../../../src/styles/color';
+import { useSelector } from 'react-redux';
+import { setEventData } from '../../../src/store/slices/eventDataSlice/eventDataSlice';
+import UserNamePost from '../Friends/components/UserNamePost';
+const ManagePost = () => {
     const today = 'Today - 12:00 PM';
     const navigation = useNavigation();
-    function onPressCard() {
-        navigation.navigate('Attendees')
-    }
+    const eventData = useSelector((state) => state.event.eventData);
+    const [event, setEvent] = useState();
+    const [modalVisible, setModalVisible] = useState(false); // State to control modal visibility
+
+    // function onPressCard() {
+    //     navigation.navigate('Attendees')
+    // }
+    const openModal = () => {
+        setModalVisible(true);
+    };
+
+    const closeModal = () => {
+        setModalVisible(false);
+    };
 
     function backPress() {
         navigation.goBack();
@@ -31,10 +45,12 @@ const EventDetails = () => {
         {
             id: 1,
             username: 'msu-fiji',
-            userProfileIcon: require('../../src/assets/images/partyUser1x4.png'),
-            title: 'FIJI DARTY',
-            partyImage: require('../../src/assets/images/BirthdayListScreen.png'),
-            partyMainImage: require('../../src/assets/images/eventDetail.png'),
+            // userProfileIcon: require('../../../src/assets/images/partyUser1x4.png'),
+            userProfileIcon: require('../../../src/assets/images/partyUser1x4.png'),
+
+            Title: 'FIJI DARTY',
+            partyImage: require('../../../src/assets/images/BirthdayListScreen.png'),
+            partyMainImage: require('../../../src/assets/images/eventDetail.png'),
             description: 'Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, fermentum, mauris leo eget..',
             time: today,
             other: 130,
@@ -42,20 +58,28 @@ const EventDetails = () => {
             Location: 'Phi Gamma Delta House'
         },
     ];
+    useEffect(() => {
+
+
+        // Dynamically update the data based on the selected tab
+
+        setEvent(eventData);
+        console.log("evenbt data result>>>>", eventData)
+
+    }, []);
 
     return (
         <SafeAreaView style={styles.safeArea}>
             <ScrollView
-                            showsVerticalScrollIndicator={false}
->
-                <ImageBackground source={require('../../src/assets/images/EventDetailBlurr.png')} style={styles.mainImage} resizeMode='stretch'>
+                showsVerticalScrollIndicator={false}>
+                <ImageBackground source={require('../../../src/assets/images/EventDetailBlurr.png')} style={styles.mainImage} resizeMode='stretch'>
                     <View style={styles.overlay}>
                         <View style={styles.topIconsContainer}>
                             <TouchableOpacity style={styles.backButton} onPress={backPress}>
-                                <Image source={require('../../src/assets/images/EventBackArrowImage1x4.png')} style={styles.iconImage} />
+                                <Image source={require('../../../src/assets/images/EventBackArrowImage1x4.png')} style={styles.iconImage} />
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.shareButton}>
-                                <Image source={require('../../src/assets/images/EventBackShareImage1x4.png')} style={styles.iconImage} />
+                                <Image source={require('../../../src/assets/images/EventBackShareImage1x4.png')} style={styles.iconImage} />
                             </TouchableOpacity>
                         </View>
                         <View style={styles.mainImageContainer}>
@@ -63,34 +87,66 @@ const EventDetails = () => {
                         </View>
 
 
-                        <UserName data={data[0]} />
+                        <UserNamePost
+                            data={eventData} />
 
                     </View>
                 </ImageBackground>
-                {/* DEscription scection */}
 
 
-                <DescriptionSection description={data[0].description} />
 
-                {/* Friend scection */}
-                <TouchableOpacity onPress={onPressCard} style={styles.FriendSection}>
-                    <Image source={require('../../src/assets/images/EventDetailFriendImages1x4.png')} style={styles.friendImage} resizeMode='contain' />
+
+                <DescriptionSection description={eventData.description} />
+
+                <TouchableOpacity 
+                // onPress={onPressCard}
+                 style={styles.FriendSection}>
+                    <Image source={require('../../../src/assets/images/EventDetailFriendImages1x4.png')} style={styles.friendImage} resizeMode='contain' />
                     <Text style={styles.friendCountText}>35 friends and 100 others going</Text>
                     <Text style={styles.tapText}>Tap to see who's going</Text>
                 </TouchableOpacity>
-                {/* button     zzz scection */}
 
-                {/* <View style={styles.GoingContainer}>
-                    <TouchableOpacity style={styles.continueButton}>
-                        <Text style={styles.goingText}>Going</Text>
-                    </TouchableOpacity>
-                </View> */}
             </ScrollView>
             <View style={styles.GoingContainer}>
-                    <TouchableOpacity style={styles.continueButton}>
-                        <Text style={styles.goingText}>Going</Text>
-                    </TouchableOpacity>
-                </View> 
+                <TouchableOpacity style={styles.continueButton} onPress={openModal}>
+                    <Text style={styles.goingText}>Manage</Text>
+                </TouchableOpacity>
+            </View>
+
+
+
+
+
+            {/* Modal Component */}
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={closeModal} // Close modal on request
+            >
+                <View style={styles.modalContainer}>
+                    <View style={styles.modalContent}>
+                    <TouchableOpacity style={styles.modalOption} onPress={() => { /* Handle Edit option here */ }}>
+                            <Text style={styles.optionText}>Edit</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.modalOption} onPress={() => { /* Handle Invite option here */ }}>
+                            <Text style={styles.optionText}>Invite</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.modalOption} onPress={() => { /* Handle Duplicate option here */ }}>
+                            <Text style={styles.optionText}>Duplicate</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.modalOption} onPress={() => { /* Handle Copy Link option here */ }}>
+                            <Text style={styles.optionText}>Copy Link</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.modalOption} onPress={() => { /* Handle Delete option here */ }}>
+                            <Text style={styles.optionTextDelete}>Delete</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.modalOption} onPress={closeModal}>
+                            <Text style={styles.optionText}>Cancel</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
         </SafeAreaView>
     );
 }
@@ -129,8 +185,8 @@ const styles = StyleSheet.create({
         right: 0,
     },
     iconImage: {
-        width:45,
-        height:45,
+        width: 45,
+        height: 45,
     },
     mainImage: {
         flex: 1,
@@ -269,7 +325,56 @@ const styles = StyleSheet.create({
         lineHeight: 14.52,
         fontStyle: 'italic',
         color: color.whiteColor,
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        position:'absolute',
+        bottom:'5%',
+        alignSelf:'center',
+        justifyContent:'center',
+        alignItems:'center',
+        // backgroundColor: 'rgba(0,0,0,0.5)', // Semi-transparent background
+        // backgroundColor: color.inputFieldColor, // Semi-transparent background
+
+    },
+    modalContent: {
+        width: wp('95%'),
+        // padding: 20,
+        backgroundColor: color.inputFieldColor, // Semi-transparent background
+        borderRadius: 10,
+        alignItems: 'center',
+    },
+    modalTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 15,
+    },
+    modalOption: {
+        paddingVertical: 10,
+        width: '100%',
+        alignItems: 'center',
+        justifyContent:'center',
+        height:hp(6),
+        borderBottomWidth:1,
+        borderColor:'#ffffff14',
+
+
+    },
+    optionText: {
+        fontSize: 14,
+        fontWeight:'500',
+        fontFamily:'Inter',
+        color: color.whiteColor,
+        
+    },
+    optionTextDelete:{
+        fontSize: 14,
+        fontWeight:'500',
+        fontFamily:'Inter',
+        color: color.redColor,
     }
 });
 
-export default EventDetails;
+export default ManagePost;

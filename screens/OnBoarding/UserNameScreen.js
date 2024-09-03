@@ -125,7 +125,7 @@ const UserNameScreen = ({ navigation }) => {
                                 // marginTop={(screenHeight < 890) ? hp('18.5%') : hp('23%')} // Example margin top value
                                 marginTop={
                                     keyboardVisible
-                                        ? (screenHeight < 890 ? hp('18.5%') : hp('23%')) // If the keyboard is visible
+                                        ? (screenHeight < 890 ? hp('19.5%') : hp('24%')) // If the keyboard is visible
                                         : (screenHeight < 890 ? hp('50.5%') : hp('53%'))     // If the keyboard is not visible
                                 }
                             />
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     titleContainer: {
         width: wp('95%'),
         alignSelf: 'center',
-        marginTop: hp('1%'),
+        // marginTop: hp('1%'),
         justifyContent: 'center',
         alignItems: 'center',
         // backgroundColor:'red'

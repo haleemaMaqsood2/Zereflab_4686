@@ -145,7 +145,7 @@ const AddFriendScreen = ({ navigation }) => {
                     <AddFriendList1 data={addFriendData} inviteFriends={inviteFriendData}/>
 
                     {/* <View style={{justifyContent:'center'}}> */}
-                    <View style={[styles.ButtonContainer, { marginTop: screenHeight > 890 ? hp(30) : hp(29) }]}>
+                    <View style={[styles.ButtonContainer, { marginTop: screenHeight > 890 ? hp(30) : hp(30) }]}>
                     <TouchableOpacity onPress={moveNext} style={styles.touchableArea}>
                                 <Text style={styles.conTinueText}>Continue</Text>
                             </TouchableOpacity>

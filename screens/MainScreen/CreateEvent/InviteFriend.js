@@ -290,6 +290,11 @@ const InviteFriend = ({ navigation }) => {
             </TouchableOpacity>
         );
     };
+    const moveNext = () => {
+       
+
+        navigation.navigate('ManagePost');
+    };
 
     useEffect(() => {
 
@@ -345,7 +350,7 @@ const InviteFriend = ({ navigation }) => {
                 />
                    <View style={styles.SendInviteContainer}>
                             <TouchableOpacity 
-                            // onPress={moveNext} 
+                            onPress={moveNext} 
                             style={styles.touchableArea}>
                                 <Text style={styles.conTinueText}>Send Invitation</Text>
                             </TouchableOpacity>

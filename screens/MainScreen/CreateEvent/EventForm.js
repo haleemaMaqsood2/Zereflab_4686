@@ -18,6 +18,7 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { useDispatch } from 'react-redux';
 
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -30,16 +31,22 @@ import { color } from '../../../src/styles/color';
 import AddFriendList from '../../Components/AddFriendList';
 import EventUpload from '../../Components/EventUpload';
 import CustomTextInputMain from '../../Components/CustomTextInputMain';
+import { setEventData } from '../../../src/store/slices/eventDataSlice/eventDataSlice';
 // CustomTextInput
 
 
 const EventForm = ({ navigation }) => {
     //   const navigation = useNavigation();
+    const dispatch = useDispatch();
+
     const [date, setDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
 
     const [isDatePickerVisible, setDatePickerVisible] = useState(false); // State to control date picker visibility
-    const [title, setTitle] = useState('')
+    const [title, setTitle] = useState('')//200 Park Lane, Anytown, CA 98765
+    const [location, setlocation] = useState('200 Park Lane, Anytown, CA 98765')//200 Park Lane, Anytown, CA 98765
+    const [description, setDescription] = useState('')//200 Park Lane, Anytown, CA 98765
+
     const [modalVisible, setModalVisible] = useState(false); // Start with the modal visible
     const [privacy, setPrivacy] = useState('Public'); // Default privacy set to 'Public'
     const [privacyIcon, setPrivacyIcon] = useState(require('../../../src/assets/images/EventModule/publicImage.png')); // Default icon
@@ -65,10 +72,18 @@ const EventForm = ({ navigation }) => {
 
     };
     const createEventPress = () => {
-        navigation.navigate('InviteFriend')
+        // navigation.navigate('InviteFriend')
+        const eventData = { date, endDate, title, location, description, privacy };
+
+        dispatch(setEventData({ date, endDate, title, location,description,privacy }));
+        console.log(">>>>>>>>>>>",eventData)
+
+        navigation.navigate('InviteFriend');
     };
 
-
+    const handleDescriptionChange = (value) => {
+        setDescription(value);
+    };
     const handleDateConfirm = (selectedDate) => {
         setDate(selectedDate);
         setDatePickerVisible(false); // Hide the date picker after selecting a date
@@ -116,16 +131,17 @@ const EventForm = ({ navigation }) => {
                     showsHorizontalScrollIndicator={false}>
 
                     <Header title={"Create Event"} />
-                    {/* <ScrollView contentContainerStyle={styles.scrollViewContent}
-                    showsVerticalScrollIndicator={false}  // Hide vertical scrollbar
-                    showsHorizontalScrollIndicator={false} // Hide horizontal scrollbar
-                > */}
+               
                     {/* <EventUpload /> */}
                     <Image source={require('../../../src/assets/images/EventModule/eventMain.png')}
                         // resizeMode={'contain'}
                         resizeMode="CONTAIN"
 
                         style={styles.image} />
+                        <TouchableOpacity style={{backgroundColor:'white',        alignItems:'center'
+,borderRadius:19,position:'absolute',top:'20%',alignSelf:'center',alignItems:'center',justifyContent:'center',width:wp(45),height:hp(4)}}>
+                            <Text style={styles.imageUploadText}>Upload event banner</Text>
+                        </TouchableOpacity>
                     <View style={styles.fieldsContainer}>
                         <View style={styles.fieldWrapper}>
                             <Text style={styles.fieldTitle}>Event Title <Text style={{ color: 'red' }}>*</Text></Text>
@@ -245,6 +261,9 @@ const EventForm = ({ navigation }) => {
                                 placeholder='(optional)'
                                 multiline={true}
                                 numberOfLines={4}
+                                value={description}
+                                onChangeText={handleDescriptionChange}  // And this line
+
                             />
                         </View>
                         <View style={styles.fieldWrapper}>
@@ -415,6 +434,12 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'flex-start'
     },
+    imageUploadText:{
+        fontsize:11,
+        fontWeight:'400',
+        fontFamily:'inter',
+        color:color.balckFontColor,
+    },
     PrivacyInput: {
         backgroundColor: color.inputFieldColor,
         width: wp('96%'),
@@ -516,7 +541,8 @@ const styles = StyleSheet.create({
     },
     image: {
         height: 350,
-        width: '100%'
+        width: '100%',
+        marginTop:hp(3)
     },
     input: {
         backgroundColor: color.inputFieldColor,

@@ -15,4 +15,5 @@ export const color ={
     whiteWithFifteenPercentOpacity:'#ffffff26',
     whitewithThirty:'#ffffff4D',
     whiteWithTenPercencentOpacity:'#ffffff1a',
+    redColor:'#F9373F',
 };
