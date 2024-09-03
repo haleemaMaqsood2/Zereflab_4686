@@ -23,8 +23,11 @@ const Splash = () => {
   useEffect(() => {
     // Set a timer for 5 seconds and navigate to VerifyCode screen
     const timer = setTimeout(() => {
-      // navigation.navigate('VerifyCode');
-      navigation.navigate('Carousel');
+      // navigation.navigate('Carousel');
+      navigation.replace('Carousel');
+
+      // navigation.replace('SignIn');  // Use replace to navigate to SignIn screen
+
 
     }, 1000);
 

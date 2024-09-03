@@ -11,6 +11,7 @@ import {
     TouchableOpacity,
     Image,
     KeyboardAvoidingView,
+    Dimensions
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
@@ -24,6 +25,8 @@ import AddFriendList1 from '../MainScreen/Components/AddFriendList1';
 
 const AddFriendScreen = ({ navigation }) => {
     //   const navigation = useNavigation();
+    const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
+
     const addFriendData=[
         {
             id:1,
@@ -142,8 +145,8 @@ const AddFriendScreen = ({ navigation }) => {
                     <AddFriendList1 data={addFriendData} inviteFriends={inviteFriendData}/>
 
                     {/* <View style={{justifyContent:'center'}}> */}
-                        <View style={styles.ButtonContainer}>
-                            <TouchableOpacity onPress={moveNext} style={styles.touchableArea}>
+                    <View style={[styles.ButtonContainer, { marginTop: screenHeight > 890 ? hp(30) : hp(30) }]}>
+                    <TouchableOpacity onPress={moveNext} style={styles.touchableArea}>
                                 <Text style={styles.conTinueText}>Continue</Text>
                             </TouchableOpacity>
                         </View>

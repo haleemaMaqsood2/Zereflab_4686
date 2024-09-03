@@ -13,7 +13,7 @@ const UserName = ({ data }) => {
     return (
         <View style={styles.secondHalf}>
         <View style={styles.titleContainer}>
-            <Text style={styles.title}>{data.Title}</Text>
+            <Text style={styles.title}>{data.title}</Text>
             <Text style={styles.footerTime}>{data.time}</Text>
         </View>
         <View style={styles.locationContainer}>
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     flatlistContainer: {
         flexDirection: 'row',
         paddingLeft: hp(1.4),
-        marginTop: hp(3)
+        marginTop: hp(2)
     },
     profileIcon: {
         width: 40,

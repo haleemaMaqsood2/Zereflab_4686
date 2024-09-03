@@ -152,8 +152,8 @@ const VerifyCode = () => {
                     <Header />
 
                     <View style={styles.titleContainer}>
-                        <HeadingText title={'Enter the verification code'} />
-                        {/* <Text style={styles.titleText}>Enter the verification code</Text> */}
+                        {/* <HeadingText title={'Enter the verification code'} /> */}
+                        <Text style={styles.titleText}>Enter the verification code</Text>
 
 
                         <View style={styles.inputContainer}>
@@ -245,7 +245,7 @@ const VerifyCode = () => {
                                 keyboardHeight={keyboardHeight}
                                 nextScreenName="NameInputScreen"
                                 onPress={moveNext}
-                                marginTop={(screenHeight < 890) ? hp('16%') : hp('23.0%')} // Example margin top value
+                                marginTop={(screenHeight < 890) ? hp('16.5%') : hp('24.5%')} // Example margin top value
                             />
 
                         </View>
@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
     titleContainer: {
         width: wp('95%'),
         alignSelf: 'center',
-        marginTop: hp('1%'),
+        // marginTop: hp('1%'),
         justifyContent: 'center',
         alignItems: 'center',
         // backgroundColor:'red'
@@ -291,9 +291,10 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 28,
         fontWeight: '700',
-        width: wp('75%'),
+        width: wp('85%'),
         textAlign: 'center',
         fontFamily: 'inter',
+        marginTop:hp(0),
         //    backgroundColor:'red'
         //    lineHeight:128.646,
         // font:'urbanist'

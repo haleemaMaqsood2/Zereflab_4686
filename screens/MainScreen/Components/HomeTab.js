@@ -12,7 +12,7 @@ const HomeTab = ({ data, onTabSelect }) => {
   };
 
   return (
-    <View style={{ width: wp('100%'),marginTop:hp(1.1), backgroundColor:color.balckFontColor}}>
+    <View style={{ width: wp('100%'), backgroundColor:color.balckFontColor}}>
       <View style={styles.tabContainer}>
         {/* <ScrollView horizontal showsHorizontalScrollIndicator={false}> */}
           {data.map((tab) => (
@@ -60,9 +60,10 @@ const styles = StyleSheet.create({
   tab: {
     
     // paddingHorizontal: (33.5),
-    width:'31%',
+    width:'30.5%',
     marginRight: 10,
     borderRadius: 20,
+    marginLeft:'1%',
     backgroundColor: color.inputFieldColor, // Default tab color
     // backgroundColor:'red', // Default tab color
     height:'100%',
@@ -73,9 +74,10 @@ const styles = StyleSheet.create({
   },
   selectedTab: {
     backgroundColor: color.whiteColor, // Selected tab color
-    marginLeft:'1%',
+    // marginLeft:'0.5%',
     height:'100%',
     borderRadius: 20,
+    // width:'30%',
   },
   tabText: {
     fontSize: 12, // Use responsive font size

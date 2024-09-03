@@ -128,9 +128,9 @@ const Location = ({ navigation }) => {
         location !== '' ? styles.buttonEnabled : styles.buttonDisabled,
         {
             bottom: (screenHeight > 890 && keyboardVisible) 
-                ? hp(34) 
+                ? hp(33.5) 
                 : (screenHeight > 890 ) 
-                    ? hp(4) 
+                    ? hp(3.5) 
                     : (!keyboardVisible && screenHeight < 890)
                     ? hp(4) // If screenHeight < 890 and keyboard is not visible
                     : hp(36.2) 
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     titleContainer: {
         width: wp('95%'),
         alignSelf: 'center',
-        marginTop: hp('1%'),
+        // marginTop: hp('1%'),
         justifyContent: 'center',
         alignItems: 'center',
         // backgroundColor:'red'

@@ -143,14 +143,44 @@ const Attendees = ({ navigation }) => {
             status:'Add'
 
         },
-        // {
-        //     id:8,
-        //     name:"Full Name",
-        //     username:'@Username',
-        //     image: require('../../src/assets/images/Profile2.png'),
-        //     status:'Invite'
+        {
+            id:8,
+            name:"Full Name",
+            username:'@Username',
+            image: require('../../src/assets/images/Profile2.png'),
+            status:'Invite'
 
-        // },
+        },
+        {
+            id:9,
+            name:"Ronald C",
+            username:'@Username',
+            image: require('../../src/assets/images/avatar/Avatar3.png'),
+            status:'Add'
+        },
+        {
+            id:10,
+            name:"Cristofer Nolan ",
+            username:'@Username',
+            image: require('../../src/assets/images/avatar/Avatar5.png'),
+            status:'Add'
+
+        },
+        {
+            id:11,
+            name:"Rayn howard",
+            username:'@Username',
+            image: require('../../src/assets/images/avatar/Avatar1.png'),
+            status:'Add'
+
+        },{
+            id:12,
+            name:"Alex M",
+            username:'@Username',
+            image: require('../../src/assets/images/Profile2.png'),
+            status:'Add'
+
+        }
     ]
     function moveNext() {
         navigation.navigate('Location')

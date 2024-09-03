@@ -108,7 +108,7 @@ const SignInEmail = ({ navigation }) => {
                     <View style={styles.titleContainer}>
                         <HeadingText title={"What's your email?"} />
                         <CustomTextInput
-                            value={name}
+                            value={email}
                             onChangeText={handleChange}
                             placeholder='Email'
                             placeholderTextColor={color.placeholderColor}
@@ -140,8 +140,14 @@ const SignInEmail = ({ navigation }) => {
                                 keyboardHeight={keyboardHeight}
                                 nextScreenName="VerifyCode"
                                 onPress={moveNext}
-                                marginTop={(screenHeight < 890) ? hp('15%') : hp('19%')} // Example margin top value
+                                marginTop={
+                                    keyboardVisible
+                                        ? (screenHeight < 890 ? hp('13.5%') : hp('18%')) // If the keyboard is visible
+                                        : (screenHeight < 890 ? hp('45%') : hp('48%'))     // If the keyboard is not visible
+                                }
+                                // marginTop={(screenHeight < 890) ? hp('13.5%') : hp('17.5%')} // Example margin top value
                             />
+
 
                         {/* </View> */}
 
@@ -174,9 +180,9 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     titleContainer: {
-        width: wp('95%'),
+        width: wp('100%'),
         alignSelf: 'center',
-        marginTop: hp('1%'),
+        // marginTop: hp('1%'),
         justifyContent: 'center',
         alignItems: 'center',
         // backgroundColor:'red'
@@ -239,7 +245,11 @@ const styles = StyleSheet.create({
 
     emailTextContainer: {
         alignSelf: 'flex-start',
-        paddingLeft: '5%'
+        paddingLeft: '8%',
+        paddingTop:wp(0),
+        width:'100%',
+        height:hp(5),
+        // backgroundColor:'red'
     },
     emailText: {
         color: color.privacyPolicyColor,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { color } from '../../../src/styles/color';
@@ -7,10 +7,22 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 
 const EventListData = ({ data }) => {
     const navigation = useNavigation();
+    const [isGoing, setIsGoing] = useState(false); // State to manage button click
+    const [selectedItemIds, setSelectedItemIds] = useState({}); // State to track the selected items with a toggle
+
     function onPressItem() {
         navigation.navigate('EventDetails')
 
+
     }
+    const handleGoingPress = (id) => {
+        setSelectedItemIds((prevSelectedItemIds) => ({
+            ...prevSelectedItemIds,
+            [id]: !prevSelectedItemIds[id], // Toggle the selected state of the item
+        }));
+    };
+
+
     const renderItem = ({ item }) => (
         <View style={styles.itemContainer}>
             <View style={styles.flatlistContainer}>
@@ -35,9 +47,29 @@ const EventListData = ({ data }) => {
                     </View>
                 </TouchableOpacity>
                 <View style={styles.bottom}>
-                    <TouchableOpacity style={styles.goingButton}>
-                        <Text style={styles.goingText}>Going</Text>
+                {/* <TouchableOpacity
+                        style={[styles.goingButton, isGoing && styles.goingButtonActive]} // Conditional styling
+                        onPress={handleGoingPress}
+                    >
+                        <Text style={[styles.goingText, isGoing && styles.goingTextActive]}>Going</Text>
+                    </TouchableOpacity> */}
+                   <TouchableOpacity
+                        style={[
+                            styles.goingButton,
+                            selectedItemIds[item.id] ? styles.goingButtonActive : {}, // Change button color if item is selected
+                        ]}
+                        onPress={() => handleGoingPress(item.id)}
+                    >
+                        <Text
+                            style={[
+                                styles.goingText,
+                                selectedItemIds[item.id] ? styles.goingTextActive : {}, // Change text color if item is selected
+                            ]}
+                        >
+                            Going
+                        </Text>
                     </TouchableOpacity>
+
                     <TouchableOpacity style={styles.saveButton}>
                         <Image source={require('../../../src/assets/images/share1x4.png')} 
                         style={styles.shareImage}
@@ -125,7 +157,8 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         color: color.whiteColor,
         alignSelf: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        fontFamily:'Inter'
     },
     imageContainer: {
         position: 'relative',
@@ -216,7 +249,18 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: color.WhiteWithThirtypercentOpacity,
         borderRadius: 10,
-    }
+    },
+    goingButtonActive: {
+        backgroundColor: color.whiteColor, // Change to white when active
+    },
+    goingTextActive: {
+        color: color.blackColor, // Change to black when active
+        fontWeight: '500',
+        fontSize: 14,
+        fontFamily: 'Inter',
+        alignSelf: 'center',
+        lineHeight: 16.94,
+    },
 });
 
 export default EventListData;

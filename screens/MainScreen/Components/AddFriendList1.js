@@ -8,13 +8,18 @@ import { font } from '../../../src/styles/font';
 const AddFriendList1 = ({ data, inviteFriends }) => {
     // Combine the data and inviteFriends arrays with a type property
     const combinedData = [
+        { id: 'friendsHeader', type: 'header', title: ' Add Friends' }, // Add Friends title before data
         ...data.map(item => ({ ...item, type: 'data' })),
         { id: 'footer', type: 'footer' },
         ...inviteFriends.map(item => ({ ...item, type: 'inviteFriends' })),
     ];
 
     const renderItem = ({ item }) => {
-        if (item.type === 'data') {
+        if (item.type === 'header') {
+            return (
+                <Text style={styles.titleText1}>{item.title}</Text>
+            );
+        } else if (item.type === 'data') {
             return (
                 <View style={styles.friendContainer1}>
                     <Image source={item.image} style={styles.image} />
@@ -46,11 +51,16 @@ const AddFriendList1 = ({ data, inviteFriends }) => {
                 <Text style={styles.titleText}>Invite Friends</Text>
             );
         }
+        // else if (item.type === 'header') {
+        //     return (
+        //         <Text style={styles.titleText}>Add Friends</Text>
+        //     );
+        // }
     };
 
     return (
         <View style={styles.container}>
-            <Text style={styles.titleText}>Add Friends</Text>
+            {/* <Text style={styles.titleText}>Add Friends</Text> */}
             <FlatList
                 data={combinedData}
                 renderItem={renderItem}
@@ -66,7 +76,7 @@ const AddFriendList1 = ({ data, inviteFriends }) => {
 const styles = StyleSheet.create({
     container: {
         height: hp('90%'),
-        width: wp('90%'), // 90% of the screen width
+        width: wp('95%'), // 90% of the screen width
         alignSelf: 'center',
     },
     titleText: {
@@ -75,7 +85,7 @@ const styles = StyleSheet.create({
         fontFamily: font.Regular,
         color: color.whiteColor,
         marginBottom: hp('2%'),
-        marginTop:'3%'
+        // marginTop:'3%'
         
     },
     titleText1: {
@@ -83,17 +93,17 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         fontFamily: font.Regular,
         color: color.whiteColor,
-        marginBottom: hp('1%'),
-        marginTop: hp('2%'),
-        alignSelf: 'center'
+        marginBottom: hp('2%'),
+        // marginTop: hp('2%'),
+        // alignSelf: 'center'
     },
     list: {
-        marginTop: hp('1%'),
+        // marginTop: hp('1%'),
     },
     friendContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingBottom: '5%',
+        paddingBottom: '3%',
         borderBottomColor: color.placeholderColor,
     },
     friendContainer1: {
@@ -103,13 +113,14 @@ const styles = StyleSheet.create({
         borderBottomColor: color.placeholderColor,
     },
     image: {
-        width: RFPercentage(5),
-        height: RFPercentage(5),
+        width: RFPercentage(5.5),
+        height: RFPercentage(5.5),
         borderRadius: RFPercentage(2),
     },
     infoContainer: {
         marginLeft: wp('3%'),
         flex: 1,
+        // backgroundColor:'red'
     },
     nameText: {
         fontSize: 15,
@@ -122,6 +133,7 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         fontFamily: font.Regular,
         color: '#727272',
+        paddingTop:hp(0.25)
     },
     addButton: {
         flexDirection: 'row',
@@ -131,9 +143,11 @@ const styles = StyleSheet.create({
         backgroundColor: color.onBoardingButton,
         // padding: wp('1.5%'),
         borderRadius: 8,
-        width:wp('27%'),
-        height:hp(4),
-        paddingHorizontal: wp('7%'), // Adjust horizontal padding for increased width
+        // width:wp('27%'),
+        // height:hp(4),
+        width:111,
+        height:32,
+        // paddingHorizontal: wp('7%'), // Adjust horizontal padding for increased width
     },
     addIcon: {
         width: RFPercentage(1.8),
@@ -155,9 +169,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#373739',
         padding: wp('1.5%'),
         borderRadius: 8,
-        width:wp('27%'),
+        // width:wp('27%'),
         justifyContent:'center',
-        height:hp(4),
+        // height:hp(4),
+        width:111,
+        height:32,
 
 
 
