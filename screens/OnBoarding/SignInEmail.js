@@ -14,7 +14,9 @@ import {
     Keyboard,
     Dimensions,
     InteractionManager,
-    unstable_batchedUpdates
+    unstable_batchedUpdates,
+    LayoutAnimation,
+    Animated
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
@@ -56,10 +58,17 @@ const SignInEmail = ({ navigation }) => {
 
         const showSubscription = Keyboard.addListener('keyboardWillShow', (event) => {
             const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
+            // LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseIn);
+            // LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut); // keyboard
+
+
+
             setKeyboardVisible(true);
             setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
         });
         const hideSubscription = Keyboard.addListener('keyboardWillHide', () => {
+            // LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+
             setKeyboardVisible(false);
             setKeyboardHeight(0);
         });
@@ -85,9 +94,13 @@ const SignInEmail = ({ navigation }) => {
     };
 
     function moveNext() {
+        // Keyboard.dismiss(); // Dismiss keyboard before navigation to prevent animation
+
         navigation.navigate('VerifyCode');
     }
     function onPressPhone() {
+        // Keyboard.dismiss(); // Dismiss keyboard before navigation to prevent animation
+
         navigation.navigate('SignIn');
     }
 
@@ -102,7 +115,10 @@ const SignInEmail = ({ navigation }) => {
     {
         return (
             <SafeAreaView style={styles.safeArea}>
-                <KeyboardAvoidingView >
+                <KeyboardAvoidingView
+                // behavior={Platform.OS === "ios" ? "padding" : "height"}
+                // keyboardVerticalOffset={Platform.select({ ios: 0, android: -500 })} // Adjust as needed
+                 >
                     <Header />
 
                     <View style={styles.titleContainer}>

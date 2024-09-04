@@ -84,7 +84,7 @@ const UserNameScreen = ({ navigation }) => {
     useFocusEffect(
         React.useCallback(() => {
             // Refocus the first input field when the screen is focused
-            userNameRef.current.focus();
+            // userNameRef.current.focus();
         }, [])
     );
 
@@ -126,7 +126,7 @@ const UserNameScreen = ({ navigation }) => {
                                 marginTop={
                                     keyboardVisible
                                         ? (screenHeight < 890 ? hp('19.5%') : hp('24%')) // If the keyboard is visible
-                                        : (screenHeight < 890 ? hp('50.5%') : hp('53%'))     // If the keyboard is not visible
+                                        : (screenHeight < 890 ? hp('51%') : hp('54%'))     // If the keyboard is not visible
                                 }
                             />
                         </View>

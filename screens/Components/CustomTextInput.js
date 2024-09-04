@@ -20,6 +20,7 @@ const CustomTextInput = forwardRef(({ value, onChangeText, placeholder, placehol
                autoCapitalize="none" // Disable auto capitalization
                keyboardType="default" // Default keyboard type
                spellCheck={false} // Disable spell check
+               
 
             />
         </View>

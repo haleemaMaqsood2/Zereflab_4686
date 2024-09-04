@@ -108,6 +108,18 @@ const VerifyCode = () => {
             }
         }, [v1, v2, v3, v4])
     );
+    // useFocusEffect(
+  //   React.useCallback(() => {
+  //     // Delay focus to avoid race condition on navigation
+  //     const timeoutId = setTimeout(() => {
+  //       if (internalTextInputRef.current) {
+  //         internalTextInputRef.current.focus();
+  //       }
+  //     }, 200); // Adjust delay as needed
+
+  //     return () => clearTimeout(timeoutId);
+  //   }, [])
+  // );
 
     function startTimer() {
         console.log("Timere started again")
@@ -128,7 +140,7 @@ const VerifyCode = () => {
     //     React.useCallback(() => {
     //         const focusTimeout = setTimeout(() => {
     //             v1Ref.current.focus();
-    //         }, 100);
+    //         }, 200);
 
     //         return () => clearTimeout(focusTimeout);
     //     }, [])
@@ -245,7 +257,7 @@ const VerifyCode = () => {
                                 keyboardHeight={keyboardHeight}
                                 nextScreenName="NameInputScreen"
                                 onPress={moveNext}
-                                marginTop={(screenHeight < 890) ? hp('16.5%') : hp('24.5%')} // Example margin top value
+                                marginTop={(screenHeight < 890) ? hp('17%') : hp('24.5%')} // Example margin top value
                             />
 
                         </View>
