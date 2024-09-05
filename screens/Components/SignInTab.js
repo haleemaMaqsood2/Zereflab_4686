@@ -103,7 +103,7 @@ const SignInTab = () => {
         if (internalTextInputRef.current) {
           internalTextInputRef.current.focus();
         }
-      }, 200); // Adjust delay as needed
+      }, 100); // Adjust delay as needed
 
       return () => clearTimeout(timeoutId);
     }, [])

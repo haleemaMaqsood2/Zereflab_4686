@@ -20,6 +20,10 @@ const PrivacyScreen = ({ navigation }) => {
     }
   ]
 
+  function onPress(id) {
+    
+    console.log("Nothing to navigate")
+}
   const renderItem = ({ item }) => (
     <BarItem
       leftIcon={item.leftIcon}

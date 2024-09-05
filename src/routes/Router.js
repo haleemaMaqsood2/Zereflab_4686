@@ -15,9 +15,9 @@ const Router = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       
-        {onBoardingComplete ? <MainStack /> : <OnBoardingStack />}
+        {/* {onBoardingComplete ? <MainStack /> : <OnBoardingStack />} */}
         {/* <MainStack /> */}
-        {/* <OnBoardingStack /> */}
+        <OnBoardingStack />
 
 
      

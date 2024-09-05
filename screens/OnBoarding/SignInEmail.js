@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback,useLayoutEffect } from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -86,12 +86,12 @@ const SignInEmail = ({ navigation }) => {
     }, [selectedTab]);
 
 
-    const handleChange = (value) => {
-        setEmail(value);
-        // EmailRef.current.focus();
+    // const handleChange = (value) => {
+    //     setEmail(value);
+    //     // EmailRef.current.focus();
 
 
-    };
+    // };
 
     function moveNext() {
         // Keyboard.dismiss(); // Dismiss keyboard before navigation to prevent animation
@@ -103,19 +103,66 @@ const SignInEmail = ({ navigation }) => {
 
         navigation.navigate('SignIn');
     }
-
-
+    // useFocusEffect(
+    //     // React.useCallback(() => {
+    //     //     // Refocus the first input field when the screen is focused
+    //     //     EmailRef.current.focus();
+    //     // }, [])
+    //     useCallback(() => {
+    //         const timeoutId = setTimeout(() => {
+    //           if (EmailRef.current) {
+    //             EmailRef.current.focus();
+    //           }
+    //         }, 10); // Adjust delay as needed
+        
+    //         return () => clearTimeout(timeoutId);
+    //       }, [])
+    // );
     useFocusEffect(
-        React.useCallback(() => {
-            // Refocus the first input field when the screen is focused
-            EmailRef.current.focus();
+        useCallback(() => {
+            // Immediately focus the input when the screen is focused
+            if (EmailRef.current) {
+                EmailRef.current.focus();
+            }
         }, [])
     );
+
+    const handleChange = (value) => {
+        setEmail(value);
+    };
+
+    function moveNext() {
+        Keyboard.dismiss(); // Dismiss keyboard before navigation
+        navigation.navigate('VerifyCode');
+    }
+
+    function onPressPhone() {
+        Keyboard.dismiss(); // Dismiss keyboard before navigation
+        navigation.navigate('SignIn');
+    }
+
+
+    // useFocusEffect(
+    //     React.useCallback(() => {
+    //         // Refocus the first input field when the screen is focused
+    //         EmailRef.current.focus();
+    //     }, [])
+    //     // useCallback(() => {
+    //     //     const timeoutId = setTimeout(() => {
+    //     //       if (EmailRef.current) {
+    //     //         EmailRef.current.focus();
+    //     //       }
+    //     //     }, 200); // Adjust delay as needed
+        
+    //     //     return () => clearTimeout(timeoutId);
+    //     //   }, [])
+    // );
 
     {
         return (
             <SafeAreaView style={styles.safeArea}>
                 <KeyboardAvoidingView
+                
                 // behavior={Platform.OS === "ios" ? "padding" : "height"}
                 // keyboardVerticalOffset={Platform.select({ ios: 0, android: -500 })} // Adjust as needed
                  >

@@ -71,7 +71,7 @@ const ProfileHeader = ({ title }) => {
           <TouchableOpacity
             onPress={toggleModal}
             style={{ width: '15%' }} >
-            {(titleText == 'Notification' || titleText == 'Friends' || titleText == 'Create Event') ?
+            {(titleText == 'Notification' || titleText == 'Friends' || titleText == 'Create Event'||titleText == 'Create Event') ?
               null :
               <Image
                 source={require('../../../src/assets/images/ProfileShareIcon.png')}
