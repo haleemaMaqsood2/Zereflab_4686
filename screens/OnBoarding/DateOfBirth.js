@@ -20,22 +20,29 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { RFPercentage } from "react-native-responsive-fontsize";
 import DatePicker from 'react-native-date-picker';
 import HeadingText from '../Components/HeadingText';
-HeadingText
+
 const DateOfBirth = () => {
     const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 
     const navigation = useNavigation();
-    const [date, setDate] = useState(new Date());
+    // const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState(new Date(2007, 0, 1));
+
     const [open, setOpen] = useState(true);
     const [formattedDate, setFormattedDate] = useState('');
     const dobRef = useRef(null);
     const [keyboardHeight, setKeyboardHeight] = useState(0);
     const [keyboardVisible, setKeyboardVisible] = useState(false);
+    const [age, setAge] = useState(0);
+    const [isOldEnough, setIsOldEnough] = useState(false); // New state for age check
 
     const handleDateChange = (selectedDate) => {
         setDate(selectedDate);
         const formatted = formatDate(selectedDate);
         setFormattedDate(formatted);
+        const age = calculateAge(selectedDate);
+        setIsOldEnough(age >= 17);
+
     };
 
     const formatDate = (date) => {
@@ -64,21 +71,7 @@ const DateOfBirth = () => {
             hideSubscription.remove();
         };
     }, [screenHeight]);
-    // useFocusEffect(
-    //     React.useCallback(() => {
-    //         // Refocus the first input field when the screen is focused
-    //         userNameRef.current.focus();
-    //     }, [])
-    // );
-
-    // useFocusEffect(
-    //     React.useCallback(() => {
-    //         setOpen(true); // Open the date picker when screen is focused
-    //         return () => {
-    //             setOpen(false); // Optionally close the picker when unfocused
-    //         };
-    //     }, [])
-    // );
+   
 
     const calculateAge = (birthDate) => {
         const today = new Date();
@@ -91,10 +84,8 @@ const DateOfBirth = () => {
     };
 
     const moveNext = () => {
-        const age = calculateAge(date);
-        if (age >= 17) {
-        //     setOpen(false);
-        navigation.navigate('UserNameScreen'); // Navigate if age is 17 or older
+        if (isOldEnough) {
+            navigation.navigate('UserNameScreen');
         } else {
             alert("You must be at least 17 years old to continue.");
         }
@@ -104,7 +95,7 @@ const DateOfBirth = () => {
         <SafeAreaView style={styles.safeArea}>
             <KeyboardAvoidingView >
                 <Header />
-                <View style={{}}> 
+                <View > 
                 <HeadingText title={"What's your birthday?"} />
 
                 </View>
@@ -124,17 +115,29 @@ const DateOfBirth = () => {
                             onFocus={() => setOpen(true)}
                             ref={dobRef}
                             readOnly={true}
+                            
                         />
 
                     </View>
-                    <View style={{height:(screenHeight < 890 ? hp('33') : hp('37.5%')),justifyContent:'flex-end'}}>
-                    <View style={styles.ButtonContainer}>
+                    {/* <View style={{height:(screenHeight < 890 ? hp('33.5') : hp('37.5%')),justifyContent:'flex-end'}}> */}
+                    <View 
+                    style={
+                        {
+                            height:(screenHeight < 890 ? hp('33.5') : hp('37.2%')),
+                            // marginBottom:100,
+                        justifyContent:'flex-end',
+                        // backgroundColor:'pink'
+                        }}>
+
+                    {/* <View style={[styles.ButtonContainer, { backgroundColor: isOldEnough? color.onBoardingButton : '#ffffff33' }]}> */}
+                    <View style={[styles.ButtonContainer, { backgroundColor: formattedDate? color.onBoardingButton : '#ffffff33' }]}>
+
                         <TouchableOpacity onPress={moveNext} style={styles.touchableArea}>
                             <Text style={styles.conTinueText}>Continue</Text>
                         </TouchableOpacity>
+                    </View> 
                     </View>
-                    </View>
-                    <View style={{alignSelf:'center'}}>
+                    <View style={{alignSelf:'center',position:'absolute',top:hp('47%'),height:(screenHeight*0.3)}}>
                     <DatePicker
                         date={date}
                         onDateChange={handleDateChange}
@@ -148,46 +151,11 @@ const DateOfBirth = () => {
                         onCancel={() => setOpen(false)}
                         color={'red'}
                         theme={'dark'}
+
                     />
                     </View>
 
-                    {/* <Modal
-                        transparent={true}
-                        visible={open}
-                        animationType="none"
-                        onRequestClose={() => setOpen(false)}
-                    >
-                        <View style={styles.modalHeaderContainer}>
-                            <Header title="Date of Birth" />
-                        </View>
-
-                        <View style={styles.modalOverlay}>
-                        <View style={styles.ButtonContainer}>
-                                    <TouchableOpacity onPress={moveNext} style={styles.touchableArea}>
-                                        <Text style={styles.conTinueText}>Continue</Text>
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={[styles.modalContainer, { height: (screenHeight > 890) ? '32.5%' : '34%' }]}>
-                                
-                                <View style={styles.datePickerContainer}>
-                                    <DatePicker
-                                        date={date}
-                                        onDateChange={handleDateChange}
-                                        mode="date"
-                                        textColor="white" // Set text color to white
-                                        androidVariant="nativeAndroid"
-                                        onConfirm={(date) => {
-                                            setOpen(false);
-                                            handleDateChange(date);
-                                        }}
-                                        onCancel={() => setOpen(false)}
-                                        color={'red'}
-                                        theme={'dark'}
-                                    />
-                                </View>
-                            </View>
-                        </View>
-                    </Modal> */}
+                    
 
                 </View>
             </KeyboardAvoidingView>

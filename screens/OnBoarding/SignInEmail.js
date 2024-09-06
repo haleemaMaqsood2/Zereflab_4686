@@ -19,7 +19,7 @@ import {
     Animated
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useNavigation, useFocusEffect,useIsFocused } from '@react-navigation/native';
 import { color } from '../../src/styles/color';
 import Header from '../Components/Header';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -52,6 +52,7 @@ const SignInEmail = ({ navigation }) => {
     const [keyboardHeight, setKeyboardHeight] = useState(0);
     const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
     const continueTextHeight = hp(6); // Adjust this value based on your design needs
+    const isFocused = useIsFocused();
 
     useEffect(() => {
         // phoneRef.current.focus();  // Automatically focus the first input field when the component mounts
@@ -118,13 +119,22 @@ const SignInEmail = ({ navigation }) => {
     //         return () => clearTimeout(timeoutId);
     //       }, [])
     // );
+    // useFocusEffect(
+    //     useCallback(() => {
+    //         // Immediately focus the input when the screen is focused
+    //         if (EmailRef.current) {
+    //             EmailRef.current.focus();
+    //         }
+    //     }, [])
+    // );
     useFocusEffect(
         useCallback(() => {
             // Immediately focus the input when the screen is focused
-            if (EmailRef.current) {
-                EmailRef.current.focus();
+            if (isFocused) {
+                EmailRef.current?.focus();
+
             }
-        }, [])
+        }, [isFocused])
     );
 
     const handleChange = (value) => {
@@ -142,21 +152,21 @@ const SignInEmail = ({ navigation }) => {
     }
 
 
-    // useFocusEffect(
-    //     React.useCallback(() => {
-    //         // Refocus the first input field when the screen is focused
-    //         EmailRef.current.focus();
-    //     }, [])
-    //     // useCallback(() => {
-    //     //     const timeoutId = setTimeout(() => {
-    //     //       if (EmailRef.current) {
-    //     //         EmailRef.current.focus();
-    //     //       }
-    //     //     }, 200); // Adjust delay as needed
+    useFocusEffect(
+        // React.useCallback(() => {
+        //     // Refocus the first input field when the screen is focused
+        //     EmailRef.current.focus();
+        // }, [])
+        useCallback(() => {
+            const timeoutId = setTimeout(() => {
+              if (EmailRef.current) {
+                EmailRef.current.focus();
+              }
+            }, 100); // Adjust delay as needed
         
-    //     //     return () => clearTimeout(timeoutId);
-    //     //   }, [])
-    // );
+            return () => clearTimeout(timeoutId);
+          }, [])
+    );
 
     {
         return (
@@ -206,7 +216,7 @@ const SignInEmail = ({ navigation }) => {
                                 marginTop={
                                     keyboardVisible
                                         ? (screenHeight < 890 ? hp('13.5%') : hp('18%')) // If the keyboard is visible
-                                        : (screenHeight < 890 ? hp('45%') : hp('48%'))     // If the keyboard is not visible
+                                        : (screenHeight < 890 ? hp('44.5`%') : hp('48%'))     // If the keyboard is not visible
                                 }
                                 // marginTop={(screenHeight < 890) ? hp('13.5%') : hp('17.5%')} // Example margin top value
                             />
@@ -257,7 +267,7 @@ const styles = StyleSheet.create({
         width: wp('80%'),
         textAlign: 'center',
         fontFamily: 'Inter',
-        lineHeight: 36,
+        // lineHeight: 36,
         // font:'urbanist'
     },
 

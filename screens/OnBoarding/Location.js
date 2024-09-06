@@ -133,7 +133,7 @@ const Location = ({ navigation }) => {
                     ? hp(3.5) 
                     : (!keyboardVisible && screenHeight < 890)
                     ? hp(4) // If screenHeight < 890 and keyboard is not visible
-                    : hp(36.2) 
+                    : hp(35.5) 
         }
     ]}
     disabled={location === ''}

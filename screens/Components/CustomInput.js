@@ -37,7 +37,9 @@ const styles = StyleSheet.create({
     inputContainer: {
         backgroundColor: color.inputFieldColor,
         width: wp('92%'),
-        marginTop: '10%',
+        // marginTop: '10%',
+        marginTop: '9.2%',
+
         borderRadius: 10,
         borderColor: '#414142',
         borderWidth: 1,

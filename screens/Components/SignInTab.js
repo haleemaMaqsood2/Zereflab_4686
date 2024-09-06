@@ -5,7 +5,7 @@ import {
   UIManager,
 
 } from 'react-native';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useNavigation, useFocusEffect,useIsFocused } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { color } from '../../src/styles/color';
@@ -13,15 +13,18 @@ import PhoneInput from "react-native-phone-number-input";
 import LineWithText from './LineWithText';
 import PrivacyPolicy from './PrivacyPolicy';
 import CustomTextInput from './CustomTextInput';
-if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
-  UIManager.setLayoutAnimationEnabledExperimental(true);
-}
+import { useNavigationComponentDidAppear } from 'react-native-navigation-hooks';
+
+// if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
+//   UIManager.setLayoutAnimationEnabledExperimental(true);
+// }
 
 const SignInTab = () => {
   const navigation = useNavigation();
   const [selectedTab, setSelectedTab] = useState('Email')
   const phoneRef = useRef(null);
   const [formattedValue, setFormattedValue] = useState("");
+  const isFocused = useIsFocused();
 
   const [phone, setPhone] = useState()
   const [name, setName] = useState('')
@@ -41,7 +44,7 @@ const SignInTab = () => {
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
   const continueTextHeight = hp(6); // Adjust this value based on your design needs
-
+ 
   useEffect(() => {
 
     const showSubscription = Keyboard.addListener('keyboardWillShow', (event) => {
@@ -86,6 +89,20 @@ const SignInTab = () => {
 
     navigation.navigate('SignInEmail');
   }
+  // useEffect(() => {
+  //   if (isFocused) {
+  //     internalTextInputRef.current?.focus();
+  //   }
+  // }, [isFocused]);
+  useFocusEffect(
+    useCallback(() => {
+        // Immediately focus the input when the screen is focused
+        if (isFocused) {
+            internalTextInputRef.current?.focus();
+
+        }
+    }, [isFocused])
+);
 
 
   // useFocusEffect(
@@ -142,7 +159,7 @@ const SignInTab = () => {
               setCountryCode(country.cca2); // Update the state with selected country code
             }}
             withDarkTheme
-            withShadow
+            // withShadow
             // autoFocus
             flagButtonStyle={{ alignSelf: 'center', width: wp(13) }}
             containerStyle={styles.phoneInput}

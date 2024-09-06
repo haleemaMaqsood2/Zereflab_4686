@@ -125,8 +125,8 @@ const UserNameScreen = ({ navigation }) => {
                                 // marginTop={(screenHeight < 890) ? hp('18.5%') : hp('23%')} // Example margin top value
                                 marginTop={
                                     keyboardVisible
-                                        ? (screenHeight < 890 ? hp('19.5%') : hp('24%')) // If the keyboard is visible
-                                        : (screenHeight < 890 ? hp('51%') : hp('54%'))     // If the keyboard is not visible
+                                        ? (screenHeight < 890 ? hp('20.5%') : hp('24.5%')) // If the keyboard is visible
+                                        : (screenHeight < 890 ? hp('52%') : hp('54%'))     // If the keyboard is not visible
                                 }
                             />
                         </View>
@@ -270,7 +270,8 @@ const styles = StyleSheet.create({
         fontSize: RFPercentage(14),
         fontWeight: '500',
         fontFamily: 'Inter',
-        marginTop: RFPercentage(2),
+        // marginTop: RFPercentage(2),
+        marginTop: '4%',
         width: wp('80%')
     },
     descriptionText: {
