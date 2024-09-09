@@ -108,18 +108,13 @@ const VerifyCode = () => {
             }
         }, [v1, v2, v3, v4])
     );
-    // useFocusEffect(
-  //   React.useCallback(() => {
-  //     // Delay focus to avoid race condition on navigation
-  //     const timeoutId = setTimeout(() => {
-  //       if (internalTextInputRef.current) {
-  //         internalTextInputRef.current.focus();
-  //       }
-  //     }, 200); // Adjust delay as needed
-
-  //     return () => clearTimeout(timeoutId);
-  //   }, [])
-  // );
+    const handleKeyPress = (key, setValue, prevRef) => {
+        if (key === 'Backspace' && setValue === '') {
+            if (prevRef) {
+                prevRef.current.focus();
+            }
+        }
+    };
 
     function startTimer() {
         console.log("Timere started again")
@@ -173,6 +168,8 @@ const VerifyCode = () => {
                                 style={styles.input}
                                 // onChangeText={value => setV1(value)}
                                 onChangeText={value => handleChange(value, setV1, v2Ref)}
+                                onKeyPress={({ nativeEvent }) => handleKeyPress(nativeEvent.key, v1, null)}
+
 
                                 keyboardType="numeric"
                                 keyboardAppearance="dark"
@@ -184,6 +181,8 @@ const VerifyCode = () => {
                                 style={styles.input}
                                 // onChangeText={value => setV2(value)}
                                 onChangeText={value => handleChange(value, setV2, v3Ref)}
+                                onKeyPress={({ nativeEvent }) => handleKeyPress(nativeEvent.key, v2, v1Ref)}
+
 
                                 value={v2}
                                 keyboardType="numeric"
@@ -196,6 +195,7 @@ const VerifyCode = () => {
                                 style={styles.input}
                                 // onChangeText={value => setV3(value)}
                                 onChangeText={value => handleChange(value, setV3, v4Ref)}
+                                onKeyPress={({ nativeEvent }) => handleKeyPress(nativeEvent.key, v3, v2Ref)}
 
                                 value={v3}
                                 keyboardType="numeric"
@@ -207,6 +207,7 @@ const VerifyCode = () => {
                             <TextInput
                                 style={styles.input}
                                 onChangeText={value => handleChange(value, setV4, null)}
+                                onKeyPress={({ nativeEvent }) => handleKeyPress(nativeEvent.key, v4, v3Ref)}
 
                                 // onChangeText={value => setV4(value)}
                                 ref={v4Ref}

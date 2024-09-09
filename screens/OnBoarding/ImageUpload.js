@@ -23,7 +23,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import HeadingText from '../Components/HeadingText';
 import CustomButtonContainer from '../Components/CustomButtonContainer';
-
+// import {request, PERMISSIONS} from 'react-native-permissions';
 const ImageUpload = ({ navigation }) => {
     //   const navigation = useNavigation();
     const [name, setName] = useState('')
@@ -45,7 +45,18 @@ const ImageUpload = ({ navigation }) => {
           },
           {text: 'Allow', onPress: () => console.log('OK Pressed')},
         ]);
-
+        // request(PERMISSIONS.IOS.CAMERA).then((result) => {
+        //     // …
+        //   });
+   
+    // const askForPermissions = permission =>{
+       
+    //         request(PERMISSIONS.IOS.CAMERA).then((result) => {
+    //             console.log("result>>>>",result)
+    //             // …
+    //           });
+    //         };
+       
     function moveNext() {
         navigation.navigate('DiscoverFriends')
     }
@@ -53,7 +64,7 @@ const ImageUpload = ({ navigation }) => {
         console.log("upload click")
         // navigation.navigate('DiscoverFriends')
     }
-
+   
 
 
     {

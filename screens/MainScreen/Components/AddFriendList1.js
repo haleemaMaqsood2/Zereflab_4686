@@ -1,19 +1,50 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, Share } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { RFPercentage } from "react-native-responsive-fontsize";
 import { color } from '../../../src/styles/color';
 import { font } from '../../../src/styles/font';
 
 const AddFriendList1 = ({ data, inviteFriends }) => {
+    const [friendData, setFriendData] = useState(data);
+
     // Combine the data and inviteFriends arrays with a type property
     const combinedData = [
         { id: 'friendsHeader', type: 'header', title: ' Add Friends' }, // Add Friends title before data
-        ...data.map(item => ({ ...item, type: 'data' })),
+        ...friendData.map(item => ({ ...item, type: 'data' })),
         { id: 'footer', type: 'footer' },
         ...inviteFriends.map(item => ({ ...item, type: 'inviteFriends' })),
     ];
 
+    const handleAddFriend = (itemId) => {
+        // Update the status of the clicked friend
+        console.log(">>>>>>", itemId.status)
+        const updatedData = friendData.map(item =>
+            item.id === itemId
+                ? { ...item, status: item.status === 'Add' ? 'REQUESTED' : 'Add' }
+                : item
+        );
+        setFriendData(updatedData); // Update the state
+    };
+    const handleInvite = async () => {
+        try {
+            const result = await Share.share({
+                message: 'Invite your friends to join this awesome platform!',
+                url: 'https://your-invite-link.com',
+            });
+            if (result.action === Share.sharedAction) {
+                if (result.activityType) {
+                    console.log('Shared with activity type:', result.activityType);
+                } else {
+                    console.log('Shared successfully!');
+                }
+            } else if (result.action === Share.dismissedAction) {
+                console.log('Share dismissed');
+            }
+        } catch (error) {
+            alert(error.message);
+        }
+    };
     const renderItem = ({ item }) => {
         if (item.type === 'header') {
             return (
@@ -27,10 +58,27 @@ const AddFriendList1 = ({ data, inviteFriends }) => {
                         <Text style={styles.nameText}>{item.name}</Text>
                         <Text style={styles.usernameText}>{item.username}</Text>
                     </View>
-                    <TouchableOpacity style={styles.addButton}>
-                        <Image source={require('../../../src/assets/images/addIcon1x4.png')} style={styles.addIcon} />
-                        <Text style={styles.addText}>Add</Text>
-                    </TouchableOpacity>
+                    {item.status == "Add" ?
+                        <TouchableOpacity
+                            onPress={() => handleAddFriend(item.id)} // Update the status when clicked
+
+                            style={styles.addButton}>
+                            <Image source={require('../../../src/assets/images/addIcon1x4.png')} style={styles.addIcon} />
+                            {/* <Text style={styles.addText}>Add</Text> */}
+                            <Text style={styles.addText}>{item.status}</Text>
+
+                        </TouchableOpacity>
+                        :
+                        <TouchableOpacity
+                            onPress={() => handleAddFriend(item.id)} // Update the status when clicked
+
+                            style={styles.addButton1}>
+                            <Image source={require('../../../src/assets/images/addIcon1x4.png')} style={styles.addIcon} />
+                            {/* <Text style={styles.addText}>Add</Text> */}
+                            <Text style={styles.addText}>{item.status}</Text>
+
+                        </TouchableOpacity>
+                    }
                 </View>
             );
         } else if (item.type === 'inviteFriends') {
@@ -40,9 +88,9 @@ const AddFriendList1 = ({ data, inviteFriends }) => {
                     <View style={styles.infoContainer}>
                         <Text style={styles.nameText}>{item.name}</Text>
                     </View>
-                    <TouchableOpacity style={styles.addButton1}>
-                    <Image source={require('../../../src/assets/images/addIcon1x4.png')} style={styles.addIcon} />
-                    <Text style={styles.addText}>{item.status}</Text>
+                    <TouchableOpacity style={styles.addButton1} onPress={handleInvite}>
+                        <Image source={require('../../../src/assets/images/addIcon1x4.png')} style={styles.addIcon} />
+                        <Text style={styles.addText}>{item.status}</Text>
                     </TouchableOpacity>
                 </View>
             );
@@ -86,7 +134,7 @@ const styles = StyleSheet.create({
         color: color.whiteColor,
         marginBottom: hp('2%'),
         // marginTop:'3%'
-        
+
     },
     titleText1: {
         fontSize: 17,
@@ -133,20 +181,20 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         fontFamily: font.Regular,
         color: '#727272',
-        paddingTop:hp(0.25)
+        paddingTop: hp(0.25)
     },
     addButton: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent:'center',
+        justifyContent: 'center',
         // alignSelf:'center',
         backgroundColor: color.onBoardingButton,
         // padding: wp('1.5%'),
         borderRadius: 8,
         // width:wp('27%'),
         // height:hp(4),
-        width:111,
-        height:32,
+        width: 111,
+        height: 32,
         // paddingHorizontal: wp('7%'), // Adjust horizontal padding for increased width
     },
     addIcon: {
@@ -158,7 +206,7 @@ const styles = StyleSheet.create({
     addText: {
         color: color.whiteColor,
         fontSize: 14,
-        fontWeight:'500',
+        fontWeight: '500',
         // fontWeight: 'medium',
         fontFamily: font.Regular,
         // backgroundColor:'red'
@@ -170,14 +218,14 @@ const styles = StyleSheet.create({
         padding: wp('1.5%'),
         borderRadius: 8,
         // width:wp('27%'),
-        justifyContent:'center',
+        justifyContent: 'center',
         // height:hp(4),
-        width:111,
-        height:32,
+        width: 111,
+        height: 32,
 
 
 
-        paddingHorizontal: wp('7%'), // Adjust horizontal padding for increased width
+        // paddingHorizontal: wp('7%'), // Adjust horizontal padding for increased width
     },
 });
 

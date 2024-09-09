@@ -10,7 +10,7 @@ import {
     FlatList,
     Platform,
     Dimensions,
-    Keyboard
+    Keyboard,TouchableWithoutFeedback
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { RFPercentage } from "react-native-responsive-fontsize";
@@ -33,15 +33,12 @@ const Location = ({ navigation }) => {
     const [keyboardVisible, setKeyboardVisible] = useState(false);
 
     useEffect(() => {
-        locationRef.current.focus();
+        // locationRef.current.focus();
         const showSubscription = Keyboard.addListener('keyboardWillShow', (event) => {
-            // const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
             setKeyboardVisible(true);
-            // setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
         });
         const hideSubscription = Keyboard.addListener('keyboardWillHide', () => {
             setKeyboardVisible(false);
-            // setKeyboardHeight(0);
         });
     
         return () => {
@@ -70,16 +67,21 @@ const Location = ({ navigation }) => {
     };
 
     const renderItem = ({ item }) => (
-        <View style={styles.ResultContainer}>
-            <Image style={styles.locationImage} source={require('../../src/assets/images/location1x4.png')} />
+        // <View style={styles.ResultContainer}>
+           <TouchableOpacity style={styles.ResultContainer} onPress={locationRef.current.focus()}>
+           <Image style={styles.locationImage} source={require('../../src/assets/images/location1x4.png')} />
             <View style={styles.infoContainer}>
                 <Text style={styles.locationName}>{item.locationName}</Text>
             </View>
-        </View>
+           </TouchableOpacity>
+        // </View>
     );
 
     return (
+        // <TouchableWithoutFeedback onPress={() => console.log("hello")}>
+
         <SafeAreaView style={styles.safeArea}>
+
             <Header />
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Where are you located?</Text>
@@ -140,7 +142,10 @@ const Location = ({ navigation }) => {
 >
     <Text style={styles.conTinueText}>Continue</Text>
 </TouchableOpacity>
+
         </SafeAreaView>
+        // </TouchableWithoutFeedback>
+
     );
 };
 
@@ -236,6 +241,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '90%',
         alignSelf: 'center',
+        // backgroundColor:"red"
     },
     resultList: {
         height: '25%',
