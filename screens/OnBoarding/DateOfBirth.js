@@ -120,6 +120,8 @@ const DateOfBirth = () => {
 
                     </View>
                     {/* <View style={{height:(screenHeight < 890 ? hp('33.5') : hp('37.5%')),justifyContent:'flex-end'}}> */}
+                   {
+                    screenHeight>700?
                     <View 
                     style={
                         {
@@ -137,6 +139,28 @@ const DateOfBirth = () => {
                         </TouchableOpacity>
                     </View> 
                     </View>
+                    :
+                    <View 
+                    style={
+                        {
+                            height:hp(34.7),
+                            // marginBottom:100,
+                        justifyContent:'flex-end',
+                        // backgroundColor:'pink'
+                        }}>
+
+                    {/* <View style={[styles.ButtonContainer, { backgroundColor: isOldEnough? color.onBoardingButton : '#ffffff33' }]}> */}
+                    <View style={[styles.ButtonContainer, { backgroundColor: formattedDate? color.onBoardingButton : '#ffffff33' }]}>
+
+                        <TouchableOpacity onPress={moveNext} style={styles.touchableArea}>
+                            <Text style={styles.conTinueText}>Continue</Text>
+                        </TouchableOpacity>
+                    </View> 
+                    </View>
+
+                   }
+                  
+
                     <View style={{alignSelf:'center',position:'absolute',top:hp('47%'),height:(screenHeight*0.3)}}>
                     <DatePicker
                         date={date}

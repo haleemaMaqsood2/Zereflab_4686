@@ -193,8 +193,10 @@ const SignInTab = () => {
           <Text style={styles.emailText}>Use email instead</Text>
         </TouchableOpacity>
         <View>
-          <View style={{ marginTop: (screenHeight < 890) ? hp('14.5%') : hp('19%'), flex: 1 }}>
-            {/* <Text style={styles.emailText}>Continue{screenHeight}</Text> */}
+          {screenHeight>700?
+           <View style={{ marginTop: (screenHeight < 890) ? hp('14.5%') : hp('19%')}}>
+          {/* <View style={{ marginTop:100}}> */}
+
             <View style={styles.ButtonContainer}>
 
               <TouchableOpacity onPress={moveNext}
@@ -206,6 +208,23 @@ const SignInTab = () => {
 
           </View>
 
+          :
+          <View style={{ marginTop:hp(12.5)}}>
+          {/* <View style={{ marginTop:100}}> */}
+
+            <View style={styles.ButtonContainer}>
+
+              <TouchableOpacity onPress={moveNext}
+                style={[styles.touchableArea, value ? styles.buttonActive : styles.buttonInactive]}
+              >
+                <Text style={styles.conTinueText}>Continue</Text>
+              </TouchableOpacity>
+            </View>
+
+          </View>
+
+          }
+         
         </View>
         {/* <View style={styles.ButtonContainer}>
 

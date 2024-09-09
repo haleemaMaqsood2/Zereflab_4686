@@ -112,8 +112,9 @@ const UserNameScreen = ({ navigation }) => {
 
 
                
-
-                        <View style={styles.ResposiveContainer}>
+                        {
+                            screenHeight>700?
+                            <View style={styles.ResposiveContainer}>
 
                             <ResponsiveButton
                                 title="Sign Up"
@@ -130,6 +131,27 @@ const UserNameScreen = ({ navigation }) => {
                                 }
                             />
                         </View>
+
+                            :
+                            <View style={styles.ResposiveContainer}>
+
+                            <ResponsiveButton
+                                title="Sign Up"
+                                buttonState={userName}
+                                keyboardVisible={keyboardVisible}
+                                keyboardHeight={keyboardHeight}
+                                nextScreenName="ImageUpload"
+                                onPress={moveNext}
+                                // marginTop={(screenHeight < 890) ? hp('18.5%') : hp('23%')} // Example margin top value
+                                marginTop={
+                                    keyboardVisible
+                                        ? hp(20) // If the keyboard is visible
+                                        :hp(53.5)     // If the keyboard is not visible
+                                }
+                            />
+                        </View>
+                        }
+                       
 
                         {/* <CustomButton
                             title="Sign Up"
