@@ -1,0 +1,1 @@
+export const BASE_URL ="https://api.where2.us/api/";

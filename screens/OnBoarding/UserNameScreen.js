@@ -26,11 +26,13 @@ import HeadingText from '../Components/HeadingText';
 import CustomInput from '../Components/CustomInput';
 import CustomButton from '../Components/CustomButton';
 import ResponsiveButton from '../Components/ResponsiveButton';
-
+import { useDispatch } from 'react-redux';
+import { setuName } from '../../src/store/slices/userSlice';
 
 const UserNameScreen = ({ navigation }) => {
     //   const navigation = useNavigation();
     const [keyboardVisible, setKeyboardVisible] = useState(false);
+    const dispatch = useDispatch(); // Initialize useDispatch hook
 
     const [userName, setUserName] = useState('')
     const [keyboardHeight, setKeyboardHeight] = useState(0);
@@ -46,6 +48,8 @@ const UserNameScreen = ({ navigation }) => {
 
 
     function moveNext() {
+        console.log("userName screen>>>>>>>",userName)
+        dispatch(setuName(userName))
         navigation.navigate('ImageUpload')
     }
 

@@ -13,6 +13,7 @@ import {
     KeyboardAvoidingView,
     Keyboard,
     Dimensions,
+    Alert
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
@@ -24,8 +25,9 @@ import HeadingText from '../Components/HeadingText';
 import CustomButton from '../Components/CustomButton';
 import { getTabBarHeight } from '@react-navigation/bottom-tabs/lib/typescript/src/views/BottomTabBar';
 import ResponsiveButton from '../Components/ResponsiveButton';
-
-
+import { useSelector } from 'react-redux';
+import { verifyOtp } from '../../src/store/services/services';
+import FormData from 'form-data'; // Import FormData for handling the form data
 const VerifyCode = () => {
     //   const navigation = useNavigation();
     const customKeyboardHeight = hp(30); // For example, 40% of screen height
@@ -33,6 +35,8 @@ const VerifyCode = () => {
     const [keyboardVisible, setKeyboardVisible] = useState(false);
     const [keyboardHeight, setKeyboardHeight] = useState(0);
     const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
+    const phone = useSelector((state) => state.user.phone); // Ensure the correct slice name
+    const email = useSelector((state) => state.user.email); // Ensure the correct slice name
 
     const navigation = useNavigation();
     const [v1, setV1] = useState('');
@@ -53,10 +57,10 @@ const VerifyCode = () => {
         if (value.length === 1 && nextRef) {
             nextRef.current.focus();
         }
-        if (setValue === setV4 && value.length === 1) {
-            // Navigate to VerifyName screen when v4 is filled
-            navigation.navigate('NameInputScreen');
-        }
+        // if (setValue === setV4 && value.length === 1) {
+        //     // Navigate to VerifyName screen when v4 is filled
+        //     // navigation.navigate('NameInputScreen');
+        // }
     };
 
     useEffect(() => {
@@ -141,10 +145,53 @@ const VerifyCode = () => {
     //     }, [])
     // );
     const isAllFieldsFilled = v1 && v2 && v3 && v4;
-
-    function moveNext() {
-        navigation.navigate('NameInputScreen');
+const phone_number=phone;
+    async function moveNext() {
+        // Combine the four input values to form the OTP
+        const otp = v1 + v2 + v3 + v4;
+    
+        // Check if the OTP is valid
+        if (!otp || otp.length !== 4) {
+            Alert.alert('Error', 'Please enter a valid 4-digit OTP.');
+            return;
+        }
+    
+        // Check if email or phone is missing
+        if (!email || !phone) {
+            Alert.alert('Error', 'Email or phone number is missing.');
+            return;
+        }
+    
+        const requestData = {
+            email,
+            phone,
+            otp,
+        };
+    
+        console.log("request data>>>>>>>",requestData)
+        // Try to verify the OTP by making an API call
+        try {
+            const response = await verifyOtp({email,phone_number,otp}); // Make API call
+            console.log("verify response>>>>>>>", response);
+            Alert.alert(response.message );            // Handle success response
+            navigation.navigate('NameInputScreen');
+            // if (response.status === 'success') {
+            //     Alert.alert('Success', 'OTP verified successfully!');
+            //     // navigation.navigate('NameInputScreen'); // Navigate to next screen
+            // } else {
+            //     console.log("!!!!!!!!!!!!!!!!!!",response)
+            //     Alert.alert('Error', response.message || 'OTP verification failed.');
+            // }
+        } catch (error) {
+            // Handle API error
+            Alert.alert('Error', 'Something went wrong. Please try again.');
+            console.error('API Error:', error.response ? error.response.data : error.message);
+        }
+    //    alert('Error', 'Something went wrong. Please try again.');
+      
+       
     }
+    
 
     const keyboardVerticalOffset = Platform.OS === 'ios' ? 20 : 0;
 

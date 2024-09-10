@@ -3,9 +3,10 @@ import {
   View, Text, ScrollView, Keyboard, Dimensions, TouchableOpacity, TouchableWithoutFeedback,
   Image, StyleSheet, TextInput, LayoutAnimation, KeyboardAvoidingView, Animated,
   UIManager,
+  Alert,
 
 } from 'react-native';
-import { useNavigation, useFocusEffect,useIsFocused } from '@react-navigation/native';
+import { useNavigation, useFocusEffect, useIsFocused } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { color } from '../../src/styles/color';
@@ -14,6 +15,12 @@ import LineWithText from './LineWithText';
 import PrivacyPolicy from './PrivacyPolicy';
 import CustomTextInput from './CustomTextInput';
 import { useNavigationComponentDidAppear } from 'react-native-navigation-hooks';
+import { getOtpByEmail, getOtpByphoneNumber } from '../../src/store/services/services';
+import { GET_OTP_BY_PHONE_NUMBER } from '../../src/store/services/endpoints';
+import { store } from '../../src/store/Store';
+import { setPhone1 } from '../../src/store/slices/userSlice';
+import { useDispatch } from 'react-redux';
+
 
 // if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
 //   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -25,6 +32,7 @@ const SignInTab = () => {
   const phoneRef = useRef(null);
   const [formattedValue, setFormattedValue] = useState("");
   const isFocused = useIsFocused();
+  const dispatch = useDispatch(); // Initialize useDispatch hook
 
   const [phone, setPhone] = useState()
   const [name, setName] = useState('')
@@ -44,7 +52,7 @@ const SignInTab = () => {
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
   const continueTextHeight = hp(6); // Adjust this value based on your design needs
- 
+
   useEffect(() => {
 
     const showSubscription = Keyboard.addListener('keyboardWillShow', (event) => {
@@ -65,6 +73,7 @@ const SignInTab = () => {
     };
   }, [screenHeight]);
 
+
   useEffect(() => {
     if (selectedTab === 'Number' && internalTextInputRef.current) {
       internalTextInputRef.current.focus();
@@ -82,37 +91,26 @@ const SignInTab = () => {
   function moveNext() {
     // Keyboard.dismiss(); // Dismiss keyboard before navigation to prevent animation
 
-    navigation.navigate('VerifyCode');
+    // navigation.navigate('VerifyCode');
+    getOTP(phone)
   }
   function onPressEmail() {
     // Keyboard.dismiss(); // Dismiss keyboard before navigation to prevent animation
 
     navigation.navigate('SignInEmail');
   }
-  // useEffect(() => {
-  //   if (isFocused) {
-  //     internalTextInputRef.current?.focus();
-  //   }
-  // }, [isFocused]);
+
   useFocusEffect(
     useCallback(() => {
-        // Immediately focus the input when the screen is focused
-        if (isFocused) {
-            internalTextInputRef.current?.focus();
+      // Immediately focus the input when the screen is focused
+      if (isFocused) {
+        internalTextInputRef.current?.focus();
 
-        }
+      }
     }, [isFocused])
-);
+  );
 
 
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     // Refocus the first input field when the screen is focused
-  //     if (internalTextInputRef.current) {
-  //       internalTextInputRef.current.focus();
-  //     }
-  //   }, [])
-  // );
   useFocusEffect(
     React.useCallback(() => {
       // Delay focus to avoid race condition on navigation
@@ -126,107 +124,160 @@ const SignInTab = () => {
     }, [])
   );
 
+  // /////api call::::
+  // const getOTP = async (phoneNumber) => {
+  //   console.log(">>>>>>>>>>>>>>>>>>>>>",phoneNumber)
+
+  //   try {
+  //     const response = await getOtpByphoneNumber({ phone_number: phoneNumber }); // Make API call
+  //     alert(JSON.stringify(response.message)); // Display response for testing
+  //     // dispatch(setPhone(phoneNumber)); // Dispatch phone to Redux store
+      
+  //     dispatch(setPhone(phoneNumber));
+
+
+  //     navigation.navigate('VerifyCode')
+  //   } catch (error) {
+  //     alert(JSON.stringify(response.message)); // Display response for testing
+
+  //     console.error("API Error:", error.response ? error.response.data : error.message);
+  //   }
+  // };
+  const getOTP = async (phoneNumber) => {
+    console.log(">>>>>>>>>>>>>>>>>>>>>", phoneNumber);
+  
+    try {
+      const response = await getOtpByphoneNumber({ phone_number: phoneNumber }); // Make API call
+      alert(JSON.stringify(response.message)); // Display response for testing
+      
+      try {
+        // Dispatch phone to Redux store
+        dispatch(setPhone1(phoneNumber));
+      } catch (dispatchError) {
+        console.error("Dispatch Error1:", dispatchError);
+      }
+  
+      navigation.navigate('VerifyCode');
+    } catch (error) {
+      alert(JSON.stringify(error.message)); // Display error for testing
+      console.error("API Error:", error.response ? error.response.data : error.message);
+    }
+  };
+  
+  const handlePhoneChange = (phoneValue) => {
+    setPhone(phoneValue); 
+    // dispatch(setPhone(phoneValue)); // Dispatch phone to Redux store
+  };
 
   return (
 
     <View style={styles.container}>
-                      <KeyboardAvoidingView
-                       behavior={Platform.OS === "ios" ? "padding" : "height"} // Adjust based on your needs
-                       style={{ flex: 1 }}
-                       keyboardVerticalOffset={Platform.select({ ios: 0, android: 0 })} // Ensure there's no offset that could cause animation
-       
-                       >
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"} // Adjust based on your needs
+        style={{ flex: 1 }}
+        keyboardVerticalOffset={Platform.select({ ios: 0, android: 0 })} // Ensure there's no offset that could cause animation
+
+      >
 
 
 
 
-      <View style={styles.contentContainer}>
-        {/* Your number input field or view goes here */}
-        <View style={styles.phonContainer}>
-          <PhoneInput
-            ref={phoneRef}
-            defaultValue={value}
-            defaultCode={countryCode} // Use the state for country code
-            // defaultCode="US"
-            layout="first"
-            onChangeText={(text) => {
-              setValue(text);
-            }}
-            onChangeFormattedText={(text) => {
-              setFormattedValue(text);
-            }}
-            onChangeCountry={(country) => {
-              setCountryCode(country.cca2); // Update the state with selected country code
-            }}
-            withDarkTheme
-            // withShadow
-            // autoFocus
-            flagButtonStyle={{ alignSelf: 'center', width: wp(13) }}
-            containerStyle={styles.phoneInput}
-            textContainerStyle={styles.phoneTextContainer}
-            textInputStyle={styles.phoneTextInput}
-            codeTextStyle={styles.phoneCodeText}
-            // dropdownIcon={{color:'red'}}
-            // renderDropdownImage={require('../../src/assets/images/apple.png')}
+        <View style={styles.contentContainer}>
+          {/* Your number input field or view goes here */}
+          <View style={styles.phonContainer}>
+            <PhoneInput
+              ref={phoneRef}
+              defaultValue={value}
+              defaultCode={countryCode} // Use the state for country code
+              // defaultCode="US"
+              layout="first"
+              onChangeText={(text) => {
+                setValue(text);
+              }}
+              // onChangeFormattedText={handlePhoneChange} // Call handlePhoneChange when phone changes
 
-            // dropdownIcon={require('../../src/assets/images/apple.png')}
-            textInputProps={{
-              placeholder: "Phone number",
-              placeholderTextColor: '#ffffff80',
-              selectionColor: color.onBoardingButton,
-              ref: internalTextInputRef, // Assigning the internal ref
+              onChangeFormattedText={(text) => {
+                setFormattedValue(text);
+                setPhone(text)
+                // setPhone(`+${countryCode}${text}`); // Concatenate country code and phone number
 
-            }}
-          // This sets the cursor color to blue
+              }}
+              onChangeCountry={(country) => {
+                // Alert.alert(JSON.stringify(country.callingCode))
+                // setCountryCode(country.cca2); // Update the state with selected country code
+                setCountryCode(country.callingCode); // Update state with selected country calling code
+
+              }}
+          
+              withDarkTheme
+              // withShadow
+              // autoFocus
+              flagButtonStyle={{ alignSelf: 'center', width: wp(13) }}
+              containerStyle={styles.phoneInput}
+              textContainerStyle={styles.phoneTextContainer}
+              textInputStyle={styles.phoneTextInput}
+              codeTextStyle={styles.phoneCodeText}
+              // dropdownIcon={{color:'red'}}
+              // renderDropdownImage={require('../../src/assets/images/apple.png')}
+
+              // dropdownIcon={require('../../src/assets/images/apple.png')}
+              textInputProps={{
+                placeholder: "Phone number",
+                placeholderTextColor: '#ffffff80',
+                selectionColor: color.onBoardingButton,
+                ref: internalTextInputRef, // Assigning the internal ref
+
+              }}
+            // This sets the cursor color to blue
 
 
-          />
+            />
 
 
-
-        </View>
-
-        <View style={{ marginTop: '4%', paddingLeft: 0 }}>
-          <PrivacyPolicy />
-        </View>
-        <TouchableOpacity style={styles.emailTextContainer} onPress={onPressEmail}>
-          <Text style={styles.emailText}>Use email instead</Text>
-        </TouchableOpacity>
-        <View>
-          {screenHeight>700?
-           <View style={{ marginTop: (screenHeight < 890) ? hp('14.5%') : hp('19%')}}>
-          {/* <View style={{ marginTop:100}}> */}
-
-            <View style={styles.ButtonContainer}>
-
-              <TouchableOpacity onPress={moveNext}
-                style={[styles.touchableArea, value ? styles.buttonActive : styles.buttonInactive]}
-              >
-                <Text style={styles.conTinueText}>Continue</Text>
-              </TouchableOpacity>
-            </View>
 
           </View>
 
-          :
-          <View style={{ marginTop:hp(12.5)}}>
-          {/* <View style={{ marginTop:100}}> */}
+          <View style={{ marginTop: '4%', paddingLeft: 0 }}>
+            <PrivacyPolicy />
+          </View>
+          <TouchableOpacity style={styles.emailTextContainer} onPress={onPressEmail}>
+            <Text style={styles.emailText}>Use email instead</Text>
+          </TouchableOpacity>
+          <View>
+            {screenHeight > 700 ?
+              <View style={{ marginTop: (screenHeight < 890) ? hp('14.5%') : hp('19%') }}>
+                {/* <View style={{ marginTop:100}}> */}
 
-            <View style={styles.ButtonContainer}>
+                <View style={styles.ButtonContainer}>
 
-              <TouchableOpacity onPress={moveNext}
-                style={[styles.touchableArea, value ? styles.buttonActive : styles.buttonInactive]}
-              >
-                <Text style={styles.conTinueText}>Continue</Text>
-              </TouchableOpacity>
-            </View>
+                  <TouchableOpacity onPress={moveNext}
+                    style={[styles.touchableArea, value ? styles.buttonActive : styles.buttonInactive]}
+                  >
+                    <Text style={styles.conTinueText}>Continue</Text>
+                  </TouchableOpacity>
+                </View>
+
+              </View>
+
+              :
+              <View style={{ marginTop: hp(12.5) }}>
+                {/* <View style={{ marginTop:100}}> */}
+
+                <View style={styles.ButtonContainer}>
+
+                  <TouchableOpacity onPress={moveNext}
+                    style={[styles.touchableArea, value ? styles.buttonActive : styles.buttonInactive]}
+                  >
+                    <Text style={styles.conTinueText}>Continue</Text>
+                  </TouchableOpacity>
+                </View>
+
+              </View>
+
+            }
 
           </View>
-
-          }
-         
-        </View>
-        {/* <View style={styles.ButtonContainer}>
+          {/* <View style={styles.ButtonContainer}>
 
             <TouchableOpacity onPress={moveNext}
               style={[styles.touchableArea, value ? styles.buttonActive : styles.buttonInactive]}
@@ -235,7 +286,7 @@ const SignInTab = () => {
             </TouchableOpacity>
           </View> */}
 
-      </View>
+        </View>
       </KeyboardAvoidingView>
 
 
@@ -267,7 +318,7 @@ const styles = StyleSheet.create({
     // backgroundColor: 'red',
 
     alignSelf: 'center'
-    
+
   },
   signInTabContainer: {
     width: wp('90%'),
@@ -292,8 +343,8 @@ const styles = StyleSheet.create({
   emailTextContainer: {
     alignSelf: 'flex-start',
     paddingLeft: '5%',
-    width:'100%',
-    height:hp(5),
+    width: '100%',
+    height: hp(5),
     // backgroundColor:'red'
     // paddingTop:'2.5%'
   },

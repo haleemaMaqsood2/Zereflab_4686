@@ -20,6 +20,8 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { RFPercentage } from "react-native-responsive-fontsize";
 import DatePicker from 'react-native-date-picker';
 import HeadingText from '../Components/HeadingText';
+import { useDispatch } from 'react-redux';
+import { setDateOfBirth } from '../../src/store/slices/userSlice';
 
 const DateOfBirth = () => {
     const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
@@ -27,6 +29,7 @@ const DateOfBirth = () => {
     const navigation = useNavigation();
     // const [date, setDate] = useState(new Date());
     const [date, setDate] = useState(new Date(2007, 0, 1));
+    const dispatch = useDispatch(); // Initialize useDispatch hook
 
     const [open, setOpen] = useState(true);
     const [formattedDate, setFormattedDate] = useState('');
@@ -85,6 +88,9 @@ const DateOfBirth = () => {
 
     const moveNext = () => {
         if (isOldEnough) {
+            console.log("DateInput  screen>>>>>>>",formattedDate)
+            dispatch(setDateOfBirth(formatDate))
+
             navigation.navigate('UserNameScreen');
         } else {
             alert("You must be at least 17 years old to continue.");

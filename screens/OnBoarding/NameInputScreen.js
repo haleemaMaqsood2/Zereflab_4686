@@ -26,10 +26,14 @@ import HeadingText from '../Components/HeadingText';
 import CustomTextInput from '../Components/CustomTextInput';
 import CustomButton from '../Components/CustomButton';
 import ResponsiveButton from '../Components/ResponsiveButton';
+import { useDispatch } from 'react-redux';
+import { setuName } from '../../src/store/slices/userSlice';
+
 const NameInputScreen = ({ navigation }) => {
     const [keyboardVisible, setKeyboardVisible] = useState(false);
     const [keyboardHeight, setKeyboardHeight] = useState(0);
     const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
+    const dispatch = useDispatch(); // Initialize useDispatch hook
 
 
     //   const navigation = useNavigation();
@@ -43,7 +47,11 @@ const NameInputScreen = ({ navigation }) => {
     };
 
     function moveNext() {
-        navigation.navigate('DateOfBirth')
+        console.log("NmaeInput screen>>>>>>>",name)
+        dispatch(setuName(name))
+        navigation.navigate('DateOfBirth');
+
+
         // navigation.navigate('UserNameScreen'); // Navigate if age is 17 or older
 
     }

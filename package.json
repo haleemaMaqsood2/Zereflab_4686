@@ -17,6 +17,8 @@
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.10.0",
     "@reduxjs/toolkit": "^2.2.6",
+    "axios": "^1.7.7",
+    "form-data": "^4.0.0",
     "react": "18.2.0",
     "react-native": "0.74.3",
     "react-native-circular-progress": "^1.4.0",

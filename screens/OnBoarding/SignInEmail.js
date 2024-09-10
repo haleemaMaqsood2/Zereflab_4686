@@ -19,6 +19,8 @@ import {
     Animated
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { useDispatch } from 'react-redux';
+
 import { useNavigation, useFocusEffect,useIsFocused } from '@react-navigation/native';
 import { color } from '../../src/styles/color';
 import Header from '../Components/Header';
@@ -29,6 +31,8 @@ import CustomTextInput from '../Components/CustomTextInput';
 import CustomButton from '../Components/CustomButton';
 import PrivacyPolicy from '../Components/PrivacyPolicy';
 import ResponsiveButton from '../Components/ResponsiveButton';
+import { getOtpByEmail } from '../../src/store/services/services';
+import { setEmail1 } from '../../src/store/slices/userSlice';
 const SignInEmail = ({ navigation }) => {
     const [selectedTab, setSelectedTab] = useState('Email')
     const phoneRef = useRef(null);
@@ -38,6 +42,7 @@ const SignInEmail = ({ navigation }) => {
     const [name, setName] = useState('')
     const nameRef = useRef(null);
     const internalTextInputRef = useRef(null);
+    const dispatch = useDispatch(); // Initialize useDispatch hook
 
     const [value, setValue] = useState();
     const [count, setCount] = useState(0);
@@ -97,36 +102,14 @@ const SignInEmail = ({ navigation }) => {
     function moveNext() {
         // Keyboard.dismiss(); // Dismiss keyboard before navigation to prevent animation
 
-        navigation.navigate('VerifyCode');
+        // navigation.navigate('VerifyCode');
     }
     function onPressPhone() {
         // Keyboard.dismiss(); // Dismiss keyboard before navigation to prevent animation
 
         navigation.navigate('SignIn');
     }
-    // useFocusEffect(
-    //     // React.useCallback(() => {
-    //     //     // Refocus the first input field when the screen is focused
-    //     //     EmailRef.current.focus();
-    //     // }, [])
-    //     useCallback(() => {
-    //         const timeoutId = setTimeout(() => {
-    //           if (EmailRef.current) {
-    //             EmailRef.current.focus();
-    //           }
-    //         }, 10); // Adjust delay as needed
-        
-    //         return () => clearTimeout(timeoutId);
-    //       }, [])
-    // );
-    // useFocusEffect(
-    //     useCallback(() => {
-    //         // Immediately focus the input when the screen is focused
-    //         if (EmailRef.current) {
-    //             EmailRef.current.focus();
-    //         }
-    //     }, [])
-    // );
+   
     useFocusEffect(
         useCallback(() => {
             // Immediately focus the input when the screen is focused
@@ -139,11 +122,14 @@ const SignInEmail = ({ navigation }) => {
 
     const handleChange = (value) => {
         setEmail(value);
+
     };
 
     function moveNext() {
         Keyboard.dismiss(); // Dismiss keyboard before navigation
-        navigation.navigate('VerifyCode');
+        dispatch(setEmail1(email));
+        getOTP(email);
+        // navigation.navigate('VerifyCode');
     }
 
     function onPressPhone() {
@@ -153,10 +139,7 @@ const SignInEmail = ({ navigation }) => {
 
 
     useFocusEffect(
-        // React.useCallback(() => {
-        //     // Refocus the first input field when the screen is focused
-        //     EmailRef.current.focus();
-        // }, [])
+      
         useCallback(() => {
             const timeoutId = setTimeout(() => {
               if (EmailRef.current) {
@@ -167,6 +150,16 @@ const SignInEmail = ({ navigation }) => {
             return () => clearTimeout(timeoutId);
           }, [])
     );
+    const getOTP = async (email) => {
+        console.log(">>>>>>>>>>>>>>>>>>>>>",email)
+        try {
+          const response = await getOtpByEmail({ email: email }); // Make API call
+          alert(JSON.stringify(response.message)); // Display response for testing
+          navigation.navigate('VerifyCode')
+        } catch (error) {
+          console.error("API Error:", error.response ? error.response.data : error.message);
+        }
+      };
 
     {
         return (
