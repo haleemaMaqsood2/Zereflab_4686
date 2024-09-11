@@ -86,10 +86,15 @@ const Location = ({ navigation }) => {
         try {
             const formData = new FormData();
             formData.append('_method', 'PUT'); // Required for PUT method
-            formData.append('name', name); // Ensure name is not empty
-            formData.append('user_name', uname || '@username'); // Ensure user_name is not empty
-            formData.append('dob',dob); // Ensure dob is in YYYY-MM-DD format
-            formData.append('city_id', '1'); // Ensure city_id is a string
+            formData.append('name', "jghhk"); // Ensure name is not empty
+            formData.append('user_name','@username'); // Ensure user_name is not empty
+            formData.append('dob','2300-06-01'); // Ensure dob is in YYYY-MM-DD format
+            formData.append('city_id', '1'); // Ensure city_id 
+            // formData.append('_method', 'PUT'); // Required for PUT method
+            // formData.append('name', name); // Ensure name is not empty
+            // formData.append('user_name', uname || '@username'); // Ensure user_name is not empty
+            // formData.append('dob',dob); // Ensure dob is in YYYY-MM-DD format
+            // formData.append('city_id', '1'); // Ensure city_id is a string
          
             // Logging formData to see the data being sent
             console.log('request Data being sent:', formData);

@@ -2,133 +2,92 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-<!-- Camera Access -->
-<key>NSCameraUsageDescription</key>
-<string>We need access to your camera to allow you to take photos and videos.</string>
+    <!-- Camera Access -->
+    <key>NSCameraUsageDescription</key>
+    <string>We need access to your camera to allow you to take photos and videos.</string>
 
-<!-- Photo Library Access -->
-<key>NSPhotoLibraryUsageDescription</key>
-<string>We need access to your photo library to select photos and videos.</string>
+    <!-- Photo Library Access -->
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>We need access to your photo library to select photos and videos.</string>
 
-<!-- Microphone Access -->
-<key>NSMicrophoneUsageDescription</key>
-<string>We need access to your microphone to record audio.</string>
+    <!-- Microphone Access -->
+    <key>NSMicrophoneUsageDescription</key>
+    <string>We need access to your microphone to record audio.</string>
 
-<!-- Location Access -->
-<key>NSLocationWhenInUseUsageDescription</key>
-<string>We need access to your location to provide location-based services.</string>
+    <!-- Location Access Always -->
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>We need access to your location even when the app is in the background.</string>
 
-<!-- Location Access Always -->
-<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-<string>We need access to your location even when the app is in the background.</string>
+    <!-- Bluetooth Access -->
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>We need access to Bluetooth to connect with external devices.</string>
 
-<!-- Bluetooth Access -->
-<key>NSBluetoothAlwaysUsageDescription</key>
-<string>We need access to Bluetooth to connect with external devices.</string>
+    <!-- Contacts Access -->
+    <key>NSContactsUsageDescription</key>
+    <string>We need access to your contacts to enhance your experience.</string>
 
-<!-- Contacts Access -->
-<key>NSContactsUsageDescription</key>
-<string>We need access to your contacts to enhance your experience.</string>
-<key>ITSAppUsesNonExemptEncryption</key>  
-<false/>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
-	<key>CFBundleDisplayName</key>
-	<string>secondProject</string>
-	<key>CFBundleExecutable</key>
-	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleShortVersionString</key>
-	<string>$(MARKETING_VERSION)</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<false/>
-		<key>NSAllowsLocalNetworking</key>
-		<true/>
-	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Inter-VariableFont_slnt,wght.ttf</string>
-		<string>Inter-Black.ttf</string>
-		<string>Inter-Bold.ttf</string>
-		<string>Inter-ExtraBold.ttf</string>
-		<string>Inter-ExtraLight.ttf</string>
-		<string>Inter-Light.ttf</string>
-		<string>Inter-Medium.ttf</string>
-		<string>Inter-Regular.ttf</string>
-		<string>Inter-SemiBold.ttf</string>
-		<string>Inter-Thin.ttf</string>
-		<string>Urbanist-Italic-VariableFont_wght.ttf</string>
-		<string>Urbanist-VariableFont_wght.ttf</string>
-		<string>Urbanist-Black.ttf</string>
-		<string>Urbanist-BlackItalic.ttf</string>
-		<string>Urbanist-Bold.ttf</string>
-		<string>Urbanist-BoldItalic.ttf</string>
-		<string>Urbanist-ExtraBold.ttf</string>
-		<string>Urbanist-ExtraBoldItalic.ttf</string>
-		<string>Urbanist-ExtraLight.ttf</string>
-		<string>Urbanist-ExtraLightItalic.ttf</string>
-		<string>Urbanist-Italic.ttf</string>
-		<string>Urbanist-Light.ttf</string>
-		<string>Urbanist-LightItalic.ttf</string>
-		<string>Urbanist-Medium.ttf</string>
-		<string>Urbanist-MediumItalic.ttf</string>
-		<string>Urbanist-Regular.ttf</string>
-		<string>Urbanist-SemiBold.ttf</string>
-		<string>Urbanist-SemiBoldItalic.ttf</string>
-		<string>Urbanist-Thin.ttf</string>
-		<string>Urbanist-ThinItalic.ttf</string>
-	</array>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-<string>We need your location to show nearby events</string>
-<key>NSLocationAlwaysUsageDescription</key>
-<string>We need your location to show nearby events even when the app is in the background</string>
-<key>NSContactsUsageDescription</key>
-<string>We need access to your contacts to suggest people you may know.</string>
-	<key>UIRequiredDeviceCapabilities</key>
+    <key>ITSAppUsesNonExemptEncryption</key>
+    <false/>
 
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>CFBundleDisplayName</key>
+    <string>secondProject</string>
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
+    <key>CFBundleIdentifier</key>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>$(PRODUCT_NAME)</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>$(MARKETING_VERSION)</string>
+    <key>CFBundleSignature</key>
+    <string>????</string>
+    <key>CFBundleVersion</key>
+    <string>$(CURRENT_PROJECT_VERSION)</string>
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
 
-<!-- image upload -->
-	<key>NSPhotoLibraryUsageDescription</key>
-<string>We need access to your photo library to upload your profile picture.</string>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <false/>
+        <key>NSAllowsLocalNetworking</key>
+        <true/>
+    </dict>
 
-<key>NSCameraUsageDescription</key>
-<string>We need access to your camera to take profile pictures.</string>
+    <key>UIAppFonts</key>
+    <array>
+        <string>Inter-VariableFont_slnt,wght.ttf</string>
+        <!-- other font entries -->
+    </array>
 
-<key>NSDocumentsUsageDescription</key>
-<string>We need access to your documents to upload files.</string>
+    <key>UILaunchStoryboardName</key>
+    <string>LaunchScreen</string>
 
-<key>UIFileSharingEnabled</key>
-<!-- image upload end-->
+    <!-- Image upload -->
+    <key>NSDocumentsUsageDescription</key>
+    <string>We need access to your documents to upload files.</string>
 
-<true/>
-	<array>
-		<string>arm64</string>
-	</array>
-	<key>UISupportedInterfaceOrientations</key>
-<array>
-    <string>UIInterfaceOrientationPortrait</string>
-    <string>UIInterfaceOrientationPortraitUpsideDown</string>
-</array>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
+    <key>UIFileSharingEnabled</key>
+    <true/>
+
+    <key>UIRequiredDeviceCapabilities</key>
+    <array>
+        <string>arm64</string>
+    </array>
+
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationPortraitUpsideDown</string>
+    </array>
+
+    <key>UIViewControllerBasedStatusBarAppearance</key>
+    <false/>
 </dict>
 </plist>

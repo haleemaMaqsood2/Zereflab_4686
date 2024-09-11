@@ -23,7 +23,6 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import HeadingText from '../Components/HeadingText';
 import CustomButtonContainer from '../Components/CustomButtonContainer';
-import DocumentPicker from 'react-native-document-picker';
 
 const ImageUpload = ({ navigation }) => {
     //   const navigation = useNavigation();
@@ -32,41 +31,54 @@ const ImageUpload = ({ navigation }) => {
     const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
     const [imageUri, setImageUri] = useState(null);
 
-    const handleImageUpload = async () => {
-        console.log("handle image>>>>>>>>>>>>>>>>>>>>")
-        try {
-            const res = await DocumentPicker.pick({
-                type: [DocumentPicker.types.images],
-            });
-            console.log('Image URI:', res.uri);
-            setImageUri(res.uri);
-        } catch (err) {
-            if (DocumentPicker.isCancel(err)) {
-                console.log('User cancelled the picker');
-            } else {
-                throw err;
-            }
-        }
-    };
+    // const handleImageUpload = async () => {
+    //     console.log("handle image>>>>>>>>>>>>>>>>>>>>")
+    //     try {
+    //         const res = await DocumentPicker.pick({
+    //             type: [DocumentPicker.types.images],
+    //         });
+    //         console.log('Image URI:', res.uri);
+    //         setImageUri(res.uri);
+    //     } catch (err) {
+    //         if (DocumentPicker.isCancel(err)) {
+    //             console.log('User cancelled the picker');
+    //         } else {
+    //             throw err;
+    //         }
+    //     }
+    // };
     const handleChange = (value) => {
         setName(value);
         nameRef.current.focus();
 
 
     };
+    // const requestPhotoPermission = async () => {
+    //     const result = await request(
+    //       Platform.OS === 'ios'
+    //         ? PERMISSIONS.IOS.PHOTO_LIBRARY
+    //         : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE
+    //     );
+
+    //     if (result === 'granted') {
+    //       handleImageUpload();
+    //     } else {
+    //       Alert.alert('Permission denied', 'We need permission to access your photo library.');
+    //     }
+    //   };
     const createTwoButtonAlert = () =>
         Alert.alert('Where2 would like to access your Photo Library', ' ', [
-          {
-            text: "Don't Allow",
-            onPress: () => console.log('Cancel Pressed'),
-            // style: 'cancel',
-          },
-          {text: 'Allow', onPress: () => {
-            handleImageUpload(); // Trigger image upload
-        }},
+            {
+                text: "Don't Allow",
+                onPress: () => console.log('Cancel Pressed'),
+                // style: 'cancel',
+            },
+            {
+                text: 'Allow', onPress: () => console.log('ok Pressed'),
+            },
         ]);
-        
-       
+
+
     function moveNext() {
         navigation.navigate('DiscoverFriends')
     }
@@ -74,7 +86,7 @@ const ImageUpload = ({ navigation }) => {
         console.log("upload click")
         // navigation.navigate('DiscoverFriends')
     }
-   
+
 
 
     {
@@ -111,6 +123,8 @@ const ImageUpload = ({ navigation }) => {
                             button1Name="Upload"
                             button2Name="Skip"
                             onPressButton1={createTwoButtonAlert}
+                            // onPressButton1={requestPhotoPermission}
+
                             onPressButton2={moveNext}
                             marginTop={7}
                         />
