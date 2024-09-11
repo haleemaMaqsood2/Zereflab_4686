@@ -81,38 +81,6 @@ static inline void fromRawValue(const PropsParserContext& context, const RawValu
 static inline std::string toString(const RNSVGSvgViewAndroidNativeForegroundAndroidStruct &value) {
   return "[Object RNSVGSvgViewAndroidNativeForegroundAndroidStruct]";
 }
-
-struct RNSVGSvgViewAndroidHitSlopStruct {
-  Float left{0.0};
-  Float top{0.0};
-  Float right{0.0};
-  Float bottom{0.0};
-};
-
-static inline void fromRawValue(const PropsParserContext& context, const RawValue &value, RNSVGSvgViewAndroidHitSlopStruct &result) {
-  auto map = (std::unordered_map<std::string, RawValue>)value;
-
-  auto tmp_left = map.find("left");
-  if (tmp_left != map.end()) {
-    fromRawValue(context, tmp_left->second, result.left);
-  }
-  auto tmp_top = map.find("top");
-  if (tmp_top != map.end()) {
-    fromRawValue(context, tmp_top->second, result.top);
-  }
-  auto tmp_right = map.find("right");
-  if (tmp_right != map.end()) {
-    fromRawValue(context, tmp_right->second, result.right);
-  }
-  auto tmp_bottom = map.find("bottom");
-  if (tmp_bottom != map.end()) {
-    fromRawValue(context, tmp_bottom->second, result.bottom);
-  }
-}
-
-static inline std::string toString(const RNSVGSvgViewAndroidHitSlopStruct &value) {
-  return "[Object RNSVGSvgViewAndroidHitSlopStruct]";
-}
 class RNSVGSvgViewAndroidProps final : public ViewProps {
  public:
   RNSVGSvgViewAndroidProps() = default;
@@ -154,7 +122,7 @@ class RNSVGSvgViewAndroidProps final : public ViewProps {
   std::string backfaceVisibility{};
   std::string borderStyle{};
   bool needsOffscreenAlphaCompositing{false};
-  RNSVGSvgViewAndroidHitSlopStruct hitSlop{};
+  folly::dynamic hitSlop{};
   SharedColor borderTopColor{};
   int nextFocusLeft{0};
   double borderTopRightRadius{0.0};
@@ -503,6 +471,74 @@ class RNSVGFeColorMatrixProps final : public ViewProps {
   std::vector<Float> values{};
 };
 
+enum class RNSVGFeGaussianBlurEdgeMode { Duplicate, Wrap, None };
+
+static inline void fromRawValue(const PropsParserContext& context, const RawValue &value, RNSVGFeGaussianBlurEdgeMode &result) {
+  auto string = (std::string)value;
+  if (string == "duplicate") { result = RNSVGFeGaussianBlurEdgeMode::Duplicate; return; }
+  if (string == "wrap") { result = RNSVGFeGaussianBlurEdgeMode::Wrap; return; }
+  if (string == "none") { result = RNSVGFeGaussianBlurEdgeMode::None; return; }
+  abort();
+}
+
+static inline std::string toString(const RNSVGFeGaussianBlurEdgeMode &value) {
+  switch (value) {
+    case RNSVGFeGaussianBlurEdgeMode::Duplicate: return "duplicate";
+    case RNSVGFeGaussianBlurEdgeMode::Wrap: return "wrap";
+    case RNSVGFeGaussianBlurEdgeMode::None: return "none";
+  }
+}
+
+class RNSVGFeGaussianBlurProps final : public ViewProps {
+ public:
+  RNSVGFeGaussianBlurProps() = default;
+  RNSVGFeGaussianBlurProps(const PropsParserContext& context, const RNSVGFeGaussianBlurProps &sourceProps, const RawProps &rawProps);
+
+#pragma mark - Props
+
+  folly::dynamic x{};
+  folly::dynamic y{};
+  folly::dynamic width{};
+  folly::dynamic height{};
+  std::string result{};
+  std::string in1{};
+  Float stdDeviationX{0.0};
+  Float stdDeviationY{0.0};
+  RNSVGFeGaussianBlurEdgeMode edgeMode{RNSVGFeGaussianBlurEdgeMode::None};
+};
+
+class RNSVGFeMergeProps final : public ViewProps {
+ public:
+  RNSVGFeMergeProps() = default;
+  RNSVGFeMergeProps(const PropsParserContext& context, const RNSVGFeMergeProps &sourceProps, const RawProps &rawProps);
+
+#pragma mark - Props
+
+  folly::dynamic x{};
+  folly::dynamic y{};
+  folly::dynamic width{};
+  folly::dynamic height{};
+  std::string result{};
+  std::vector<std::string> nodes{};
+};
+
+class RNSVGFeOffsetProps final : public ViewProps {
+ public:
+  RNSVGFeOffsetProps() = default;
+  RNSVGFeOffsetProps(const PropsParserContext& context, const RNSVGFeOffsetProps &sourceProps, const RawProps &rawProps);
+
+#pragma mark - Props
+
+  folly::dynamic x{};
+  folly::dynamic y{};
+  folly::dynamic width{};
+  folly::dynamic height{};
+  std::string result{};
+  std::string in1{};
+  folly::dynamic dx{};
+  folly::dynamic dy{};
+};
+
 enum class RNSVGFilterFilterUnits { UserSpaceOnUse, ObjectBoundingBox };
 
 static inline void fromRawValue(const PropsParserContext& context, const RawValue &value, RNSVGFilterFilterUnits &result) {
@@ -849,6 +885,7 @@ class RNSVGSvgViewProps final : public ViewProps {
   SharedColor tintColor{};
   SharedColor color{};
   std::string pointerEvents{};
+  folly::dynamic hitSlop{};
 };
 
 class RNSVGLinearGradientProps final : public ViewProps {

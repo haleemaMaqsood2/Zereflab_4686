@@ -33,13 +33,89 @@ import CustomTextInputMain from '../../Components/CustomTextInputMain';
 import { setEventData } from '../../../src/store/slices/eventDataSlice/eventDataSlice';
 import ProfileHeader from './ProfileHeader';
 import ProfileTab from '../Components/ProfileTab';
+import EventDetail from '../Components/EventDetail';
 
 
 const Profile = ({ navigation }) => {
     //   const navigation = useNavigation();
-    const [selectedTab, setSelectedTab] = useState('Suggestions')
+    const [selectedTab, setSelectedTab] = useState('Upcoming')
     const [filteredData, setFilteredData] = useState([]);
+    const today = 'Today - 12:00 PM';
 
+    const upcomingData = [
+        {
+          id: 1,
+          username: 'msu-fiji',
+          userProfileIcon: require('../../../src/assets/images/partyUser1x4.png'),
+          Title: 'Business conference 2024..',
+          partyImage: require('../../../src/assets/images/event.png'),
+          time: 'Fri, Jul 20',
+          count: 50,
+          friends: 12,
+          userCountImage:require('../../../src/assets/images/user1.png'),
+        },
+        {
+          id: 2,
+          username: 'msu-fiji',
+          userProfileIcon: require('../../../src/assets/images/partyUser1x4.png'),
+          Title: 'Business conference 2024..',
+          partyImage: require('../../../src/assets/images/event.png'),
+    
+          time: 'Fri, Jul 20',
+          count: 50,
+          friends: 12,
+          userCountImage:require('../../../src/assets/images/user1.png'),
+        },
+        {
+          id: 3,
+          username: 'msu-fiji1',
+          userProfileIcon: require('../../../src/assets/images/partyUser1x4.png'),
+          Title: 'Business conference 2024..',
+          partyImage: require('../../../src/assets/images/event.png'),
+          time: 'Fri, Jul 20',
+          count: 50,
+          friends: 12,
+          userCountImage:require('../../../src/assets/images/user1.png'),
+        },
+        {
+          id: 4,
+          username: 'msu-fiji',
+          userProfileIcon: require('../../../src/assets/images/partyUser1x4.png'),
+          Title: 'Business conference 2024..',
+          partyImage: require('../../../src/assets/images/event.png'),
+    
+          time: 'Fri, Jul 20',
+          count: 50,
+          friends: 12,
+          userCountImage:require('../../../src/assets/images/user1.png'),
+        },
+      ]
+      const pastData = [
+        {
+            id: 1,
+            username: 'msu-fiji',
+            userProfileIcon: require('../../../src/assets/images/partyUser1x4.png'),
+            Title: 'Business conference 2024..',
+            partyImage: require('../../../src/assets/images/event.png'),
+            time: 'Fri, Jul 20',
+            count: 50,
+            friends: 12,
+            userCountImage:require('../../../src/assets/images/user1.png'),
+          },
+          {
+            id: 2,
+            username: 'msu-fiji',
+            userProfileIcon: require('../../../src/assets/images/partyUser1x4.png'),
+            Title: 'Business conference 2024..',
+            partyImage: require('../../../src/assets/images/event.png'),
+      
+            time: 'Fri, Jul 20',
+            count: 50,
+            friends: 12,
+            userCountImage:require('../../../src/assets/images/user1.png'),
+          },
+        
+      ]
         function moveNext() {
             navigation.navigate('EditProfile')
     
@@ -63,9 +139,9 @@ const Profile = ({ navigation }) => {
 
             // Dynamically update the data based on the selected tab
             if (selectedTab === 'Upcoming') {
-            //   setFilteredData(suggestedFriendData);
+              setFilteredData(upcomingData);
             } else if (selectedTab === 'Past') {
-            //   setFilteredData(friendData);
+              setFilteredData(pastData);
     
             } 
         }, [selectedTab]);
@@ -74,7 +150,7 @@ const Profile = ({ navigation }) => {
     {
         return (
             <SafeAreaView style={styles.safeArea}>
-                <KeyboardAwareScrollView
+                <ScrollView
                     showsVerticalScrollIndicator={false}  // Hide vertical scrollbar
                     showsHorizontalScrollIndicator={false}>
 
@@ -100,12 +176,13 @@ const Profile = ({ navigation }) => {
 
                     </View>
                     <ProfileTab  data={TabData} onTabSelect={setSelectedTab}/>
-                 
+                    <EventDetail data={filteredData}/>
 
 
 
 
-                </KeyboardAwareScrollView>
+
+                </ScrollView>
 
             </SafeAreaView>
 

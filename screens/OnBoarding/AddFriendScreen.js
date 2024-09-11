@@ -11,7 +11,8 @@ import {
     TouchableOpacity,
     Image,
     KeyboardAvoidingView,
-    Dimensions
+    Dimensions,
+    Platform
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
@@ -21,9 +22,12 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import AddFriendList1 from '../MainScreen/Components/AddFriendList1';
 // import AddFriendList from '../Components/AddFriendList';
+import Contacts from 'react-native-contacts';
 
 
 const AddFriendScreen = ({ navigation }) => {
+    const [contacts, setContacts] = useState([]);
+
     //   const navigation = useNavigation();
     const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 
@@ -135,6 +139,62 @@ const AddFriendScreen = ({ navigation }) => {
     function moveNext() {
         navigation.navigate('Location')
     }
+    const requestContactsPermission = async () => {
+        if (Platform.OS === 'android') {
+          try {
+            const granted = await PermissionsAndroid.request(
+              PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+              {
+                title: 'Contacts Permission',
+                message: 'This app would like to view your contacts.',
+                buttonPositive: 'OK',
+              }
+            );
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+              console.log('Contacts permission granted');
+              fetchContacts();
+            } else {
+              console.log('Contacts permission denied');
+            }
+          } catch (err) {
+            console.warn(err);
+          }
+        } else if (Platform.OS === 'ios') {
+            console.log("request permission clicked1")
+
+          Contacts.checkPermission().then(permission => {
+            if (permission === 'undefined') {
+              Contacts.requestPermission().then(permission => {
+                if (permission === 'authorized') {
+                  fetchContacts();
+                } else {
+                  Alert.alert('Permission denied', 'Contacts permission was denied');
+                }
+              });
+            } else if (permission === 'authorized') {
+              fetchContacts();
+            } else {
+              Alert.alert('Permission denied', 'Contacts permission was denied');
+            }
+          });
+        }
+      };
+      const fetchContacts = () => {
+        Contacts.getAll()
+          .then((contacts) => {
+            setContacts(contacts);
+            console.log('Contacts fetched:', contacts);
+          })
+          .catch((error) => {
+            console.error('Failed to load contacts', error);
+          });
+      };
+    //   useEffect(() => {
+    //     console.log("request permission clicked")
+    //     requestContactsPermission();
+    //   }, []);
+    
+    
 
 
     {

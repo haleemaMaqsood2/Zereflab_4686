@@ -12,7 +12,8 @@ import {
     Image,
     KeyboardAvoidingView,
     Dimensions,
-    Keyboard
+    Keyboard,
+    Alert,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
@@ -22,7 +23,6 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import HeadingText from '../Components/HeadingText';
 import CustomButtonContainer from '../Components/CustomButtonContainer';
-
 const ImageUpload = ({ navigation }) => {
     //   const navigation = useNavigation();
     const [name, setName] = useState('')
@@ -35,11 +35,25 @@ const ImageUpload = ({ navigation }) => {
 
 
     };
-
+    const createTwoButtonAlert = () =>
+        Alert.alert('Where2 would like to access your Photo Library', ' ', [
+          {
+            text: "Don't Allow",
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          },
+          {text: 'Allow', onPress: () => console.log('OK Pressed')},
+        ]);
+        
+       
     function moveNext() {
         navigation.navigate('DiscoverFriends')
     }
-
+    function UploadClick() {
+        console.log("upload click")
+        // navigation.navigate('DiscoverFriends')
+    }
+   
 
 
     {
@@ -75,7 +89,7 @@ const ImageUpload = ({ navigation }) => {
                         <CustomButtonContainer
                             button1Name="Upload"
                             button2Name="Skip"
-                            onPressButton1={moveNext}
+                            onPressButton1={createTwoButtonAlert}
                             onPressButton2={moveNext}
                             marginTop={7}
                         />

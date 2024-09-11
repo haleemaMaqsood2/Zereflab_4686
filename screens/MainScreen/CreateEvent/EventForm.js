@@ -63,8 +63,12 @@ const EventForm = ({ navigation }) => {
         );
         setChecklistData(updatedData);
         const selectedOption = updatedData.find(item => item.selected);
-        setPrivacy(selectedOption.title);
-        setPrivacyIcon(selectedOption.icon);
+        // setPrivacy(selectedOption.title);
+        // setPrivacyIcon(selectedOption.icon);
+        if (selectedOption) {
+            setPrivacy(selectedOption.title);
+            setPrivacyIcon(selectedOption.icon);
+        }
         setModalVisible(false);
     };
     const onPressModalClose = () => {

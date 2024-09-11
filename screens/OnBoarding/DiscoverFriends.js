@@ -12,7 +12,8 @@ import {
     Image,
     KeyboardAvoidingView,
     DevToolsSettingsManager,
-    Dimensions
+    Dimensions,
+    Alert,Modal
 
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -24,6 +25,34 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import HeadingText from '../Components/HeadingText';
 import CustomButtonContainer from '../Components/CustomButtonContainer';
 
+const CustomAlert = ({ visible, onClose, onAllow, onDontAllow }) => {
+    return (
+      <Modal
+        visible={visible}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={onClose}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.modalTitle}>"Where2" Would Like to Access Your Contacts</Text>
+            <Text style={styles.modalSubtitle}>
+              Your contacts will be uploaded to Where2's servers so you and others can find friends, and to improve your experience.
+            </Text>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity style={styles.dontAllowButton} onPress={onDontAllow}>
+                <Text style={styles.dontAllowText}>Don't Allow</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.allowButton} onPress={onAllow}>
+                <Text style={styles.allowText}>Allow</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+    );
+  };
+  
 const DiscoverFriends = ({ navigation }) => {
     //   const navigation = useNavigation();
     const [name, setName] = useState('');
@@ -31,6 +60,8 @@ const DiscoverFriends = ({ navigation }) => {
     const [keyboardVisible, setKeyboardVisible] = useState(false);
     const [keyboardHeight, setKeyboardHeight] = useState(0);
     const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
+    const [isAlertVisible, setAlertVisible] = useState(false);
+
 
     const nameRef = useRef(null);
     const handleChange = (value) => {
@@ -40,12 +71,38 @@ const DiscoverFriends = ({ navigation }) => {
 
     };
     function onPressContinue() {
-        setContinuePress(true)
-        // navigation.navigate('AddFriendScreen')
-    }
-    function moveNext() {
-        navigation.navigate('AddFriendScreen')    }
+        // setContinuePress(true)
+        console.log("continue press")
+        Alert.alert('"Where2" Would Like to Access Your Contacts', 
+            "Your contacts will be uploaded to Where2's servers so you and other can find friends, and to improve your experience. ", 
+            [
+            {
+              text: "Don't Allow",
+              onPress: () => 
+                navigation.navigate('Location'),
+            //   style: 'cancel',
+            },
+            {text: 'Allow', onPress: () => navigation.navigate('AddFriendScreen') },
+          ]);
+        // setAlertVisible(true);
 
+    }
+
+    function moveNext() {
+        // navigation.navigate('AddFriendScreen')  
+        navigation.navigate('Location')
+
+      }
+      const handleAllow = () => {
+        setAlertVisible(false);
+        navigation.navigate('AddFriendScreen');
+      };
+    
+      const handleDontAllow = () => {
+        setAlertVisible(false);
+        navigation.navigate('Location');
+      };
+    
 
 
     {
@@ -76,12 +133,17 @@ const DiscoverFriends = ({ navigation }) => {
                     <CustomButtonContainer
                     button1Name="Continue"
                     button2Name="Skip"
-                    onPressButton1={moveNext}
+                    onPressButton1={onPressContinue}
                     onPressButton2={moveNext}
                     marginTop={8}
 
                 />
-
+ {/* <CustomAlert
+        visible={isAlertVisible}
+        onClose={() => setAlertVisible(false)}
+        onAllow={handleAllow}
+        onDontAllow={handleDontAllow}
+      /> */}
 
                     </View>
               

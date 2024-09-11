@@ -20,11 +20,14 @@ import { BlurView } from '@react-native-community/blur'; // Import the BlurView 
 import { useNavigation } from '@react-navigation/native';
 import Header from './Components/Header';
 import RadialGradientButton from './Components/RadialGradientButton';
+import { useSelector } from 'react-redux';
+
 const Location = () => {
     const navigation = useNavigation();
     const [search, setSearch] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
-
+    const name = useSelector((state) => state.user.name); // Ensure the correct slice name
+    const user_name = useSelector((state) => state.user.email); // Ensure the correct slice name
    
     function moveNext() {
         navigation.navigate('JoinGroup')

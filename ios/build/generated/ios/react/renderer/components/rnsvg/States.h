@@ -106,6 +106,51 @@ public:
 #endif
 };
 
+class RNSVGFeGaussianBlurState {
+public:
+  RNSVGFeGaussianBlurState() = default;
+
+#ifdef ANDROID
+  RNSVGFeGaussianBlurState(RNSVGFeGaussianBlurState const &previousState, folly::dynamic data){};
+  folly::dynamic getDynamic() const {
+    return {};
+  };
+  MapBuffer getMapBuffer() const {
+    return MapBufferBuilder::EMPTY();
+  };
+#endif
+};
+
+class RNSVGFeMergeState {
+public:
+  RNSVGFeMergeState() = default;
+
+#ifdef ANDROID
+  RNSVGFeMergeState(RNSVGFeMergeState const &previousState, folly::dynamic data){};
+  folly::dynamic getDynamic() const {
+    return {};
+  };
+  MapBuffer getMapBuffer() const {
+    return MapBufferBuilder::EMPTY();
+  };
+#endif
+};
+
+class RNSVGFeOffsetState {
+public:
+  RNSVGFeOffsetState() = default;
+
+#ifdef ANDROID
+  RNSVGFeOffsetState(RNSVGFeOffsetState const &previousState, folly::dynamic data){};
+  folly::dynamic getDynamic() const {
+    return {};
+  };
+  MapBuffer getMapBuffer() const {
+    return MapBufferBuilder::EMPTY();
+  };
+#endif
+};
+
 class RNSVGFilterState {
 public:
   RNSVGFilterState() = default;

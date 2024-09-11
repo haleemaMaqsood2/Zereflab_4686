@@ -3,6 +3,8 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Notification from "../../../screens/MainScreen/Activity/Notification";
 import Friends from "../../../screens/MainScreen/Friends/Friends";
+import FriendProfile from "../../../screens/MainScreen/Profile/FriendProfile";
+FriendProfile
 export default function FriendStack() {
   const NavigationStack = createNativeStackNavigator();
   return (
@@ -16,6 +18,10 @@ export default function FriendStack() {
       <NavigationStack.Screen
         name="Friends"
         component={Friends}
+      />
+       <NavigationStack.Screen
+        name="FriendProfile"
+        component={FriendProfile}
       />
      
     </NavigationStack.Navigator>

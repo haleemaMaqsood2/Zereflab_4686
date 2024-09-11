@@ -22,6 +22,9 @@ registry->add(concreteComponentDescriptorProvider<RNSVGClipPathComponentDescript
 registry->add(concreteComponentDescriptorProvider<RNSVGDefsComponentDescriptor>());
 registry->add(concreteComponentDescriptorProvider<RNSVGEllipseComponentDescriptor>());
 registry->add(concreteComponentDescriptorProvider<RNSVGFeColorMatrixComponentDescriptor>());
+registry->add(concreteComponentDescriptorProvider<RNSVGFeGaussianBlurComponentDescriptor>());
+registry->add(concreteComponentDescriptorProvider<RNSVGFeMergeComponentDescriptor>());
+registry->add(concreteComponentDescriptorProvider<RNSVGFeOffsetComponentDescriptor>());
 registry->add(concreteComponentDescriptorProvider<RNSVGFilterComponentDescriptor>());
 registry->add(concreteComponentDescriptorProvider<RNSVGForeignObjectComponentDescriptor>());
 registry->add(concreteComponentDescriptorProvider<RNSVGGroupComponentDescriptor>());

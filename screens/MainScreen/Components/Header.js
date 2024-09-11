@@ -51,27 +51,7 @@ const Header = ({ title }) => {
 
       {title ? (
         <>
-          {/* <View style={styles.leftContainer}>
-        <TouchableOpacity onPress={goBack}  
-        // style={styles.circleContainer}*/}
-          {/* > */}
-          {/* <Image
-            source={require('../../../src/assets/images/circle.png')}
-            style={styles.circleImage}
-            resizeMode="contain"
-          />
-          <Image
-            source={require('../../../src/assets/images/arrow.png')}
-            style={styles.arrowImage}
-            resizeMode="contain"
-          /> */}
-          {/* <Image
-            source={require('../../../src/assets/images/BackNew1x4.png')}
-            style={styles.arrowImage}
-            resizeMode="contain"
-          /> */}
-          {/* </TouchableOpacity> 
-      </View>*/}
+       
           <View style={{ width: '100%', alignItems: 'center', flexDirection: 'row' }}>
             <TouchableOpacity onPress={goBack} style={{ width: '15%' }} >
               {(titleText == 'Notification' || titleText == 'Friends' || titleText == 'Create Event') ?
@@ -87,7 +67,7 @@ const Header = ({ title }) => {
 
 
             <Text style={styles.titleContainer}>{title}</Text>
-            {title === 'Edit profile' ? (
+            {title === 'Edit profile'||title==='Account Details' ? (
               <TouchableOpacity style={{ width: '15%' }}>
                 <Text style={styles.counter}>Save</Text>
               </TouchableOpacity>

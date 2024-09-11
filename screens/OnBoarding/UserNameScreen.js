@@ -26,11 +26,13 @@ import HeadingText from '../Components/HeadingText';
 import CustomInput from '../Components/CustomInput';
 import CustomButton from '../Components/CustomButton';
 import ResponsiveButton from '../Components/ResponsiveButton';
-
+import { useDispatch } from 'react-redux';
+import { setuName } from '../../src/store/slices/userSlice';
 
 const UserNameScreen = ({ navigation }) => {
     //   const navigation = useNavigation();
     const [keyboardVisible, setKeyboardVisible] = useState(false);
+    const dispatch = useDispatch(); // Initialize useDispatch hook
 
     const [userName, setUserName] = useState('')
     const [keyboardHeight, setKeyboardHeight] = useState(0);
@@ -46,6 +48,8 @@ const UserNameScreen = ({ navigation }) => {
 
 
     function moveNext() {
+        console.log("userName screen>>>>>>>",userName)
+        dispatch(setuName(userName))
         navigation.navigate('ImageUpload')
     }
 
@@ -84,7 +88,7 @@ const UserNameScreen = ({ navigation }) => {
     useFocusEffect(
         React.useCallback(() => {
             // Refocus the first input field when the screen is focused
-            userNameRef.current.focus();
+            // userNameRef.current.focus();
         }, [])
     );
 
@@ -112,8 +116,9 @@ const UserNameScreen = ({ navigation }) => {
 
 
                
-
-                        <View style={styles.ResposiveContainer}>
+                        {
+                            screenHeight>700?
+                            <View style={styles.ResposiveContainer}>
 
                             <ResponsiveButton
                                 title="Sign Up"
@@ -125,11 +130,32 @@ const UserNameScreen = ({ navigation }) => {
                                 // marginTop={(screenHeight < 890) ? hp('18.5%') : hp('23%')} // Example margin top value
                                 marginTop={
                                     keyboardVisible
-                                        ? (screenHeight < 890 ? hp('19.5%') : hp('24%')) // If the keyboard is visible
-                                        : (screenHeight < 890 ? hp('50.5%') : hp('53%'))     // If the keyboard is not visible
+                                        ? (screenHeight < 890 ? hp('20.5%') : hp('24.5%')) // If the keyboard is visible
+                                        : (screenHeight < 890 ? hp('52%') : hp('54%'))     // If the keyboard is not visible
                                 }
                             />
                         </View>
+
+                            :
+                            <View style={styles.ResposiveContainer}>
+
+                            <ResponsiveButton
+                                title="Sign Up"
+                                buttonState={userName}
+                                keyboardVisible={keyboardVisible}
+                                keyboardHeight={keyboardHeight}
+                                nextScreenName="ImageUpload"
+                                onPress={moveNext}
+                                // marginTop={(screenHeight < 890) ? hp('18.5%') : hp('23%')} // Example margin top value
+                                marginTop={
+                                    keyboardVisible
+                                        ? hp(20) // If the keyboard is visible
+                                        :hp(53.5)     // If the keyboard is not visible
+                                }
+                            />
+                        </View>
+                        }
+                       
 
                         {/* <CustomButton
                             title="Sign Up"
@@ -270,7 +296,8 @@ const styles = StyleSheet.create({
         fontSize: RFPercentage(14),
         fontWeight: '500',
         fontFamily: 'Inter',
-        marginTop: RFPercentage(2),
+        // marginTop: RFPercentage(2),
+        marginTop: '4%',
         width: wp('80%')
     },
     descriptionText: {

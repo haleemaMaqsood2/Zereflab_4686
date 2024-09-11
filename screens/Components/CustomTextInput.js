@@ -12,7 +12,7 @@ const CustomTextInput = forwardRef(({ value, onChangeText, placeholder, placehol
                 onChangeText={onChangeText}
                 placeholder={placeholder}
                 placeholderTextColor={placeholderTextColor}
-                keyboardAppearance="dark"
+                keyboardAppearance="dark"//dark
                 value={value}
                 ref={ref}
                  autoCorrect={false}
@@ -20,6 +20,7 @@ const CustomTextInput = forwardRef(({ value, onChangeText, placeholder, placehol
                autoCapitalize="none" // Disable auto capitalization
                keyboardType="default" // Default keyboard type
                spellCheck={false} // Disable spell check
+               
 
             />
         </View>

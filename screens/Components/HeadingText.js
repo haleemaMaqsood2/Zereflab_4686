@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
     // backgroundColor:'red'
   },
   titleContainer: {
-    width: wp('95%'),
+    // width: wp('95%'),
+    width:wp(100),
     alignSelf: 'center',
     // marginBottom: hp('1%'),
     justifyContent:'center',
@@ -69,7 +70,7 @@ titleText: {
     color: '#FFFFFF',
     fontSize: 28,
     fontWeight: '700',
-    width:wp('85%'),
+    width:wp('95%'),
     textAlign:'center',
    fontFamily:'inter',
   //  marginBottom: hp('2%'),

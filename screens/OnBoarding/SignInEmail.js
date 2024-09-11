@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback,useLayoutEffect } from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -14,10 +14,14 @@ import {
     Keyboard,
     Dimensions,
     InteractionManager,
-    unstable_batchedUpdates
+    unstable_batchedUpdates,
+    LayoutAnimation,
+    Animated
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+
+import { useNavigation, useFocusEffect,useIsFocused } from '@react-navigation/native';
 import { color } from '../../src/styles/color';
 import Header from '../Components/Header';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -27,6 +31,8 @@ import CustomTextInput from '../Components/CustomTextInput';
 import CustomButton from '../Components/CustomButton';
 import PrivacyPolicy from '../Components/PrivacyPolicy';
 import ResponsiveButton from '../Components/ResponsiveButton';
+import { getOtpByEmail } from '../../src/store/services/services';
+import { setEmail1 } from '../../src/store/slices/userSlice';
 const SignInEmail = ({ navigation }) => {
     const [selectedTab, setSelectedTab] = useState('Email')
     const phoneRef = useRef(null);
@@ -36,6 +42,7 @@ const SignInEmail = ({ navigation }) => {
     const [name, setName] = useState('')
     const nameRef = useRef(null);
     const internalTextInputRef = useRef(null);
+    const dispatch = useDispatch(); // Initialize useDispatch hook
 
     const [value, setValue] = useState();
     const [count, setCount] = useState(0);
@@ -50,16 +57,24 @@ const SignInEmail = ({ navigation }) => {
     const [keyboardHeight, setKeyboardHeight] = useState(0);
     const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
     const continueTextHeight = hp(6); // Adjust this value based on your design needs
+    const isFocused = useIsFocused();
 
     useEffect(() => {
         // phoneRef.current.focus();  // Automatically focus the first input field when the component mounts
 
         const showSubscription = Keyboard.addListener('keyboardWillShow', (event) => {
             const keyboardHeightInPercentage = (event.endCoordinates.height / screenHeight) * 100;
+            // LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseIn);
+            // LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut); // keyboard
+
+
+
             setKeyboardVisible(true);
             setKeyboardHeight(keyboardHeightInPercentage.toFixed(1));
         });
         const hideSubscription = Keyboard.addListener('keyboardWillHide', () => {
+            // LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+
             setKeyboardVisible(false);
             setKeyboardHeight(0);
         });
@@ -77,32 +92,83 @@ const SignInEmail = ({ navigation }) => {
     }, [selectedTab]);
 
 
+    // const handleChange = (value) => {
+    //     setEmail(value);
+    //     // EmailRef.current.focus();
+
+
+    // };
+
+    function moveNext() {
+        // Keyboard.dismiss(); // Dismiss keyboard before navigation to prevent animation
+
+        // navigation.navigate('VerifyCode');
+    }
+    function onPressPhone() {
+        // Keyboard.dismiss(); // Dismiss keyboard before navigation to prevent animation
+
+        navigation.navigate('SignIn');
+    }
+   
+    useFocusEffect(
+        useCallback(() => {
+            // Immediately focus the input when the screen is focused
+            if (isFocused) {
+                EmailRef.current?.focus();
+
+            }
+        }, [isFocused])
+    );
+
     const handleChange = (value) => {
         setEmail(value);
-        // EmailRef.current.focus();
-
 
     };
 
     function moveNext() {
-        navigation.navigate('VerifyCode');
+        Keyboard.dismiss(); // Dismiss keyboard before navigation
+        dispatch(setEmail1(email));
+        getOTP(email);
+        // navigation.navigate('VerifyCode');
     }
+
     function onPressPhone() {
+        Keyboard.dismiss(); // Dismiss keyboard before navigation
         navigation.navigate('SignIn');
     }
 
 
     useFocusEffect(
-        React.useCallback(() => {
-            // Refocus the first input field when the screen is focused
-            EmailRef.current.focus();
-        }, [])
+      
+        useCallback(() => {
+            const timeoutId = setTimeout(() => {
+              if (EmailRef.current) {
+                EmailRef.current.focus();
+              }
+            }, 100); // Adjust delay as needed
+        
+            return () => clearTimeout(timeoutId);
+          }, [])
     );
+    const getOTP = async (email) => {
+        console.log(">>>>>>>>>>>>>>>>>>>>>",email)
+        try {
+          const response = await getOtpByEmail({ email: email }); // Make API call
+          alert(JSON.stringify(response.message)); // Display response for testing
+          navigation.navigate('VerifyCode')
+        } catch (error) {
+          console.error("API Error:", error.response ? error.response.data : error.message);
+        }
+      };
 
     {
         return (
             <SafeAreaView style={styles.safeArea}>
-                <KeyboardAvoidingView >
+                <KeyboardAvoidingView
+                
+                // behavior={Platform.OS === "ios" ? "padding" : "height"}
+                // keyboardVerticalOffset={Platform.select({ ios: 0, android: -500 })} // Adjust as needed
+                 >
                     <Header />
 
                     <View style={styles.titleContainer}>
@@ -143,7 +209,7 @@ const SignInEmail = ({ navigation }) => {
                                 marginTop={
                                     keyboardVisible
                                         ? (screenHeight < 890 ? hp('13.5%') : hp('18%')) // If the keyboard is visible
-                                        : (screenHeight < 890 ? hp('45%') : hp('48%'))     // If the keyboard is not visible
+                                        : (screenHeight < 890 ? hp('44.5`%') : hp('48%'))     // If the keyboard is not visible
                                 }
                                 // marginTop={(screenHeight < 890) ? hp('13.5%') : hp('17.5%')} // Example margin top value
                             />
@@ -194,7 +260,7 @@ const styles = StyleSheet.create({
         width: wp('80%'),
         textAlign: 'center',
         fontFamily: 'Inter',
-        lineHeight: 36,
+        // lineHeight: 36,
         // font:'urbanist'
     },
 

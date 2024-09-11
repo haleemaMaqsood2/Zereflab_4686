@@ -35,6 +35,8 @@ const Carousel = ({ navigation }) => {
     function moveNext() {
 
         navigation.navigate('SignIn');
+        // navigation.navigate('VerifyCode');
+
     }
 
     useFocusEffect(
@@ -203,7 +205,7 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         width: wp('90%'),
         textAlign: 'center',
-        lineHeight: 36.02,
+        // lineHeight: 36.02,
         // fontFamily: 'Inter'
         font: 'Urbanist'
     },

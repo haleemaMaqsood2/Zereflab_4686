@@ -33,6 +33,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@protocol RCTRNSVGFeGaussianBlurViewProtocol <NSObject>
+
+@end
+
+@protocol RCTRNSVGFeMergeViewProtocol <NSObject>
+
+@end
+
+@protocol RCTRNSVGFeOffsetViewProtocol <NSObject>
+
+@end
+
 @protocol RCTRNSVGFilterViewProtocol <NSObject>
 
 @end

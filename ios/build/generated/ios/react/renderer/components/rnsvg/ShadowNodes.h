@@ -84,6 +84,39 @@ using RNSVGFeColorMatrixShadowNode = ConcreteViewShadowNode<
     RNSVGFeColorMatrixEventEmitter,
     RNSVGFeColorMatrixState>;
 
+JSI_EXPORT extern const char RNSVGFeGaussianBlurComponentName[];
+
+/*
+ * `ShadowNode` for <RNSVGFeGaussianBlur> component.
+ */
+using RNSVGFeGaussianBlurShadowNode = ConcreteViewShadowNode<
+    RNSVGFeGaussianBlurComponentName,
+    RNSVGFeGaussianBlurProps,
+    RNSVGFeGaussianBlurEventEmitter,
+    RNSVGFeGaussianBlurState>;
+
+JSI_EXPORT extern const char RNSVGFeMergeComponentName[];
+
+/*
+ * `ShadowNode` for <RNSVGFeMerge> component.
+ */
+using RNSVGFeMergeShadowNode = ConcreteViewShadowNode<
+    RNSVGFeMergeComponentName,
+    RNSVGFeMergeProps,
+    RNSVGFeMergeEventEmitter,
+    RNSVGFeMergeState>;
+
+JSI_EXPORT extern const char RNSVGFeOffsetComponentName[];
+
+/*
+ * `ShadowNode` for <RNSVGFeOffset> component.
+ */
+using RNSVGFeOffsetShadowNode = ConcreteViewShadowNode<
+    RNSVGFeOffsetComponentName,
+    RNSVGFeOffsetProps,
+    RNSVGFeOffsetEventEmitter,
+    RNSVGFeOffsetState>;
+
 JSI_EXPORT extern const char RNSVGFilterComponentName[];
 
 /*

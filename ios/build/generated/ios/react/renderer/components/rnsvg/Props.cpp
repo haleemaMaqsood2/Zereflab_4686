@@ -209,6 +209,47 @@ RNSVGFeColorMatrixProps::RNSVGFeColorMatrixProps(
     type(convertRawProp(context, rawProps, "type", sourceProps.type, {RNSVGFeColorMatrixType::Matrix})),
     values(convertRawProp(context, rawProps, "values", sourceProps.values, {}))
       {}
+RNSVGFeGaussianBlurProps::RNSVGFeGaussianBlurProps(
+    const PropsParserContext &context,
+    const RNSVGFeGaussianBlurProps &sourceProps,
+    const RawProps &rawProps): ViewProps(context, sourceProps, rawProps),
+
+    x(convertRawProp(context, rawProps, "x", sourceProps.x, {})),
+    y(convertRawProp(context, rawProps, "y", sourceProps.y, {})),
+    width(convertRawProp(context, rawProps, "width", sourceProps.width, {})),
+    height(convertRawProp(context, rawProps, "height", sourceProps.height, {})),
+    result(convertRawProp(context, rawProps, "result", sourceProps.result, {})),
+    in1(convertRawProp(context, rawProps, "in1", sourceProps.in1, {})),
+    stdDeviationX(convertRawProp(context, rawProps, "stdDeviationX", sourceProps.stdDeviationX, {0.0})),
+    stdDeviationY(convertRawProp(context, rawProps, "stdDeviationY", sourceProps.stdDeviationY, {0.0})),
+    edgeMode(convertRawProp(context, rawProps, "edgeMode", sourceProps.edgeMode, {RNSVGFeGaussianBlurEdgeMode::None}))
+      {}
+RNSVGFeMergeProps::RNSVGFeMergeProps(
+    const PropsParserContext &context,
+    const RNSVGFeMergeProps &sourceProps,
+    const RawProps &rawProps): ViewProps(context, sourceProps, rawProps),
+
+    x(convertRawProp(context, rawProps, "x", sourceProps.x, {})),
+    y(convertRawProp(context, rawProps, "y", sourceProps.y, {})),
+    width(convertRawProp(context, rawProps, "width", sourceProps.width, {})),
+    height(convertRawProp(context, rawProps, "height", sourceProps.height, {})),
+    result(convertRawProp(context, rawProps, "result", sourceProps.result, {})),
+    nodes(convertRawProp(context, rawProps, "nodes", sourceProps.nodes, {}))
+      {}
+RNSVGFeOffsetProps::RNSVGFeOffsetProps(
+    const PropsParserContext &context,
+    const RNSVGFeOffsetProps &sourceProps,
+    const RawProps &rawProps): ViewProps(context, sourceProps, rawProps),
+
+    x(convertRawProp(context, rawProps, "x", sourceProps.x, {})),
+    y(convertRawProp(context, rawProps, "y", sourceProps.y, {})),
+    width(convertRawProp(context, rawProps, "width", sourceProps.width, {})),
+    height(convertRawProp(context, rawProps, "height", sourceProps.height, {})),
+    result(convertRawProp(context, rawProps, "result", sourceProps.result, {})),
+    in1(convertRawProp(context, rawProps, "in1", sourceProps.in1, {})),
+    dx(convertRawProp(context, rawProps, "dx", sourceProps.dx, {})),
+    dy(convertRawProp(context, rawProps, "dy", sourceProps.dy, {}))
+      {}
 RNSVGFilterProps::RNSVGFilterProps(
     const PropsParserContext &context,
     const RNSVGFilterProps &sourceProps,
@@ -350,7 +391,8 @@ RNSVGSvgViewProps::RNSVGSvgViewProps(
     meetOrSlice(convertRawProp(context, rawProps, "meetOrSlice", sourceProps.meetOrSlice, {0})),
     tintColor(convertRawProp(context, rawProps, "tintColor", sourceProps.tintColor, {})),
     color(convertRawProp(context, rawProps, "color", sourceProps.color, {})),
-    pointerEvents(convertRawProp(context, rawProps, "pointerEvents", sourceProps.pointerEvents, {}))
+    pointerEvents(convertRawProp(context, rawProps, "pointerEvents", sourceProps.pointerEvents, {})),
+    hitSlop(convertRawProp(context, rawProps, "hitSlop", sourceProps.hitSlop, {}))
       {}
 RNSVGLinearGradientProps::RNSVGLinearGradientProps(
     const PropsParserContext &context,

@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   Image,
   Modal,
+  Alert
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
@@ -166,7 +167,7 @@ const HomePage = () => {
   );
   useEffect(() => {
     dispatch(setOnBoardingComplete(true));//false//true
-
+ 
     // setModalVisible(true)
     // Dynamically update the data based on the selected tab
     if (selectedTab === 'Popular') {
@@ -177,6 +178,31 @@ const HomePage = () => {
       setFilteredData(friendsData);
     }
   }, [selectedTab]);
+  function onPressContinue() {
+    // setContinuePress(true)
+    console.log("continue press")
+    Alert.alert('"Where2" Would Like to Send You Notifications', 
+        "Notifications may include alerts, sounds,  and icon badges. These can be configured in Settings.", 
+        [
+        {
+          text: "Don't Allow",
+          onPress: () => 
+            // setModalVisible(false)
+
+            // navigation.navigate('Location')
+          console.log("dont allow press")
+
+          ,
+          // style: 'cancel',
+        },
+        {text: 'Allow', onPress: () => 
+          onPressModalClose
+          // console.log("llow press")
+
+          // navigation.navigate('AddFriendScreen')
+         },
+      ]);
+}
 
   {
     return (
@@ -242,7 +268,7 @@ const HomePage = () => {
                   <CustomButtonContainer
                     button1Name="Continue"
                     button2Name="Maybe Later"
-                    onPressButton1={onPressModalClose}
+                    onPressButton1={onPressContinue}
                     onPressButton2={onPressModalClose}
                     marginTop={10}
 

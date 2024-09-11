@@ -14,6 +14,8 @@ export default function MainStack() {
         // initialRouteName={"Main"}
         screenOptions={{
                 headerShown: false,
+                animationEnabled: false, // Disable the animation
+
             }}
         >
                   <MainStack.Screen name="bottomTab" component={BottomTabStack} />

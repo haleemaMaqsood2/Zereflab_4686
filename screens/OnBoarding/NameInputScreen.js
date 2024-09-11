@@ -26,10 +26,14 @@ import HeadingText from '../Components/HeadingText';
 import CustomTextInput from '../Components/CustomTextInput';
 import CustomButton from '../Components/CustomButton';
 import ResponsiveButton from '../Components/ResponsiveButton';
+import { useDispatch } from 'react-redux';
+import { setuName } from '../../src/store/slices/userSlice';
+
 const NameInputScreen = ({ navigation }) => {
     const [keyboardVisible, setKeyboardVisible] = useState(false);
     const [keyboardHeight, setKeyboardHeight] = useState(0);
     const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
+    const dispatch = useDispatch(); // Initialize useDispatch hook
 
 
     //   const navigation = useNavigation();
@@ -43,7 +47,11 @@ const NameInputScreen = ({ navigation }) => {
     };
 
     function moveNext() {
-        navigation.navigate('DateOfBirth')
+        console.log("NmaeInput screen>>>>>>>",name)
+        dispatch(setuName(name))
+        navigation.navigate('DateOfBirth');
+
+
         // navigation.navigate('UserNameScreen'); // Navigate if age is 17 or older
 
     }
@@ -114,6 +122,37 @@ const NameInputScreen = ({ navigation }) => {
                             ref={nameRef}
                         />
                         <View style={styles.ResposiveContainer}>
+                            {screenHeight>700? 
+                            <ResponsiveButton
+                            title="Continue"
+                            buttonState={name}
+                            keyboardVisible={keyboardVisible}
+                            keyboardHeight={keyboardHeight}
+                            nextScreenName="DateOfBirth"
+                            onPress={moveNext}
+                            // marginTop={(screenHeight < 890) ? hp('24%') : hp('28%')} // Example margin top value
+                            marginTop={
+                                keyboardVisible
+                                    ? (screenHeight < 890 ? hp('26') : hp('30%')) // If the keyboard is visible
+                                    : (screenHeight < 890 ? hp('57%') : hp('59%'))     // If the keyboard is not visible
+                            }
+                        />
+                            :
+                            <ResponsiveButton
+                                title="Continue"
+                                buttonState={name}
+                                keyboardVisible={keyboardVisible}
+                                keyboardHeight={keyboardHeight}
+                                nextScreenName="DateOfBirth"
+                                onPress={moveNext}
+                                // marginTop={(screenHeight < 890) ? hp('24%') : hp('28%')} // Example margin top value
+                                marginTop={
+                                    keyboardVisible
+                                        ? hp(27.5) // If the keyboard is visible
+                                        : hp(64)     // If the keyboard is not visible
+                                }
+                            />
+                            }
 
                             <ResponsiveButton
                                 title="Continue"

@@ -1,0 +1,14 @@
+import { postRequest,getRequest,putRequest} from "./api";
+
+import {GET_OTP_BY_EMAIL,
+GET_OTP_BY_PHONE_NUMBER,
+    VERIFY_OTP,
+    PROFILE_COMPLETE
+} from "./endpoints";
+export const getOtpByphoneNumber = (data) => postRequest(GET_OTP_BY_PHONE_NUMBER, data);
+
+export const getOtpByEmail = (data) => postRequest(GET_OTP_BY_EMAIL,data);
+export const verifyOtp = (data,data1,data2) => postRequest(VERIFY_OTP,data,data1,data2);
+// export const profileComplete = (data,data1,data2,data3,data4) => postRequest(PROFILE_COMPLETE,data,data1,data2,data3,data4);
+export const profileComplete = (data) => postRequest(PROFILE_COMPLETE,data);
+
