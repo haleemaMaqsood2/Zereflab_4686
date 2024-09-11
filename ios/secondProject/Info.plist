@@ -97,7 +97,29 @@
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+<string>We need your location to show nearby events</string>
+<key>NSLocationAlwaysUsageDescription</key>
+<string>We need your location to show nearby events even when the app is in the background</string>
+<key>NSContactsUsageDescription</key>
+<string>We need access to your contacts to suggest people you may know.</string>
 	<key>UIRequiredDeviceCapabilities</key>
+
+
+<!-- image upload -->
+	<key>NSPhotoLibraryUsageDescription</key>
+<string>We need access to your photo library to upload your profile picture.</string>
+
+<key>NSCameraUsageDescription</key>
+<string>We need access to your camera to take profile pictures.</string>
+
+<key>NSDocumentsUsageDescription</key>
+<string>We need access to your documents to upload files.</string>
+
+<key>UIFileSharingEnabled</key>
+<!-- image upload end-->
+
+<true/>
 	<array>
 		<string>arm64</string>
 	</array>

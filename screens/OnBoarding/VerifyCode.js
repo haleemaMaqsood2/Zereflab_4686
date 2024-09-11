@@ -28,7 +28,12 @@ import ResponsiveButton from '../Components/ResponsiveButton';
 import { useSelector } from 'react-redux';
 import { verifyOtp } from '../../src/store/services/services';
 import FormData from 'form-data'; // Import FormData for handling the form data
+import { useDispatch } from 'react-redux';
+import { setEmail1, setToken } from '../../src/store/slices/userSlice';
+
 const VerifyCode = () => {
+    const dispatch = useDispatch(); // Initialize useDispatch hook
+
     //   const navigation = useNavigation();
     const customKeyboardHeight = hp(30); // For example, 40% of screen height
 
@@ -157,24 +162,41 @@ const phone_number=phone;
         }
     
         // Check if email or phone is missing
-        if (!email || !phone) {
-            Alert.alert('Error', 'Email or phone number is missing.');
-            return;
-        }
+        // if (!email || !phone) {
+        //     Alert.alert('Error', 'Email or phone number is missing.');
+        //     return;
+        // }
     
         const requestData = {
             email,
             phone,
             otp,
         };
+        if(phone_number!=''){
+            dispatch(setEmail1(''))
+           
+        }
     
         console.log("request data>>>>>>>",requestData)
+        // navigation.navigate('NameInputScreen');
+
         // Try to verify the OTP by making an API call
         try {
             const response = await verifyOtp({email,phone_number,otp}); // Make API call
+            console.log("verify response>>>>>>>", response.token);
+            const userToken=response.token;
+            dispatch(setToken(userToken));
+            console.log("verify response>>>>>>>utoken>>>", userToken);
+
             console.log("verify response>>>>>>>", response);
-            Alert.alert(response.message );            // Handle success response
+
+            // Alert.alert(response.message );            // Handle success response
+
             navigation.navigate('NameInputScreen');
+
+
+
+
             // if (response.status === 'success') {
             //     Alert.alert('Success', 'OTP verified successfully!');
             //     // navigation.navigate('NameInputScreen'); // Navigate to next screen

@@ -2,9 +2,10 @@ import axios from "axios";
 import { store } from "../Store";
 const { dispatch, getState } = store;
 // import { userToken } from "../slices/authSlice/userDataSlice";
+import {token} from "../userSlice"
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../../config/constant";
-
+import { Alert } from "react-native";
 export const headerKeys = {
     AccessToken: "Authorization",
     Expiry: "expiry",
@@ -20,21 +21,30 @@ const api = axios.create({
   baseURL: BASE_URL,
 });
 
-api.interceptors.request.use((config) => {
-    const token = getApiHeaders();
-      // alert(JSON.stringify(token))
+// api.interceptors.request.use((config) => {
+//     const token = getApiHeaders();
+//       alert(JSON.stringify(token))
 
-    //   console.log("headers", config.headers, token);
-    if (config.headers && token) {
-      console.log("Application/json");
-      config.headers[headerKeys.AccessToken] = "Bearer " + token;
-      config.headers[headerKeys.ContentType] = "multipart/form-data";
-    } else if (!token) {
-      // console.log("Multipart form data");
-      config.headers[headerKeys.ContentType] = "multipart/form-data";
-    }
-    return config;
-  });
+//     //   console.log("headers", config.headers, token);
+//     if (config.headers && token) {
+//       console.log("Application/json");
+//       config.headers[headerKeys.AccessToken] = "Bearer " + token;
+//       config.headers[headerKeys.ContentType] = "multipart/form-data";
+//     } else if (!token) {
+//       // console.log("Multipart form data");
+//       config.headers[headerKeys.ContentType] = "multipart/form-data";
+//     }
+//     return config;
+//   });
+api.interceptors.request.use((config) => {
+  const token = getApiHeaders();
+  // alert(JSON.stringify(token))
+  if (token) {
+      config.headers[headerKeys.AccessToken] = `Bearer ${token}`;
+  }
+  config.headers[headerKeys.ContentType] = 'multipart/form-data';
+  return config;
+});
   api.interceptors.response.use(
     function (response) {
       return response.data;
@@ -102,10 +112,10 @@ api.interceptors.request.use((config) => {
     }
   );
   function getApiHeaders() {
-    //   console.log("store.getState()", store.getState().userDataReducer);
-//     const userToken = useSelector((state) => state.userDataSlice.userToken);
-// alert(JSON.stringify(store.getState().userDataSlice?.userToken))
-    return store.getState().userDataSlice?.userToken;
+
+    const token = store.getState().user.token; // Ensure the path is correct
+    console.log("Token from store:", token); // Debugging token retrieval
+    return token;
   }
   function isTokenError(error) {
     const headers = getApiHeaders();

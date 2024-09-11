@@ -23,13 +23,31 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import HeadingText from '../Components/HeadingText';
 import CustomButtonContainer from '../Components/CustomButtonContainer';
-// import {request, PERMISSIONS} from 'react-native-permissions';
+import DocumentPicker from 'react-native-document-picker';
+
 const ImageUpload = ({ navigation }) => {
     //   const navigation = useNavigation();
     const [name, setName] = useState('')
     const nameRef = useRef(null);
     const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
+    const [imageUri, setImageUri] = useState(null);
 
+    const handleImageUpload = async () => {
+        console.log("handle image>>>>>>>>>>>>>>>>>>>>")
+        try {
+            const res = await DocumentPicker.pick({
+                type: [DocumentPicker.types.images],
+            });
+            console.log('Image URI:', res.uri);
+            setImageUri(res.uri);
+        } catch (err) {
+            if (DocumentPicker.isCancel(err)) {
+                console.log('User cancelled the picker');
+            } else {
+                throw err;
+            }
+        }
+    };
     const handleChange = (value) => {
         setName(value);
         nameRef.current.focus();
@@ -41,21 +59,13 @@ const ImageUpload = ({ navigation }) => {
           {
             text: "Don't Allow",
             onPress: () => console.log('Cancel Pressed'),
-            style: 'cancel',
+            // style: 'cancel',
           },
-          {text: 'Allow', onPress: () => console.log('OK Pressed')},
+          {text: 'Allow', onPress: () => {
+            handleImageUpload(); // Trigger image upload
+        }},
         ]);
-        // request(PERMISSIONS.IOS.CAMERA).then((result) => {
-        //     // …
-        //   });
-   
-    // const askForPermissions = permission =>{
-       
-    //         request(PERMISSIONS.IOS.CAMERA).then((result) => {
-    //             console.log("result>>>>",result)
-    //             // …
-    //           });
-    //         };
+        
        
     function moveNext() {
         navigation.navigate('DiscoverFriends')

@@ -85,11 +85,20 @@ const DateOfBirth = () => {
         }
         return age;
     };
+  const formatDateYYMMDD = (date) => {
+        const d = new Date(date);
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0'); // Ensure 2 digits
+        const day = String(d.getDate()).padStart(2, '0'); // Ensure 2 digits
+      
+        return `${year}-${month}-${day}`;
+      };
 
     const moveNext = () => {
         if (isOldEnough) {
-            console.log("DateInput  screen>>>>>>>",formattedDate)
-            dispatch(setDateOfBirth(formatDate))
+            console.log("DateInput  screen>>>>>>>",formatDate(date))
+            const dateFormated=formatDateYYMMDD(date);
+            dispatch(setDateOfBirth(dateFormated))
 
             navigation.navigate('UserNameScreen');
         } else {
